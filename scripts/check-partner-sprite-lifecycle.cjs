@@ -1,0 +1,11 @@
+const fs=require('node:fs'),path=require('node:path'),vm=require('node:vm'),assert=require('node:assert/strict');
+let io,next=1,draws=0;const frames=new Map(),listeners={},observed=new Set(),overlay={hidden:false};
+const g={clearRect(){draws++},fillText(){},drawImage(){}},document={hidden:false,querySelector:()=>overlay,createElement:()=>({isConnected:true,setAttribute(){},getContext:()=>g}),addEventListener:(name,fn)=>listeners[name]=fn};
+const env={window:{},document,PMD:{get:()=>Promise.resolve(null)},matchMedia:()=>({matches:false}),IntersectionObserver:class{constructor(fn){io=fn}observe(cv){observed.add(cv)}unobserve(cv){observed.delete(cv)}disconnect(){observed.clear()}},requestAnimationFrame:fn=>{const id=next++;frames.set(id,fn);return id},cancelAnimationFrame:id=>frames.delete(id),addEventListener:(name,fn)=>listeners[name]=fn};
+vm.runInNewContext(fs.readFileSync(path.join(__dirname,'../assets/trainer-profile/partner-sprites.js'),'utf8'),env);
+const api=env.window.TRAINER_PARTNER_SPRITES,step=()=>{const pending=[...frames.values()];frames.clear();pending.forEach(fn=>fn(next*100))};
+assert.equal(frames.size,0,'no loop before thumbnails exist');const cv=api.create(1,'Bulbasaur');assert.equal(frames.size,0,'wait for visibility');io([{target:cv,isIntersecting:true}]);assert.equal(frames.size,1);step();assert.equal(draws,1);assert.equal(frames.size,1);
+io([{target:cv,isIntersecting:true}]);assert.equal(frames.size,1,'one loop only');overlay.hidden=true;step();assert.equal(frames.size,0,'hidden profile stops loop');
+overlay.hidden=false;io([{target:cv,isIntersecting:true}]);assert.equal(frames.size,1,'visible profile resumes');document.hidden=true;listeners.visibilitychange();assert.equal(frames.size,0);document.hidden=false;listeners.visibilitychange();assert.equal(frames.size,1,'tab return resumes');
+cv.isConnected=false;step();assert.equal(frames.size,0);assert.equal(observed.size,0,'detached thumbnails released');listeners.pagehide();assert.equal(frames.size,0);
+console.log('PASS partner thumbnails: no idle loop, visibility resume, single loop, tab hide/return and detached cleanup.');

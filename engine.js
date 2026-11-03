@@ -3208,27 +3208,12 @@ function updateCUEl(u){
    ===================================================================== */
 const BOSS_ROW=2,BOSS_COL=3,BOSS_TOP=88;/* BOSS_TOP: altura (em px do palco, 800 de altura) reservada ao HUD superior */
 function bossToRow(list){for(const sp of list){const Ln=LINES[sp.line];if(Ln&&(Ln.names[0]==='Mewtwo'||BIRDLINES.includes(sp.line))){sp.r=BOSS_ROW;sp.c=BOSS_COL}}return list}
-function fitBossEl(u){
-  const e=u&&u.el;if(!e||u.side!==1||!e.isConnected)return;
-  const cl=e.classList,fin=cl.contains('final');if(!fin){e.style.removeProperty('--boss-fit');return}/* Regular gym teams retain their normal sprite size; only giant bosses need fitting. */
-  const inn=e.querySelector('.in');if(!inn||inn.offsetHeight<30)return;
-  // Fit once per viewport and sprite source, using layout size rather than animated bounds.
-  const key=[innerWidth,innerHeight,SC,cl.contains('pmd')?1:0].join(':');
-  if(e._bossFitKey===key)return;
-  const stageRect=stage.getBoundingClientRect();
-  let top=stageRect.top+BOSS_TOP*SC;
-  const rb=document.getElementById('roundbox');if(rb){const q=rb.getBoundingClientRect();if(q.height)top=Math.max(top,q.bottom+6)}
-  const style=getComputedStyle(e),depth=parseFloat(style.getPropertyValue('--unit-depth'))||1,fix=parseFloat(style.getPropertyValue('--unit-fix'))||1;
-  if(e._bossFitAnchor==null)e._bossFitAnchor=u.y;
-  const bottom=stageRect.top+e._bossFitAnchor*SC,height=inn.offsetHeight*SC*depth*fix;
-  const f=Math.max(fin?.42:.55,Math.min(1,(bottom-top)/height));
-  e.style.setProperty('--boss-fit',f.toFixed(3));e._bossFitKey=key;
-}
+function fitBossEl(u){if(window.fitIdleBossElement)window.fitIdleBossElement(u,{stage,scale:SC,top:BOSS_TOP})}
 let IDLE_BOSS_FIT=null;
 function installIdleBossFit(){if(!IDLE_BOSS_FIT&&window.createIdleBossFit)IDLE_BOSS_FIT=createIdleBossFit({root:unitsL,units:()=>B.units,fit:fitBossEl,stage,hud:document.getElementById('roundbox')})}
-if(window.createIdleBossFit)installIdleBossFit();else{
+if(window.createIdleBossFit&&window.fitIdleBossElement)installIdleBossFit();else{
   // Recover when an older cached HTML document loads the current engine.
-  const helper=document.createElement('script');helper.src=new URL('modes/idle/boss-fit.js?v=1',document.baseURI).href;helper.onload=installIdleBossFit;helper.onerror=()=>console.warn('Encaixe dos bosses indisponível; recarregue a página.');document.head.append(helper);
+  const helper=document.createElement('script');helper.src=new URL('modes/idle/boss-fit.js?v=geometry-2',document.baseURI).href;helper.onload=installIdleBossFit;helper.onerror=()=>console.warn('Encaixe dos bosses indisponível; recarregue a página.');document.head.append(helper);
 }
 
 function applyTraits(team,foes){
@@ -3434,6 +3419,7 @@ function hurt(src,t,raw,kind,o){
   if(!tactical&&t.L?.passive?.id==='friendguard')d*=.92;
   if(!tactical&&kind!=='true'){const ar=(kind==='phys'?t.armor:t.mr)*(t.shred?1-t.shred:1);d*=100/(100+Math.max(0,ar))}
   if(!tactical){d*=(1-t.dr)*(1+B.sudden);d=Math.max(1,d)}
+  if(window.OAK_IDLE_MODE){if(src?.side===0&&t.side===1&&t._idlePreyBonus?.kind==='damage')d*=1+t._idlePreyBonus.percent/100;else if(src?.side===1&&t.side===0&&src._idlePreyBonus?.kind==='defense')d*=1-src._idlePreyBonus.percent/100;}
   if(src&&src.bossCap&&!o.dot)d=Math.min(d,t.maxHp*src.bossCap); /* boss nunca tira mais que X% do PS máx num golpe só */
   if(tactical&&!o.basic&&!o.dot&&kind!=='true'&&o.type)idleEffectivenessNotice(t,tactical.effectiveness(o.type,t.types));
   const full=d;let absorbed=0;if(t.shield>0){const a=Math.min(t.shield,d);t.shield-=a;d-=a;absorbed=a;t._shieldAbsorbed=(t._shieldAbsorbed||0)+a}
@@ -4790,16 +4776,17 @@ $('#vtim').onchange=e=>{CFG.timer=e.target.checked;saveCfg();syncMenuUI();e.targ
 const SWT=[['vmovepreview','movePreview',false],['vmute','mute',false],['vfx','reduceFx',true],['vrem','remSpeed',false],['vskip','skipDlg',true],['vmana','manabar',true],['vshk','shake',true]];
 SWT.forEach(([id,k,dt])=>{$('#'+id).onchange=e=>{CFG[k]=e.target.checked;saveCfg();syncMenuUI();e.target.blur()}});
 document.querySelectorAll('#menu .seg').forEach(sg=>sg.querySelectorAll('button').forEach(b=>b.addEventListener('click',()=>{CFG[sg.dataset.key]=b.dataset.v;saveCfg();SND.click();syncMenuUI();b.blur()})));
+let idleSettingsViewLoading=false;
+function requestIdleSettingsView(){
+  if(idleSettingsViewLoading)return;
+  idleSettingsViewLoading=true;
+  const helper=document.createElement('script');helper.src=new URL('modes/idle/settings-view.js?v=1',document.baseURI).href;
+  helper.onload=()=>{idleSettingsViewLoading=false;if(typeof window.syncIdleSettingsView==='function')syncMenuUI();else console.warn('Interface de configurações indisponível.')};
+  helper.onerror=()=>{idleSettingsViewLoading=false;helper.remove();console.warn('Interface de configurações indisponível; tente novamente ao alterar uma opção.')};
+  document.head.append(helper);
+}
 function syncMenuUI(){
-  document.body.classList.toggle('countdown-disabled',!CFG.timer);
-  const timerBar=document.getElementById('tbar');
-  if(timerBar){if(!CFG.timer)timerBar.style.setProperty('display','none','important');else timerBar.style.removeProperty('display')}
-  [['vmusvol','pmus','musvol'],['vsfx','psfx','sfx'],['vcry','pcry','cry']].forEach(([id,pid,k])=>{const el=$('#'+id);el.value=CFG[k];paintRange(el);$('#'+pid).textContent=Math.round(CFG[k]*100)+'%'});
-  $('#vmus').checked=CFG.music;syncMusRow();$('#vtim').checked=CFG.timer;$('#vpmd').checked=!!CFG.pmd;
-  SWT.forEach(([id,k,dt])=>{$('#'+id).checked=dt?CFG[k]!==false:!!CFG[k]});
-  document.querySelectorAll('#menu .seg').forEach(sg=>sg.querySelectorAll('button').forEach(b=>b.classList.toggle('on',b.dataset.v===String(CFG[sg.dataset.key]))));
-  document.body.classList.toggle('reduce-fx',!!CFG.reduceFx);document.body.classList.toggle('hide-mana',CFG.manabar===false);
-  $('#menu').classList.toggle('muted',!!CFG.mute);
+  if(typeof window.syncIdleSettingsView==='function')window.syncIdleSettingsView({config:CFG,query:$,switches:SWT,paintRange,syncMusRow});else requestIdleSettingsView();
   SND.set();syncSpeed();if(window.syncTitleDiff)syncTitleDiff();if(typeof syncExtraSettings==='function')syncExtraSettings();if(typeof syncPauseSettings==='function')syncPauseSettings()}
 function toggleMute(){CFG.mute=!CFG.mute;saveCfg();syncMenuUI();toast(CFG.mute?'\ud83d\udd07 Som silenciado':'\ud83d\udd0a Som ativado')}
 function resetCfg(){const diff=CFG.diff;Object.assign(CFG,CFG0);CFG.diff=diff;saveCfg();syncMenuUI();Object.values(UB).forEach(u=>{if(u&&u.el&&u.line!=null)pmdApply(u.el,u.line,u.star)});toast('Configurações restauradas')}

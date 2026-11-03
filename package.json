@@ -4,10 +4,14 @@
   "private": true,
   "description": "OakChess Idle — projeto independente",
   "scripts": {
-    "test": "node scripts/check-render-scheduler.cjs && node scripts/check-phone-clock.cjs && node scripts/check-village-labels.cjs && node scripts/check-portal-audio-lifecycle.cjs && node scripts/check-standalone.cjs && node scripts/check-idle-tutorial-content.cjs",
+    "test": "node scripts/check-partner-sprite-lifecycle.cjs && node scripts/check-boss-geometry.cjs && node scripts/check-render-scheduler.cjs && node scripts/check-phone-clock.cjs && node scripts/check-village-labels.cjs && node scripts/check-portal-audio-lifecycle.cjs && node scripts/check-standalone.cjs && node scripts/check-idle-tutorial-content.cjs",
     "profile": "node scripts/profile-idle.cjs",
     "test:session": "node scripts/check-optimized-session.cjs",
-    "test:evolution": "node scripts/check-idle-evolution-animation.cjs"
+    "test:evolution": "node scripts/check-idle-evolution-animation.cjs",
+    "test:center": "node scripts/check-center-demand.cjs",
+    "test:lifecycle": "node scripts/check-panel-lifecycle.cjs",
+    "test:partners": "node scripts/check-partner-sprite-lifecycle.cjs",
+    "test:prey": "node scripts/check-prey.cjs && node scripts/check-prey-browser.cjs"
   },
   "devDependencies": {
     "playwright": "^1.56.0"

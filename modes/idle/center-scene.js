@@ -17,7 +17,14 @@ window.createIdleCenterScene=function(ctx){
   Promise.all([...sprites.querySelectorAll('img')].map(img=>img.decode().catch(()=>{}))).then(()=>{if(evolutionEffect!==fx)return;evolutionTimer=setTimeout(()=>{if(evolutionEffect!==fx)return;fx.dataset.transforming='true';evolutionTimer=setTimeout(reveal,reduced?900:3200)},reduced?250:600)});
  }
 
- const interior=new Image();interior.src='modes/idle/assets/center/interior-pixel-v2.png';interior.onload=()=>{if(root&&!root.hidden)repaintArena()};
+ let interior=null;
+ function loadInterior(){
+  if(interior)return;
+  const image=new Image();interior=image;image.decoding='async';
+  image.onload=()=>{if(interior===image&&root&&!root.hidden)repaintArena()};
+  image.onerror=()=>{if(interior===image)interior=null};
+  image.src='modes/idle/assets/center/interior-pixel-v2.png';
+ }
  function staffSprite(id,label,shiny=false){
   const cv=document.createElement('canvas');cv.width=80;cv.height=88;cv.className='ic-staff-pokemon';cv.setAttribute('role','img');cv.setAttribute('aria-label',label);const item={cv,data:null};staff.push(item);
   const fallback=()=>cv.replaceWith(Object.assign(new Image(),{src:'assets/pokeapi/sprites/pokemon/'+(shiny?'shiny/':'')+id+'.png',alt:label,className:'ic-staff-fallback'}));TRAINER_PARTNER_SPRITES.load(id,shiny).then(data=>{if(!data?.Idle){fallback();return}item.data=data}).catch(fallback);return cv;
@@ -41,7 +48,7 @@ window.createIdleCenterScene=function(ctx){
   g.save();g.imageSmoothingEnabled=false;
   if(part!=='arena'){g.fillStyle='#25323a';g.fillRect(-640,-300,2560,1400)}
   if(part!=='scene'){
-   const layout=centerLayout();if(interior.complete&&interior.naturalWidth)g.drawImage(interior,layout.x,layout.y,W*layout.scale,H*layout.scale);
+   const layout=centerLayout();if(interior?.complete&&interior.naturalWidth)g.drawImage(interior,layout.x,layout.y,W*layout.scale,H*layout.scale);
    else {g.fillStyle='#e2dfcc';g.fillRect(0,0,W,H)}
   }
   g.restore();
@@ -58,7 +65,7 @@ window.createIdleCenterScene=function(ctx){
   });dialogueActions.append(confirm,btn('Agora não',dismissDialogue));confirm.focus();
  }
  function close(){clearEvolution();if(!root||root.hidden)return;dismissDialogue();ctx.closePanels();root.hidden=true;layer.hidden=true;document.body.classList.remove('idle-center-view');cancelAnimationFrame(staffFrame);staffFrame=0;repaintArena();const action=document.getElementById('in-auto-label');if(action)action.textContent=ctx.isRunning()?'PAUSAR':'EXPLORAR';if(!ctx.isRunning()){s.world.location='field';ctx.save()}focus?.focus()}
- function open(){if(root&&!root.hidden){close();return}focus=document.activeElement;ctx.closePanels();if(!ctx.isRunning()){s.world.location='center';ctx.save()}root.hidden=false;layer.hidden=false;document.body.classList.add('idle-center-view');last='';repaintArena();refresh();if(!staffFrame)staffFrame=requestAnimationFrame(animateStaff)}
+ function open(){if(root&&!root.hidden){close();return}focus=document.activeElement;loadInterior();ctx.closePanels();if(!ctx.isRunning()){s.world.location='center';ctx.save()}root.hidden=false;layer.hidden=false;document.body.classList.add('idle-center-view');last='';repaintArena();refresh();if(!staffFrame)staffFrame=requestAnimationFrame(animateStaff)}
  function refresh(){if(!root||root.hidden)return;centerLayout();const action=document.getElementById('in-auto-label');if(action)action.textContent='VOLTAR À CAÇADA';team.replaceChildren();last='';}
 
  function mount(stage){
