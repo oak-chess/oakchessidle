@@ -2,6 +2,8 @@
 
 ## Objetivo e limites
 
+Plano detalhado das cinco etapas restantes, com entregas, testes e critérios de conclusão: [OPTIMIZATION-REMAINING-STAGES.md](OPTIMIZATION-REMAINING-STAGES.md).
+
 Reduzir o trabalho e os recursos que o Idle não usa, mantendo batalhas, animações aprovadas, cinco gerações, eventos, fazenda, pesca, Pokéfone e progresso dos jogadores. A campanha antiga não será alterada.
 
 Cada lote deve ter diagnóstico, mudança pequena, teste de regressão e comparação. Separar arquivos não é, por si só, uma melhora de FPS. Tamanho em disco, bytes carregados, memória JavaScript e tempo de processamento serão tratados como medidas diferentes.
@@ -73,3 +75,9 @@ A base foi medida e o primeiro lote foi implementado e comparado. Resultados, li
 O segundo lote removeu três integrações invisíveis da campanha, preservando os painéis próprios do Idle e o estilo compartilhado. Comparação e testes: [OPTIMIZATION-SECOND-BATCH.md](OPTIMIZATION-SECOND-BATCH.md). A checagem de dimensões dos bosses permanece como próximo alvo, sem alterações neste lote.
 
 O terceiro lote substituiu a varredura de encaixe dos bosses por observação de mudanças de layout, sprite e viewport. A fórmula de encaixe foi preservada. Validação e comparação: [OPTIMIZATION-THIRD-BATCH.md](OPTIMIZATION-THIRD-BATCH.md).
+
+O quarto lote inicia o controle de desenho atrás dos painéis, mantendo a atualização dos efeitos que aplica dano. Plano, limites e resultados: [OPTIMIZATION-PANEL-BUDGET.md](OPTIMIZATION-PANEL-BUDGET.md).
+
+O diagnóstico de portal, vila e Pokéfone está em [OPTIMIZATION-HEAVY-SCENES.md](OPTIMIZATION-HEAVY-SCENES.md). A primeira mudança elimina a verificação de áudio do portal quando não existem sons ativos; a aparência foi preservada após comparação do desfoque.
+
+A etapa com oito moradores e aplicativos realmente abertos está em [OPTIMIZATION-POPULATED-VIEWS.md](OPTIMIZATION-POPULATED-VIEWS.md). O primeiro ajuste evita reescrever nomes e níveis inalterados a cada frame da vila, preservando a animação.

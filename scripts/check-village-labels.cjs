@@ -1,0 +1,14 @@
+const fs=require('node:fs'),path=require('node:path'),vm=require('node:vm'),assert=require('node:assert/strict');
+const source=fs.readFileSync(path.join(__dirname,'../modes/idle/village/scene.js'),'utf8');
+const start=source.indexOf('function moveActors(dt=0)'),end=source.indexOf('\n function loop(now)',start);assert.ok(start>=0&&end>start);
+let writes=0,draws=0,steps=0,text='Bulbasaur · Nv. 10';
+const label={get textContent(){return text},set textContent(value){writes++;text=value}};
+const context={clearRect(){}},sprite={tagName:'CANVAS',getContext:()=>context};
+const node={dataset:{index:'0'},style:{},_pmdData:{Idle:{},Walk:{}},_wander:{state:{x:.7,y:.6},step(dt){steps++;this.state.x+=dt*.01;return {...this.state,moving:true,row:2,phase:0}}},querySelector:s=>s==='span'?label:sprite};
+const env={document:{querySelectorAll:()=>[node]},roster:[{name:'Bulbasaur',level:10}],reducedMovement:{matches:false},W:1280,H:760,time:2,TRAINER_PARTNER_SPRITES:{draw(){draws++}}};
+vm.createContext(env);vm.runInContext(source.slice(start,end)+';globalThis.moveActors=moveActors',env);
+for(let i=0;i<120;i++)env.moveActors(1/60);
+assert.equal(writes,0,'stable names and levels must not rewrite DOM every frame');assert.equal(draws,120,'sprite animation remains active');assert.equal(steps,120,'movement retains its frequency');assert.equal(node.dataset.direction,2);assert.ok(parseFloat(node.style.left)>1280*.7);
+env.roster[0].level=11;env.moveActors(1/60);assert.equal(writes,1);assert.equal(text,'Bulbasaur · Nv. 11');
+env.moveActors(1/60);assert.equal(writes,1);env.roster[0].name='Ivysaur';env.moveActors(1/60);assert.equal(writes,2);assert.equal(text,'Ivysaur · Nv. 11');
+console.log('PASS village labels: stable DOM, immediate level/name refresh, unchanged movement steps and sprite drawing.');

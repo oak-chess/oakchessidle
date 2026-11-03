@@ -4723,6 +4723,8 @@ document.addEventListener('visibilitychange',()=>{if(document.hidden)saveNow()})
 
 /* ---------- loop principal ---------- */
 let lastT=performance.now(),lastTick=-1;
+// Old cached HTML can retain an older presentation module; keep combat functional.
+function paintBattleFx(ts){if(window.IDLE_RENDER_FX)window.IDLE_RENDER_FX(ts,FX.draw);else FX.draw()}
 function frame(ts){try{frame_(ts)}catch(e){reportErr(e)}requestAnimationFrame(frame)}
 function frame_(ts){
   const dt=Math.max(0,Math.min(.05,(ts-lastT)/1000));lastT=ts;if(window.OAK_IDLE_MODE&&(document.hidden||window.IDLE_BACKGROUND_BUSY))return;
@@ -4747,7 +4749,7 @@ function frame_(ts){
   window.GHOST_SHADOW?.tick();
   window.PSYCHIC_FOLD?.tick();
   window.TRAINER_RECALL?.tick(sdt);
-  FX.draw();tipTick(ts);window.LIVE_BATTLE_STATS?.update(ts)}
+  paintBattleFx(ts);tipTick(ts);window.LIVE_BATTLE_STATS?.update(ts)}
 
 /* ---------- pausa ---------- */
 function togglePause(force){if(document.body.classList.contains('idle-native-mode'))return;if(!['plan','combat'].includes(G.phase))return;const next=typeof force==='boolean'?force:!G.paused;if(next===G.paused)return;G.paused=next;document.body.classList.toggle('game-paused',next);$('#pausedOverlay').classList.toggle('show',next);$('#pauseBtn').textContent=next?'▶':'⏸';$('#pauseBtn').setAttribute('aria-label',next?'Continuar jogo':'Pausar jogo');$('#pauseBtn').title=next?'Continuar (P)':'Pausar (P)';if(next)$('#resumeBtn').focus();else $('#pauseBtn').focus();SND.click()}

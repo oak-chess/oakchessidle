@@ -53,4 +53,10 @@ Créditos e atribuições: [CREDITS.md](CREDITS.md).
 
 ## Plano e medições
 
+O ciclo das cinco frentes e seus limites está em [docs/OPTIMIZATION-REMAINING-STAGES.md](docs/OPTIMIZATION-REMAINING-STAGES.md). O lote de carregamento da vila, limpeza da biblioteca antiga e extração de apresentação está em [docs/OPTIMIZATION-CLOSING-BATCH.md](docs/OPTIMIZATION-CLOSING-BATCH.md). O motor ainda compartilha recursos antigos necessários; esta rodada não representa uma reescrita completa.
+
+As responsabilidades e a ordem dos módulos estão em [docs/RUNTIME-MODULES.md](docs/RUNTIME-MODULES.md). Para a regressão prolongada isolada, use `node scripts/check-optimized-session.cjs` (três minutos de caçada, além das interações e recarregamento). Relatório em `output/optimized-session.json`.
+
 O plano por etapas está em [docs/OPTIMIZATION-PLAN.md](docs/OPTIMIZATION-PLAN.md). Execute `npm run profile -- minha-amostra` para medir preparação, combate e tablet aberto em um perfil isolado. O relatório fica em `output/performance-minha-amostra.json`; não usa o save do jogador. Compare sempre as mesmas condições e diferencie rAF de FPS real.
+
+Para medir outras telas no PowerShell: `$env:IDLE_PROFILE_SCENARIOS='portal,village,phone'`, seguido de `npm run profile -- telas`. Remova a variável depois com `Remove-Item Env:IDLE_PROFILE_SCENARIOS`. O cenário opcional `phone-no-blur` é um experimento de diagnóstico: remove o desfoque apenas no navegador do teste, sem alterar o CSS do jogo. Resultados e limites: [docs/OPTIMIZATION-HEAVY-SCENES.md](docs/OPTIMIZATION-HEAVY-SCENES.md).

@@ -50,3 +50,7 @@ body.idle-native-mode .ic-dialogue-actions button:focus-visible{outline-color:#f
 
 /* Keep panoramic atmosphere aligned beyond the fixed-width NPC layer. */
 #idle-center-scene.rv-native-layer{overflow:visible}
+
+/* Recovery stays available if the on-demand service page fails to load. */
+#rv-native-tools.rv-services-failed .rv-native-tools-close,#rv-native-tools.rv-services-loading .rv-native-tools-close{display:block!important;z-index:2}
+#rv-native-tools .rv-service-retry{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:2;padding:10px 16px;border:1px solid #5ad6e0;border-radius:8px;background:#102331;color:#f0faff;font:600 12px system-ui;cursor:pointer}
