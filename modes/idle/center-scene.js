@@ -6,7 +6,7 @@ window.createIdleCenterScene=function(ctx){
  function celebrateEvolution(event){
   if(!root||root.hidden)open();clearEvolution();refresh();
   const fx=el('section',undefined,'ic-evolution-effect');evolutionEffect=fx;fx.setAttribute('role','status');fx.setAttribute('aria-live','polite');fx.dataset.memberId=event.member.id;
-  const reduced=!!CFG.reduceFx||matchMedia('(prefers-reduced-motion: reduce)').matches;fx.dataset.reduced=String(reduced);
+  const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;fx.dataset.reduced=String(reduced);fx.dataset.gentle=String(!!CFG.reduceFx);
   const copy=el('div',undefined,'ic-evolution-copy'),caption=el('small','EVOLUÇÃO NO CENTRO POKÉMON'),title=el('h2',event.fromName+' está evoluindo!'),sprites=el('div',undefined,'ic-evolution-sprites');
   const sprite=(id,label,cls)=>{const img=el('img',undefined,cls);img.src=window.IDLE_SHINY.sprite(ctx.sprite(id),event.member.shiny===true);img.alt=label;return img};
   sprites.append(sprite(event.fromId,event.fromName,'ic-evolution-before'),sprite(event.toId,event.toName,'ic-evolution-after'));
@@ -14,7 +14,7 @@ window.createIdleCenterScene=function(ctx){
   copy.append(caption,title,sprites,el('p','Nível, IVs, potência e identidade preservados.'));fx.append(copy);stage.append(fx);SND.evolve();
   const reveal=()=>{if(evolutionEffect!==fx)return;fx.dataset.revealed='true';title.textContent=event.fromName+' evoluiu para '+event.toName+'!';SND.cry(event.toId,1);SND.star();evolutionTimer=setTimeout(clearEvolution,reduced?1800:2400)};
   // Start the transformation only once both forms can actually be drawn.
-  Promise.all([...sprites.querySelectorAll('img')].map(img=>img.decode().catch(()=>{}))).then(()=>{if(evolutionEffect!==fx)return;fx.dataset.transforming='true';evolutionTimer=setTimeout(reveal,reduced?150:3200)});
+  Promise.all([...sprites.querySelectorAll('img')].map(img=>img.decode().catch(()=>{}))).then(()=>{if(evolutionEffect!==fx)return;evolutionTimer=setTimeout(()=>{if(evolutionEffect!==fx)return;fx.dataset.transforming='true';evolutionTimer=setTimeout(reveal,reduced?900:3200)},reduced?250:600)});
  }
 
  const interior=new Image();interior.src='modes/idle/assets/center/interior-pixel-v2.png';interior.onload=()=>{if(root&&!root.hidden)repaintArena()};

@@ -784,7 +784,7 @@ function moveText(L,star,mv){
 /* =====================================================================
    ÁUDIO — efeitos sintetizados (WebAudio), gritos da PokeAPI, música simples
    ===================================================================== */
-const CFG0={movePreview:true,sfx:.7,cry:.6,music:true,musvol:.5,timer:true,speed:1,pmd:true,mute:false,shake:true,reduceFx:true,diff:'normal',remSpeed:false,txt:'normal',skipDlg:true,dmgnum:'all',manabar:true,confirmSell:false,autoPause:false,uiSize:'normal',fxLevel:'normal',teamMarkers:false,noticeVol:.5,recordReplays:true,keys:{roll:'d',xp:'f',sell:'e',bag:'b',fight:' ',pause:'p',view:'v',mute:'m'}};
+const CFG0={movePreview:false,sfx:.7,cry:.6,music:true,musvol:.5,timer:true,speed:1,pmd:true,mute:false,shake:true,reduceFx:true,diff:'normal',remSpeed:false,txt:'normal',skipDlg:true,dmgnum:'all',manabar:true,confirmSell:false,autoPause:false,uiSize:'normal',fxLevel:'normal',teamMarkers:false,noticeVol:.5,recordReplays:true,keys:{roll:'d',xp:'f',sell:'e',bag:'b',fight:' ',pause:'p',view:'v',mute:'m'}};
 CFG0.hexNeon=.5;
 const CFG=Object.assign({},CFG0);
 function gameKey(action){return (CFG.keys&&CFG.keys[action])||CFG0.keys[action]}
@@ -4787,7 +4787,7 @@ $('#vmus').checked=CFG.music;syncMusRow();
 $('#vmus').onchange=e=>{CFG.music=e.target.checked;SND.set();syncMusRow();saveCfg();e.target.blur()};
 $('#vtim').checked=CFG.timer;
 $('#vtim').onchange=e=>{CFG.timer=e.target.checked;saveCfg();syncMenuUI();e.target.blur()};
-const SWT=[['vmovepreview','movePreview',true],['vmute','mute',false],['vfx','reduceFx',true],['vrem','remSpeed',false],['vskip','skipDlg',true],['vmana','manabar',true],['vshk','shake',true]];
+const SWT=[['vmovepreview','movePreview',false],['vmute','mute',false],['vfx','reduceFx',true],['vrem','remSpeed',false],['vskip','skipDlg',true],['vmana','manabar',true],['vshk','shake',true]];
 SWT.forEach(([id,k,dt])=>{$('#'+id).onchange=e=>{CFG[k]=e.target.checked;saveCfg();syncMenuUI();e.target.blur()}});
 document.querySelectorAll('#menu .seg').forEach(sg=>sg.querySelectorAll('button').forEach(b=>b.addEventListener('click',()=>{CFG[sg.dataset.key]=b.dataset.v;saveCfg();SND.click();syncMenuUI();b.blur()})));
 function syncMenuUI(){

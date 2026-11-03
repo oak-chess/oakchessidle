@@ -6,7 +6,8 @@
   "scripts": {
     "test": "node scripts/check-render-scheduler.cjs && node scripts/check-phone-clock.cjs && node scripts/check-village-labels.cjs && node scripts/check-portal-audio-lifecycle.cjs && node scripts/check-standalone.cjs && node scripts/check-idle-tutorial-content.cjs",
     "profile": "node scripts/profile-idle.cjs",
-    "test:session": "node scripts/check-optimized-session.cjs"
+    "test:session": "node scripts/check-optimized-session.cjs",
+    "test:evolution": "node scripts/check-idle-evolution-animation.cjs"
   },
   "devDependencies": {
     "playwright": "^1.56.0"

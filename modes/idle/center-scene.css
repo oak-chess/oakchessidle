@@ -74,3 +74,12 @@ body.idle-center-view #idle-center-scene .ic-floor-team{display:none!important}
 @keyframes ic-form-before{0%,12%,28%,42%,54%,64%,72%,79%,85%,90%,94%{opacity:1;transform:translate(-50%,-50%) scale(1)}20%,36%,48%,59%,68%,76%,82%,88%,92%,97%,100%{opacity:0;transform:translate(-50%,-50%) scale(.87)}}
 @keyframes ic-form-after{0%,12%,28%,42%,54%,64%,72%,79%,85%,90%,94%{opacity:0;transform:translate(-50%,-50%) scale(.87)}20%,36%,48%,59%,68%,76%,82%,88%,92%,97%,100%{opacity:1;transform:translate(-50%,-50%) scale(1.08)}}
 @media(prefers-reduced-motion:reduce){.ic-evolution-effect[data-transforming=true] .ic-evolution-before,.ic-evolution-effect[data-transforming=true] .ic-evolution-after{animation:none!important}}
+
+/* Reduce flashes without skipping either form: slow crossfades, steady soft glow. */
+.ic-evolution-effect[data-gentle=true] .ic-evolution-particles{display:none}
+.ic-evolution-effect[data-gentle=true][data-transforming=true]:not([data-revealed=true]):not([data-reduced=true]) .ic-evolution-before{animation-name:ic-form-before-soft;filter:brightness(0) invert(1) drop-shadow(0 0 8px #a9ecff)}
+.ic-evolution-effect[data-gentle=true][data-transforming=true]:not([data-revealed=true]):not([data-reduced=true]) .ic-evolution-after{animation-name:ic-form-after-soft;filter:brightness(0) invert(1) drop-shadow(0 0 8px #e3c7ff)}
+.ic-evolution-effect[data-gentle=true][data-revealed=true] .ic-evolution-after{animation-name:ic-evolution-reveal-soft}
+@keyframes ic-form-before-soft{0%,10%,45%,55%{opacity:1}25%,30%,75%,100%{opacity:0}}
+@keyframes ic-form-after-soft{0%,10%,45%,55%{opacity:0}25%,30%,75%,100%{opacity:1}}
+@keyframes ic-evolution-reveal-soft{from{opacity:.7;filter:drop-shadow(0 0 8px #c9f0ff)}to{opacity:1;filter:drop-shadow(0 0 5px #c9f0ff)}}
