@@ -1384,8 +1384,8 @@ body.idrag .unit:has(.its.has){z-index:4000!important}
 </style>
 <link rel="icon" type="image/svg+xml" href="assets/game-home/favicon.svg">
 </head>
-<body>
-<script src="asset-inventory.js"></script>
+<body class="stream-themed">
+
 <script src="assets/startup-loader.js?v=terminal-2"></script>
 <script src="assets/resource-warmup.js?v=1"></script>
 <script src="assets/playable-moves.js?v=psychic-3"></script>
@@ -1578,7 +1578,7 @@ window.reportErr=function(e){try{console.error(e);var d=document.getElementById(
 addEventListener('error',function(ev){if(ev.error||ev.message)reportErr(ev.error||ev.message)});
 addEventListener('unhandledrejection',function(ev){reportErr(ev.reason)});
 </script>
-<script src="engine.js"></script>
+<script src="modes/idle/boss-fit.js?v=1"></script><script src="engine.js?v=boss-events-1"></script>
 <script id="tutorial-carvalho-js">
 /* ===== Tutorial do Prof. Carvalho (primeira rodada) ===== */
 (function(){
@@ -3594,7 +3594,7 @@ body #tip .ut .usec.its{padding-top:4px}
 <link rel="stylesheet" href="assets/achievements.css">
 <script src="assets/achievements.js?v=notice-theme-2"></script>
 <link rel="stylesheet" href="assets/title-menu.css?v=hierarchy-3">
-<script src="assets/title-menu.js?v=hierarchy-2"></script>
+
 <link rel="stylesheet" href="assets/pokedex.css">
 <script src="assets/dex/catalog.js"></script>
 <script src="assets/dex/learnsets.js?v=nine-4"></script>
@@ -3602,13 +3602,13 @@ body #tip .ut .usec.its{padding-top:4px}
 <script src="assets/dex/pmd-preview.js?v=local-1"></script>
 <script src="assets/pokedex.js?v=shop-shiny-8"></script>
 <link rel="stylesheet" href="assets/battle-report.css">
-<script src="assets/battle-report.js?v=right-notice-2"></script>
+
 <link rel="stylesheet" href="assets/regional-events.css">
 <script src="assets/regional-events.js"></script>
 <link rel="stylesheet" href="assets/game-menu.css">
 <script src="assets/game-menu.js"></script>
 <link rel="stylesheet" href="assets/run-challenges.css">
-<script src="assets/run-challenges.js"></script>
+
 <link rel="stylesheet" href="assets/alternative-routes.css">
 <script src="assets/alternative-routes.js"></script>
 <link rel="stylesheet" href="assets/mystery-events.css">
@@ -3718,7 +3718,7 @@ body #tip .ut .usec.its{padding-top:4px}
 <link rel="stylesheet" href="assets/game-home/pokemon-logo.css?v=1">
 <link rel="stylesheet" href="assets/game-home/credits.css?v=1">
 <link rel="stylesheet" href="assets/game-home/scores.css?v=1">
-<script src="assets/game-home/streaming.js?v=mode-11-idle"></script>
+
 <script src="assets/game-home/mode-arenas.js?v=3-idle"></script>
 <script src="assets/game-home/trainer-card.js?v=2"></script>
 <script src="assets/game-home/credits.js?v=1"></script>
@@ -3729,7 +3729,7 @@ body #tip .ut .usec.its{padding-top:4px}
 <link rel="stylesheet" href="assets/game-home/library-layout.css?v=1">
 <!-- game-home:end -->
 <link rel="stylesheet" href="assets/team-view.css?v=7">
-<script src="assets/team-view.js?v=rocket-fight-9"></script>
+
 <link rel="stylesheet" href="assets/interface-colors.css?v=4">
 <link rel="stylesheet" href="assets/rocket-theft.css?v=2">
 <script src="assets/rocket-theft.js?v=2"></script>

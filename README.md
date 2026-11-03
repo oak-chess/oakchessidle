@@ -50,3 +50,7 @@ As filas de imagens e o carregamento de recursos visíveis já existentes foram 
 Próximas limpezas devem ser pequenas e verificáveis: mapear dependências do motor, remover rotinas exclusivas de outros modos, eliminar mídias comprovadamente sem uso e só depois dividir o motor em módulos menores. Não apague um diretório por seu nome: algumas arenas e interfaces são compartilhadas.
 
 Créditos e atribuições: [CREDITS.md](CREDITS.md).
+
+## Plano e medições
+
+O plano por etapas está em [docs/OPTIMIZATION-PLAN.md](docs/OPTIMIZATION-PLAN.md). Execute `npm run profile -- minha-amostra` para medir preparação, combate e tablet aberto em um perfil isolado. O relatório fica em `output/performance-minha-amostra.json`; não usa o save do jogador. Compare sempre as mesmas condições e diferencie rAF de FPS real.

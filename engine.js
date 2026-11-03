@@ -3224,7 +3224,12 @@ function fitBossEl(u){
   const f=Math.max(fin?.42:.55,Math.min(1,(bottom-top)/height));
   e.style.setProperty('--boss-fit',f.toFixed(3));e._bossFitKey=key;
 }
-setInterval(()=>{for(const u of B.units)fitBossEl(u)},80);
+let IDLE_BOSS_FIT=null;
+function installIdleBossFit(){if(!IDLE_BOSS_FIT&&window.createIdleBossFit)IDLE_BOSS_FIT=createIdleBossFit({root:unitsL,units:()=>B.units,fit:fitBossEl,stage,hud:document.getElementById('roundbox')})}
+if(window.createIdleBossFit)installIdleBossFit();else{
+  // Recover when an older cached HTML document loads the current engine.
+  const helper=document.createElement('script');helper.src=new URL('modes/idle/boss-fit.js?v=1',document.baseURI).href;helper.onload=installIdleBossFit;helper.onerror=()=>console.warn('Encaixe dos bosses indisponível; recarregue a página.');document.head.append(helper);
+}
 
 function applyTraits(team,foes){
   const cnt=typeCounts(team),act={};

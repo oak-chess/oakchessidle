@@ -4,7 +4,8 @@
   "private": true,
   "description": "OakChess Idle — projeto independente",
   "scripts": {
-    "test": "node scripts/check-standalone.cjs && node scripts/check-idle-tutorial-content.cjs"
+    "test": "node scripts/check-standalone.cjs && node scripts/check-idle-tutorial-content.cjs",
+    "profile": "node scripts/profile-idle.cjs"
   },
   "devDependencies": {
     "playwright": "^1.56.0"
