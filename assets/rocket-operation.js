@@ -51,6 +51,7 @@ function valid(s){
  const used=new Set();return s.units.every(u=>{const p=u.pos,k=JSON.stringify(p);if(!LINES[u.line]||(LINES[u.line].boss&&!EEVEE_FORMS.includes(u.line))||!Number.isInteger(u.star)||u.star<1||u.star>3||!Array.isArray(u.items)||u.items.some(k=>!ITEMBY[k])||!p||used.has(k))return false;used.add(k);return p.z==='n'?Number.isInteger(p.i)&&p.i>=0&&p.i<9:p.z==='b'&&Number.isInteger(p.r)&&p.r>=4&&p.r<8&&Number.isInteger(p.c)&&p.c>=0&&p.c<7});
 }
 function save(force=false){
+ window.IDLE_ROCKET_HOST?.accrue();
  if(!active()||writing||DEMO.on||G.pending.length||!force&&['combat','vs'].includes(G.phase))return false;
  writing=true;
  try{localStorage.setItem(KEY,JSON.stringify({version:1,operation:copy(state()),game:{hp:G.hp,gold:G.gold,lvl:G.lvl,xp:G.xp,streak:G.streak,items:G.items.slice(),pool:G.pool.slice(),shop:copy(G.shop),locked:G.locked,shPity:G.shPity||0,joyBuff:G.joyBuff||0,mk:G.mk?copy(G.mk):null},units:allUnits().filter(u=>u.pos).map(u=>({line:u.line,star:u.star,items:u.items.slice(),pos:{...u.pos},shiny:!!u.shiny,dexPurchased:!!u.dexPurchased,evoSkip:u.evoSkip??null}))}));saveFailed=false;return true}
@@ -131,7 +132,7 @@ window.addEventListener('keydown',e=>{
  if(!overlay||window.TEAM_VIEW?.isOpen||e.ctrlKey||e.metaKey||e.altKey||['F5','F11','F12'].includes(e.key))return;
  e.stopImmediatePropagation();if(window.ROCKET_DIALOGUE?.key(overlay,e))return;if(!overlay.contains(document.activeElement))overlay.querySelector('button')?.focus();
  if(e.key==='Tab'){const buttons=[...overlay.querySelectorAll('button:not(:disabled),a[href]')],i=buttons.indexOf(document.activeElement);if(buttons.length&&(e.shiftKey&&i<=0||!e.shiftKey&&i===buttons.length-1)){e.preventDefault();buttons[e.shiftKey?buttons.length-1:0].focus()}return}
- if(e.key==='Escape'){e.preventDefault();if(!active())close();return}
+ if(e.key==='Escape'){e.preventDefault();if(!active()){if(window.IDLE_ROCKET_HOST)IDLE_ROCKET_HOST.requestExit();else close()}return}
  if(['Enter',' '].includes(e.key)){e.preventDefault();if(!e.repeat&&overlay.contains(document.activeElement))document.activeElement.click()}
 },true);
 function menu(id=chapter){
@@ -141,7 +142,7 @@ function menu(id=chapter){
  const unlocked=!!progress.silphScope;
  panel(chapterName(),objective(),
  '<div class="rop-mission-cover"><img src="assets/mode-art/'+(lavender()?'lavender-tower.svg':'rocket-base.svg')+'" alt="'+chapterName()+'"><span><small>DOSSIÊ '+(lavender()?'02':'01')+' / KANTO</small><b>'+chapterName()+'</b><em>50 etapas · '+(lavender()?'Silph Scope · Sr. Fuji':'Infiltração · Resgate')+'</em></span></div><div class="rop-story"><article class="'+(!lavender()?'available':'')+'"><b>01 · Base escondida</b><span>Celadon · 50 etapas · Giovanni</span><small>'+(progress.celadon?'✓ Silph Scope recuperado':'Disponível')+'</small></article><article class="'+(lavender()?'available':'')+'"><b>02 · Ecos de Lavender</b><span>Torre Pokémon · 50 etapas · Sr. Fuji</span><small>'+(progress.lavender?'✓ Sr. Fuji resgatado':unlocked?'Disponível':'Requer o Silph Scope de Celadon')+'</small></article><article><b>03 · Silph sob ataque</b><span>Silph Co. · Libertação de Saffron</span><small>'+(progress.lavender?'Próximo capítulo · em desenvolvimento':'Após Lavender')+'</small></article></div>'+(running?'<p class="rop-notice">Tentativa salva · etapa '+(saved.operation.step+1)+'/50 · '+Math.round(saved.game.hp)+' de vida</p>':'')+'<p>Cada capítulo possui equipe, recursos, recordes e salvamento próprios. Comece com três Pokémon e desenvolva sua equipe ao longo da operação.</p>',
- [...(running?[{label:'Continuar operação',run:()=>launch(saved)}]:[]),{label:'Iniciar operação',run:()=>running?confirmNew():launch()},...(lavender()?[{label:'Ver Base escondida',secondary:true,run:()=>menu('celadon')}]:unlocked?[{label:'Ecos de Lavender →',secondary:true,run:()=>menu('lavender')}]:[]),{label:'Recordes',secondary:true,run:records},{label:'Voltar à biblioteca',secondary:true,run:close}],true);
+ [...(running?[{label:'Continuar operação',run:()=>launch(saved)}]:[]),{label:'Iniciar operação',run:()=>running?confirmNew():launch()},...(lavender()?[{label:'Ver Base escondida',secondary:true,run:()=>menu('celadon')}]:unlocked?[{label:'Ecos de Lavender →',secondary:true,run:()=>menu('lavender')}]:[]),{label:'Recordes',secondary:true,run:records},{label:window.IDLE_ROCKET_EMBEDDED?'Voltar às operações':'Voltar à biblioteca',secondary:true,run:()=>window.IDLE_ROCKET_HOST?IDLE_ROCKET_HOST.requestExit():close()}],true);
 }
 function confirmNew(){panel('Substituir a tentativa?','A equipe e os recursos da Operação Rocket atual serão substituídos. Os recordes e o progresso de conclusão serão mantidos.','',[{label:'Voltar',run:menu},{label:'Começar nova operação',secondary:true,run:()=>launch()}],true)}
 function clean(){
@@ -227,7 +228,7 @@ function intro(){
 function rocketOpponent(t){
  if(t.room==='duo')return{slug:'rocketgrunt',name:'Jessie e James'};
  if(t.room==='boss')return lavender()?{slug:'archer',name:'Archer'}:{slug:'giovanni',name:'Giovanni'};
- if(t.room==='spirit')return{slug:'channeler',name:'Espírito de Marowak'};
+ if(t.room==='spirit')return{slug:'medium',name:'Espírito de Marowak'};
  if(['officer','convoy'].includes(t.room)||t.ambush){const names=['Proton','Petrel','Ariana','Archer'],i=Math.floor(t.step/5)%4;return{slug:names[i].toLowerCase(),name:names[i]+' — Equipe Rocket'}}
  return{slug:t.step%2?'rocketgruntf':'rocketgrunt',name:'Recruta Rocket'};
 }
@@ -303,8 +304,8 @@ function finish(){
 function score(t,hp){return t.history.length*100+t.rescued.length*150+t.protected*50+(t.result==='won'?1000:0)+Math.round(hp)*5-Math.min(300,t.losses*25)}
 function storeResult(){
  const t=state();try{
-  const rows=read(RECORDS)||[],entry={id:t.id,at:t.endedAt,result:t.result,steps:t.history.length,total:t.total||TOTAL,rescued:t.rescued.length,protected:t.protected,hp:G.hp,maxAlert:t.maxAlert,losses:t.losses,score:score(t,G.hp)};
-  const records=Array.isArray(rows)?rows:[];if(!records.some(r=>r.id===t.id))records.push(entry);localStorage.setItem(RECORDS,JSON.stringify(records.slice(-100)));
+  const rows=read(RECORDS)||[],entry={id:t.id,chapter,scoreVersion:1,activeMs:Math.round(t.activeMs||0),wins:t.wins||0,at:t.endedAt,result:t.result,steps:t.history.length,total:t.total||TOTAL,rescued:t.rescued.length,protected:t.protected,hp:G.hp,maxAlert:t.maxAlert,losses:t.losses,score:score(t,G.hp)};
+  const records=Array.isArray(rows)?rows:[];if(!records.some(r=>r.id===t.id))records.push(entry);localStorage.setItem(RECORDS,JSON.stringify(records.slice(-100)));const best=read(RECORDS+'_best');if(!best||entry.score>best.score)localStorage.setItem(RECORDS+'_best',JSON.stringify(entry));
   if(t.result==='won'){const p=read(PROGRESS)||{};if(lavender()){p.lavender=true;p.fujiRescued=true;p.pokeFlute=true;p.lavenderCompletedAt=p.lavenderCompletedAt||t.endedAt}else{p.celadon=true;p.silphScope=true;p.completedAt=p.completedAt||t.endedAt}localStorage.setItem(PROGRESS,JSON.stringify(p))}return true;
  }catch{toast('Não foi possível registrar o resultado. O salvamento da tentativa será mantido.');return false}
 }
@@ -313,15 +314,15 @@ function resultScreen(){
  const t=state(),won=t.result==='won';G.over=true;G.eventModal=true;storeResult();
  panel(won?(lavender()?'Sr. Fuji resgatado!':'Silph Scope recuperado!'):t.result==='extracted'?'Extração concluída':'Fim da operação',won?(lavender()?'Os Rockets deixaram a torre. O Sr. Fuji agradece e entrega a Poké Flauta como marco da sua jornada.':'Giovanni recuou. Os Pokémon estão livres, e uma pista leva à Torre Pokémon de Lavender.'):t.result==='extracted'?'Sua equipe deixou a base em segurança. Os resgates foram registrados.':'A base resistiu à infiltração. Monte outra equipe e tente uma nova estratégia.',
  '<div class="rop-result-emblem">'+(won?'✓':'R')+'</div><div class="rop-stats"><span>Pontuação <b>'+score(t,G.hp)+'</b></span><span>Etapas <b>'+t.history.length+'/'+(t.total||TOTAL)+'</b></span><span>Resgates <b>'+t.rescued.length+'</b></span><span>Protegidos <b>'+t.protected+'</b></span><span>Vida <b>'+Math.round(G.hp)+'</b></span><span>Maior alerta <b>'+t.maxAlert+'/4</b></span></div>'+(won?'<p class="rop-notice">'+(lavender()?'Marcos conquistados: Sr. Fuji resgatado e Poké Flauta. Próximo capítulo: Silph sob ataque.':'Silph Scope recuperado. Ecos de Lavender está disponível na seleção de capítulos.')+'</p>':''),
- [...(won&&!lavender()?[{label:'Seguir para Ecos de Lavender',run:()=>{if(!save(true)||!storeResult())return;clean();G.rocketOperation=null;document.body.classList.remove('rocket-operation-active');hud.hidden=true;menu('lavender')}}]:[]),{label:'Voltar à biblioteca',run:exit},{label:'Iniciar outra operação',secondary:true,run:()=>panel('Começar outra operação?','O resultado desta tentativa já foi registrado.','',[{label:'Voltar',run:resultScreen},{label:'Nova operação',secondary:true,run:()=>launch()}])}]);
+ [...(won&&!lavender()?[{label:'Seguir para Ecos de Lavender',run:()=>{if(!save(true)||!storeResult())return;clean();G.rocketOperation=null;document.body.classList.remove('rocket-operation-active');hud.hidden=true;menu('lavender')}}]:[]),{label:window.IDLE_ROCKET_EMBEDDED?'Voltar às operações':'Voltar à biblioteca',run:exit},{label:'Iniciar outra operação',secondary:true,run:()=>panel('Começar outra operação?','O resultado desta tentativa já foi registrado.','',[{label:'Voltar',run:resultScreen},{label:'Nova operação',secondary:true,run:()=>launch()}])}]);
 }
 function records(){
  const rows=read(RECORDS),list=Array.isArray(rows)?rows.slice().sort((a,b)=>b.score-a.score):[];
  panel('Recordes · '+chapterName(),'Tentativas deste capítulo registradas neste navegador.',list.length?'<ol class="rop-records">'+list.map(r=>'<li><b>'+Math.round(r.score)+' pontos</b><span>'+({won:'Missão concluída',lost:'Derrota',extracted:'Extração'}[r.result]||'Tentativa')+' · '+r.steps+'/'+(r.total||10)+' etapas · '+r.rescued+' resgates</span><small>'+new Date(r.at).toLocaleDateString('pt-BR')+' · alerta máximo '+r.maxAlert+'</small></li>').join('')+'</ol>':'<p>Nenhuma tentativa encerrada.</p>',[{label:'Voltar',run:menu}],true);
 }
 function exit(){
- if(!active()){close();return}if(['combat','vs'].includes(G.phase)){toast('Conclua a batalha antes de salvar e sair.');return}
- if(!save(true))return;if(state().status==='ended'&&!storeResult())return;location.href='index.html';
+ if(!active()){if(window.IDLE_ROCKET_HOST)IDLE_ROCKET_HOST.leave();else close();return}if(['combat','vs'].includes(G.phase)){toast('Conclua a batalha antes de salvar e sair.');return}
+ if(!save(true))return;if(state().status==='ended'&&!storeResult())return;if(window.IDLE_ROCKET_HOST){IDLE_ROCKET_HOST.leave();return}location.href='index.html';
 }
 function restart(){const t=state();if(!t)return;const modal=G.eventModal,paused=G.paused;G.paused=true;panel('Recomeçar a operação?','A equipe e os recursos desta tentativa serão substituídos.','',[{label:'Continuar tentativa',run:()=>{close();G.paused=paused;G.eventModal=modal;if(modal)resume()}},{label:'Recomeçar',secondary:true,run:()=>launch()}])}
 function resume(){

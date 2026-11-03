@@ -157,8 +157,6 @@ function render(){if(!root||root.hidden)return;sync();root.dataset.view=tab;root
 function mount(stage){
  function panel(id,eyebrow,title,tabs){const node=h('section',undefined,'idle-window ih-window');node.id=id;node.hidden=true;const head=h('header'),words=h('div');words.append(h('small',eyebrow),h('h2',title));head.append(words,btn('✕',close));node.append(head);const nav=h('nav',undefined,'ip-tabs');for(const [key,label]of tabs){const b=btn(label,()=>{root=node;tab=key;render();node.querySelector('.ih-content').scrollTop=0});b.dataset.huntTab=key;nav.append(b)}node.append(nav,h('div',undefined,'ih-content'));stage.append(node);return node}
  huntRoot=panel('idle-hunts','CAÇADAS · FORMAÇÃO · PROGRESSO','Escolha sua caçada',[['choose','Caçadas'],['setup','Expedição'],['habitat','Habitantes']]);
- const preyButton=btn('Prey',()=>ctx.openPrey?.());preyButton.dataset.openPrey='true';huntRoot.querySelector('nav').append(preyButton);
- const safariButton=btn('Safari',()=>ctx.safariOpen?.());safariButton.dataset.openSafari='true';huntRoot.querySelector('nav').append(safariButton);
  recordRoot=panel('idle-records','REGISTROS · RESULTADOS · CAPTURAS','Registro da caçada',[['report','Registro'],['history','Histórico de capturas']]);root=huntRoot;
  document.addEventListener('keydown',e=>{if(e.key==='Escape')close()});
 }

@@ -12,5 +12,5 @@
   new MutationObserver(queue).observe(nav,{subtree:true,childList:true,characterData:true,attributes:true,attributeFilter:['aria-pressed']});
   new MutationObserver(queue).observe(document.body,{attributes:true,attributeFilter:['class']});const stage=nav.closest('#stage'),fit=()=>stage?.style.setProperty('--device-dock-height',nav.offsetHeight+'px');new ResizeObserver(fit).observe(nav);fit();sync();return true;
  }
- const timer=setInterval(()=>{if(mount())clearInterval(timer)},100),art=new Image();art.onload=()=>{assetReady=true;if(mount())clearInterval(timer)};art.onerror=()=>{clearInterval(timer);console.warn('Arte da navegação indisponível; controles originais preservados.')};art.src=new URL('modes/idle/assets/navigation/device-neutral.png',document.baseURI).href;
+ const timer=setInterval(()=>{if(mount())clearInterval(timer)},100),art=new Image();art.onload=()=>{assetReady=true;if(mount())clearInterval(timer)};art.onerror=()=>{clearInterval(timer);console.warn('Arte da navegação indisponível; controles originais preservados.')};art.src=new URL('modes/idle/assets/navigation/device-modes-v1.png',document.baseURI).href;
 })();

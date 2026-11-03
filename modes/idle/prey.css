@@ -1,81 +1,81 @@
-body.idle-native-mode #stage #idle-prey{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:min(1120px,calc(100% - 48px));height:auto;max-height:calc(100% - 28px);padding:28px 32px 24px!important;background:transparent!important;border:0!important;box-shadow:none!important;overflow:visible;z-index:1600;color:#e8f6ff;font:15px Arial,sans-serif;box-sizing:border-box}
+/* Approved artwork is a backplate; all values and actions remain native controls. */
+body.idle-native-mode #stage #idle-prey{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:min(1120px,calc(100% - 24px),calc((100vh - 38px)*1.7768));height:auto!important;aspect-ratio:1672/941;max-height:none!important;padding:0!important;border:0!important;background:transparent!important;box-shadow:none!important;overflow:visible;z-index:1600;container-type:inline-size;color:#e8f6ff;font-family:Arial,sans-serif;box-sizing:border-box}
 body.idle-native-mode #stage #idle-prey[hidden]{display:none!important}
-body.idle-native-mode #stage #idle-prey .pr-frame{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:2}
-body.idle-native-mode #stage #idle-prey .pr-shell{background:linear-gradient(135deg,#102635,#07141f 60%,#112638);border-radius:22px;padding:20px 22px 12px;box-shadow:0 14px 40px #0009;position:relative}
-body.idle-native-mode #stage #idle-prey .pr-head{display:flex;align-items:center;gap:18px;border-bottom:1px solid #53ddf06b;padding:2px 0 12px!important;background:none!important;margin:0!important}
-body.idle-native-mode #stage #idle-prey .pr-head small{letter-spacing:2px;color:#89d9ef;font-size:10px}
-body.idle-native-mode #stage #idle-prey .pr-head h2{font:bold 36px Georgia,serif;color:#ffe5a2;margin:2px 0 0}
-body.idle-native-mode #stage #idle-prey .pr-balance{margin-left:auto;color:#ffe5a2;font-size:16px;border:1px solid #997f42;border-radius:8px;padding:9px 14px;background:#06101b}
-body.idle-native-mode #stage #idle-prey button,body.idle-native-mode #stage .ih-prey-open{cursor:pointer;border:1px solid #658fa5;border-radius:9px;background:linear-gradient(#21465a,#0b2434);color:#eefaff;padding:9px 14px;font:600 13px Arial;box-shadow:inset 0 1px #ffffff24,0 2px 3px #0006;transition:filter .15s,border-color .15s}
-body.idle-native-mode #stage #idle-prey button:hover,body.idle-native-mode #stage .ih-prey-open:hover{filter:brightness(1.18);border-color:#70edff}
-body.idle-native-mode #stage #idle-prey button:focus-visible{outline:2px solid #fff2a2;outline-offset:3px}
-body.idle-native-mode #stage #idle-prey button:disabled{opacity:.45;cursor:default}
-body.idle-native-mode #stage #idle-prey .pr-close{background:linear-gradient(#913d50,#4a1828);font-size:20px;padding:5px 11px}
-body.idle-native-mode #stage #idle-prey .pr-main{display:grid;grid-template-columns:1.25fr 1fr;gap:20px;margin:16px 0}
-body.idle-native-mode #stage #idle-prey .pr-choices{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
-body.idle-native-mode #stage #idle-prey .pr-choice{padding:8px!important;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:12px;background:radial-gradient(ellipse at 50% 35%,#236078,#07131f 75%)!important;min-height:240px;overflow:hidden;position:relative}
-body.idle-native-mode #stage #idle-prey .pr-choice:before{content:'';position:absolute;inset:5px;border:1px solid #37657a;border-radius:7px;pointer-events:none}
+body.idle-native-mode #stage #idle-prey .pr-frame{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0}
+body.idle-native-mode #stage #idle-prey .pr-shell{position:absolute;inset:0;background:none;border:0;padding:0;box-shadow:none}
+body.idle-native-mode #stage #idle-prey button{cursor:pointer;font-family:Arial,sans-serif;transition:filter .15s;box-sizing:border-box}
+body.idle-native-mode #stage #idle-prey button:focus-visible{outline:2px solid #fff2a2!important;outline-offset:3px}
+body.idle-native-mode #stage #idle-prey button:disabled{cursor:default}
+body.idle-native-mode #stage #idle-prey .pr-head{position:absolute;inset:0;margin:0!important;padding:0!important;background:none!important;border:0!important;pointer-events:none}
+body.idle-native-mode #stage #idle-prey .pr-title{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}
+body.idle-native-mode #stage #idle-prey .pr-balance{position:absolute;left:76.3%;top:11.2%;width:13.5%;height:4.5%;display:flex;align-items:center;justify-content:center;color:#ffe6a3;font:bold 1.7cqw Georgia;white-space:nowrap;background:none!important;border:0!important;padding:0!important;box-shadow:none}
+body.idle-native-mode #stage #idle-prey .pr-close{position:absolute;left:92.8%;top:9.6%;width:3.8%;height:6.6%;pointer-events:auto;opacity:0;background:transparent!important;border:0!important;padding:0!important}
+body.idle-native-mode #stage #idle-prey .pr-close:hover{opacity:.25;background:#fff!important}
+body.idle-native-mode #stage #idle-prey .pr-close:focus-visible{opacity:1;color:transparent!important;background:transparent!important}
+body.idle-native-mode #stage #idle-prey .pr-main{position:absolute;inset:0;margin:0;display:block;pointer-events:none}
+body.idle-native-mode #stage #idle-prey .pr-choices{position:absolute;left:5.3%;top:25.2%;width:54%;height:51.2%;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.1cqw;pointer-events:auto}
+body.idle-native-mode #stage #idle-prey .pr-choice{padding:8px!important;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:1.1cqw;background:radial-gradient(ellipse at 50% 35%,#236078,#07131f 75%)!important;border:1px solid #507a90!important;border-radius:7px!important;overflow:hidden;position:relative;min-height:0!important;color:#e8f6ff}
+body.idle-native-mode #stage #idle-prey .pr-choice:before{content:'';position:absolute;inset:5px;border:1px solid #37657a;border-radius:5px;pointer-events:none}
 body.idle-native-mode #stage #idle-prey .pr-choice[aria-pressed=true]{border-color:#69f3ff!important;box-shadow:inset 0 0 18px #00d6ff22,0 0 10px #00d9ff60!important}
-body.idle-native-mode #stage #idle-prey .pr-choice img{width:115px;height:120px;object-fit:contain;image-rendering:pixelated;filter:drop-shadow(0 6px 12px #0008)}
-body.idle-native-mode #stage #idle-prey .pr-choice strong{color:#ffe4a4;font:bold 20px Georgia,serif}
-body.idle-native-mode #stage #idle-prey .pr-choice small{text-align:center;font:11px/1.4 Arial;color:#add1df}
-body.idle-native-mode #stage #idle-prey .pr-details{background:linear-gradient(145deg,#10293a,#07121c);border:1px solid #44748b;border-radius:12px;padding:16px;display:flex;flex-direction:column;gap:11px}
-body.idle-native-mode #stage #idle-prey .pr-details>small{color:#95dbe9;font-size:10px;letter-spacing:1px}
-body.idle-native-mode #stage #idle-prey .pr-details h3{font:bold 28px Georgia,serif;color:#ffe4a4;margin:0}
-body.idle-native-mode #stage #idle-prey .pr-bonus{color:#7eedff;font-size:23px}
-body.idle-native-mode #stage #idle-prey .pr-details>b{color:#ffeac0;font-size:18px}
-body.idle-native-mode #stage #idle-prey .pr-details progress{width:100%;height:14px;accent-color:#51e0f9}
-body.idle-native-mode #stage #idle-prey .pr-details p{font-size:12px;color:#b7d3df;margin:0;line-height:1.5}
-body.idle-native-mode #stage #idle-prey .pr-kinds{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin-top:auto}
-body.idle-native-mode #stage #idle-prey .pr-kind{display:grid;place-items:center;gap:5px;border:1px solid #416173;border-radius:9px;padding:8px 3px;color:#9cb4c1}
-body.idle-native-mode #stage #idle-prey .pr-kind>b{font-size:25px}
-body.idle-native-mode #stage #idle-prey .pr-kind>span{font-size:11px}
-body.idle-native-mode #stage #idle-prey .pr-kind[data-active=true]{color:#7eecff;border-color:#62e5fa;box-shadow:0 0 10px #00d9ff33;background:#183d4c}
-body.idle-native-mode #stage #idle-prey .pr-actions{display:flex;align-items:center;gap:10px;border-top:1px solid #47758b;padding-top:12px;background:none!important}
-body.idle-native-mode #stage #idle-prey .pr-slots{display:flex;align-items:center;gap:6px;margin-right:auto}
-body.idle-native-mode #stage #idle-prey .pr-slots>b{color:#ffe6a6;font-size:12px;margin-right:4px}
-body.idle-native-mode #stage #idle-prey .pr-slots button{padding:8px 12px!important}
-body.idle-native-mode #stage #idle-prey .pr-slots [aria-pressed=true]{border-color:#76f4ff!important;box-shadow:0 0 8px #37ddff66!important}
-body.idle-native-mode #stage #idle-prey .pr-renew{background:linear-gradient(#702738,#32121c);border-color:#b86271}
-body.idle-native-mode #stage #idle-prey .pr-activate{background:linear-gradient(#1b6974,#0b3444);border-color:#75eafa;color:#ffe6a6}
-body.idle-native-mode #stage #idle-prey .pr-notice{font-size:11px;color:#a0c9d9;margin:10px 0 0;min-height:14px;line-height:1.4}
-body.idle-native-mode #stage #idle-prey .pr-intro{display:flex;align-items:center;gap:12px;background:#173444;border:1px solid #376476;border-radius:10px;margin-top:12px;padding:9px 12px}
-body.idle-native-mode #stage #idle-prey .pr-intro img{width:35px;height:50px;object-fit:contain;image-rendering:pixelated}
-body.idle-native-mode #stage #idle-prey .pr-intro b{color:#ffe6a6;font-size:12px}
-body.idle-native-mode #stage #idle-prey .pr-intro p{font-size:12px;line-height:1.4;margin:4px 0 0;color:#d0e1e8}
-body.idle-native-mode #stage #idle-prey .pr-intro button{margin-left:auto}
-body.idle-native-mode #stage #idle-prey .pr-locked{padding:32px 10px;color:#e9d69e}
-body.idle-native-mode #stage #idle-prey .pr-empty{font-size:14px;color:#acd0df;padding:20px}
-body.idle-native-mode #stage .ih-prey-open{font-size:11px!important;max-width:100%;white-space:normal}
-body.idle-native-mode #stage .ih-prey-summary{display:flex;align-items:center;justify-content:space-between;gap:12px;border:1px solid #39788b;background:#102d3c;border-radius:9px;padding:8px 12px;margin-bottom:10px;font:12px/1.4 Arial;color:#bde3ec}
-
-@media(max-height:720px){body.idle-native-mode #stage #idle-prey .pr-choice{min-height:190px}
-body.idle-native-mode #stage #idle-prey .pr-choice img{height:95px;width:95px}
-body.idle-native-mode #stage #idle-prey .pr-main{margin:10px 0;gap:12px}
-body.idle-native-mode #stage #idle-prey .pr-head h2{font-size:29px}
-body.idle-native-mode #stage #idle-prey .pr-details{gap:7px;padding:12px}
-body.idle-native-mode #stage #idle-prey .pr-intro{padding:6px 10px}
-body.idle-native-mode #stage #idle-prey .pr-shell{padding-top:15px}
-body.idle-native-mode #stage #idle-prey .pr-kinds .pr-kind{padding:5px}
-}
-
-@media(prefers-reduced-motion:reduce){body.idle-native-mode #stage #idle-prey button{transition:none}
-}
-.pr-hud{position:absolute;top:112px;left:50%;transform:translateX(-50%);max-width:330px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;background:linear-gradient(#153d4e,#0b1f2d);border:1px solid #4bd9ee;border-radius:8px;color:#c1f5ff;font:11px Arial;padding:6px 10px;cursor:pointer;z-index:82;box-shadow:0 2px 9px #0007}
+body.idle-native-mode #stage #idle-prey .pr-choice img{width:10.3cqw;height:10.8cqw;object-fit:contain;image-rendering:pixelated;filter:drop-shadow(0 6px 12px #0008)}
+body.idle-native-mode #stage #idle-prey .pr-choice strong{color:#ffe4a4;font:bold 1.8cqw Georgia,serif}
+body.idle-native-mode #stage #idle-prey .pr-choice small{text-align:center;font:1cqw/1.4 Arial;color:#add1df}
+body.idle-native-mode #stage #idle-prey .pr-details{position:absolute;left:62.3%;top:25.7%;width:32%;height:50.7%;background:none!important;border:0!important;padding:0!important;border-radius:0;box-shadow:none;pointer-events:auto}
+body.idle-native-mode #stage #idle-prey .pr-details>small{position:absolute;left:0;top:14.5%;font:.75cqw Arial;letter-spacing:1px;color:#9dc8db}
+body.idle-native-mode #stage #idle-prey .pr-details h3{position:absolute;left:0;top:0;width:100%;margin:0;color:#ffe4a4;font:bold italic 2.8cqw Georgia;text-shadow:0 2px #60421c}
+body.idle-native-mode #stage #idle-prey .pr-bonus{position:absolute;left:0;top:20%;width:100%;font:bold italic 2cqw Georgia;color:#84f1ff;text-shadow:0 0 10px #18c9ec90}
+body.idle-native-mode #stage #idle-prey .pr-counter{position:absolute;left:0;top:35.5%;font:bold 1.9cqw Georgia;color:#ffedc1}
+body.idle-native-mode #stage #idle-prey .pr-counter:before{content:'⚔';color:#f2d27a;margin-right:.7cqw}
+body.idle-native-mode #stage #idle-prey .pr-details progress{position:absolute;left:0;top:46%;width:97%;height:2cqw;appearance:none;-webkit-appearance:none;border:2px solid #8eaec2;border-radius:20px;background:#07121e;padding:3px;box-shadow:0 0 0 2px #00101c,inset 0 2px 4px #0009}
+body.idle-native-mode #stage #idle-prey progress::-webkit-progress-bar{background:#061320;border-radius:15px}
+body.idle-native-mode #stage #idle-prey progress::-webkit-progress-value{background:linear-gradient(#b5ffff,#3be3ff 50%,#1693ba);border-radius:12px;box-shadow:0 0 7px #36cfff}
+body.idle-native-mode #stage #idle-prey progress::-moz-progress-bar{background:linear-gradient(#b5ffff,#3be3ff,#1693ba);border-radius:12px}
+body.idle-native-mode #stage #idle-prey .pr-details p{position:absolute;left:0;top:56%;width:98%;text-align:center;font:italic 1.45cqw Georgia;color:#e2edf4;margin:0;line-height:1.3}
+body.idle-native-mode #stage #idle-prey .pr-kinds{position:absolute;left:0;top:69.5%;height:26%;width:100%;display:grid;grid-template-columns:repeat(4,1fr);gap:1cqw}
+body.idle-native-mode #stage #idle-prey .pr-kind{position:relative;background:#071b2b;border:0;border-radius:0;filter:brightness(.8) saturate(.65);transition:filter .15s;overflow:hidden}
+body.idle-native-mode #stage #idle-prey .pr-kind:before{content:'';position:absolute;inset:0;background-image:url('assets/prey/reference-backplate-v3.png');background-size:1393.333% 746.825%;background-position:67.33% 70.55%}
+body.idle-native-mode #stage #idle-prey .pr-kind:nth-child(2):before{background-position:76.16% 70.55%}
+body.idle-native-mode #stage #idle-prey .pr-kind:nth-child(3):before{background-position:84.92% 70.55%}
+body.idle-native-mode #stage #idle-prey .pr-kind:nth-child(4):before{background-position:93.81% 70.55%}
+body.idle-native-mode #stage #idle-prey .pr-kind[data-active=true]{filter:brightness(1.15) saturate(1.15);box-shadow:0 0 8px #3de6ff}
+body.idle-native-mode #stage #idle-prey .pr-kind>.pr-icon,body.idle-native-mode #stage #idle-prey .pr-kind>span{opacity:0}
+body.idle-native-mode #stage #idle-prey .pr-actions{position:absolute;inset:0;border:0;padding:0;background:none!important;pointer-events:none}
+body.idle-native-mode #stage #idle-prey .pr-actions>button{position:absolute;top:83.2%;height:7.1%;display:flex;align-items:center;justify-content:center;border:0!important;border-radius:0!important;box-shadow:none!important;background:transparent!important;padding:0 0 0 3.6cqw!important;color:#fff0d5!important;font:bold 1.65cqw Georgia!important;text-shadow:0 2px 2px #160409;pointer-events:auto;white-space:nowrap}
+body.idle-native-mode #stage #idle-prey .pr-actions>.pr-renew{left:42%;width:17.4%}
+body.idle-native-mode #stage #idle-prey .pr-actions>.pr-hunt{left:61.1%;width:14.7%}
+body.idle-native-mode #stage #idle-prey .pr-actions>.pr-activate{left:77.7%;width:17.7%;font:bold italic 1.85cqw Georgia!important;color:#ffe39c!important}
+body.idle-native-mode #stage #idle-prey .pr-actions>button>.pr-icon{display:none}
+body.idle-native-mode #stage #idle-prey .pr-actions>button:not(:disabled):hover{filter:brightness(1.5);box-shadow:inset 0 0 20px #fff2!important}
+body.idle-native-mode #stage #idle-prey .pr-actions>button:disabled{color:#98a6b4!important;background:#03121a66!important;opacity:.8}
+body.idle-native-mode #stage #idle-prey .pr-renew:after{content:attr(data-cost);position:absolute;left:0;top:104%;width:100%;font:.8cqw Arial;color:#c3d8df;text-shadow:0 1px #000}
+body.idle-native-mode #stage #idle-prey .pr-slots{position:absolute;left:6.6%;top:83%;width:28%;height:7.4%;display:flex;align-items:center;pointer-events:auto;gap:.7cqw}
+body.idle-native-mode #stage #idle-prey .pr-slots>b{position:absolute;left:0;top:25%;font:bold 1.5cqw Georgia;color:#f6d57e;white-space:nowrap}
+body.idle-native-mode #stage #idle-prey .pr-slots button{position:absolute;left:46%;top:0;width:16%;height:100%;background:none!important;border:0!important;box-shadow:none!important;padding:0!important;border-radius:4px;overflow:hidden}
+body.idle-native-mode #stage #idle-prey .pr-slots button:nth-of-type(2){left:65%}
+body.idle-native-mode #stage #idle-prey .pr-slots button:nth-of-type(3){left:84%}
+body.idle-native-mode #stage #idle-prey .pr-slots button[aria-pressed=true]{box-shadow:0 0 12px #31dcff!important;outline:1px solid #7ceeff}
+body.idle-native-mode #stage #idle-prey .pr-slots button .pr-icon{display:flex;position:absolute;inset:14%;width:72%;height:72%;color:#c6e6f3;background:linear-gradient(#263f51,#091d2b);border-radius:4px}
+body.idle-native-mode #stage #idle-prey .pr-icon svg{width:100%;height:100%}
+body.idle-native-mode #stage #idle-prey .pr-slots button small{position:absolute;right:0;bottom:0;color:#c7eaff;font:.65cqw Arial}
+body.idle-native-mode #stage #idle-prey .pr-notice{position:absolute;left:6%;top:78.3%;width:88%;margin:0;font:.9cqw Arial;color:#a9cbd6;text-align:center;line-height:1.1}
+body.idle-native-mode #stage #idle-prey .pr-intro{position:absolute;left:6%;top:23%;width:51%;box-sizing:border-box;z-index:5;padding:10px 12px;background:#102e40f5;border:1px solid #56c8df;border-radius:7px;box-shadow:0 6px 20px #0009;display:flex;align-items:center;gap:10px}
+body.idle-native-mode #stage #idle-prey .pr-intro img[hidden]{display:none}
+body.idle-native-mode #stage #idle-prey .pr-intro b{color:#ffe2a1;font-size:12px}
+body.idle-native-mode #stage #idle-prey .pr-intro p{font:12px/1.4 Arial;color:#d1e5ef;margin:4px 0}
+body.idle-native-mode #stage #idle-prey .pr-intro button,body.idle-native-mode #stage #idle-prey .pr-locked button{background:linear-gradient(#24485e,#102634)!important;border:1px solid #598fa8!important;color:#e5f6ff!important;border-radius:5px!important;padding:8px 12px!important}
+body.idle-native-mode #stage #idle-prey .pr-locked{position:absolute;left:10%;top:30%;width:44%;font-size:16px;color:#f5d89c}
+body.idle-native-mode #stage #idle-prey .pr-empty{align-self:center;font-size:15px;color:#b3d4e3}
+.pr-hud{position:absolute;top:112px;left:50%;transform:translateX(-50%);max-width:330px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;background:linear-gradient(#153d4e,#0b1f2d);border:1px solid #4bd9ee;border-radius:8px;color:#c1f5ff;font:11px Arial;padding:6px 10px;cursor:default;z-index:82;box-shadow:0 2px 9px #0007}
 .pr-hud[hidden],body.idle-center-view .pr-hud,body.rv-native-open .pr-hud{display:none!important}
-
-
-body.idle-native-mode #stage #idle-prey .pr-shell{padding-bottom:30px}
-
-body.idle-native-mode #stage #idle-prey .pr-choice{border-color:#507a90!important}
-
-body.idle-native-mode #stage #idle-prey .pr-choice[aria-pressed=true]{border-color:#69f3ff!important}
-
-body.idle-native-mode #stage #idle-prey .pr-activate{background:linear-gradient(#1b6974,#0b3444)!important;border-color:#75eafa!important}
-
-body.idle-native-mode #stage #idle-prey .pr-hunt{background:linear-gradient(#21465a,#0b2434)!important}
-
-body.idle-native-mode #stage #idle-prey .pr-renew{background:linear-gradient(#702738,#32121c)!important}
-
-body.idle-native-mode #stage #idle-prey .pr-slots [aria-pressed=true]{background:#164858!important}
-
+body.idle-native-mode #stage .ih-prey-summary{display:flex;align-items:center;justify-content:space-between;gap:12px;border:1px solid #39788b;background:#102d3c;border-radius:9px;padding:8px 12px;margin-bottom:10px;font:12px/1.4 Arial;color:#bde3ec}
+@media(prefers-reduced-motion:reduce){body.idle-native-mode #stage #idle-prey button,body.idle-native-mode #stage #idle-prey .pr-kind{transition:none!important}}
+body.idle-native-mode #stage #idle-prey .pr-details h3{padding-left:3.7cqw;box-sizing:border-box;font-size:2.65cqw}
+body.idle-native-mode #stage #idle-prey .pr-details h3:before{content:'';position:absolute;left:0;top:-.3cqw;width:3.2cqw;height:3.35cqw;background:url('assets/prey/reference-backplate-v3.png') 49.94% 2.98%/2533.333% 1344.285% no-repeat}
+body.idle-native-mode #stage #idle-prey .pr-actions>.pr-renew{padding-left:4.2cqw!important;font-size:1.48cqw!important}
+body.idle-native-mode #stage #idle-prey .pr-notice{top:78.3%;font-size:.9cqw;line-height:1.25;max-height:4.2%;overflow:hidden}
+body.idle-native-mode #stage #idle-prey .pr-actions>.pr-activate[data-confirm=true]{font-size:1.6cqw!important;padding-left:4.5cqw!important}
+body.idle-native-mode #stage #idle-prey .pr-slots button .pr-slot-pokemon{position:absolute;inset:8%;width:84%;height:84%;object-fit:contain;image-rendering:pixelated;background:radial-gradient(#21475b,#091b2a);border-radius:5px;filter:drop-shadow(0 1px 2px #000)}
+body.idle-native-mode #stage #idle-prey .pr-slots button[data-pending=true]:after{content:'';position:absolute;right:4%;top:5%;width:6px;height:6px;background:#ffda70;border-radius:50%;box-shadow:0 0 4px #ffbd43;border:1px solid #59481d}
+body.idle-native-mode #stage #idle-prey .pr-slot-unlock{position:absolute;top:105%;width:19%;font:.72cqw/1.2 Arial;color:#ffe09c;white-space:nowrap;text-align:center;pointer-events:none;text-shadow:0 1px 2px #000}
+body.idle-native-mode #stage #idle-prey .pr-slot-unlock[data-slot="1"]{left:63.5%}
+body.idle-native-mode #stage #idle-prey .pr-slot-unlock[data-slot="2"]{left:82.5%}

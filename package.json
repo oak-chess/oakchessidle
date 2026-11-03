@@ -11,7 +11,9 @@
     "test:center": "node scripts/check-center-demand.cjs",
     "test:lifecycle": "node scripts/check-panel-lifecycle.cjs",
     "test:partners": "node scripts/check-partner-sprite-lifecycle.cjs",
-    "test:prey": "node scripts/check-prey.cjs && node scripts/check-prey-browser.cjs"
+    "test:prey": "node scripts/check-prey.cjs && node scripts/check-prey-browser.cjs",
+    "build:rocket": "node scripts/build-rocket-host.cjs",
+    "test:rocket": "node scripts/check-rocket-transfer-browser.cjs"
   },
   "devDependencies": {
     "playwright": "^1.56.0"

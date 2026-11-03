@@ -1,0 +1,4 @@
+html,body{background:#07111e!important}body{overflow:hidden}
+#starter,#ttl,.stream-home,#modePreview,#collectionShortcuts,#titleMenu,#hist,#again,#tutbtn,#restart,.dex-pause-button{display:none!important}
+#startupLoader .startup-note:after{content:' Operação Rocket · equipe e recursos próprios.'}
+#rocketOperationOverlay .rop-actions button{white-space:normal}

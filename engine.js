@@ -4713,7 +4713,7 @@ let lastT=performance.now(),lastTick=-1;
 function paintBattleFx(ts){if(window.IDLE_RENDER_FX)window.IDLE_RENDER_FX(ts,FX.draw);else FX.draw()}
 function frame(ts){try{frame_(ts)}catch(e){reportErr(e)}requestAnimationFrame(frame)}
 function frame_(ts){
-  const dt=Math.max(0,Math.min(.05,(ts-lastT)/1000));lastT=ts;if(window.OAK_IDLE_MODE&&(document.hidden||window.IDLE_BACKGROUND_BUSY))return;
+  const dt=Math.max(0,Math.min(.05,(ts-lastT)/1000));lastT=ts;if(window.OAK_IDLE_MODE&&(document.hidden||window.IDLE_BACKGROUND_BUSY||window.IDLE_ROCKET_OPERATION_ACTIVE))return;
   if(document.body.classList.contains('tower-entry-open')||document.body.classList.contains('rocket-entry-open'))return;
   const sdt=G.paused?0:((G.phase==='combat'||G.phase==='result')?dt*CFG.speed:dt);
   tickApprovedArenas(dt);
@@ -4884,7 +4884,7 @@ function renderBagBtn(){
   c.textContent=G.items.length;c.style.display=G.items.length?'':'none';
   b.classList.toggle('can',n>0);$('#bagalert').style.display=n>0?'grid':'none';
   $('#vialmini').innerHTML=VIALS.map(v=>`<div class="vm" data-k="${v.k}" style="--c:${v.c}" title="${v.n}"><img src="${vialUrl(v.k)}" alt=""><b>${G.vials[v.k]}</b></div>`).join('')}
-function openBag(tab){if(!['plan','combat','result'].includes(G.phase)||G.over)return;BAG.open=true;if(tab)BAG.tab=tab;$('#bagov').classList.add('show');SND.click();renderBag()}
+function openBag(tab){if(window.OAK_IDLE_MODE||document.body.classList.contains('idle-native-mode')){window.dispatchEvent(new Event('idle-open-phone'));return}if(!['plan','combat','result'].includes(G.phase)||G.over)return;BAG.open=true;if(tab)BAG.tab=tab;$('#bagov').classList.add('show');SND.click();renderBag()}
 function closeBag(){BAG.open=false;const e=$('#bagov');if(e)e.classList.remove('show');document.body.classList.remove('bag-dragging')}
 function toggleBag(tab){if(BAG.open&&(!tab||BAG.tab===tab))closeBag();else openBag(tab)}
 const vcirc=(i,attr)=>{const v=VIALS[i],n=G.vials[v.k];return`<div class="vcirc vh${n?'':' zero'}" ${attr}="${i}" style="--c:${v.c}" title="${v.n}"><img src="${vialUrl(v.k)}" alt="${v.n}"><b>${n}</b></div>`};
@@ -5013,6 +5013,7 @@ const dock=mk('div');dock.id='bagdock';dock.appendChild($('#bagbtn'));dock.appen
 $('#bagbtn').addEventListener('click',()=>toggleBag('bag'));
 $('#vialmini').addEventListener('click',()=>toggleBag('craft'));
 addEventListener('keydown',e=>{
+  if(window.OAK_IDLE_MODE||document.body.classList.contains('idle-native-mode')){if(BAG.open)closeBag();const target=e.target;if(e.ctrlKey||e.metaKey||e.altKey||e.repeat||target?.closest?.('input,textarea,select,[contenteditable]:not([contenteditable="false"])')||menuEl.classList.contains('show'))return;if(e.key.toLowerCase()===gameKey('bag')){e.preventDefault();openBag()}return}
   if(e.key==='Escape'&&BAG.open){closeBag();return}
   if(e.key.toLowerCase()===gameKey('bag')&&!e.ctrlKey&&!e.metaKey&&!e.altKey&&!menuEl.classList.contains('show')&&!G.paused&&!G.eventModal&&['plan','combat','result'].includes(G.phase)){e.preventDefault();toggleBag()}});
 addEventListener('pointerup',()=>{if(document.body.classList.contains('bag-dragging')){document.body.classList.remove('bag-dragging');renderBag()}});

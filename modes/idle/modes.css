@@ -1,0 +1,24 @@
+body.idle-native-mode #stage #idle-modes{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:min(1150px,calc(100% - 24px),calc((100vh - 30px)*1.7768));height:auto!important;aspect-ratio:1672/941;max-height:none!important;container-type:inline-size;padding:0!important;background:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;overflow:visible!important;z-index:1600;isolation:isolate}
+body.idle-native-mode #stage #idle-modes[hidden]{display:none!important}
+#idle-modes .im-art{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;filter:drop-shadow(0 12px 24px #0008)}
+#idle-modes .im-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}
+body.idle-native-mode #stage #idle-modes button{border:0!important;background:transparent!important;box-shadow:none!important;border-radius:8px!important;cursor:pointer;color:white!important}
+body.idle-native-mode #stage #idle-modes button:focus-visible{outline:2px solid #9cffff!important;outline-offset:3px}
+body.idle-native-mode #stage #idle-modes .im-close{position:absolute;left:87.4%;top:4.6%;width:6.1%;height:7.2%;padding:0!important}
+body.idle-native-mode #stage #idle-modes .im-close:hover{background:#ffffff20!important}
+#idle-modes .im-card{position:absolute;left:3%;top:15%;width:23.4%;height:77%;pointer-events:none;--mode-glow:#ff405b}
+#idle-modes .im-safari{left:26.8%;--mode-glow:#79f497}
+#idle-modes .im-prey{left:50.4%;--mode-glow:#75dcff}
+#idle-modes .im-tower{left:74.1%;--mode-glow:#cfb5fb}
+#idle-modes .im-status{position:absolute;left:3%;top:80%;width:94%;height:7.2%;display:flex;align-items:center;justify-content:center;margin:0!important;color:#eaf2fb!important;font:italic 1.25cqw/1.2 Arial;text-align:center;text-shadow:0 2px 3px #000}
+body.idle-native-mode #stage #idle-modes .im-enter{position:absolute;left:10%;top:87.5%;width:80%;height:9.6%;padding:0 5px!important;pointer-events:auto;font:bold italic 1.95cqw Arial!important;white-space:nowrap;text-shadow:0 2px 2px #0006;transition:filter .15s}
+body.idle-native-mode #stage #idle-modes .im-enter:not(:disabled):hover{background:#ffffff14!important;filter:brightness(1.2);box-shadow:0 0 16px var(--mode-glow)!important}
+body.idle-native-mode #stage #idle-modes .im-enter:not(:disabled):active{transform:translateY(1px)}
+body.idle-native-mode #stage #idle-modes .im-enter:disabled{cursor:not-allowed;color:#c7ccd2!important}
+/* Navigation artwork retains the original bar; only one extra cell is added. */
+@media(prefers-reduced-motion:reduce){body.idle-native-mode #stage #idle-modes .im-enter{transition:none!important}}
+body.idle-native-mode #stage #idle-modes .im-back{position:absolute;left:4%;top:4.4%;width:9%;height:7.2%;font:bold 1.25cqw Arial!important;z-index:1;background:#172130ed!important;border:1px solid #a14553!important}
+body.idle-native-mode #stage #idle-modes .im-back[hidden]{display:none!important}
+#idle-modes[data-view=rocket] .im-status{font:1.08cqw/1.25 Arial}
+#idle-modes[data-view=rocket] .im-card[data-state=locked] .im-enter{color:#d5d5d5!important;text-shadow:0 1px 3px #000}
+#idle-modes[data-view=rocket] .im-card[data-state=locked] .im-enter:disabled{opacity:.7}

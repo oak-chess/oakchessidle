@@ -2,7 +2,7 @@
 
 ## Acesso e apresentação
 
-O mesmo painel abre por Caçadas ou pelo aplicativo Prey do Pokéfone. A moldura possui fundo transparente; textos, sprites, barras e botões são elementos da interface. O Professor Carvalho apresenta o recurso uma vez. O indicador de campo fica oculto no Centro Pokémon e na Vila.
+O painel abre exclusivamente pelo card Prey no menu Modos da barra inferior. A moldura possui fundo transparente; textos, sprites, barras e botões são elementos da interface. O Professor Carvalho apresenta o recurso uma vez. O indicador de campo fica oculto no Centro Pokémon e na Vila.
 
 ## Regras
 
@@ -27,3 +27,7 @@ O combate recebe uma marca por adversário no início do encontro. O modelo cent
 - `node scripts/check-standalone.cjs`: inicialização independente e recuperação de dependências em HTML antigo.
 
 Arte da moldura: `modes/idle/assets/prey/frame-v1.png`. Ícone do aplicativo: `modes/idle/assets/phone/prey.svg`. Captura de conferência local: `output/prey-panel.png`.
+
+## Acabamento da referência
+
+A versão visual 3 usa `modes/idle/assets/prey/reference-backplate-v3.png`, preparada com a ferramenta integrada de imagens a partir da referência aprovada. Prompt: preservar a composição e o acabamento metálico, logotipo, título, louros, faixa, ícones ilustrados e botões; remover Pokémon e valores dinâmicos; fundo externo transparente. Os cartões dos Pokémon continuam nativos. Valores, seleção, progresso, confirmação, custo e áreas clicáveis continuam funcionais em HTML, sem mudanças nas regras.

@@ -45,7 +45,8 @@ window.IDLE_TUTORIAL_DATA=(()=>{
    step('Clique no Hoopa voando junto ao anel no topo e revele um adversário aleatório no Portal misterioso. A descoberta fica salva; a tentativa é consumida ao entrar na batalha. O treino é gratuito e não entrega recompensas.','events','#idle-legendary-event'),
    step('Vencer eventos lendários e míticos concede Bronze Boss Token para as Fendas Mega. Esses combates não usam a captura automática das caçadas; o arquivo serve para consultar, sem escolher o adversário.','events',null)]),
   topic('rocket','Atenção à Equipe Rocket',[
-   step('O R na lateral direita abre a invasão da Equipe Rocket. Ela tem relógio e painel próprios, separados do Hoopa. Jessie e James chegam a cada 45 minutos; você tem 1 minuto para aceitar.','rocket','#idle-rocket-event'),
+   step('Em Modos → Equipe Rocket, Base Escondida e Ecos de Lavender são operações TFT com equipe, loja e saves próprios. Conclua Celadon para liberar Lavender. Salvar e voltar preserva sua tentativa e retorna à jornada.','rocket','.is-navigation [data-menu=modes]'),
+   step('Abra Modos na barra inferior e escolha Equipe Rocket. Ela tem relógio e painel próprios, separados do Hoopa. Jessie e James chegam a cada 45 minutos; você tem 1 minuto para aceitar.','rocket','.is-navigation [data-menu=modes]'),
    step('Quando estiver disponível, prepare parceiros em campo e clique em Enfrentar Jessie e James. A entrada não gasta tentativas do portal. Vencer concede Coins, materiais e o resgate de Cubone.','rocket','#idle-rocket-event')]),
   topic('mega','Desbloqueie Mega Evoluções',[
    step('Abra Fendas Mega e recolha Pesquisa Mega quando cumprir a missão inicial. Você recebe a Pedra-Chave e tokens. Escolha um boss e confirme o custo; treino permite experimentar sem recompensa.','mega','#idle-mega-portal'),
@@ -60,7 +61,7 @@ window.IDLE_TUTORIAL_DATA=(()=>{
    step('No Centro, escolha uma região liberada e a quantidade de ovos. Cada tentativa custa '+window.IDLE_GACHA_DATA.price.toLocaleString('pt-BR')+' Coins; 5x e 10x fazem sorteios independentes. Consulte as chances antes de comprar.','gacha','.is-navigation [data-menu=center]'),
    step('Ovos P1–P5 ficam numa reserva própria, sem limite e sem garantia por tentativas. Lendário P5 é qualidade, não espécie lendária. Ao chocar, todos os Pokémon do Gachapon nascem no nível 1.','gacha','.is-navigation [data-menu=center]')]),
   topic('safari','Explore o Safari',[
-   step('O Safari fica em Caçadas e é liberado pela insígnia Arco-íris de Erika. A expedição tem Safari Balls e passos próprios; não há batalha, e sua caçada pode continuar em paralelo.','safari','.is-navigation [data-menu=hunts]'),
+   step('O Safari fica no menu Modos e é liberado pela insígnia Arco-íris de Erika. A expedição tem Safari Balls e passos próprios; não há batalha, e sua caçada pode continuar em paralelo.','safari','.is-navigation [data-menu=modes]'),
    step('Escolha um setor e explore. Em cada encontro, decida entre bola, alimento, aproximação ou seguir adiante. A automação para ao fechar o painel ou ocultar a aba; as capturas vão ao PC.','safari','.is-navigation [data-menu=hunts]')]),
   topic('village','Visite a Vila',[
    step('Abra Vila na barra inferior. Seu Elias cuida da pesca e Dona Rosa das casas. Conheça os dois moradores para receber sua primeira propriedade.','village','#rv-village-launch'),
@@ -84,7 +85,7 @@ window.IDLE_TUTORIAL_DATA=(()=>{
   topic('quick-auto','Captura e recuperação',[step('A Automação liga as capturas, escolhe bolas, foco, destino e proteção. A cura usa poções até completar a vida, conforme estoque. O Centro recupera a equipe gratuitamente.','capture','.is-quick [aria-label=Automação]')]),
   topic('quick-center','PC, evolução e ovos',[step('No Centro, organize o PC, confira as condições de evolução e use incubadora e Gachapon. Cadeados e favoritos protegem vendas; os Pokémon do Gachapon nascem no nível 1.','center','.is-navigation [data-menu=center]')]),
   topic('quick-village','Vila, pesca e casas',[step('A Vila tem acesso próprio. Seu Elias oferece pesca e varas; Dona Rosa cuida das casas. Instale até quatro propriedades e escolha moradores do PC para receber XP das caçadas.','village','#rv-village-launch')]),
-  topic('quick-mega','Eventos e Mega Evolução',[step('Hoopa revela um lendário ou mítico aleatório; a entrada usa tentativas recarregáveis. A Rocket tem acesso próprio na lateral. Nas Fendas Mega, enfrente bosses ou treine grátis. Carvalho fabrica Mega Pedras com 100 fragmentos.','mega','#idle-mega-portal')]),
+  topic('quick-mega','Eventos e Mega Evolução',[step('Hoopa revela um lendário ou mítico aleatório; a entrada usa tentativas recarregáveis. A Rocket fica no menu Modos. Nas Fendas Mega, enfrente bosses ou treine grátis. Carvalho fabrica Mega Pedras com 100 fragmentos.','mega','#idle-mega-portal')]),
   topic('quick-help','Registros e segurança',[step('Consulte resultados no Registro e regras na Wiki. Exporte backups em Configurações → Dados. O progresso é local ao navegador; você pode voltar ao guia completo pelo Professor Carvalho.','wiki','#idleWikiLaunch')])
  ];
  return {version:4,full,quick};
