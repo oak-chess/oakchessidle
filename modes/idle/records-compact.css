@@ -1,0 +1,60 @@
+/* Narrow only the session dashboard; capture history keeps its existing room. */
+body.idle-native-mode #stage #idle-records[data-view=report]{width:min(490px,calc(100% - 36px))!important;min-width:0;max-width:calc(100% - 36px)!important;height:auto!important;max-height:calc(100% - 36px)!important;top:50%!important}
+body.idle-native-mode #stage #idle-records[data-view=report]>header{padding:10px 13px}
+body.idle-native-mode #stage #idle-records[data-view=report]>.ih-content{flex:none;padding:7px 10px 9px;overflow:auto!important}
+body.idle-native-mode #stage #idle-records[data-view=report] .ih-report-dashboard{gap:6px}
+body.idle-native-mode #stage #idle-records[data-view=report] .ih-report-heading{padding-bottom:5px;gap:8px}
+body.idle-native-mode #stage #idle-records[data-view=report] .ih-report-section{padding:7px 8px}
+body.idle-native-mode #stage #idle-records[data-view=report] .ih-report-result{min-width:122px;padding:5px 7px}
+body.idle-native-mode #stage #idle-records[data-view=report]>.ip-tabs{padding:6px 10px;gap:6px}
+body.idle-native-mode #stage #idle-records[data-view=report] .ih-report-metrics>div{padding:5px 6px}
+body.idle-native-mode #stage #idle-records[data-view=report] .ih-report-columns{gap:7px}
+body.idle-native-mode #stage #idle-records[data-view=report] .ih-report-line{min-height:25px}
+body.idle-native-mode #stage #idle-records[data-view=report] .ih-report-footer{gap:9px;align-items:center}
+body.idle-native-mode #stage #idle-records[data-view=report] .ih-report-heading{min-width:0}
+body.idle-native-mode #stage #idle-records[data-view=report] .ih-report-metrics>div{min-width:0}
+body.idle-native-mode #stage #idle-records[data-view=report] .ih-report-line{gap:8px}
+body.idle-native-mode #stage #idle-records[data-view=report] .ih-report-line>:last-child{white-space:nowrap}
+@media(max-width:700px){body.idle-native-mode #stage #idle-records[data-view=report] .ih-report-footer{gap:8px;flex-wrap:wrap}}
+/* Store-terminal palette, scoped to this report. */
+body.idle-native-mode #stage #idle-records[data-view=report]{border:1px solid #538491!important;background:linear-gradient(130deg,#10202b,#151520 65%,#201823)!important;box-shadow:0 0 0 2px #07121ccc,inset 0 1px #acf1ff33,0 15px 45px #0008!important;color:#dceef9}
+body.idle-native-mode #stage #idle-records[data-view=report]>header{position:relative;background:linear-gradient(90deg,#102d3c,#171b29 70%,#302031)!important;border-bottom:1px solid #408298!important}
+body.idle-native-mode #stage #idle-records[data-view=report]>header::before{content:'';position:absolute;left:18px;right:18px;top:3px;height:2px;background:linear-gradient(90deg,#49e6ff,transparent 45%,transparent 75%,#ff426b)}
+body.idle-native-mode #stage #idle-records[data-view=report]>header small{color:#79d8ec!important}
+body.idle-native-mode #stage #idle-records[data-view=report] :is(h2,h3){color:#effcff!important}
+body.idle-native-mode #stage #idle-records[data-view=report]>.ip-tabs{background:#101b25!important;border-bottom:1px solid #345163}
+body.idle-native-mode #stage #idle-records[data-view=report] button{border:1px solid #456479!important;border-radius:7px!important;background:linear-gradient(#2b4253,#1a2c3b)!important;color:#e1edf6!important;box-shadow:inset 0 1px #c4edff1c,0 2px 3px #0004!important}
+body.idle-native-mode #stage #idle-records[data-view=report] button[aria-pressed=true]{border-color:#4bbed9!important;background:linear-gradient(100deg,#16445b,#172b3b)!important;box-shadow:inset 0 -2px #64e7ff!important;color:#e9fbff!important}
+body.idle-native-mode #stage #idle-records[data-view=report] button:hover{border-color:#81c4dc!important;filter:brightness(1.12)}
+body.idle-native-mode #stage #idle-records[data-view=report] button:focus-visible{outline:2px solid #72e8ff;outline-offset:2px}
+body.idle-native-mode #stage #idle-records[data-view=report] .ih-report-heading{border-color:#365369}
+body.idle-native-mode #stage #idle-records[data-view=report] .ih-report-heading :is(small,p){color:#a9c4d2}
+body.idle-native-mode #stage #idle-records[data-view=report] .ih-report-result{border-color:#446d7c;background:#153342;color:#bce9f8}
+body.idle-native-mode #stage #idle-records[data-view=report] .ih-report-section{border:1px solid #3a5369!important;background:linear-gradient(140deg,#1d3342,#151e2c)!important;box-shadow:inset 0 1px #98d9ff0c}
+body.idle-native-mode #stage #idle-records[data-view=report] .ih-report-section h4{color:#8ee5f6}
+body.idle-native-mode #stage #idle-records[data-view=report] .ih-report-metrics>div{background:#102331;border-color:#355165}
+body.idle-native-mode #stage #idle-records[data-view=report] .ih-report-metrics small{color:#afcbdc}
+body.idle-native-mode #stage #idle-records[data-view=report] .ih-report-metrics b{color:#edfbff}
+body.idle-native-mode #stage #idle-records[data-view=report] .ih-report-line{border-color:#355165;color:#c7dfed}
+body.idle-native-mode #stage #idle-records[data-view=report] .ih-report-footer p{color:#a1bdcf}
+body.idle-native-mode #stage #idle-records[data-view=report] .ih-report-line[data-kind=income] b{color:#83e5b3}
+body.idle-native-mode #stage #idle-records[data-view=report] .ih-report-line[data-kind=loot] b{color:#ffda83}
+body.idle-native-mode #stage #idle-records[data-view=report] .ih-report-line[data-kind=expense] b{color:#ffa4b4}
+body.idle-native-mode #stage #idle-records[data-view=report] .ih-report-result[data-sign=negative]{background:#35232f;border-color:#865264}
+body.idle-native-mode #stage #idle-records[data-view=report] .ih-report-result[data-sign=negative] b{color:#ffa4b4}
+body.idle-native-mode #stage #idle-records[data-view=report] .ih-report-result[data-sign=positive] b{color:#83e5b3}
+body.idle-native-mode #stage #idle-records[data-view=report][data-report-resized=true]{width:var(--report-width)!important;height:var(--report-height)!important}
+body.idle-native-mode #stage #idle-records[data-view=report][data-report-resized=true]>.ih-content{flex:1;min-height:0;overflow:auto!important}
+body.idle-native-mode #stage #idle-records>.ih-report-resize{display:none}
+body.idle-native-mode #stage #idle-records[data-view=report]>.ih-report-resize{display:block;position:absolute;right:3px;bottom:3px;z-index:10;width:19px;height:19px;min-width:0;min-height:0;padding:0!important;border:0!important;border-radius:0 0 8px 0!important;background:repeating-linear-gradient(135deg,transparent 0 3px,#8bd6e5 3px 4px,transparent 4px 6px) 7px 7px/12px 12px no-repeat!important;box-shadow:none!important;cursor:nwse-resize;touch-action:none;opacity:.75}
+body.idle-native-mode #stage #idle-records[data-view=report]>.ih-report-resize:hover{opacity:1;filter:drop-shadow(0 0 3px #3bddff)}
+body.idle-native-mode #stage #idle-records[data-view=report]>.ih-report-resize:focus-visible{outline:2px solid #72e8ff;outline-offset:0}
+body.idle-native-mode #stage #idle-records[data-view=report] .ih-report-footer{padding-right:11px}
+body.idle-native-mode #stage #idle-records[data-view=report][data-report-moved=true]{left:var(--report-left)!important;top:var(--report-top)!important;transform:none!important}
+body.idle-native-mode #stage #idle-records[data-view=report]>header{cursor:grab;touch-action:none;user-select:none}
+body.idle-native-mode #stage #idle-records[data-view=report]>header:active{cursor:grabbing}
+body.idle-native-mode #stage #idle-records[data-view=report]{background:linear-gradient(130deg,#10202bdf,#151520df 65%,#201823df)!important;backdrop-filter:blur(4px)}
+body.idle-native-mode #stage #idle-records[data-view=report]>header{background:linear-gradient(90deg,#102d3cdb,#171b29db 70%,#302031db)!important}
+body.idle-native-mode #stage #idle-records[data-view=report]>.ip-tabs{background:#101b25cc!important}
+body.idle-native-mode #stage #idle-records[data-view=report] .ih-report-section{background:linear-gradient(140deg,#1d3342c9,#151e2cc9)!important}
+body.idle-native-mode #stage #idle-records[data-view=report] .ih-report-metrics>div{background:#102331b8}

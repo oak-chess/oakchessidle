@@ -1,0 +1,93 @@
+.il-help{font-size:11px;line-height:1.65;color:#a9c0cd}.il-warning{color:#e6bb78;font-size:11px;line-height:1.6}
+.il-outbreak{display:flex;align-items:center;gap:13px;padding:12px 15px;margin-bottom:13px;border:1px solid #8db9a344;border-radius:12px;background:linear-gradient(110deg,#254439cc,#1b3038)}.il-outbreak>img{width:50px;height:46px;object-fit:contain;image-rendering:pixelated}.il-outbreak>div{flex:1;min-width:0}.il-outbreak h3{font-size:15px;margin:3px 0;color:#e6f6ec}.il-outbreak p{font-size:11px;margin:3px 0;color:#bfdbd2}.il-outbreak small{font-size:9px;color:#9bc1b2}.il-outbreak>b{font-size:11px;white-space:nowrap;color:#d5edb4}.il-outbreak[data-active=false]{background:#20313b;border-color:#839dad33}.il-outbreak[data-active=false] h3{color:#c4d6e2}
+.il-breeding{border:1px solid #839dad33;border-radius:13px;background:#1d303b;padding:18px}.il-breeding>h3{margin:0 0 10px}.il-breeding>input{box-sizing:border-box;width:100%;margin:10px 0}.il-breeding>button{margin:10px 8px 0 0}.il-breeding details{margin-top:15px}.il-selected-pair,.il-parent-pair{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:15px 0}.il-selected-pair>button,.il-parent-pair>article{display:flex;align-items:center;justify-content:center;gap:10px;min-height:75px;padding:12px;border:1px solid #a2b8c13b;border-radius:10px;background:#152631;color:#dfedf2}.il-selected-pair img,.il-parent-pair img{width:48px;height:48px;object-fit:contain;image-rendering:pixelated}.il-parent-pair article{flex-direction:column}.il-parent-pair small{color:#b7cad7;font-size:10px}.il-breeding-options{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px}.il-breeding-options>button{display:flex;align-items:center;text-align:left;gap:10px;margin:0;min-height:82px}.il-breeding-options img{width:42px;height:48px;object-fit:contain;image-rendering:pixelated}.il-breeding-options>button>div{display:grid;gap:4px;min-width:0}.il-breeding-options small{font-size:9px;color:#a8c1d0}.il-breeding-options [aria-pressed=true]{border-color:#92d6b7!important;background:#284a41!important}.il-pair-progress{display:block;color:#a9e1c1;padding:10px 0}
+.il-pages{display:flex;justify-content:center;align-items:center;gap:12px;margin:15px 0}.il-pages span{font-size:11px;color:#bdd0dc}.il-skills-heading input{width:min(340px,100%);box-sizing:border-box;margin-bottom:15px}.il-skills-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.il-skills-grid>article{padding:13px;background:#1d303b;border:1px solid #839dad33;border-radius:11px}.il-skills-grid>article>div:first-child{display:flex;align-items:center;gap:10px}.il-skills-grid img{width:44px;height:48px;object-fit:contain;image-rendering:pixelated}.il-skill-row{display:grid;gap:5px;padding:11px 0;border-top:1px solid #ffffff0a}.il-skill-row b{font-size:11px;color:#c5e9d9}.il-skill-row small,.il-skill-row span{font-size:9px;color:#a7bfcc}
+.il-dex-nav,.il-collection-nav{display:flex;gap:7px;margin-bottom:14px;flex-wrap:wrap}.il-dex-nav button,.il-collection-nav button{flex:none!important;border-radius:8px;padding:9px 12px}.il-dex-nav [aria-pressed=true],.il-collection-nav [aria-pressed=true]{background:#8e3a54!important;color:#fff!important}.il-goals{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:11px}.il-goals article{display:flex;flex-direction:column;gap:10px;padding:16px;background:#1d303b;border:1px solid #839dad33;border-radius:11px}.il-goals h4{margin:0;font-size:12px;color:#e0eaf0}.il-goals b{font-size:18px;color:#afd9c6}.il-goals p{font-size:10px;line-height:1.6;color:#b8cad6;margin:0;flex:1}.il-goals progress{width:100%;height:6px;accent-color:#88cfac}.il-goals [data-status=ready]{border-color:#8ac5a5}.il-goals [data-status=claimed]{opacity:.65}.il-goals button{align-self:start}
+@media(max-width:850px){.il-breeding-options,.il-skills-grid,.il-goals{grid-template-columns:repeat(2,minmax(0,1fr))}.il-outbreak{flex-wrap:wrap}.il-outbreak>b{margin-left:auto}}
+@media(max-width:550px){.il-breeding-options,.il-skills-grid,.il-goals,.il-selected-pair,.il-parent-pair{grid-template-columns:1fr}}
+body.idle-native-mode #idle-hunts[data-view=choose]>.ih-content:has(.il-outbreak){display:flex;flex-direction:column;flex:1;min-height:0;overflow:hidden;max-height:none!important}
+body.idle-native-mode #idle-hunts[data-view=choose] .il-outbreak{flex:none;padding:9px 12px;gap:10px;margin-bottom:10px}
+body.idle-native-mode #idle-hunts[data-view=choose] .il-outbreak img{width:40px;height:40px}
+body.idle-native-mode #idle-hunts[data-view=choose] .il-outbreak h3{font-size:13px;margin:2px 0}
+body.idle-native-mode #idle-hunts[data-view=choose] .il-outbreak p{margin:2px 0;font-size:10px}
+body.idle-native-mode #idle-hunts[data-view=choose] .ih-browser{height:auto;min-height:0;flex:1}
+body.idle-native-mode #idle-hunts[data-view=choose] .ih-browser-tools{flex:none}
+.il-breeding>input{width:min(100%,340px);box-sizing:border-box;margin:8px 0;padding:9px 12px;border:1px solid #82506a;border-radius:9px;background:#211b28;color:#fff}
+.il-breeding-history{margin:8px 0;border:1px solid #68465f;border-radius:12px;padding:10px 12px;background:#211b2a}.il-breeding-history>summary{cursor:pointer;color:#ffd765;font-weight:700}.il-breeding-history>div{max-height:300px;overflow:auto;scrollbar-width:thin}.il-breeding-history article{padding:10px;border-bottom:1px solid #53354a}.il-breeding-history article>b,.il-breeding-history article>small{display:block}.il-breeding-history article>small{color:#bcaec5;margin-top:4px}.il-breeding-history article p{font-size:12px;margin:6px 0}
+body.idle-native-mode #idle-field-notes :is(.il-dex-nav,.il-collection-nav) [aria-pressed=true]{background:#8e3a54!important;color:#fff!important}
+body.idle-native-mode #idle-world .il-breeding-options [aria-pressed=true]{border-color:#92d6b7!important;background:#284a41!important}
+/* Baby Egg laboratory: parents, genetic ranges and explicit consumption. */
+body.idle-native-mode #idle-world[data-family=nursery] .il-baby-preview{border:1px solid #98a7d84a;border-radius:20px;background:radial-gradient(ellipse at 0 0,#526ca62e,transparent 70%),linear-gradient(140deg,#242c42,#282033);padding:16px;margin:12px 0 17px;box-shadow:inset 0 1px #d6dcff15}
+#idle-world .il-baby-heading{display:flex;gap:13px;align-items:center}
+#idle-world .il-baby-heading>img{width:46px;height:56px;object-fit:contain;image-rendering:pixelated;filter:drop-shadow(0 0 14px #b9c5fa55)}
+#idle-world .il-baby-heading small{font:600 8px system-ui;letter-spacing:1.2px;color:#aebce8}
+#idle-world .il-baby-heading h4{font:650 17px system-ui;color:#f1eafa;margin:5px 0}
+#idle-world .il-baby-heading p{font:10px/1.5 system-ui;color:#b8aecb;margin:0}
+#idle-world .il-baby-metrics{display:flex;justify-content:space-between;align-items:center;gap:9px;margin:14px 0;padding:9px 12px;background:#ffffff07;border-radius:10px;font:11px system-ui;color:#b6acc8}
+#idle-world .il-baby-metrics b{color:#c8d9ff;font-size:15px}
+#idle-world .il-baby-stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+#idle-world .il-baby-stat{padding:10px;background:#11172555;border:1px solid #ffffff0b;border-radius:11px;min-width:0}
+#idle-world .il-baby-stat>div:first-child{display:flex;justify-content:space-between;gap:5px;font:10px system-ui;color:#e8e0f2}
+#idle-world .il-baby-stat small{font-size:9px;opacity:.6}
+#idle-world .il-baby-stat>span{font:9px/1.5 system-ui;color:#b8afc6;display:block;margin-top:7px}
+#idle-world .il-parent-iv-bars{display:grid;gap:4px;margin-top:8px}
+#idle-world .il-parent-iv-bars>div{height:4px;background:#10121d;border-radius:6px;overflow:hidden}
+#idle-world .il-parent-iv-bars i{display:block;height:100%;background:#8baae9}
+#idle-world .il-parent-iv-bars>div:nth-child(2) i{background:#de8fb7}
+#idle-world .il-consume-confirm{padding:15px;border:1px solid #d77c9855;background:linear-gradient(140deg,#592e3b55,#292535);border-radius:16px;margin:12px 0}
+#idle-world .il-consume-confirm h4{font:650 16px system-ui;color:#ffd1da;margin:0 0 9px}
+#idle-world .il-consume-confirm p{font:11px/1.6 system-ui;color:#d6bdcb}
+#idle-world .il-consume-confirm>div{display:flex;justify-content:flex-end;gap:8px}
+#idle-world .il-consumption-note{font:11px/1.6 system-ui;color:#d7b3c5;background:#5c2f3e33;padding:12px;border-radius:12px}
+#idle-world .il-selected-pair button{flex-wrap:wrap}
+#idle-world .il-selected-pair button small{flex-basis:100%;font:10px system-ui;color:#c5afce}
+@media(max-width:650px){#idle-world .il-baby-stats{grid-template-columns:repeat(2,minmax(0,1fr))}}
+/* Incubation laboratory and breeding selection. */
+body.idle-native-mode #idle-world[data-family=nursery] .iw-nursery-main{padding:14px!important;min-width:0;scrollbar-width:thin;scrollbar-color:#a57caa55 transparent}
+body.idle-native-mode #idle-world[data-family=nursery] .iw-nursery-heading{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:12px!important;flex-wrap:wrap}
+#idle-world[data-family=nursery] .iw-nursery-heading h3{font:650 19px system-ui;letter-spacing:-.4px;margin:5px 0}
+#idle-world[data-family=nursery] .iw-nursery-heading small{font-size:8px;letter-spacing:1px;color:#baa5c6}
+#idle-world .nursery-overview{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:0 0 14px}
+#idle-world .nursery-overview>div{border:1px solid #a28fbb27;border-radius:13px;background:linear-gradient(140deg,#332c41,#232636);padding:10px 13px;display:flex;align-items:center;justify-content:space-between;gap:7px}
+#idle-world .nursery-overview small{font:10px system-ui;color:#c2b0ce}
+#idle-world .nursery-overview b{font:600 18px system-ui;color:#a6e1e2}
+body.idle-native-mode #idle-world[data-family=nursery] .iw-nursery-slots{display:grid!important;grid-template-columns:repeat(auto-fit,minmax(125px,1fr))!important;gap:9px!important;margin-bottom:13px!important}
+body.idle-native-mode #idle-world[data-family=nursery] .iw-nursery-slots>div{background:radial-gradient(ellipse at 50% 70%,#508b9d25,transparent 65%),linear-gradient(155deg,#302b3d,#202536)!important;border:1px solid #7f78964a!important;border-radius:18px!important;padding:14px 10px!important;min-height:0!important;display:flex;flex-direction:column;align-items:center;gap:7px}
+body.idle-native-mode #idle-world[data-family=nursery] .iw-nursery-slots>div[data-ready=true]{border-color:#9ad8bf88!important;box-shadow:inset 0 0 25px #6ee7b511!important}
+#idle-world[data-family=nursery] .nursery-chamber{width:73px!important;height:85px!important;margin:0 0 3px!important}
+#idle-world[data-family=nursery] .iw-nursery-slots progress{width:85%;height:5px;accent-color:#7cd2c9}
+body.idle-native-mode #idle-world[data-family=nursery] .iw-nursery-slots button{border-radius:10px!important;padding:7px 12px!important;min-height:0!important;font-size:10px!important}
+body.idle-native-mode #idle-world[data-family=nursery] .iw-egg-card{border-radius:15px!important;padding:12px!important;min-height:0!important;background:linear-gradient(140deg,#312a3b,#252536)!important;border-color:#8a73914a!important}
+#idle-world[data-family=nursery] .iw-nursery-help{border-radius:14px!important;padding:12px 14px!important;margin-top:12px!important;background:#242634!important;font-size:10px!important}
+body.idle-native-mode #idle-world[data-family=nursery] .il-breeding{background:transparent!important;border:0!important;padding:0!important}
+#idle-world .il-breeding-heading h3{font:650 21px system-ui;margin:5px 0;color:#f4e8f7}
+#idle-world .il-breeding-heading>small{font-size:8px;letter-spacing:1px;color:#b6a3c2}
+#idle-world .il-breeding-metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:14px 0}
+#idle-world .il-breeding-metrics>div{display:grid;gap:5px;padding:12px;border:1px solid #ab83ad27;border-radius:13px;background:#2c293b}
+#idle-world .il-breeding-metrics small{font-size:9px;color:#bda9cb}
+#idle-world .il-breeding-metrics b{font-size:11px;color:#e3c3ed}
+#idle-world .il-breeding-toolbar{display:flex;align-items:center;gap:7px;flex-wrap:wrap;margin:12px 0}
+#idle-world .il-breeding-toolbar>input{flex:1;min-width:120px;padding:9px;border-radius:10px}
+#idle-world .il-breeding-toolbar select{padding:8px;border:1px solid #725471;border-radius:10px;background:#251e2d;color:#e4d4e9;font-size:10px}
+#idle-world .il-breeding-toolbar label{display:flex;align-items:center;gap:5px;font-size:10px;color:#cdb8d4}
+body.idle-native-mode #idle-world[data-family=nursery] .il-selected-pair>button,body.idle-native-mode #idle-world[data-family=nursery] .il-parent-pair>article{border-radius:16px!important;background:linear-gradient(135deg,#403047,#242d3f)!important;border:1px solid #b293c146!important;min-height:83px!important;padding:12px!important}
+body.idle-native-mode #idle-world[data-family=nursery] .il-breeding-options>button{border-radius:13px!important;background:#282637!important;border:1px solid #86658e38!important;min-height:70px!important;padding:9px!important}
+#idle-world .il-breeding-options button:disabled{opacity:.4}
+#idle-world .il-breeding-status{padding:11px 13px;border:1px solid #d5b26e44;border-radius:12px;background:#4b3d292b;color:#dfc592;font-size:11px}
+#idle-world .il-breeding-status[data-ready=true]{background:#235c4433;color:#9fe4bb;border-color:#75c9a14a}
+#idle-world .il-pair-track{width:100%;height:8px;accent-color:#b78cde}
+@media(max-width:650px){#idle-world .il-breeding-metrics,#idle-world .nursery-overview{grid-template-columns:1fr}body.idle-native-mode #idle-world[data-family=nursery] .iw-nursery-slots{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
+/* Keep every hunt reachable inside the panel, including the fourth/endless area. */
+body.idle-native-mode #idle-hunts[data-view=choose]{display:flex;flex-direction:column;height:700px;max-height:calc(100% - 28px)!important;top:50%!important;overflow:hidden}
+body.idle-native-mode #idle-hunts[data-view=choose][hidden]{display:none}
+body.idle-native-mode #idle-hunts[data-view=choose]>header,body.idle-native-mode #idle-hunts[data-view=choose]>.ip-tabs{flex:none}
+body.idle-native-mode #idle-hunts[data-view=choose]>.ih-content{display:flex;flex-direction:column;flex:1;min-height:0;overflow:hidden;max-height:none!important;padding:12px 16px}
+body.idle-native-mode #idle-hunts[data-view=choose] .ih-browser{min-height:0;flex:1;height:auto;align-items:stretch}
+body.idle-native-mode #idle-hunts[data-view=choose] .ih-browser-list{min-height:0;overflow-y:auto;overflow-x:hidden;scrollbar-width:thin;scrollbar-color:#bc577a #211c27;padding:0 5px 3px 0;gap:7px}
+body.idle-native-mode #idle-hunts[data-view=choose] .ih-browser-card{height:94px;min-height:94px;padding:8px 10px;gap:3px;box-sizing:border-box;white-space:normal}
+body.idle-native-mode #idle-hunts[data-view=choose] .ih-browser-card-head{align-items:start}
+body.idle-native-mode #idle-hunts[data-view=choose] .ih-browser-card-head b{overflow-wrap:anywhere}
+body.idle-native-mode #idle-hunts[data-view=choose] .ih-browser-portraits{height:26px;flex:none}
+body.idle-native-mode #idle-hunts[data-view=choose] .ih-browser-portraits img{width:26px;height:26px}
+body.idle-native-mode #idle-hunts[data-view=choose] .ih-browser-detail{min-height:0;overflow-y:auto;scrollbar-width:thin;scrollbar-color:#bc577a #211c27}
+body.idle-native-mode #idle-hunts[data-view=choose] .ih-browser-tools{flex:none}

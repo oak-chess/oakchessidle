@@ -1,0 +1,2 @@
+/* Region membership is metadata, never inferred from a two-continent boolean. */
+(()=>{const D=window.IDLE_WORLD_DATA;D.continents=[];D.regions.forEach((r,i)=>{const name=r.continent||'Kanto';let c=D.continents.find(c=>c.name===name);if(!c){c={id:name.toLowerCase(),name,start:i,end:i};D.continents.push(c)}c.end=i});window.IDLE_CONTINENTS={all:D.continents,forArea:i=>D.continents.find(c=>i>=c.start&&i<=c.end),count:(badges,name)=>badges.filter(i=>D.regions[i]?.continent===name).length};})();

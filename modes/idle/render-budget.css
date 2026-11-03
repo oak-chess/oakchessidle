@@ -1,0 +1,10 @@
+/* Tinted surfaces remain readable without re-blurring the animated arena. */
+body.idle-native-mode #stage .idle-window,
+body.idle-native-mode #stage #idle-records[data-view=report],
+body.idle-native-mode #stage .tg.center{backdrop-filter:none!important;-webkit-backdrop-filter:none!important}
+/* Pause only decorative portal/HUD loops while a native panel is open. */
+body.idle-panel-render-budget #idle-mega-portal *,
+body.idle-panel-render-budget #idle-mega-portal *::before,
+body.idle-panel-render-budget #idle-mega-portal *::after,
+body.idle-panel-render-budget .is-shiny-card-sparks,
+body.idle-panel-render-budget .is-shiny-card-sparks *{animation-play-state:paused!important}

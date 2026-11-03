@@ -1,0 +1,82 @@
+/* Approved Pokémon-style dialogue presentation, using native encounter content. */
+#rocketOperationOverlay.rop-game-dialogue{padding:56px 24px 25px;align-items:center}
+#rocketOperationOverlay.rop-game-dialogue .rop-dialog{display:flex;flex-direction:column;width:min(980px,100%);max-height:calc(100dvh - 90px);gap:0;margin:auto;overflow:visible}
+#rocketOperationOverlay.rop-game-dialogue header{padding:4px 18px 5px;flex-shrink:0}
+#rocketOperationOverlay.rop-game-dialogue header h2{font-size:23px;margin:6px 0}
+#rocketOperationOverlay.rop-game-dialogue header>p{display:none}
+#rocketOperationOverlay.rop-game-dialogue .rop-context{justify-content:center;padding:7px 0;flex-shrink:0;margin:0 auto}
+#rocketOperationOverlay.rop-game-dialogue .rop-context>span{font-size:10px}
+#rocketOperationOverlay.rop-game-dialogue .rop-body{padding:10px 12px 16px;gap:8px;overflow:auto;scrollbar-width:thin;min-height:0;flex:0 1 auto;max-height:calc(100dvh - 345px)}
+#rocketOperationOverlay.rop-game-dialogue .rop-spoken-copy{display:none!important}
+#rocketOperationOverlay.rop-game-dialogue .rop-guide{display:none!important}
+#rocketOperationOverlay.rop-game-dialogue .rop-opponent{padding:0;gap:7px;margin:0;min-height:0}
+#rocketOperationOverlay.rop-game-dialogue .rop-opponent>img{height:112px;width:112px;object-fit:contain;image-rendering:pixelated}
+#rocketOperationOverlay.rop-game-dialogue .rop-opponent b{font-size:14px}
+#rocketOperationOverlay.rop-game-dialogue .rop-opponent small{font-size:10px}
+#rocketOperationOverlay.rop-game-dialogue .rop-rescue{padding:0;margin:0}
+#rocketOperationOverlay.rop-game-dialogue .rop-rescue>img{width:112px;height:112px;object-fit:contain}
+#rocketOperationOverlay.rop-game-dialogue .rop-rescue h3{font-size:18px;margin:3px 0}
+#rocketOperationOverlay.rop-game-dialogue .rop-rescue p{font-size:11px;margin:3px}
+#rocketOperationOverlay.rop-game-dialogue .rop-rescue small{font-size:10px}
+#rocketOperationOverlay.rop-game-dialogue .rop-event-visual{height:100px;margin:0}
+#rocketOperationOverlay.rop-game-dialogue .rop-dialogue-actor{height:115px;display:flex;justify-content:center;align-items:end;flex-shrink:0}
+.rop-dialogue-actor>img{width:112px;height:112px;object-fit:contain;image-rendering:pixelated;filter:drop-shadow(0 5px 0 #080a1155)}
+.rop-dialogue-actor .rop-fuji{display:block;width:48px;height:96px;background:url('trainer-profile/sprites/mrfuji_normal.png') left top/auto 96px no-repeat;image-rendering:pixelated}
+#rocketOperationOverlay.rop-game-dialogue .rop-conversation{display:grid;grid-template-columns:minmax(0,1fr) 230px;align-items:center;gap:14px;width:min(840px,100%);margin:13px auto 0;flex-shrink:0}
+#rocketOperationOverlay.rop-game-dialogue .rop-message{position:relative;isolation:isolate;border:3px solid #090a0d;border-radius:16px;outline:0;background:linear-gradient(#64656c,#383940 18%,#35363d 82%,#777880);padding:23px 20px 10px;box-shadow:0 0 0 1px #999aa1,0 0 0 3px #1b1c22,0 5px 0 #08090b,0 12px 22px #0007}
+.rop-message:before{content:'';position:absolute;z-index:-1;inset:5px;border:1px solid #a92c42;border-radius:10px;background:linear-gradient(#202126,#14151a)}
+.rop-speaker{position:absolute;top:-16px;left:18px;max-width:calc(100% - 36px);padding:4px 12px;border:2px solid #4d121d;outline:1px solid #d3455c;border-radius:7px;background:linear-gradient(#b82540,#84172c);box-shadow:0 2px #090a0d;color:#fff;font:700 10px monospace;letter-spacing:.6px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#rocketOperationOverlay.rop-game-dialogue .rop-message-advance{position:relative;display:block;width:100%;min-height:68px;padding:0 17px 5px 0;margin:0;background:none;border:0;box-shadow:none;text-align:left;text-transform:none;cursor:pointer;color:#f4f4f5;font:600 13px/1.65 'Courier New',monospace;white-space:pre-line}
+.rop-message-advance i{position:absolute;bottom:3px;right:0;font:11px monospace;color:#ed3b54;animation:rop-dialogue-cursor 1s steps(2) infinite}
+.rop-message-bottom{display:flex;justify-content:space-between;gap:12px;color:#a9abb4;font:8px/1.5 monospace}
+#rocketOperationOverlay.rop-game-dialogue .rop-conversation>footer{display:flex;flex-direction:column;align-items:stretch;justify-content:center;gap:2px;padding:7px;margin:0;background:#16171df5;border:2px solid #777980;border-radius:11px;box-shadow:0 0 0 2px #202127,inset 0 0 0 1px #37383f,0 5px 0 #08090b;max-width:none;width:100%}
+#rocketOperationOverlay.rop-game-dialogue .rop-conversation .rop-action-choice{display:block;flex:none;width:100%;max-width:none;min-width:0;padding:0;gap:0;text-align:left}
+#rocketOperationOverlay.rop-game-dialogue .rop-conversation .rop-action-kind{display:none}
+#rocketOperationOverlay.rop-game-dialogue .rop-conversation .rop-action-choice>p{font:9px/1.4 Arial,sans-serif;color:#aeb0b8;margin:0 8px 5px 22px;text-align:left;max-width:none}
+#rocketOperationOverlay.rop-game-dialogue .rop-conversation button[data-rop-action]{position:relative;display:block;width:100%;min-height:28px;height:auto;border:1px solid transparent;border-radius:4px;padding:6px 8px 6px 22px;background:transparent;box-shadow:none;color:#eee;font:700 11px/1.4 Arial,sans-serif;text-align:left}
+#rocketOperationOverlay.rop-game-dialogue button[data-rop-action]:before{content:'▶';position:absolute;left:7px;color:transparent}
+#rocketOperationOverlay.rop-game-dialogue .rop-conversation button[data-rop-action]:hover,#rocketOperationOverlay.rop-game-dialogue .rop-conversation button[data-rop-action]:focus,#rocketOperationOverlay.rop-game-dialogue .rop-conversation button.rop-menu-selected{background:#6c1929;border-color:#d5334d;color:#fff}
+#rocketOperationOverlay.rop-game-dialogue button.rop-menu-selected:before,#rocketOperationOverlay.rop-game-dialogue button[data-rop-action]:focus:before{color:#ff637a}
+#rocketOperationOverlay.rop-game-dialogue .rop-message-advance:focus-visible{outline:1px solid #ed526e;outline-offset:4px}
+#rocketOperationOverlay.rop-game-dialogue[data-screen=entry] .rop-conversation{grid-template-columns:minmax(0,1fr) 260px}
+#rocketOperationOverlay.rop-game-dialogue[data-screen=entry] .rop-body{max-height:calc(100dvh - 330px)}
+#rocketOperationOverlay.rop-game-dialogue .rop-mission-cover{min-height:140px}
+#rocketOperationOverlay.rop-game-dialogue .rop-room-card{min-height:0}
+#rocketOperationOverlay.rop-game-dialogue .rop-route-art{height:65px}
+#rocketOperationOverlay.rop-game-dialogue .rop-room-card p{font-size:11px}
+#rocketOperationOverlay.rop-game-dialogue .rop-starters button{min-height:110px}
+#rocketOperationOverlay.rop-game-dialogue .rop-starters button>img{height:55px;width:55px}
+#rocketOperationOverlay.rop-game-dialogue .rop-selected-team{display:none}
+#rocketOperationOverlay.rop-game-dialogue .rop-facts{gap:10px;margin:0}
+#rocketOperationOverlay.rop-game-dialogue .rop-facts>div{padding:3px}
+@keyframes rop-dialogue-cursor{50%{opacity:.3}}
+@media(max-height:700px){#rocketOperationOverlay.rop-game-dialogue{padding:43px 18px 15px}#rocketOperationOverlay.rop-game-dialogue header h2{font-size:20px;margin:4px}#rocketOperationOverlay.rop-game-dialogue .rop-body{padding-block:5px;max-height:calc(100dvh - 305px)}#rocketOperationOverlay.rop-game-dialogue .rop-opponent>img,#rocketOperationOverlay.rop-game-dialogue .rop-rescue>img{width:90px;height:90px}#rocketOperationOverlay.rop-game-dialogue .rop-message-advance{min-height:58px;font-size:12px}#rocketOperationOverlay.rop-game-dialogue .rop-conversation{margin-top:10px}#rocketOperationOverlay.rop-game-dialogue .rop-conversation .rop-action-choice>p{font-size:8px;margin-bottom:3px}#rocketOperationOverlay.rop-game-dialogue .rop-conversation button[data-rop-action]{padding-block:4px;font-size:10px}}
+@media(max-width:650px){#rocketOperationOverlay.rop-game-dialogue{padding:54px 15px 15px}#rocketOperationOverlay.rop-game-dialogue .rop-context{flex-wrap:wrap;gap:3px}#rocketOperationOverlay.rop-game-dialogue .rop-conversation,#rocketOperationOverlay.rop-game-dialogue[data-screen=entry] .rop-conversation{grid-template-columns:1fr;gap:13px}#rocketOperationOverlay.rop-game-dialogue .rop-conversation>footer{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:4px}#rocketOperationOverlay.rop-game-dialogue .rop-body{max-height:calc(100dvh - 390px)}#rocketOperationOverlay.rop-game-dialogue .rop-message-advance{min-height:58px;font-size:12px}}
+@media(prefers-reduced-motion:reduce){.rop-message-advance i{animation:none}}
+#rocketOperationOverlay .rop-mission-strip{display:flex;align-items:center;justify-content:center;gap:13px;align-self:center;width:min(660px,100%);padding:10px 17px;margin:0 auto 13px;background:#17151fe8;border-top:1px solid #8c445b;border-bottom:1px solid #8c445b;flex-shrink:0;color:#f3eef2}
+.rop-mission-mark{font:900 36px/1 Arial,sans-serif;color:#ef365e}
+.rop-mission-identity{display:flex;flex-direction:column;gap:3px;flex:1;min-width:0;text-align:left}
+.rop-mission-identity small{font:700 8px/1.5 monospace;color:#bba7b3;letter-spacing:1px}
+.rop-mission-identity b{font:700 13px/1.4 Arial,sans-serif;color:#f6f1f4}
+.rop-mission-strip dl{display:flex;gap:23px;margin:0;flex-shrink:0;text-align:left}
+.rop-mission-strip dl>div{display:flex;flex-direction:column;gap:3px}
+.rop-mission-strip dt{font:9px/1.4 Arial,sans-serif;color:#c2b1bd}
+.rop-mission-strip dd{margin:0;font:700 15px/1.4 monospace;color:#fff;font-variant-numeric:tabular-nums}
+.rop-mission-strip .rop-mission-alert{display:flex;align-items:center;gap:5px;min-height:21px}
+.rop-mission-alert i{display:block;width:6px;height:6px;border:1px solid #9f798c;border-radius:50%;background:transparent}
+.rop-mission-alert i.active{background:#f34b73;border-color:#ff84a1;box-shadow:0 0 6px #e7335e40}
+body.rocket-operation-active:has(#rocketOperationOverlay.rop-has-mission-strip) #rocketOperationHud{visibility:hidden}
+@media(max-width:650px){#rocketOperationOverlay .rop-mission-strip{gap:8px;padding:8px 10px;margin-bottom:9px}.rop-mission-mark{font-size:28px}.rop-mission-identity small{font-size:6px;letter-spacing:.3px}.rop-mission-identity b{font-size:11px}.rop-mission-strip dl{gap:11px}.rop-mission-strip dt{font-size:8px}.rop-mission-strip dd{font-size:12px}.rop-mission-alert i{width:5px;height:5px}.rop-mission-strip .rop-mission-alert{gap:3px}}
+@media(max-width:400px){#rocketOperationOverlay .rop-mission-strip{flex-wrap:wrap}.rop-mission-identity{min-width:180px}.rop-mission-strip dl{width:100%;justify-content:space-between}}
+@media(max-height:700px){#rocketOperationOverlay .rop-mission-strip{padding-block:6px;margin-bottom:6px}.rop-mission-mark{font-size:29px}}
+/* Starter selection fits six offers without an internal scrollbar. */
+#rocketOperationOverlay.rop-game-dialogue[data-screen=starter] .rop-body{display:flex!important;flex-direction:column;align-items:center;overflow:visible;max-height:none;padding:6px 10px 12px;gap:7px}
+#rocketOperationOverlay.rop-game-dialogue[data-screen=starter] .rop-starters{display:grid;width:min(600px,100%);grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;margin:0 auto}
+#rocketOperationOverlay.rop-game-dialogue[data-screen=starter] .rop-starters button{min-height:0;height:auto;padding:7px 6px;gap:2px}
+#rocketOperationOverlay.rop-game-dialogue[data-screen=starter] .rop-starters button>img{width:48px;height:48px;margin:0 auto}
+#rocketOperationOverlay.rop-game-dialogue[data-screen=starter] .rop-starters b{font:700 11px/1.3 Arial,sans-serif}
+#rocketOperationOverlay.rop-game-dialogue[data-screen=starter] .rop-starters small{font-size:9px}
+#rocketOperationOverlay.rop-game-dialogue[data-screen=starter] .rop-mon-role{font-size:8px;padding:2px 6px;margin:2px 0}
+#rocketOperationOverlay.rop-game-dialogue[data-screen=starter] .rop-mon-description{font:9px/1.3 Arial,sans-serif;min-height:0}
+#rocketOperationOverlay.rop-game-dialogue[data-screen=starter] .rop-selection{font:700 11px/1.4 Arial,sans-serif;margin:2px auto}
+@media(max-height:740px){#rocketOperationOverlay.rop-game-dialogue[data-screen=starter] .rop-starters{width:min(550px,100%);gap:6px}#rocketOperationOverlay.rop-game-dialogue[data-screen=starter] .rop-starters button{padding:5px}#rocketOperationOverlay.rop-game-dialogue[data-screen=starter] .rop-starters button>img{width:38px;height:38px}#rocketOperationOverlay.rop-game-dialogue[data-screen=starter] .rop-mon-description{display:none}#rocketOperationOverlay.rop-game-dialogue[data-screen=starter] .rop-body{padding-block:3px}}

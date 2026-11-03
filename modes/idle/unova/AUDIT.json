@@ -1,0 +1,925 @@
+{
+  "species": 156,
+  "ordinary": 143,
+  "eventSpecies": [
+    {
+      "id": 494,
+      "name": "Victini"
+    },
+    {
+      "id": 638,
+      "name": "Cobalion"
+    },
+    {
+      "id": 639,
+      "name": "Terrakion"
+    },
+    {
+      "id": 640,
+      "name": "Virizion"
+    },
+    {
+      "id": 641,
+      "name": "Tornadus"
+    },
+    {
+      "id": 642,
+      "name": "Thundurus"
+    },
+    {
+      "id": 643,
+      "name": "Reshiram"
+    },
+    {
+      "id": 644,
+      "name": "Zekrom"
+    },
+    {
+      "id": 645,
+      "name": "Landorus"
+    },
+    {
+      "id": 646,
+      "name": "Kyurem"
+    },
+    {
+      "id": 647,
+      "name": "Keldeo"
+    },
+    {
+      "id": 648,
+      "name": "Meloetta"
+    },
+    {
+      "id": 649,
+      "name": "Genesect"
+    }
+  ],
+  "missingNormalAnimation": [
+    {
+      "id": 514,
+      "name": "Simisear"
+    },
+    {
+      "id": 516,
+      "name": "Simipour"
+    },
+    {
+      "id": 520,
+      "name": "Tranquill"
+    },
+    {
+      "id": 522,
+      "name": "Blitzle"
+    },
+    {
+      "id": 523,
+      "name": "Zebstrika"
+    },
+    {
+      "id": 538,
+      "name": "Throh"
+    },
+    {
+      "id": 558,
+      "name": "Crustle"
+    },
+    {
+      "id": 564,
+      "name": "Tirtouga"
+    },
+    {
+      "id": 565,
+      "name": "Carracosta"
+    },
+    {
+      "id": 591,
+      "name": "Amoonguss"
+    },
+    {
+      "id": 592,
+      "name": "Frillish"
+    },
+    {
+      "id": 616,
+      "name": "Shelmet"
+    },
+    {
+      "id": 618,
+      "name": "Stunfisk"
+    },
+    {
+      "id": 626,
+      "name": "Bouffalant"
+    }
+  ],
+  "missingShinyAnimation": [
+    {
+      "id": 514,
+      "name": "Simisear"
+    },
+    {
+      "id": 516,
+      "name": "Simipour"
+    },
+    {
+      "id": 520,
+      "name": "Tranquill"
+    },
+    {
+      "id": 522,
+      "name": "Blitzle"
+    },
+    {
+      "id": 523,
+      "name": "Zebstrika"
+    },
+    {
+      "id": 538,
+      "name": "Throh"
+    },
+    {
+      "id": 558,
+      "name": "Crustle"
+    },
+    {
+      "id": 564,
+      "name": "Tirtouga"
+    },
+    {
+      "id": 565,
+      "name": "Carracosta"
+    },
+    {
+      "id": 588,
+      "name": "Karrablast"
+    },
+    {
+      "id": 591,
+      "name": "Amoonguss"
+    },
+    {
+      "id": 592,
+      "name": "Frillish"
+    },
+    {
+      "id": 616,
+      "name": "Shelmet"
+    },
+    {
+      "id": 618,
+      "name": "Stunfisk"
+    },
+    {
+      "id": 626,
+      "name": "Bouffalant"
+    }
+  ],
+  "specialEvolutions": [
+    {
+      "id": 512,
+      "name": "Simisage",
+      "rules": [
+        {
+          "id": "257",
+          "evolved_species_id": "512",
+          "evolution_trigger_id": "3",
+          "version_group_id": "11",
+          "is_default": "1",
+          "trigger_item_id": "85",
+          "minimum_level": "",
+          "gender_id": "",
+          "location_id": "",
+          "held_item_id": "",
+          "time_of_day": "",
+          "known_move_id": "",
+          "known_move_type_id": "",
+          "minimum_happiness": "",
+          "minimum_beauty": "",
+          "minimum_affection": "",
+          "relative_physical_stats": "",
+          "party_species_id": "",
+          "party_type_id": "",
+          "trade_species_id": "",
+          "needs_overworld_rain": "0",
+          "turn_upside_down": "0",
+          "needs_multiplayer": "0",
+          "near_special_rock": "0",
+          "region_id": "",
+          "required_pokemon_form_id": "",
+          "evolved_pokemon_form_id": "",
+          "used_move_id": "",
+          "minimum_move_count": "",
+          "minimum_steps": "",
+          "minimum_damage_taken": "",
+          "nature_bitmask": "",
+          "condition_expression": "",
+          "percentage_chance": ""
+        }
+      ]
+    },
+    {
+      "id": 514,
+      "name": "Simisear",
+      "rules": [
+        {
+          "id": "258",
+          "evolved_species_id": "514",
+          "evolution_trigger_id": "3",
+          "version_group_id": "11",
+          "is_default": "1",
+          "trigger_item_id": "82",
+          "minimum_level": "",
+          "gender_id": "",
+          "location_id": "",
+          "held_item_id": "",
+          "time_of_day": "",
+          "known_move_id": "",
+          "known_move_type_id": "",
+          "minimum_happiness": "",
+          "minimum_beauty": "",
+          "minimum_affection": "",
+          "relative_physical_stats": "",
+          "party_species_id": "",
+          "party_type_id": "",
+          "trade_species_id": "",
+          "needs_overworld_rain": "0",
+          "turn_upside_down": "0",
+          "needs_multiplayer": "0",
+          "near_special_rock": "0",
+          "region_id": "",
+          "required_pokemon_form_id": "",
+          "evolved_pokemon_form_id": "",
+          "used_move_id": "",
+          "minimum_move_count": "",
+          "minimum_steps": "",
+          "minimum_damage_taken": "",
+          "nature_bitmask": "",
+          "condition_expression": "",
+          "percentage_chance": ""
+        }
+      ]
+    },
+    {
+      "id": 516,
+      "name": "Simipour",
+      "rules": [
+        {
+          "id": "259",
+          "evolved_species_id": "516",
+          "evolution_trigger_id": "3",
+          "version_group_id": "11",
+          "is_default": "1",
+          "trigger_item_id": "84",
+          "minimum_level": "",
+          "gender_id": "",
+          "location_id": "",
+          "held_item_id": "",
+          "time_of_day": "",
+          "known_move_id": "",
+          "known_move_type_id": "",
+          "minimum_happiness": "",
+          "minimum_beauty": "",
+          "minimum_affection": "",
+          "relative_physical_stats": "",
+          "party_species_id": "",
+          "party_type_id": "",
+          "trade_species_id": "",
+          "needs_overworld_rain": "0",
+          "turn_upside_down": "0",
+          "needs_multiplayer": "0",
+          "near_special_rock": "0",
+          "region_id": "",
+          "required_pokemon_form_id": "",
+          "evolved_pokemon_form_id": "",
+          "used_move_id": "",
+          "minimum_move_count": "",
+          "minimum_steps": "",
+          "minimum_damage_taken": "",
+          "nature_bitmask": "",
+          "condition_expression": "",
+          "percentage_chance": ""
+        }
+      ]
+    },
+    {
+      "id": 518,
+      "name": "Musharna",
+      "rules": [
+        {
+          "id": "260",
+          "evolved_species_id": "518",
+          "evolution_trigger_id": "3",
+          "version_group_id": "11",
+          "is_default": "1",
+          "trigger_item_id": "81",
+          "minimum_level": "",
+          "gender_id": "",
+          "location_id": "",
+          "held_item_id": "",
+          "time_of_day": "",
+          "known_move_id": "",
+          "known_move_type_id": "",
+          "minimum_happiness": "",
+          "minimum_beauty": "",
+          "minimum_affection": "",
+          "relative_physical_stats": "",
+          "party_species_id": "",
+          "party_type_id": "",
+          "trade_species_id": "",
+          "needs_overworld_rain": "0",
+          "turn_upside_down": "0",
+          "needs_multiplayer": "0",
+          "near_special_rock": "0",
+          "region_id": "",
+          "required_pokemon_form_id": "",
+          "evolved_pokemon_form_id": "",
+          "used_move_id": "",
+          "minimum_move_count": "",
+          "minimum_steps": "",
+          "minimum_damage_taken": "",
+          "nature_bitmask": "",
+          "condition_expression": "",
+          "percentage_chance": ""
+        }
+      ]
+    },
+    {
+      "id": 526,
+      "name": "Gigalith",
+      "rules": [
+        {
+          "id": "265",
+          "evolved_species_id": "526",
+          "evolution_trigger_id": "2",
+          "version_group_id": "11",
+          "is_default": "1",
+          "trigger_item_id": "",
+          "minimum_level": "",
+          "gender_id": "",
+          "location_id": "",
+          "held_item_id": "",
+          "time_of_day": "",
+          "known_move_id": "",
+          "known_move_type_id": "",
+          "minimum_happiness": "",
+          "minimum_beauty": "",
+          "minimum_affection": "",
+          "relative_physical_stats": "",
+          "party_species_id": "",
+          "party_type_id": "",
+          "trade_species_id": "",
+          "needs_overworld_rain": "0",
+          "turn_upside_down": "0",
+          "needs_multiplayer": "0",
+          "near_special_rock": "0",
+          "region_id": "",
+          "required_pokemon_form_id": "",
+          "evolved_pokemon_form_id": "",
+          "used_move_id": "",
+          "minimum_move_count": "",
+          "minimum_steps": "",
+          "minimum_damage_taken": "",
+          "nature_bitmask": "",
+          "condition_expression": "",
+          "percentage_chance": ""
+        }
+      ]
+    },
+    {
+      "id": 528,
+      "name": "Swoobat",
+      "rules": [
+        {
+          "id": "266",
+          "evolved_species_id": "528",
+          "evolution_trigger_id": "1",
+          "version_group_id": "11",
+          "is_default": "1",
+          "trigger_item_id": "",
+          "minimum_level": "",
+          "gender_id": "",
+          "location_id": "",
+          "held_item_id": "",
+          "time_of_day": "",
+          "known_move_id": "",
+          "known_move_type_id": "",
+          "minimum_happiness": "160",
+          "minimum_beauty": "",
+          "minimum_affection": "",
+          "relative_physical_stats": "",
+          "party_species_id": "",
+          "party_type_id": "",
+          "trade_species_id": "",
+          "needs_overworld_rain": "0",
+          "turn_upside_down": "0",
+          "needs_multiplayer": "0",
+          "near_special_rock": "0",
+          "region_id": "",
+          "required_pokemon_form_id": "",
+          "evolved_pokemon_form_id": "",
+          "used_move_id": "",
+          "minimum_move_count": "",
+          "minimum_steps": "",
+          "minimum_damage_taken": "",
+          "nature_bitmask": "",
+          "condition_expression": "",
+          "percentage_chance": ""
+        }
+      ]
+    },
+    {
+      "id": 534,
+      "name": "Conkeldurr",
+      "rules": [
+        {
+          "id": "269",
+          "evolved_species_id": "534",
+          "evolution_trigger_id": "2",
+          "version_group_id": "11",
+          "is_default": "1",
+          "trigger_item_id": "",
+          "minimum_level": "",
+          "gender_id": "",
+          "location_id": "",
+          "held_item_id": "",
+          "time_of_day": "",
+          "known_move_id": "",
+          "known_move_type_id": "",
+          "minimum_happiness": "",
+          "minimum_beauty": "",
+          "minimum_affection": "",
+          "relative_physical_stats": "",
+          "party_species_id": "",
+          "party_type_id": "",
+          "trade_species_id": "",
+          "needs_overworld_rain": "0",
+          "turn_upside_down": "0",
+          "needs_multiplayer": "0",
+          "near_special_rock": "0",
+          "region_id": "",
+          "required_pokemon_form_id": "",
+          "evolved_pokemon_form_id": "",
+          "used_move_id": "",
+          "minimum_move_count": "",
+          "minimum_steps": "",
+          "minimum_damage_taken": "",
+          "nature_bitmask": "",
+          "condition_expression": "",
+          "percentage_chance": ""
+        }
+      ]
+    },
+    {
+      "id": 542,
+      "name": "Leavanny",
+      "rules": [
+        {
+          "id": "273",
+          "evolved_species_id": "542",
+          "evolution_trigger_id": "1",
+          "version_group_id": "11",
+          "is_default": "1",
+          "trigger_item_id": "",
+          "minimum_level": "",
+          "gender_id": "",
+          "location_id": "",
+          "held_item_id": "",
+          "time_of_day": "",
+          "known_move_id": "",
+          "known_move_type_id": "",
+          "minimum_happiness": "220",
+          "minimum_beauty": "",
+          "minimum_affection": "",
+          "relative_physical_stats": "",
+          "party_species_id": "",
+          "party_type_id": "",
+          "trade_species_id": "",
+          "needs_overworld_rain": "0",
+          "turn_upside_down": "0",
+          "needs_multiplayer": "0",
+          "near_special_rock": "0",
+          "region_id": "",
+          "required_pokemon_form_id": "",
+          "evolved_pokemon_form_id": "",
+          "used_move_id": "",
+          "minimum_move_count": "",
+          "minimum_steps": "",
+          "minimum_damage_taken": "",
+          "nature_bitmask": "",
+          "condition_expression": "",
+          "percentage_chance": ""
+        }
+      ]
+    },
+    {
+      "id": 547,
+      "name": "Whimsicott",
+      "rules": [
+        {
+          "id": "276",
+          "evolved_species_id": "547",
+          "evolution_trigger_id": "3",
+          "version_group_id": "11",
+          "is_default": "1",
+          "trigger_item_id": "80",
+          "minimum_level": "",
+          "gender_id": "",
+          "location_id": "",
+          "held_item_id": "",
+          "time_of_day": "",
+          "known_move_id": "",
+          "known_move_type_id": "",
+          "minimum_happiness": "",
+          "minimum_beauty": "",
+          "minimum_affection": "",
+          "relative_physical_stats": "",
+          "party_species_id": "",
+          "party_type_id": "",
+          "trade_species_id": "",
+          "needs_overworld_rain": "0",
+          "turn_upside_down": "0",
+          "needs_multiplayer": "0",
+          "near_special_rock": "0",
+          "region_id": "",
+          "required_pokemon_form_id": "",
+          "evolved_pokemon_form_id": "",
+          "used_move_id": "",
+          "minimum_move_count": "",
+          "minimum_steps": "",
+          "minimum_damage_taken": "",
+          "nature_bitmask": "",
+          "condition_expression": "",
+          "percentage_chance": ""
+        }
+      ]
+    },
+    {
+      "id": 549,
+      "name": "Lilligant",
+      "rules": [
+        {
+          "id": "277",
+          "evolved_species_id": "549",
+          "evolution_trigger_id": "3",
+          "version_group_id": "11",
+          "is_default": "1",
+          "trigger_item_id": "80",
+          "minimum_level": "",
+          "gender_id": "",
+          "location_id": "",
+          "held_item_id": "",
+          "time_of_day": "",
+          "known_move_id": "",
+          "known_move_type_id": "",
+          "minimum_happiness": "",
+          "minimum_beauty": "",
+          "minimum_affection": "",
+          "relative_physical_stats": "",
+          "party_species_id": "",
+          "party_type_id": "",
+          "trade_species_id": "",
+          "needs_overworld_rain": "0",
+          "turn_upside_down": "0",
+          "needs_multiplayer": "0",
+          "near_special_rock": "0",
+          "region_id": "",
+          "required_pokemon_form_id": "",
+          "evolved_pokemon_form_id": "",
+          "used_move_id": "",
+          "minimum_move_count": "",
+          "minimum_steps": "",
+          "minimum_damage_taken": "",
+          "nature_bitmask": "",
+          "condition_expression": "",
+          "percentage_chance": ""
+        },
+        {
+          "id": "528",
+          "evolved_species_id": "549",
+          "evolution_trigger_id": "3",
+          "version_group_id": "24",
+          "is_default": "1",
+          "trigger_item_id": "80",
+          "minimum_level": "",
+          "gender_id": "",
+          "location_id": "",
+          "held_item_id": "",
+          "time_of_day": "",
+          "known_move_id": "",
+          "known_move_type_id": "",
+          "minimum_happiness": "",
+          "minimum_beauty": "",
+          "minimum_affection": "",
+          "relative_physical_stats": "",
+          "party_species_id": "",
+          "party_type_id": "",
+          "trade_species_id": "",
+          "needs_overworld_rain": "0",
+          "turn_upside_down": "0",
+          "needs_multiplayer": "0",
+          "near_special_rock": "0",
+          "region_id": "9",
+          "required_pokemon_form_id": "",
+          "evolved_pokemon_form_id": "10406",
+          "used_move_id": "",
+          "minimum_move_count": "",
+          "minimum_steps": "",
+          "minimum_damage_taken": "",
+          "nature_bitmask": "",
+          "condition_expression": "",
+          "percentage_chance": ""
+        }
+      ]
+    },
+    {
+      "id": 555,
+      "name": "Darmanitan",
+      "rules": [
+        {
+          "id": "280",
+          "evolved_species_id": "555",
+          "evolution_trigger_id": "1",
+          "version_group_id": "11",
+          "is_default": "1",
+          "trigger_item_id": "",
+          "minimum_level": "35",
+          "gender_id": "",
+          "location_id": "",
+          "held_item_id": "",
+          "time_of_day": "",
+          "known_move_id": "",
+          "known_move_type_id": "",
+          "minimum_happiness": "",
+          "minimum_beauty": "",
+          "minimum_affection": "",
+          "relative_physical_stats": "",
+          "party_species_id": "",
+          "party_type_id": "",
+          "trade_species_id": "",
+          "needs_overworld_rain": "0",
+          "turn_upside_down": "0",
+          "needs_multiplayer": "0",
+          "near_special_rock": "0",
+          "region_id": "",
+          "required_pokemon_form_id": "",
+          "evolved_pokemon_form_id": "",
+          "used_move_id": "",
+          "minimum_move_count": "",
+          "minimum_steps": "",
+          "minimum_damage_taken": "",
+          "nature_bitmask": "",
+          "condition_expression": "",
+          "percentage_chance": ""
+        },
+        {
+          "id": "458",
+          "evolved_species_id": "555",
+          "evolution_trigger_id": "3",
+          "version_group_id": "20",
+          "is_default": "1",
+          "trigger_item_id": "885",
+          "minimum_level": "",
+          "gender_id": "",
+          "location_id": "",
+          "held_item_id": "",
+          "time_of_day": "",
+          "known_move_id": "",
+          "known_move_type_id": "",
+          "minimum_happiness": "",
+          "minimum_beauty": "",
+          "minimum_affection": "",
+          "relative_physical_stats": "",
+          "party_species_id": "",
+          "party_type_id": "",
+          "trade_species_id": "",
+          "needs_overworld_rain": "0",
+          "turn_upside_down": "0",
+          "needs_multiplayer": "0",
+          "near_special_rock": "0",
+          "region_id": "",
+          "required_pokemon_form_id": "10335",
+          "evolved_pokemon_form_id": "10336",
+          "used_move_id": "",
+          "minimum_move_count": "",
+          "minimum_steps": "",
+          "minimum_damage_taken": "",
+          "nature_bitmask": "",
+          "condition_expression": "",
+          "percentage_chance": ""
+        }
+      ]
+    },
+    {
+      "id": 573,
+      "name": "Cinccino",
+      "rules": [
+        {
+          "id": "288",
+          "evolved_species_id": "573",
+          "evolution_trigger_id": "3",
+          "version_group_id": "11",
+          "is_default": "1",
+          "trigger_item_id": "107",
+          "minimum_level": "",
+          "gender_id": "",
+          "location_id": "",
+          "held_item_id": "",
+          "time_of_day": "",
+          "known_move_id": "",
+          "known_move_type_id": "",
+          "minimum_happiness": "",
+          "minimum_beauty": "",
+          "minimum_affection": "",
+          "relative_physical_stats": "",
+          "party_species_id": "",
+          "party_type_id": "",
+          "trade_species_id": "",
+          "needs_overworld_rain": "0",
+          "turn_upside_down": "0",
+          "needs_multiplayer": "0",
+          "near_special_rock": "0",
+          "region_id": "",
+          "required_pokemon_form_id": "",
+          "evolved_pokemon_form_id": "",
+          "used_move_id": "",
+          "minimum_move_count": "",
+          "minimum_steps": "",
+          "minimum_damage_taken": "",
+          "nature_bitmask": "",
+          "condition_expression": "",
+          "percentage_chance": ""
+        }
+      ]
+    },
+    {
+      "id": 589,
+      "name": "Escavalier",
+      "rules": [
+        {
+          "id": "297",
+          "evolved_species_id": "589",
+          "evolution_trigger_id": "2",
+          "version_group_id": "11",
+          "is_default": "1",
+          "trigger_item_id": "",
+          "minimum_level": "",
+          "gender_id": "",
+          "location_id": "",
+          "held_item_id": "",
+          "time_of_day": "",
+          "known_move_id": "",
+          "known_move_type_id": "",
+          "minimum_happiness": "",
+          "minimum_beauty": "",
+          "minimum_affection": "",
+          "relative_physical_stats": "",
+          "party_species_id": "",
+          "party_type_id": "",
+          "trade_species_id": "616",
+          "needs_overworld_rain": "0",
+          "turn_upside_down": "0",
+          "needs_multiplayer": "0",
+          "near_special_rock": "0",
+          "region_id": "",
+          "required_pokemon_form_id": "",
+          "evolved_pokemon_form_id": "",
+          "used_move_id": "",
+          "minimum_move_count": "",
+          "minimum_steps": "",
+          "minimum_damage_taken": "",
+          "nature_bitmask": "",
+          "condition_expression": "",
+          "percentage_chance": ""
+        }
+      ]
+    },
+    {
+      "id": 604,
+      "name": "Eelektross",
+      "rules": [
+        {
+          "id": "305",
+          "evolved_species_id": "604",
+          "evolution_trigger_id": "3",
+          "version_group_id": "11",
+          "is_default": "1",
+          "trigger_item_id": "83",
+          "minimum_level": "",
+          "gender_id": "",
+          "location_id": "",
+          "held_item_id": "",
+          "time_of_day": "",
+          "known_move_id": "",
+          "known_move_type_id": "",
+          "minimum_happiness": "",
+          "minimum_beauty": "",
+          "minimum_affection": "",
+          "relative_physical_stats": "",
+          "party_species_id": "",
+          "party_type_id": "",
+          "trade_species_id": "",
+          "needs_overworld_rain": "0",
+          "turn_upside_down": "0",
+          "needs_multiplayer": "0",
+          "near_special_rock": "0",
+          "region_id": "",
+          "required_pokemon_form_id": "",
+          "evolved_pokemon_form_id": "",
+          "used_move_id": "",
+          "minimum_move_count": "",
+          "minimum_steps": "",
+          "minimum_damage_taken": "",
+          "nature_bitmask": "",
+          "condition_expression": "",
+          "percentage_chance": ""
+        }
+      ]
+    },
+    {
+      "id": 609,
+      "name": "Chandelure",
+      "rules": [
+        {
+          "id": "308",
+          "evolved_species_id": "609",
+          "evolution_trigger_id": "3",
+          "version_group_id": "11",
+          "is_default": "1",
+          "trigger_item_id": "108",
+          "minimum_level": "",
+          "gender_id": "",
+          "location_id": "",
+          "held_item_id": "",
+          "time_of_day": "",
+          "known_move_id": "",
+          "known_move_type_id": "",
+          "minimum_happiness": "",
+          "minimum_beauty": "",
+          "minimum_affection": "",
+          "relative_physical_stats": "",
+          "party_species_id": "",
+          "party_type_id": "",
+          "trade_species_id": "",
+          "needs_overworld_rain": "0",
+          "turn_upside_down": "0",
+          "needs_multiplayer": "0",
+          "near_special_rock": "0",
+          "region_id": "",
+          "required_pokemon_form_id": "",
+          "evolved_pokemon_form_id": "",
+          "used_move_id": "",
+          "minimum_move_count": "",
+          "minimum_steps": "",
+          "minimum_damage_taken": "",
+          "nature_bitmask": "",
+          "condition_expression": "",
+          "percentage_chance": ""
+        }
+      ]
+    },
+    {
+      "id": 617,
+      "name": "Accelgor",
+      "rules": [
+        {
+          "id": "312",
+          "evolved_species_id": "617",
+          "evolution_trigger_id": "2",
+          "version_group_id": "11",
+          "is_default": "1",
+          "trigger_item_id": "",
+          "minimum_level": "",
+          "gender_id": "",
+          "location_id": "",
+          "held_item_id": "",
+          "time_of_day": "",
+          "known_move_id": "",
+          "known_move_type_id": "",
+          "minimum_happiness": "",
+          "minimum_beauty": "",
+          "minimum_affection": "",
+          "relative_physical_stats": "",
+          "party_species_id": "",
+          "party_type_id": "",
+          "trade_species_id": "588",
+          "needs_overworld_rain": "0",
+          "turn_upside_down": "0",
+          "needs_multiplayer": "0",
+          "near_special_rock": "0",
+          "region_id": "",
+          "required_pokemon_form_id": "",
+          "evolved_pokemon_form_id": "",
+          "used_move_id": "",
+          "minimum_move_count": "",
+          "minimum_steps": "",
+          "minimum_damage_taken": "",
+          "nature_bitmask": "",
+          "condition_expression": "",
+          "percentage_chance": ""
+        }
+      ]
+    }
+  ],
+  "integrationEnabled": true
+}

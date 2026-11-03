@@ -1,0 +1,31 @@
+/* Official library: four covers in one row and a hero that fits the stage. */
+body #ttl.stream-browsing .stream-home{display:grid;grid-template-columns:minmax(0,1fr);grid-template-rows:46px minmax(0,1fr) 204px 30px;padding:0 88px 0 32px;overflow:hidden}
+body #ttl.stream-browsing .stream-header{grid-row:1;min-width:0}
+body #ttl.stream-browsing .stream-hero{grid-row:2;min-height:0;min-width:0;padding:10px 0 16px;align-items:center;overflow:hidden}
+body #ttl.stream-browsing .stream-feature-copy{max-width:470px;min-width:0}
+body #ttl.stream-browsing .stream-pokemon-logo{width:275px;max-width:100%;margin:0 0 12px}
+body #ttl.stream-browsing .stream-pokemon-logo-art{width:100%;height:auto;max-height:118px;object-fit:contain;object-position:left center}
+body #ttl.stream-browsing .stream-feature-copy h1{font-size:33px;line-height:1.12;margin:9px 0 10px}
+body #ttl.stream-browsing .stream-meta{margin:0 0 10px;font-size:9px}
+body #ttl.stream-browsing .stream-description{font-size:11px;line-height:1.55;max-width:415px}
+body #ttl.stream-browsing .stream-actions{margin-top:14px}
+body #ttl.stream-browsing .stream-library{grid-row:3;min-height:0;min-width:0;padding:0 0 10px;overflow:visible}
+body #ttl.stream-browsing .stream-library-heading{max-width:none;height:25px;margin:0 0 8px;align-items:center}
+body #ttl.stream-browsing .stream-library-heading h2{font-size:13px}
+body #ttl.stream-browsing .stream-games{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;padding:0;align-items:start;min-width:0}
+body #ttl.stream-browsing .stream-home .stream-game{min-width:0;max-width:none;width:100%;border-radius:5px}
+body #ttl.stream-browsing .stream-home .stream-game .stream-cover{height:105px;min-height:105px;flex:none}
+body #ttl.stream-browsing .stream-game-info{padding:9px 10px;gap:5px;min-height:48px}
+body #ttl.stream-browsing .stream-game-info strong{font-size:11px;line-height:14px}
+body #ttl.stream-browsing .stream-game-info small{font-size:8px;line-height:12px;padding-right:10px}
+body #ttl.stream-browsing .stream-mode{font-size:6px;letter-spacing:.5px;padding:4px 5px;left:7px;top:7px}
+body #ttl.stream-browsing .stream-footer{grid-row:4;min-width:0}
+@media(max-width:800px){body #ttl.stream-browsing .stream-home{padding-left:22px;padding-right:76px;grid-template-rows:42px minmax(0,1fr) 196px 26px}body #ttl.stream-browsing .stream-games{gap:8px}body #ttl.stream-browsing .stream-pokemon-logo{width:230px;margin-bottom:8px}body #ttl.stream-browsing .stream-feature-copy h1{font-size:28px}body #ttl.stream-browsing .stream-game-info strong{font-size:10px}body #ttl.stream-browsing .stream-home .stream-game .stream-cover{height:97px;min-height:97px}}
+@media(max-width:540px){body #ttl.stream-browsing .stream-home{grid-template-rows:38px minmax(0,1fr) 216px 24px;padding:0 62px 0 14px}body #ttl.stream-browsing .stream-games{grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}body #ttl.stream-browsing .stream-home .stream-game .stream-cover{height:48px;min-height:48px}body #ttl.stream-browsing .stream-game-info{padding:5px 7px;gap:2px;min-height:35px}body #ttl.stream-browsing .stream-game-info small{font-size:7px;line-height:9px}body #ttl.stream-browsing .stream-mode{font-size:5px;padding:2px 3px;top:3px;left:3px}body #ttl.stream-browsing .stream-pokemon-logo{width:185px;margin-bottom:6px}body #ttl.stream-browsing .stream-feature-copy h1{font-size:23px;margin:6px 0}body #ttl.stream-browsing .stream-description{font-size:10px;line-height:1.4}body #ttl.stream-browsing .stream-meta{font-size:8px;margin-bottom:6px}body #ttl.stream-browsing .stream-actions{margin-top:9px}body #ttl.stream-browsing .stream-library-heading span{display:none}}
+
+/* Restrained cover widths; Idle has its own exploration artwork. */
+body #ttl.stream-browsing .stream-library-heading{max-width:876px}
+body #ttl.stream-browsing .stream-games{grid-template-columns:repeat(4,minmax(0,210px));max-width:876px;gap:12px;justify-content:start}
+body #ttl.stream-browsing .stream-game[data-game=idle] .stream-cover{background-size:cover;background-position:center}
+@media(max-width:800px){body #ttl.stream-browsing .stream-games{grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}}
+@media(max-width:540px){body #ttl.stream-browsing .stream-games{grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}}

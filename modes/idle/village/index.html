@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>OakChess · Vila das Margens</title><link rel="stylesheet" href="style.css?v=house-fragments-3"><link rel="stylesheet" href="property-style.css?v=house-fragments-3"></head>
+<body>
+<main class="app">
+ <header class="top"><a href="../index.html" class="brand">OAK<span>CHESS</span></a><button id="sound" aria-pressed="true">Som ligado</button><button id="help" aria-label="Como explorar a vila">?</button></header>
+ <header class="heading"><div><p class="eyebrow">ENTRE O LAGO E A FLORESTA</p><h1>Vila das Margens</h1></div><div class="village-weather"><i></i>Fim de tarde <span>Brisa leve · águas tranquilas</span></div></header>
+ <section class="scene" id="scene" aria-label="Vila rural com píer, pescador, casa e fazenda de treinamento">
+  <div class="sun-rays" aria-hidden="true"></div><canvas id="ambience" aria-hidden="true"></canvas><div class="water-shimmer" aria-hidden="true"></div>
+  <button id="fisherman" class="npc fisherman" aria-label="Conversar com Seu Elias, pescador"><span class="npc-label"><b>Seu Elias</b><small>Pescador</small></span><img src="../../../assets/showdown/trainers/fisherman.png" alt="Seu Elias"><span class="npc-shadow"></span></button>
+  <button id="farmer" class="npc farmer" aria-label="Conversar com Dona Rosa, fazendeira"><span class="npc-label"><b>Dona Rosa</b><small>Fazendeira</small></span><img src="../../../assets/showdown/trainers/cowgirl.png" alt="Dona Rosa"><span class="npc-shadow"></span></button>
+  <button id="farm-sign" class="farm-sign" aria-label="Consultar sua fazenda"><span>CASA & TREINAMENTO</span><b id="farm-sign-name">Uma fazenda para chamar de sua</b><small id="farm-sign-status">Converse com Dona Rosa ↗</small></button>
+  <button id="paddock" class="paddock-hit" aria-label="Administrar o cercado de treinamento" title="Administrar fazenda"></button><div id="farm-pokemon" aria-live="off"></div><div id="scene-sparkles" aria-hidden="true"></div>
+  <div class="scene-caption"><span class="map-pin">◆</span>Escolha um personagem para conversar.<span class="scene-key">Clique no cercado para cuidar dos parceiros.</span></div>
+ </section>
+ <nav class="quick-links" aria-label="Serviços da vila"><button id="quick-fishing"><span>01</span>Pesca & varas <small>Seu Elias ↗</small></button><button id="quick-farm"><span>02</span>Casa & fazenda <small>Dona Rosa ↗</small></button><button id="quick-pc"><span>03</span>Parceiros do PC <small id="pc-count">PC do Centro ↗</small></button></nav>
+ <section class="village-bottom"><div class="quest-note"><span class="eyebrow" id="activity-label">BEM-VINDO À VILA</span><p id="activity">Conheça os moradores. Sua primeira fazenda pode vir de uma missão.</p></div><div class="owned-farm"><span>SUA PROPRIEDADE</span><b id="owned-name">Ainda não adquirida</b><small id="owned-slots">Pesca e treinamento em um só lugar</small></div><button id="pause" class="text-button" aria-pressed="false">Pausar vila e treino</button></section>
+ <footer><span>VILA DAS MARGENS</span>Seu progresso é salvo com a jornada.<button id="reset" class="text-button">Reiniciar vila</button></footer>
+</main>
+<dialog id="dialog"><header class="dialog-top"><div><p class="eyebrow" id="dialog-tag">VILA DAS MARGENS</p><h2 id="dialog-title"></h2></div><button id="close-dialog" aria-label="Fechar painel">×</button></header><div id="dialog-body"></div></dialog>
+<dialog id="fishing-dialog" class="fishing-dialog"><header><div><span class="eyebrow">NO PÍER COM SEU ELIAS</span><b>Pesca da vila</b></div><button id="close-fishing">Voltar à vila ×</button></header><iframe id="fishing-frame" title="Pesca, loja e missões do pescador"></iframe></dialog>
+<script src="activity-audio.js"></script><script src="partner-wander.js?v=house-fragments-3"></script><script src="property-system.js?v=house-fragments-3"></script><script src="app.js?v=terminal-palette-1"></script>
+<link rel="stylesheet" href="terminal-palette.css?v=1"></body></html>

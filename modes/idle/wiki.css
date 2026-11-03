@@ -1,0 +1,19 @@
+body.idle-native-mode #stage #sysbar.game-tools>#idleWikiLaunch{order:4;position:static!important;display:flex!important;align-items:center;justify-content:center;width:34px!important;min-width:34px!important;height:38px!important;flex:0 0 34px!important;padding:0!important;margin:0!important;border:0!important;background:transparent!important;color:#ffe4a0!important;cursor:pointer;filter:drop-shadow(0 2px 1px #10182d)}
+#idleWikiLaunch svg{width:23px;height:23px}#idleWikiLaunch:hover{filter:drop-shadow(0 0 5px #ffd57488)!important}#idleWikiLaunch:focus-visible{outline:2px solid #ffcf68!important;outline-offset:-2px}
+body.idle-native-mode #idle-wiki{display:flex;flex-direction:column;width:1120px;height:720px;max-width:calc(100% - 28px)!important;max-height:calc(100% - 28px)!important;top:50%!important;padding:0;overflow:hidden;font-family:'Trebuchet MS',Arial,sans-serif}
+body.idle-native-mode #idle-wiki[hidden]{display:none}
+#idle-wiki>header{flex:none}#idle-wiki>header p{margin:4px 0 0;font-size:11px;color:#d7b9cb}
+#idle-wiki .wiki-tools{display:flex;align-items:center;gap:12px;padding:12px 16px 8px;flex:none}#idle-wiki .wiki-tools input{flex:1;min-width:0;padding:10px 12px;font:12px 'Trebuchet MS'}#idle-wiki .wiki-tools span{font-size:10px;color:#d7b9cb;white-space:nowrap}
+#idle-wiki .wiki-groups{display:flex;gap:6px;flex-wrap:wrap;padding:0 16px 12px;flex:none;border-bottom:1px solid #714859}
+body.idle-native-mode #idle-wiki .wiki-groups button{flex:none;padding:7px 12px!important;font-size:11px}
+#idle-wiki .wiki-shell{display:grid;grid-template-columns:245px minmax(0,1fr);flex:1;min-height:0}
+#idle-wiki .wiki-topics{overflow-y:auto;padding:10px;display:flex;flex-direction:column;gap:5px;background:#17131e;border-right:1px solid #714859;scrollbar-width:thin;scrollbar-color:#bd567c #17131e}
+body.idle-native-mode #idle-wiki .wiki-topics button{flex:none;display:grid;gap:4px;text-align:left;padding:10px!important;white-space:normal}
+#idle-wiki .wiki-topics small{font-size:8px;color:#d7b9cb}#idle-wiki .wiki-topics b{font-size:11px;line-height:1.4}
+#idle-wiki .wiki-article{overflow-y:auto;padding:20px 24px;min-width:0;scrollbar-width:thin;scrollbar-color:#bd567c #211c27;line-height:1.65;color:#f5dfeb}
+#idle-wiki .wiki-eyebrow{color:#ec8fae;font-size:10px;letter-spacing:.8px}#idle-wiki h3{font-size:23px;line-height:1.3;color:#ffcf68;margin:6px 0 8px}#idle-wiki .wiki-intro{color:#e0b9ce;font-size:12px;margin:0 0 18px}
+#idle-wiki .wiki-article section{padding:14px 16px;background:#302630;border:1px solid #714859;border-radius:7px;margin-bottom:12px}#idle-wiki h4{font-size:14px;margin:0 0 9px;color:#ffcf68}#idle-wiki ul{padding-left:18px;margin:0}#idle-wiki li{font-size:12px;margin:0 0 9px}#idle-wiki li:last-child{margin-bottom:0}#idle-wiki li::marker{color:#ef6e9b}
+body.idle-native-mode #idle-wiki .wiki-action{padding:9px 15px!important;background:#d72e56!important;border-color:#ff83a4!important;color:#fff0f5!important;font-size:11px}
+#idle-wiki>footer{padding:9px 16px;border-top:1px solid #714859;background:#17131e;font-size:9px;color:#d7b9cb;flex:none}
+@media(max-width:700px){#idle-wiki .wiki-shell{grid-template-columns:175px minmax(0,1fr)}#idle-wiki .wiki-article{padding:12px}#idle-wiki .wiki-tools{flex-wrap:wrap}#idle-wiki h3{font-size:19px}}
+@media(max-width:480px){#idle-wiki .wiki-shell{grid-template-columns:125px minmax(0,1fr)}#idle-wiki .wiki-topics{padding:5px}#idle-wiki .wiki-topics b{font-size:10px}#idle-wiki .wiki-article section{padding:10px}#idle-wiki li{font-size:11px}}

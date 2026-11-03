@@ -1,0 +1,4 @@
+#menu .hex-neon-setting canvas{display:block;width:100%;height:auto;max-height:124px;object-fit:contain;background:#102739;border:1px solid #526d88;margin:9px 0 6px;image-rendering:pixelated}
+#menu .hex-neon-setting>small{display:block;color:#aec3d8;font:11px/1.5 'Trebuchet MS',sans-serif}
+#menu .hex-neon-limits{display:flex;justify-content:space-between;color:#aec3d8;font:10px/1.4 'Trebuchet MS',sans-serif;margin-top:3px}
+#menu .hex-neon-setting output{font-variant-numeric:tabular-nums;white-space:nowrap}

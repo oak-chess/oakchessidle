@@ -1,0 +1,632 @@
+[
+  {
+    "key": "bugGoo",
+    "name": "Gosma de Inseto",
+    "species": "Caterpie|Metapod|Weedle|Kakuna",
+    "file": "bug-goo.png",
+    "url": "https://wiki.pokexgames.com/images/e/e8/Bug_Gosme.png",
+    "price": 10,
+    "chance": 0.3
+  },
+  {
+    "key": "venom",
+    "name": "Frasco de Veneno",
+    "species": "Ekans|Arbok|Grimer|Muk|Koffing|Weezing",
+    "file": "venom.png",
+    "url": "https://wiki.pokexgames.com/images/3/3b/Bottles_of_poison.png",
+    "price": 10,
+    "chance": 0.3
+  },
+  {
+    "key": "fireEssence",
+    "name": "Essência de Fogo",
+    "species": "Charmander|Charmeleon|Charizard|Vulpix|Ninetales|Growlithe|Arcanine|Ponyta|Rapidash|Magmar",
+    "file": "fire-essence.png",
+    "url": "https://wiki.pokexgames.com/images/9/94/Essence_of_fire.png",
+    "price": 10,
+    "chance": 0.3
+  },
+  {
+    "key": "seed",
+    "name": "Semente",
+    "species": "",
+    "file": "seed.png",
+    "url": "https://wiki.pokexgames.com/images/2/2e/Seed.png",
+    "price": 3,
+    "chance": 0.08
+  },
+  {
+    "key": "fur",
+    "name": "Pelo Macio",
+    "species": "",
+    "file": "fur.png",
+    "url": "https://wiki.pokexgames.com/images/5/5c/FurMark.png",
+    "price": 3,
+    "chance": 0.08
+  },
+  {
+    "key": "charge",
+    "name": "Caixa Elétrica",
+    "species": "",
+    "file": "charge.png",
+    "url": "https://wiki.pokexgames.com/images/6/6c/ElectricBox.png",
+    "price": 3,
+    "chance": 0.08
+  },
+  {
+    "key": "sand",
+    "name": "Bolsa de Areia",
+    "species": "",
+    "file": "sand.png",
+    "url": "https://wiki.pokexgames.com/images/5/52/SandbagMark.png",
+    "price": 3,
+    "chance": 0.08
+  },
+  {
+    "key": "dragon",
+    "name": "Dente de Dragão",
+    "species": "",
+    "file": "dragon.png",
+    "url": "https://wiki.pokexgames.com/images/9/9f/DragonTooth.png",
+    "price": 3,
+    "chance": 0.08
+  },
+  {
+    "key": "spirit",
+    "name": "Essência Fantasma",
+    "species": "",
+    "file": "spirit.png",
+    "url": "https://wiki.pokexgames.com/images/d/dd/GhostEssence.png",
+    "price": 3,
+    "chance": 0.08
+  },
+  {
+    "key": "scale",
+    "name": "Escama",
+    "species": "",
+    "file": "scale.png",
+    "url": "https://wiki.pokexgames.com/images/5/58/DragonScale.png",
+    "price": 3,
+    "chance": 0.08
+  },
+  {
+    "key": "leaves",
+    "name": "Folhas",
+    "species": "Oddish|Gloom|Vileplume|Bellsprout|Weepinbell|Victreebel|Tangela",
+    "file": "leaves.png",
+    "url": "https://wiki.pokexgames.com/images/f/f1/Leaves.png",
+    "price": 10,
+    "chance": 0.3
+  },
+  {
+    "key": "pollen",
+    "name": "Bolsa de Pólen",
+    "species": "Butterfree|Venonat|Venomoth|Paras|Parasect",
+    "file": "pollen.png",
+    "url": "https://wiki.pokexgames.com/images/b/bc/BagOfPollem.png",
+    "price": 10,
+    "chance": 0.3
+  },
+  {
+    "key": "steel",
+    "name": "Pedaço de Aço",
+    "species": "Magnemite|Magneton",
+    "file": "steel.png",
+    "url": "https://wiki.pokexgames.com/images/c/c1/PieceOfSteel.png",
+    "price": 10,
+    "chance": 0.3
+  },
+  {
+    "key": "snow",
+    "name": "Bola de Neve",
+    "species": "Seel|Dewgong|Shellder|Cloyster|Jynx|Lapras|Articuno",
+    "file": "snow.png",
+    "url": "https://wiki.pokexgames.com/images/0/04/Snowball.png",
+    "price": 10,
+    "chance": 0.3
+  },
+  {
+    "key": "waterGem",
+    "name": "Gema Aquática",
+    "species": "Squirtle|Wartortle|Blastoise|Psyduck|Golduck|Poliwag|Poliwhirl|Poliwrath|Staryu|Starmie",
+    "file": "water-gem.png",
+    "url": "https://wiki.pokexgames.com/images/c/c0/Water_gem.png",
+    "price": 10,
+    "chance": 0.3
+  },
+  {
+    "key": "beak",
+    "name": "Bico Gigante",
+    "species": "Spearow|Fearow",
+    "file": "beak.png",
+    "url": "https://wiki.pokexgames.com/images/3/34/Giant-beak.png",
+    "price": 10,
+    "chance": 0.08
+  },
+  {
+    "key": "ratTail",
+    "name": "Cauda de Rato",
+    "species": "Rattata|Raticate",
+    "file": "rat-tail.png",
+    "url": "https://wiki.pokexgames.com/images/5/5a/Rat_Tail.png",
+    "price": 10,
+    "chance": 0.08
+  },
+  {
+    "key": "redWing",
+    "name": "Asa Vermelha",
+    "species": "Pidgeotto|Pidgeot",
+    "file": "red-wing.png",
+    "url": "https://wiki.pokexgames.com/images/b/ba/Red_Wing.png",
+    "price": 10,
+    "chance": 0.08
+  },
+  {
+    "key": "snakeTail",
+    "name": "Cauda de Serpente",
+    "species": "Ekans|Arbok",
+    "file": "snake-tail.png",
+    "url": "https://wiki.pokexgames.com/images/6/6c/Snake_Tail.png",
+    "price": 10,
+    "chance": 0.08
+  },
+  {
+    "key": "electricTail",
+    "name": "Cauda Elétrica",
+    "species": "Pichu|Pikachu|Raichu",
+    "file": "electric-tail.png",
+    "url": "https://wiki.pokexgames.com/images/d/d9/Electric_Rat_Tail.png",
+    "price": 10,
+    "chance": 0.08
+  },
+  {
+    "key": "armadilloClaw",
+    "name": "Garra de Tatu",
+    "species": "Sandshrew|Sandslash",
+    "file": "armadillo-claw.png",
+    "url": "https://wiki.pokexgames.com/images/f/f6/Armadillo_Claw.png",
+    "price": 10,
+    "chance": 0.08
+  },
+  {
+    "key": "femaleEar",
+    "name": "Orelha de Nidoran Fêmea",
+    "species": "Nidoran♀|Nidoran F|NidoranF|Nidorina|Nidoqueen",
+    "file": "female-ear.png",
+    "url": "https://wiki.pokexgames.com/images/c/c3/Female_Ear.png",
+    "price": 10,
+    "chance": 0.08
+  },
+  {
+    "key": "maleEar",
+    "name": "Orelha de Nidoran Macho",
+    "species": "Nidoran♂|Nidoran M|NidoranM|Nidorino|Nidoking",
+    "file": "male-ear.png",
+    "url": "https://wiki.pokexgames.com/images/8/84/Male_Ear.png",
+    "price": 10,
+    "chance": 0.08
+  },
+  {
+    "key": "foxTail",
+    "name": "Cauda de Raposa",
+    "species": "Vulpix|Ninetales",
+    "file": "fox-tail.png",
+    "url": "https://wiki.pokexgames.com/images/7/71/Fox_Tail.png",
+    "price": 10,
+    "chance": 0.08
+  },
+  {
+    "key": "microphone",
+    "name": "Microfone",
+    "species": "Jigglypuff|Wigglytuff",
+    "file": "microphone.png",
+    "url": "https://wiki.pokexgames.com/images/6/69/Microphone.png",
+    "price": 10,
+    "chance": 0.08
+  },
+  {
+    "key": "batWing",
+    "name": "Asa de Morcego",
+    "species": "Zubat",
+    "file": "bat-wing.png",
+    "url": "https://wiki.pokexgames.com/images/3/35/Bat_Wing.png",
+    "price": 10,
+    "chance": 0.08
+  },
+  {
+    "key": "giantBatWing",
+    "name": "Asa Grande de Morcego",
+    "species": "Golbat|Crobat",
+    "file": "giant-bat-wing.png",
+    "url": "https://wiki.pokexgames.com/images/b/be/Giant_Bat_Wing.png",
+    "price": 10,
+    "chance": 0.08
+  },
+  {
+    "key": "flower",
+    "name": "Flor Estranha",
+    "species": "Oddish|Gloom|Vileplume",
+    "file": "flower.png",
+    "url": "https://wiki.pokexgames.com/images/e/ec/Strange_Flower.png",
+    "price": 10,
+    "chance": 0.08
+  },
+  {
+    "key": "mushroom",
+    "name": "Cogumelo de Paras",
+    "species": "Paras|Parasect",
+    "file": "mushroom.png",
+    "url": "https://wiki.pokexgames.com/images/1/15/Mushroom1.png",
+    "price": 10,
+    "chance": 0.08
+  },
+  {
+    "key": "antenna",
+    "name": "Antena de Inseto",
+    "species": "Venonat|Venomoth",
+    "file": "antenna.png",
+    "url": "https://wiki.pokexgames.com/images/1/1c/Bug_Antenna.png",
+    "price": 10,
+    "chance": 0.08
+  },
+  {
+    "key": "diglettPart",
+    "name": "Fragmento de Diglett",
+    "species": "Diglett|Dugtrio",
+    "file": "diglett-part.png",
+    "url": "https://wiki.pokexgames.com/images/2/2a/Piece_Of_Diglett.png",
+    "price": 10,
+    "chance": 0.08
+  },
+  {
+    "key": "medallion",
+    "name": "Medalhão da Sorte",
+    "species": "Meowth|Persian",
+    "file": "medallion.png",
+    "url": "https://wiki.pokexgames.com/images/a/ac/Luck_Medallion.png",
+    "price": 10,
+    "chance": 0.08
+  },
+  {
+    "key": "wool",
+    "name": "Novelo de Lã",
+    "species": "Meowth|Persian",
+    "file": "wool.png",
+    "url": "https://wiki.pokexgames.com/images/4/41/Wool_Ball.png",
+    "price": 10,
+    "chance": 0.08
+  },
+  {
+    "key": "duckMug",
+    "name": "Caneca de Psyduck",
+    "species": "Psyduck|Golduck",
+    "file": "duck-mug.png",
+    "url": "https://wiki.pokexgames.com/images/4/48/Psyduck_Mug.png",
+    "price": 10,
+    "chance": 0.08
+  },
+  {
+    "key": "bracelet",
+    "name": "Bracelete de Ferro",
+    "species": "Mankey|Primeape|Machop|Machoke|Machamp",
+    "file": "bracelet.png",
+    "url": "https://wiki.pokexgames.com/images/4/40/Iron_Bracelet.png",
+    "price": 10,
+    "chance": 0.08
+  },
+  {
+    "key": "giantFur",
+    "name": "Tufo Grande de Pelo",
+    "species": "Growlithe|Arcanine",
+    "file": "giant-fur.png",
+    "url": "https://wiki.pokexgames.com/images/a/a8/Giant_Piece_Of_Fur.png",
+    "price": 10,
+    "chance": 0.08
+  },
+  {
+    "key": "plantTail",
+    "name": "Cauda Vegetal",
+    "species": "Bellsprout|Weepinbell|Victreebel",
+    "file": "plant-tail.png",
+    "url": "https://wiki.pokexgames.com/images/9/92/Plant_Tail.png",
+    "price": 10,
+    "chance": 0.08
+  },
+  {
+    "key": "tentacle",
+    "name": "Tentáculo",
+    "species": "Tentacool|Tentacruel",
+    "file": "tentacle.png",
+    "url": "https://wiki.pokexgames.com/images/d/d8/Tentacruel_Tentacle1.png",
+    "price": 10,
+    "chance": 0.08
+  },
+  {
+    "key": "strangeRock",
+    "name": "Rocha Estranha",
+    "species": "Geodude|Graveler|Golem",
+    "file": "strange-rock.png",
+    "url": "https://wiki.pokexgames.com/images/3/3b/Strange_Rock.png",
+    "price": 10,
+    "chance": 0.08
+  },
+  {
+    "key": "horseFoot",
+    "name": "Casco Flamejante",
+    "species": "Ponyta|Rapidash",
+    "file": "horse-foot.png",
+    "url": "https://wiki.pokexgames.com/images/3/38/Fire_Horse_Foot.png",
+    "price": 10,
+    "chance": 0.08
+  },
+  {
+    "key": "slowTail",
+    "name": "Cauda de Slowpoke",
+    "species": "Slowpoke|Slowbro",
+    "file": "slow-tail.png",
+    "url": "https://wiki.pokexgames.com/images/7/7e/Slow_Tail.png",
+    "price": 10,
+    "chance": 0.08
+  },
+  {
+    "key": "magnetPart",
+    "name": "Ímã",
+    "species": "Magnemite|Magneton",
+    "file": "magnet-part.png",
+    "url": "https://wiki.pokexgames.com/images/6/6d/Magnet1.png",
+    "price": 10,
+    "chance": 0.08
+  },
+  {
+    "key": "stick",
+    "name": "Alho-poró",
+    "species": "Farfetchd|Farfetch’d|Farfetch'd",
+    "file": "stick.png",
+    "url": "https://wiki.pokexgames.com/images/0/0f/Farfetch%27d_Stick.png",
+    "price": 10,
+    "chance": 0.08
+  },
+  {
+    "key": "dodrioFeather",
+    "name": "Pena de Dodrio",
+    "species": "Doduo|Dodrio",
+    "file": "dodrio-feather.png",
+    "url": "https://wiki.pokexgames.com/images/b/bc/Dodrio_Feather.png",
+    "price": 10,
+    "chance": 0.08
+  },
+  {
+    "key": "sealTail",
+    "name": "Cauda de Foca",
+    "species": "Seel|Dewgong",
+    "file": "seal-tail.png",
+    "url": "https://wiki.pokexgames.com/images/7/73/Seal_Tail.png",
+    "price": 10,
+    "chance": 0.08
+  },
+  {
+    "key": "sludge",
+    "name": "Gosma",
+    "species": "Grimer|Muk",
+    "file": "sludge.png",
+    "url": "https://wiki.pokexgames.com/images/a/ae/Gosme.png",
+    "price": 10,
+    "chance": 0.08
+  },
+  {
+    "key": "shellLock",
+    "name": "Fragmento de Concha",
+    "species": "Shellder|Cloyster",
+    "file": "shell-lock.png",
+    "url": "https://wiki.pokexgames.com/images/9/9b/Locksmith_Of_Shell.png",
+    "price": 10,
+    "chance": 0.08
+  },
+  {
+    "key": "ghostTrace",
+    "name": "Vestígio de Fantasma",
+    "species": "Gastly|Haunter|Gengar",
+    "file": "ghost-trace.png",
+    "url": "https://wiki.pokexgames.com/images/3/3c/Traces_Of_Ghost.png",
+    "price": 10,
+    "chance": 0.08
+  },
+  {
+    "key": "onixTail",
+    "name": "Cauda de Onix",
+    "species": "Onix",
+    "file": "onix-tail.png",
+    "url": "https://wiki.pokexgames.com/images/7/78/Onix_Tail.png",
+    "price": 10,
+    "chance": 0.08
+  },
+  {
+    "key": "hypnosis",
+    "name": "Pêndulo Hipnótico",
+    "species": "Drowzee|Hypno",
+    "file": "hypnosis.png",
+    "url": "https://wiki.pokexgames.com/images/2/2d/Linearly_Guided_Hypnose.png",
+    "price": 10,
+    "chance": 0.08
+  },
+  {
+    "key": "crabClaw",
+    "name": "Garra de Caranguejo",
+    "species": "Krabby|Kingler",
+    "file": "crab-claw.png",
+    "url": "https://wiki.pokexgames.com/images/2/27/Crab_Claw.png",
+    "price": 10,
+    "chance": 0.08
+  },
+  {
+    "key": "tongue",
+    "name": "Língua",
+    "species": "Lickitung",
+    "file": "tongue.png",
+    "url": "https://wiki.pokexgames.com/images/1/1f/Toungue.png",
+    "price": 10,
+    "chance": 0.08
+  },
+  {
+    "key": "venomFlute",
+    "name": "Flauta Venenosa",
+    "species": "Koffing|Weezing",
+    "file": "venom-flute.png",
+    "url": "https://wiki.pokexgames.com/images/9/92/Venom_Flute.png",
+    "price": 10,
+    "chance": 0.08
+  },
+  {
+    "key": "hornDrill",
+    "name": "Chifre Perfurante",
+    "species": "Rhyhorn|Rhydon",
+    "file": "horn-drill.png",
+    "url": "https://wiki.pokexgames.com/images/d/d2/Horn_Drill.png",
+    "price": 10,
+    "chance": 0.08
+  },
+  {
+    "key": "egg",
+    "name": "Ovo de Chansey",
+    "species": "Chansey",
+    "file": "egg.png",
+    "url": "https://wiki.pokexgames.com/images/7/7f/Chansey_Egg.png",
+    "price": 10,
+    "chance": 0.08
+  },
+  {
+    "key": "vines",
+    "name": "Vinhas",
+    "species": "Tangela",
+    "file": "vines.png",
+    "url": "https://wiki.pokexgames.com/images/9/96/Blue_Vines.png",
+    "price": 10,
+    "chance": 0.08
+  },
+  {
+    "key": "kangaEar",
+    "name": "Orelha de Kangaskhan",
+    "species": "Kangaskhan",
+    "file": "kanga-ear.png",
+    "url": "https://wiki.pokexgames.com/images/a/a2/Kanga_Ear.png",
+    "price": 10,
+    "chance": 0.08
+  },
+  {
+    "key": "seahorseTail",
+    "name": "Cauda de Cavalo-marinho",
+    "species": "Horsea|Seadra",
+    "file": "seahorse-tail.png",
+    "url": "https://wiki.pokexgames.com/images/9/92/Seahorse_Tail.png",
+    "price": 10,
+    "chance": 0.08
+  },
+  {
+    "key": "fin",
+    "name": "Barbatana",
+    "species": "Goldeen|Seaking",
+    "file": "fin.png",
+    "url": "https://wiki.pokexgames.com/images/5/52/Fish_Fin.png",
+    "price": 10,
+    "chance": 0.08
+  },
+  {
+    "key": "gemStar",
+    "name": "Gema Estelar",
+    "species": "Staryu|Starmie",
+    "file": "gem-star.png",
+    "url": "https://wiki.pokexgames.com/images/e/eb/Gem_Star.png",
+    "price": 10,
+    "chance": 0.08
+  },
+  {
+    "key": "mimic",
+    "name": "Roupa de Mímico",
+    "species": "Mr. Mime|Mr.Mime",
+    "file": "mimic.png",
+    "url": "https://wiki.pokexgames.com/images/1/1a/Mimic_Clothes.png",
+    "price": 10,
+    "chance": 0.08
+  },
+  {
+    "key": "scythe",
+    "name": "Foice",
+    "species": "Scyther",
+    "file": "scythe.png",
+    "url": "https://wiki.pokexgames.com/images/2/2f/Scythe1.png",
+    "price": 10,
+    "chance": 0.08
+  },
+  {
+    "key": "electricAppendage",
+    "name": "Apêndice Elétrico",
+    "species": "Electabuzz",
+    "file": "electric-appendage.png",
+    "url": "https://wiki.pokexgames.com/images/1/15/Electric_Tail.png",
+    "price": 10,
+    "chance": 0.08
+  },
+  {
+    "key": "magmaFoot",
+    "name": "Pata de Magma",
+    "species": "Magmar",
+    "file": "magma-foot.png",
+    "url": "https://wiki.pokexgames.com/images/1/11/Magma_Foot.png",
+    "price": 10,
+    "chance": 0.08
+  },
+  {
+    "key": "pinsirHorn",
+    "name": "Chifre de Pinsir",
+    "species": "Pinsir",
+    "file": "pinsir-horn.png",
+    "url": "https://wiki.pokexgames.com/images/d/de/Pinsir_Horn.png",
+    "price": 10,
+    "chance": 0.08
+  },
+  {
+    "key": "bullTail",
+    "name": "Cauda de Touro",
+    "species": "Tauros",
+    "file": "bull-tail.png",
+    "url": "https://wiki.pokexgames.com/images/1/1c/Bull_Tail.png",
+    "price": 10,
+    "chance": 0.08
+  },
+  {
+    "key": "magikarpFin",
+    "name": "Barbatana de Magikarp",
+    "species": "Magikarp",
+    "file": "magikarp-fin.png",
+    "url": "https://wiki.pokexgames.com/images/c/c6/Magikarp_Fin.png",
+    "price": 10,
+    "chance": 0.08
+  },
+  {
+    "key": "gyaradosTail",
+    "name": "Cauda de Gyarados",
+    "species": "Gyarados",
+    "file": "gyarados-tail.png",
+    "url": "https://wiki.pokexgames.com/images/e/e3/Gyarados_Tail.png",
+    "price": 10,
+    "chance": 0.08
+  },
+  {
+    "key": "bigFur",
+    "name": "Pelo de Snorlax",
+    "species": "Snorlax",
+    "file": "big-fur.png",
+    "url": "https://wiki.pokexgames.com/images/d/d6/Big_Eater_Fur.png",
+    "price": 10,
+    "chance": 0.08
+  },
+  {
+    "key": "dragonTail",
+    "name": "Cauda de Dragão",
+    "species": "Dratini|Dragonair|Dragonite",
+    "file": "dragon-tail.png",
+    "url": "https://wiki.pokexgames.com/images/8/88/Dragon_Tail.png",
+    "price": 10,
+    "chance": 0.08
+  }
+]

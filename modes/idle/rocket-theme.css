@@ -1,0 +1,162 @@
+/* Shared Rocket palette for Idle menus. Layout, species colors and numerical charts stay independent. */
+body.idle-native-mode{--rocket-bg:#1e1b25;--rocket-panel:#302630;--rocket-raised:#3c2b39;--rocket-edge:#805064;--rocket-red:#d72e56;--rocket-magenta:#a13c7b;--rocket-yellow:#ffd364;--rocket-text:#f6e6ef;--rocket-muted:#c9abbc}
+body.idle-native-mode .idle-window:not(#idle-safari){--menu-surface:var(--rocket-panel);--menu-muted:var(--rocket-muted);--menu-accent:#ff658b;background:var(--rocket-bg)!important;border-color:#b34d6b!important;border-top-color:#ed718f!important;color:var(--rocket-text)!important;box-shadow:0 15px 45px #0008,inset 0 1px #ffffff0b!important}
+body.idle-native-mode .idle-window:not(#idle-safari)>:is(header,.mhead){background:#181720!important;border-bottom-color:#c33a60!important}
+body.idle-native-mode .idle-window:not(#idle-safari)>header h2{color:#fff0f6!important}
+body.idle-native-mode .idle-window:not(#idle-safari)>header small{color:#ff6c8f!important}
+body.idle-native-mode .idle-window:not(#idle-safari)>header p{color:#d1afc0!important}
+body.idle-native-mode .idle-window:not(#idle-safari) :is(.ip-help,.is-help,.iw-subtitle,.ip-empty,.ih-setup-help,.ip-analysis-caption){color:var(--rocket-muted)!important}
+/* Controls keep their existing sizes and click targets. */
+body.idle-native-mode .idle-window:not(#idle-safari) button{background:#6f2945!important;border-color:#b75878!important;color:#fff0f6!important;border-radius:4px!important;box-shadow:inset 0 1px #ffffff1f,inset 0 -2px #0004!important;transition:filter .12s}
+body.idle-native-mode .idle-window:not(#idle-safari) button:hover:not(:disabled){filter:brightness(1.13)}
+body.idle-native-mode .idle-window:not(#idle-safari) button:active:not(:disabled){box-shadow:inset 0 2px #0004!important}
+body.idle-native-mode .idle-window:not(#idle-safari)>header>button{background:#40232f!important;border-color:#865064!important;color:#fce3ee!important;box-shadow:none!important}
+body.idle-native-mode .idle-window:not(#idle-safari) :is(input:not([type=checkbox]):not([type=range]),select,textarea){background:#211923!important;border-color:#89516d!important;color:#f5e2ee!important;caret-color:#ffc9db}
+body.idle-native-mode .idle-window:not(#idle-safari) input::placeholder{color:#b99aaa;opacity:1}
+body.idle-native-mode .idle-window:not(#idle-safari) input[type=checkbox]{accent-color:#e44871}
+body.idle-native-mode .idle-window:not(#idle-safari) :is(button,input,select,summary):focus-visible{outline:2px solid var(--rocket-yellow)!important;outline-offset:2px}
+body.idle-native-mode .idle-window:not(#idle-safari) :is(.ip-tabs,.idle-capture-tabs,.iw-shell>nav,.iw-tasks-nav,.iw-nursery-nav,.iw-formations-nav,.is-evo-sidebar,.ie-sidebar,.il-dex-nav,.il-collection-nav){background:#201922!important;border-color:#654052!important}
+body.idle-native-mode .idle-window:not(#idle-safari) :is(.ip-tabs,.idle-capture-tabs,.iw-shell>nav,.iw-tasks-nav,.iw-nursery-nav,.iw-formations-nav,.is-evo-sidebar,.ie-sidebar,.il-dex-nav,.il-collection-nav) button{background:#3c2536!important;border-color:#754358!important;color:#ecc7d8!important;box-shadow:none!important}
+/* Neutral cards: semantic badges, condition meters and IV colors are not recolored. */
+body.idle-native-mode .idle-window:not(#idle-safari) :is(.ip-analysis-card,.ip-analysis-traits>section,.ip-analysis-skills,.ip-analysis-next,.ip-stat-group,.ip-genetics-summary,.ip-genetic-cards>section,.ip-profile-preview,.ip-item-detail,.ip-resource-card,.ip-stock-card,.ip-equipment-slot,.ip-management,.ip-training-card,.ip-inventory-layout>.ip-empty,.ipc-detail,.ipc-comparison,.ipc-comparison-columns>article,.is-evo-identity,.is-evo-pair,.is-evo-requirements,.is-shop-card,.is-automation-settings,.ih-area-detail,.ih-hunt-detail,.ih-setup-card,.ih-report-section,.ih-wave,.ich-entry,.ich-summary>div,.iw-section,.iw-region,.iw-quest-card,.iw-service-card,.iw-task-card,.iw-task-empty,.iw-task-worker,.iw-egg-card,.iw-egg-empty,.iw-nursery-slots>div,.iw-saved-formation,.iw-formation-preview,.iw-profile-hero,.iw-profile-editor,.iw-profile-metrics>div,.iw-profile-badges,.iw-badge-case-card,.iw-gym-detail,.iw-gym-hero,.iw-gym-prize,.iw-gym-node,.iw-challenge-card,.ie-detail,.il-breeding,.il-selected-pair>button,.il-parent-pair>article,.il-skills-grid>article,.il-goals>article){background:var(--rocket-panel)!important;border-color:#714859!important;color:var(--rocket-text)!important;box-shadow:none!important}
+body.idle-native-mode .idle-window:not(#idle-safari) :is(.ip-selection-entry>.ip-selection-card,.ipc-grid>.ipc-cell,.is-evo-members>button,.is-shop-grid>.is-shop-card,.ip-item-grid>.ip-button,.ih-selection-grid>.ih-selection-card,.ie-grid>button,.ie-card,.iw-map-nodes>button,.iw-gym-nodes>button,.iw-task-partners>button,.iw-profile-partner-options>button,.il-breeding-options>button){background:#392a36!important;border-color:#805468!important;box-shadow:none!important;color:#fae9f1!important}
+body.idle-native-mode .idle-window:not(#idle-safari) :is(.ip-selection-tools>nav,.ipc-tools,.is-shop-sidebar,.ip-inventory-sidebar,.is-shop-layout>nav){background:#211a23!important;border-color:#674153!important}
+body.idle-native-mode .idle-window:not(#idle-safari) :is(.ip-selection-tools>nav,.is-shop-sidebar,.is-shop-layout>nav) button{background:#44263a!important;color:#edc9d8!important}
+body.idle-native-mode .idle-window:not(#idle-safari) :is(.ip-detail-body,.ih-content,.iw-content,.is-shop-content,.ie-main){color:#ead5e1}
+body.idle-native-mode .idle-window:not(#idle-safari) :is(.ip-sheet-identity,.is-evo-actions,.iw-profile-partner-selected,.iw-profile-trainers,.iw-gym-identity){background:#38212e!important;border-color:#88516b!important}
+body.idle-native-mode .idle-window:not(#idle-safari) :is(.ip-analysis-stat-grid>div,.ip-stat-grid>div,.ip-analysis-modifiers,.ipc-iv-comparison>div,.iw-formation-member,.iw-profile-name-row,.iw-field,.ih-report-metrics>div,.ih-report-rows>div){background:#251e28!important;border-color:#5c3c4d!important}
+body.idle-native-mode .idle-window:not(#idle-safari) :is(.ip-analysis-heading h4,.is-evo-requirements h3,.iw-section h3,.ih-report-section h4,.is-shop-card h3,.iw-task-card h3,.iw-egg-card h3,.iw-saved-formation h4,.ie-detail h3){color:#ffe092!important}
+body.idle-native-mode .idle-window:not(#idle-safari) :is(.ip-selection-name>span,.ipc-card-copy>small,.is-evo-members small,.is-evo-pair small,.is-evo-identity small,.iw-task-card small,.iw-egg-card small,.ip-analysis-heading>small,.ip-analysis-stat-grid span){color:#d4b7c5!important}
+/* Selection and primary actions are red; supporting actions remain magenta. */
+body.idle-native-mode .idle-window:not(#idle-safari) :is(.is-shop-row,.is-pokemon-sale,.is-sale-bar,.is-history-entry,.is-history-summary>div,.ifn-dex-detail,.ifn-dex-tile,.ifn-dex-stones,.ifn-contract,.ifn-offline-section,.ifn-offline-summary>div,.ifn-offline-member,.ie-card,.iw-tasks-heading,.iw-nursery-help){background:var(--rocket-panel)!important;border-color:#714859!important;color:var(--rocket-text)!important}
+body.idle-native-mode .idle-window:not(#idle-safari) :is(.is-shop-row h3,.ifn-dex-detail h3,.ifn-dex-detail h4,.ifn-contract h3){color:#ffe093!important}
+body.idle-native-mode .idle-window:not(#idle-safari) :is(.is-shop-row p,.is-shop-row small,.ifn-dex-detail p,.ifn-dex-detail small,.ifn-dex-tile small,.ifn-dex-tile>span){color:#d0b5c4!important}
+body.idle-native-mode .idle-window:not(#idle-safari) :is(.ip-analysis-traits>div,.is-shop-quantities,.is-sale-controls,.iw-profile-metrics>article){background:#302630!important;border-color:#714859!important}
+body.idle-native-mode #idle-party[data-view=detail] .ip-analysis-moves>div{background:#251f2b!important}
+body.idle-native-mode #idle-party[data-view=detail] .ip-tabs>.ip-button:is([aria-pressed=true],[aria-selected=true]){background:#d72e56!important;border-color:#ff8aa6!important;color:#fff2f7!important}
+body.idle-native-mode .idle-window:not(#idle-safari) .ifn-dex-tile[aria-pressed=true]{background:#692940!important;border-color:#ff7a9c!important}
+body.idle-native-mode .idle-window:not(#idle-safari) :is(button[aria-pressed=true],button[aria-selected=true],.ip-primary,.is-primary,.idle-capture-button,.iw-button.primary,.iw-challenge-start){background:var(--rocket-red)!important;border-color:#ff8aa6!important;color:#fff2f7!important}
+body.idle-native-mode .idle-window:not(#idle-safari) :is(.ip-tabs,.iw-shell>nav,.iw-tasks-nav,.iw-nursery-nav,.iw-formations-nav,.ie-sidebar,.ip-selection-tools>nav,.is-shop-sidebar,.is-shop-layout>nav,.is-evo-sidebar) button:is([aria-pressed=true],[aria-selected=true]){background:#d72e56!important;border-color:#ff8aa6!important;color:#fff2f7!important}
+body.idle-native-mode .idle-window:not(#idle-safari) :is(.ipc-grid>.ipc-cell,.is-evo-members>button,.ih-selection-grid>.ih-selection-card,.iw-gym-nodes>button,.iw-map-nodes>button,.ie-grid>button,.ie-card,.il-breeding-options>button)[aria-pressed=true]{background:#692940!important;border-color:#ff7a9c!important;box-shadow:inset 3px 0 #ff658b!important}
+body.idle-native-mode .idle-window:not(#idle-safari) :is(.ip-group-count,.ih-selection-tag,.iw-task-duration,.ie-chip){background:#563046!important;color:#f9cade!important}
+/* Favorite/lock and requirement states retain their meanings. */
+body.idle-native-mode .idle-window:not(#idle-safari) .idle-protection-tools button[aria-pressed=true]{background:#695126!important;border-color:#e9c471!important;color:#ffe99e!important}
+body.idle-native-mode .idle-window:not(#idle-safari) .is-requirements li{background:#543d2c!important;border-color:#ac7c4b!important;color:#ffe1a0!important}
+body.idle-native-mode .idle-window:not(#idle-safari) .is-requirements li[data-ready=true]{background:#214735!important;border-color:#54856b!important;color:#ace7c0!important}
+body.idle-native-mode .idle-window:not(#idle-safari) :is(.ip-notice,.iw-notice,.is-notice){background:#512b3b!important;border-color:#a45773!important;color:#ffd3e3!important}
+body.idle-native-mode .idle-window:not(#idle-safari)>footer{background:#1a1720!important;border-color:#724153!important;color:#dcbacc}
+/* Settings is a native menu rather than an idle-window. */
+body.idle-native-mode #stage #menu.idle-settings{background:#211c27!important;border-color:#b34d6b!important;color:#f4e6ef!important}
+body.idle-native-mode #stage #menu.idle-settings :is(.mhead,.mtabs,.mfoot){background:#191720!important;border-color:#75465c!important}
+body.idle-native-mode #stage #menu.idle-settings :is(.mrow,.help,.idle-settings-data>div:not(:empty)){background:#342632!important;border-color:#7d4d64!important;color:#e4cad8!important}
+body.idle-native-mode #stage #menu.idle-settings :is(button,.mbtn){background:#7b2c49!important;border-color:#d06b88!important;color:#fff0f6!important;border-radius:4px!important}
+body.idle-native-mode #stage #menu.idle-settings :is(button.on,button[aria-selected=true],button[aria-pressed=true]){background:#d72e56!important;border-color:#ff8aa6!important}
+body.idle-native-mode #stage #menu.idle-settings :is(h2,h3,h4){color:#ffe093!important}
+body.idle-native-mode #stage #menu.idle-settings :is(p,label,.credit){color:#d1b2c3!important}
+body.idle-native-mode #stage #menu.idle-settings :is(input:not([type=range]),select){background:#211923!important;border-color:#87506a!important;color:#f2dce9!important}
+body.idle-native-mode #stage #menu.idle-settings{box-shadow:inset 0 1px #ffffff12,0 0 0 2px #50263b,0 12px 35px #0008!important;scrollbar-color:#a6567b #211923}
+body.idle-native-mode #stage #menu.idle-settings :is(.mgroup,.help,kbd){background:#342632!important;border-color:#7d4d64!important;color:#e4cad8!important}
+body.idle-native-mode #stage #menu.idle-settings :is(.ml,.mt,.comfort-choice,.key-setting,.mv,.video-setup>b){color:#f1d6e5!important}
+body.idle-native-mode #stage #menu.idle-settings :is(.ms,.credit,.video-setup p){color:#c6a6b9!important}
+body.idle-native-mode #stage #menu.idle-settings :is(button,.mbtn,.mbtn.soft,.mtab,select,[data-bind-key]){box-shadow:inset 0 1px #ffffff20,inset 0 -2px #0004!important}
+body.idle-native-mode #stage #menu.idle-settings .sw span{background:#513343!important;border-color:#95627c!important}
+body.idle-native-mode #stage #menu.idle-settings .sw input:checked+span{background:#cf375f!important;border-color:#f185a4!important}
+body.idle-native-mode #stage #menu.idle-settings .sw span:after{background:#f5d7e4!important;box-shadow:inset 0 1px #fff8,0 1px 2px #0004!important}
+body.idle-native-mode #stage #menu.idle-settings #mclose{background:#713147!important;border-color:#c47793!important;color:#ffe3ee!important;box-shadow:none!important}
+body.idle-native-mode .is-supply-picker{background:#27212d!important;border-color:#b35a7d!important;color:#f5dfeb!important}
+body.idle-native-mode .is-supply-picker .is-caught-card{background:#392a36!important;border-color:#89556d!important}
+body.idle-native-mode .is-supply-picker :is(header,p,small){color:#d7b9cb}
+/* Arena navigation and synergy HUD share the Rocket surfaces. Type hues remain semantic. */
+body.idle-native-mode #idle-hunts .ih-search-scope{flex:none;margin:0 0 8px;padding:7px 9px;background:#392635;border:1px solid #785069;border-radius:5px;font-size:10px;line-height:1.5;color:#ffcf68}
+body.idle-native-mode #idle-hunts .ih-search-scope[hidden]{display:none}
+body.idle-native-mode #idle-hunts .ih-browser-region{font-size:10px;color:#ed9cbb;margin:3px 0 7px}
+body.idle-native-mode #idle-hunts .ih-browser-species>div[data-match=true]{border-color:#ffcf68;background:#49382d}
+body.idle-native-mode #idle-hunts[data-view=choose] .ih-browser-detail>button{position:sticky;bottom:0;z-index:2;flex-shrink:0;box-shadow:0 -6px 10px #211c27}
+body.idle-native-mode #stage .idle-capture-focus-settings{display:grid;gap:9px;padding:10px 0;min-width:0}
+body.idle-native-mode #stage .idle-capture-focus-settings>label{display:flex;gap:7px;align-items:center;font-size:10px;line-height:1.5;margin:0}
+body.idle-native-mode #stage .idle-capture-focus-settings>label:first-child{align-items:stretch;flex-direction:column}
+body.idle-native-mode #stage .idle-capture-focus-settings select{min-width:0;width:100%;box-sizing:border-box;background:#17131e;color:#ffe0ed;border:1px solid #995573;border-radius:4px;padding:7px;font:11px 'Trebuchet MS'}
+body.idle-native-mode #stage .idle-capture-focus-settings input{accent-color:#ec386b;flex:none}
+body.idle-native-mode #stage .idle-capture-focus-settings small{font-size:9px;color:#d9b9cc;line-height:1.5}
+body.idle-native-mode #stage .is-caught-filter{width:100%;box-sizing:border-box;margin:0 0 8px;padding:7px;background:#17131e;border:1px solid #995573;border-radius:4px;color:#ffe0ed;font:11px 'Trebuchet MS'}
+body.idle-native-mode #stage .is-caught-list{max-height:min(300px,36vh)}
+body.idle-native-mode #stage #idle-quick-supplies:has(.is-caught-list){max-height:calc(100vh - 120px);overflow-y:auto;scrollbar-width:thin}
+body.idle-native-mode #stage .is-caught-card time{font-size:8px;color:#d8a7bf}
+body.idle-native-mode #stage .is-caught-card[data-shiny=true]{border-color:#ffcf68!important;background:#443528!important}
+body.idle-native-mode #stage .is-caught-card[role=button]{cursor:pointer}
+body.idle-native-mode #stage .is-caught-card[role=button]:hover{background:#613047!important;border-color:#ec7ba2!important}
+body.idle-native-mode #stage .is-caught-card[role=button]:focus-visible{outline:2px solid #ffcf68;outline-offset:-2px}
+body.idle-native-mode #stage .is-caught-empty{padding:12px 4px;color:#f5dfeb;font-size:11px;line-height:1.5}
+body.idle-native-mode #stage .is-caught-empty b{color:#ffcf68}
+body.idle-native-mode #stage .is-caught-empty p{font-size:10px;color:#d9b9cc;margin:5px 0}
+body.idle-native-mode #stage .is-caught-focus{border-top:1px solid #785069;margin-top:8px;padding-top:8px}
+body.idle-native-mode #stage .is-caught-focus summary{font-size:10px;color:#ffcf68;cursor:pointer;line-height:1.5}
+body.idle-native-mode #stage .is-caught-records{width:100%;margin-top:8px;padding:7px;background:#71304e;color:#ffe0ed;border:1px solid #bd567c;border-radius:4px;font:10px 'Trebuchet MS'}
+body.idle-native-mode #stage .is-supply-hud{background:#211c27!important;border-color:#934662!important;box-shadow:inset 0 1px #f493b523,0 4px 14px #0007!important;border-radius:8px}
+body.idle-native-mode #stage .is-supply-chip{background:#392635!important;border-color:#785069!important;color:#ffe0ed!important;border-radius:5px}
+body.idle-native-mode #stage .is-supply-chip b{color:#ffcf68}
+body.idle-native-mode #stage .is-supply-chip:hover,body.idle-native-mode #stage .is-supply-chip[aria-expanded=true]{background:#71304e!important;border-color:#ef82a6!important}
+body.idle-native-mode #stage .is-caught-chip{background:#922847!important;border-color:#f26c97!important}
+body.idle-native-mode #stage .is-supply-chip[data-empty=true]{border-color:#f07585!important;color:#ffadb9!important}
+body.idle-native-mode #stage .is-supply-chip[data-empty=true] b{color:#ffadb9}
+body.idle-native-mode #stage .is-supply-picker{background:#211c27!important;border-color:#bd567c!important;border-radius:8px;color:#f5dfeb!important}
+body.idle-native-mode #stage .is-supply-picker header>b{color:#ffcf68}
+body.idle-native-mode #stage .is-supply-picker header button{background:#513044!important;border-color:#ad5d7f!important;color:#ffdaeb!important;border-radius:4px}
+body.idle-native-mode #stage .is-supply-picker>nav{background:#17131e!important}
+body.idle-native-mode #stage .is-supply-picker>nav button[aria-pressed=true]{background:#d72e56!important;color:#fff0f5!important}
+body.idle-native-mode #stage .is-supply-picker-list>button,body.idle-native-mode #stage .is-caught-card{background:#362532!important;border-color:#80506a!important}
+body.idle-native-mode #stage .is-supply-picker-list>button:hover:not(:disabled),body.idle-native-mode #stage .is-supply-picker-list>button[aria-pressed=true]{background:#613047!important;border-color:#ec7ba2!important}
+body.idle-native-mode #stage .is-supply-picker-list b,body.idle-native-mode #stage .is-caught-card b{color:#fff0f6}
+body.idle-native-mode #stage .is-supply-picker-list span small,body.idle-native-mode #stage .is-caught-card small,body.idle-native-mode #stage .is-supply-picker .is-supply-picker-help{color:#d9b9cc}
+body.idle-native-mode #stage .is-supply-picker-list>button>small{color:#ffcf68}
+body.idle-native-mode #stage :is(.is-supply-picker-list,.is-caught-list){scrollbar-color:#c15d88 #211c27}
+body.idle-native-mode #stage .is-synergies header{gap:5px}
+body.idle-native-mode #stage .is-synergies header h3{flex:1;min-width:0}
+body.idle-native-mode #stage .is-synergies-collapse{width:21px;height:21px;flex:none;padding:0!important;font:16px/1 Arial!important;background:#513044!important;border:1px solid #ad5d7f!important;border-radius:4px;color:#ffdaeb!important;cursor:pointer}
+body.idle-native-mode #stage .is-synergies :is(.is-synergies-collapse,.is-synergies-reset):focus-visible{outline:2px solid #ffcf68;outline-offset:2px}
+body.idle-native-mode #stage .is-synergies.is-synergies-collapsed{min-height:0!important}
+body.idle-native-mode #stage .is-synergies.is-synergies-collapsed header{margin-bottom:0!important}
+body.idle-native-mode #stage .is-synergies.is-synergies-collapsed #traits{display:none!important}
+body.idle-native-mode #stage .is-navigation{background:#211c27!important;border-color:#934662!important;border-top-color:#ef386a!important;box-shadow:inset 0 1px #f493b523,0 4px 14px #0007!important}
+body.idle-native-mode #stage .is-navigation>button{background:transparent!important;border-color:transparent!important;color:#ebd5e1!important}
+body.idle-native-mode #stage .is-navigation>button:hover{background:#4b293d!important;border-color:#a35a7a!important;color:#ffe3a0!important}
+body.idle-native-mode #stage .is-navigation>button[aria-pressed=true]{background:#d72e56!important;border-color:#ff83a4!important;color:#fff0f5!important;box-shadow:inset 0 1px #fff3,inset 0 -2px #0004}
+body.idle-native-mode #stage .is-navigation .is-action #combatbtn{background:#d72e56!important;border-color:#ff83a4!important;color:#fff0f5!important;box-shadow:inset 0 1px #fff3,inset 0 -2px #0004!important;text-shadow:0 1px #681b35!important}
+body.idle-native-mode #stage .is-navigation .is-action #combatbtn:hover{background:#ed3d6b!important}
+body.idle-native-mode #stage .is-synergies{background:#211c27!important;border-color:#934662!important;box-shadow:inset 0 1px #f493b523,0 4px 12px #0005!important;color:#f3dce8!important}
+body.idle-native-mode #stage .is-synergies h3{color:#ffcf68!important}
+body.idle-native-mode #stage .is-synergies-reset{background:#513044!important;border:1px solid #ad5d7f!important;color:#ffdaeb!important}
+body.idle-native-mode #stage .is-synergies #traits .tr{background:#302630!important;border-color:#70465e!important;color:#e4cbd9!important}
+body.idle-native-mode #stage .is-synergies #traits .tr.on{background:color-mix(in srgb,var(--c) 20%,#302630)!important;border-color:#ffcf68!important}
+body.idle-native-mode #stage .is-synergies #traits .tr .nm{color:#ead3e0!important}
+body.idle-native-mode #stage .is-synergies #traits .tr .ct{color:#bda3b5!important}
+body.idle-native-mode #stage .is-synergies #traits .tr.on .ct{color:#ffcf68!important}
+body.idle-native-mode #stage .is-synergies #traits .tr:hover{background:#503043!important;border-color:#eb80a5!important}
+/* A typed quantity and one compact receipt keep bulk trading readable. */
+body.idle-native-mode #idle-shop .is-shop-auto-loot{grid-column:1/-1;display:flex;align-items:center;gap:12px;background:#302630;border:1px solid #a65b7b;border-radius:6px;padding:12px;margin:0}
+body.idle-native-mode #idle-shop .is-shop-auto-loot input{flex:none;width:18px;height:18px;accent-color:#ec386b}
+body.idle-native-mode #idle-shop .is-shop-auto-loot span{display:grid;gap:5px;min-width:0}
+body.idle-native-mode #idle-shop .is-shop-auto-loot b{font-size:12px;color:#ffcf68}
+body.idle-native-mode #idle-shop .is-shop-auto-loot small{font-size:10px;line-height:1.5;color:#e1c9d6}
+body.idle-native-mode #idle-shop .is-shop-quantities{flex-wrap:wrap}
+body.idle-native-mode #idle-shop .is-shop-quantities input{width:105px;min-width:75px;box-sizing:border-box;padding:7px 9px!important;text-align:center;font-size:12px}
+body.idle-native-mode #idle-shop .is-shop-notice{display:flex;align-items:center;gap:12px;padding:9px 12px;margin:0;border:1px solid #65ad8b;border-radius:6px;background:#223c32;color:#c2f3d7;min-width:0}
+body.idle-native-mode #idle-shop .is-shop-notice>span{flex:1;min-width:0;font-size:11px;line-height:1.5;overflow-wrap:anywhere;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden}
+body.idle-native-mode #idle-shop .is-shop-notice>button{flex:none;padding:4px 7px!important;margin:0!important;font-size:11px!important}
+/* Quick audio belongs to the Idle palette, including its native range controls. */
+body.idle-native-mode #stage #quickVolumePanel{background:#211c27!important;border-color:#bd567c!important;color:#ffe0ed!important;box-shadow:inset 1px 1px #f493b530,inset -1px -1px #100e16,0 0 0 3px #15121c,5px 6px #0006!important;border-radius:5px}
+body.idle-native-mode #stage #quickVolumePanel label{color:#ffe0ed!important}
+body.idle-native-mode #stage #quickVolumePanel output{color:#ffcf68!important}
+body.idle-native-mode #stage #quickVolumePanel input{background:linear-gradient(90deg,#ec386b var(--volume),#503447 var(--volume))!important;box-shadow:0 2px #100d18!important;accent-color:#ec386b}
+body.idle-native-mode #stage #quickVolumePanel input::-webkit-slider-thumb{background:#ffcf68!important;border-color:#ffe5a0!important;box-shadow:inset 1px 1px #fff2bc,1px 2px #100d18!important}
+body.idle-native-mode #stage #quickVolumePanel input::-moz-range-thumb{background:#ffcf68!important;border-color:#ffe5a0!important;box-shadow:1px 2px #100d18!important}
+body.idle-native-mode #stage #quickVolumePanel .quick-volume-mute{background:#d72e56!important;border-color:#ff7fa0!important;color:#fff0f5!important;border-radius:4px!important;box-shadow:inset 0 1px #ffffff30,inset 0 -2px #0004!important}
+body.idle-native-mode #stage #quickVolumePanel .quick-volume-mute:hover{background:#ed3d6b!important}
+body.idle-native-mode #stage #quickVolumePanel :is(input,button):focus-visible{outline:2px solid #ffcf68!important}
+/* The arena quick card uses the same surfaces without changing its battle data. */
+body.idle-native-mode #tip:has(.idle-tip-compact){background:#251d2a!important;border-color:#ac5679!important;box-shadow:0 10px 30px #0008!important}
+body.idle-native-mode #tip .idle-tip-compact .um{background:#382735!important;border-color:#87546b!important}
+body.idle-native-mode #tip .idle-tip-compact .sts>div{background:#362936!important;border-color:#654456!important}
+body.idle-native-mode #tip .idle-tip-passive{background:#463127!important;border-color:#9c754444!important}
+body.idle-native-mode #tip .idle-tip-moves>div{background:#30232f!important}
+@media(prefers-reduced-motion:reduce){body.idle-native-mode .idle-window:not(#idle-safari) button{transition:none!important}}

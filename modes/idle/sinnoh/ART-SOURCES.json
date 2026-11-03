@@ -1,0 +1,184 @@
+{
+  "tool": "Built-in image generation",
+  "date": "2026-10-27",
+  "prompts": [
+    [
+      "roark",
+      "Oreburgh geological mining gym: massive weathered coal rock strata, quarry lamps, mine tracks and fossils along edges, warm amber gray stone, flat broad central ground."
+    ],
+    [
+      "gardenia",
+      "Eterna botanical gym: lush layered forest greenhouse, ancient trees, emerald ferns and pink flowers around edges, warm sunlight, flat mossy stone clearing center."
+    ],
+    [
+      "maylene",
+      "Veilstone fighting dojo: aged red wooden beams, hanging training ropes and padded pillars, mountains visible through open sides, warm red cedar and cool blue stone, flat central courtyard."
+    ],
+    [
+      "crasher-wake",
+      "Pastoria aquatic gym: grand indoor turquoise water channels at edges with stone bridges and tropical foliage, rippling reflections, empty broad flat central slate platform."
+    ],
+    [
+      "fantina",
+      "Hearthome ghost theater: abandoned elegant purple opera stage, velvet curtains at outer edges, crooked candle stands and ornate old arches, violet moonlight, broad empty center stage."
+    ],
+    [
+      "byron",
+      "Canalave steel foundry gym: colossal riveted weathered iron beams and industrial lifts at edges, aged bronze machinery with amber lamps, blue gray metal and warm gold, flat steel stone center."
+    ],
+    [
+      "candice",
+      "Snowpoint ice temple gym: translucent ice walls and snow laden pines around edges, frosty stone pillars, clear cyan northern daylight, broad flat icy stone center."
+    ],
+    [
+      "volkner",
+      "Sunyshore electric lighthouse gym: maritime electrical station with old copper coils and ocean windows, glowing gold cables integrated into walls, navy and amber palette, broad empty center."
+    ],
+    [
+      "uxie",
+      "Lake Acuity hidden cavern: pale yellow crystals along edges, still reflective lake, frosty rock shelves, wisdom sanctuary, soft ochre cyan palette."
+    ],
+    [
+      "mesprit",
+      "Lake Verity island sanctuary: pink blooming ancient tree and tranquil reflective lake edges, fern covered ruins, rose dawn, empty level central stone."
+    ],
+    [
+      "azelf",
+      "Lake Valor secret cavern: blue crystals and powerful waterfalls at edges, deep azure cavern and cyan reflections, flat central stone."
+    ],
+    [
+      "dialga",
+      "Spear Pillar time sanctuary: ancient broken tall stone columns with diamond blue veins, distant blue celestial clocklike aurora, mountain sky, broad flat blue-gray stone center."
+    ],
+    [
+      "palkia",
+      "Spear Pillar space sanctuary: pearlescent pink marble ruins, warped distant cosmic sky and floating arch fragments, rose violet stars, broad solid flat pearl stone center."
+    ],
+    [
+      "heatran",
+      "Stark Mountain deep volcanic chamber: black basalt shelves, orange molten metal waterfalls at edges, rusty iron ore formations, broad dark solid rock center."
+    ],
+    [
+      "regigigas",
+      "Snowpoint ancient temple: colossal moss covered stone pillars with yellow carved bands at edges, cold blue light, old green gray floor, empty center."
+    ],
+    [
+      "giratina",
+      "Distortion World: inverted floating ruins and twisted stone archways around edges, charcoal and crimson dimensional sky, surreal distant waterfalls defying gravity, broad solid dark slate platform center."
+    ],
+    [
+      "cresselia",
+      "Fullmoon Island sanctuary: crescent moon above shimmering sea, pale lavender flowers and curved aged stone ruins, soft gold violet night, flat central ground."
+    ],
+    [
+      "phione",
+      "Hidden reef lagoon: translucent blue shallow pools and coral at edges, soft sea breeze, aqua and mint sunlight, flat central weathered stone."
+    ],
+    [
+      "manaphy",
+      "Temple of the Sea: luminous deep ocean palace with azure glasslike ruins, glowing coral and underwater light shafts, turquoise and sapphire, solid flat center."
+    ],
+    [
+      "darkrai",
+      "Newmoon Island: gnarled dark trees and ruined black stone sanctuary at edges, deep indigo shadows, narrow crimson moonlight accents, empty solid dark ground center."
+    ],
+    [
+      "shaymin",
+      "Flower Paradise: abundant pink gracidea flower beds along edges, vivid green foliage, bright gentle spring sky, broad empty flat central garden stone."
+    ],
+    [
+      "arceus",
+      "Hall of Origin: ethereal white gold ancient columns at edges above clouds, subtle luminous rainbow sky and sacred light, broad solid pearl stone platform center."
+    ]
+  ],
+  "files": [
+    {
+      "key": "roark",
+      "path": "C:/Users/os_ap/.codex/generated_images/01a143cc-e15d-7e93-8b77-825e37488153/exec-6195992f-b639-4767-a964-62ed84088a42.png"
+    },
+    {
+      "key": "fantina",
+      "path": "C:/Users/os_ap/.codex/generated_images/01a143cc-e15d-7e93-8b77-825e37488153/exec-f9cdcb5a-7123-476f-a741-ee745914a41a.png"
+    },
+    {
+      "key": "gardenia",
+      "path": "C:/Users/os_ap/.codex/generated_images/01a143cc-e15d-7e93-8b77-825e37488153/exec-2cf422ac-f9ff-41e1-8f77-3cc98402e23b.png"
+    },
+    {
+      "key": "byron",
+      "path": "C:/Users/os_ap/.codex/generated_images/01a143cc-e15d-7e93-8b77-825e37488153/exec-d13463f6-bcc3-4f14-a456-efa80d8ed03d.png"
+    },
+    {
+      "key": "maylene",
+      "path": "C:/Users/os_ap/.codex/generated_images/01a143cc-e15d-7e93-8b77-825e37488153/exec-2a57fc51-b694-48f9-ac6b-65f4acc441d6.png"
+    },
+    {
+      "key": "candice",
+      "path": "C:/Users/os_ap/.codex/generated_images/01a143cc-e15d-7e93-8b77-825e37488153/exec-30f6f374-d3d9-4c0b-ac67-3b0a816de87c.png"
+    },
+    {
+      "key": "crasher-wake",
+      "path": "C:/Users/os_ap/.codex/generated_images/01a143cc-e15d-7e93-8b77-825e37488153/exec-32eab92d-281d-412c-a5d0-32bbb6345fa2.png"
+    },
+    {
+      "key": "azelf",
+      "path": "C:/Users/os_ap/.codex/generated_images/01a143cc-e15d-7e93-8b77-825e37488153/exec-46e8b3bc-6236-498b-b594-832e0cb65d9b.png"
+    },
+    {
+      "key": "volkner",
+      "path": "C:/Users/os_ap/.codex/generated_images/01a143cc-e15d-7e93-8b77-825e37488153/exec-c81ad896-6441-4a95-8a39-8000a2cd4881.png"
+    },
+    {
+      "key": "dialga",
+      "path": "C:/Users/os_ap/.codex/generated_images/01a143cc-e15d-7e93-8b77-825e37488153/exec-db9ae434-5dd0-483f-8189-9ab3202930df.png"
+    },
+    {
+      "key": "uxie",
+      "path": "C:/Users/os_ap/.codex/generated_images/01a143cc-e15d-7e93-8b77-825e37488153/exec-d16604e9-7b42-49f0-98e2-7f0e07c7a421.png"
+    },
+    {
+      "key": "palkia",
+      "path": "C:/Users/os_ap/.codex/generated_images/01a143cc-e15d-7e93-8b77-825e37488153/exec-f3a593ca-118a-4a62-bd3d-ec7da698f8ff.png"
+    },
+    {
+      "key": "mesprit",
+      "path": "C:/Users/os_ap/.codex/generated_images/01a143cc-e15d-7e93-8b77-825e37488153/exec-ca944fa1-6a59-46dd-929d-7d2990bf1ef3.png"
+    },
+    {
+      "key": "regigigas",
+      "path": "C:/Users/os_ap/.codex/generated_images/01a143cc-e15d-7e93-8b77-825e37488153/exec-374fb242-d49d-4efa-a801-c5b315dc5da1.png"
+    },
+    {
+      "key": "heatran",
+      "path": "C:/Users/os_ap/.codex/generated_images/01a143cc-e15d-7e93-8b77-825e37488153/exec-a01a00cf-2391-449e-af75-86e0013ef5ff.png"
+    },
+    {
+      "key": "manaphy",
+      "path": "C:/Users/os_ap/.codex/generated_images/01a143cc-e15d-7e93-8b77-825e37488153/exec-a1382e4e-701f-4882-83fd-f712f08f02e3.png"
+    },
+    {
+      "key": "giratina",
+      "path": "C:/Users/os_ap/.codex/generated_images/01a143cc-e15d-7e93-8b77-825e37488153/exec-4d2301a7-40f0-4304-a0fc-e4efd408a118.png"
+    },
+    {
+      "key": "darkrai",
+      "path": "C:/Users/os_ap/.codex/generated_images/01a143cc-e15d-7e93-8b77-825e37488153/exec-ec2d647b-71b1-4a44-9890-0e815abbde85.png"
+    },
+    {
+      "key": "cresselia",
+      "path": "C:/Users/os_ap/.codex/generated_images/01a143cc-e15d-7e93-8b77-825e37488153/exec-8ee6a14b-6226-43a1-8c81-99129e9bf90e.png"
+    },
+    {
+      "key": "shaymin",
+      "path": "C:/Users/os_ap/.codex/generated_images/01a143cc-e15d-7e93-8b77-825e37488153/exec-16cdbcb6-9e78-467e-9ccf-03d5972c520d.png"
+    },
+    {
+      "key": "arceus",
+      "path": "C:/Users/os_ap/.codex/generated_images/01a143cc-e15d-7e93-8b77-825e37488153/exec-c948fecf-3da3-4ab1-b1e4-f9d1220ac1c1.png"
+    },
+    {
+      "key": "phione",
+      "path": "C:/Users/os_ap/.codex/generated_images/01a143cc-e15d-7e93-8b77-825e37488153/exec-d5f4fb20-9b3c-48b1-8ff5-f2c494b4d43c.png"
+    }
+  ]
+}

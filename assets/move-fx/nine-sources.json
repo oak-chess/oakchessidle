@@ -1,0 +1,59 @@
+{
+  "repository": "https://github.com/rh-hideout/pokeemerald-expansion",
+  "revision": "0ecb1115129ccb7eb3a7e0dc3718dc263ab84011",
+  "sourceFiles": [
+    "data/battle_anim_scripts.s",
+    "src/battle_anim_dark.c",
+    "src/battle_anim_dragon.c",
+    "src/battle_anim_effects_1.c",
+    "src/battle_anim_electric.c",
+    "src/battle_anim_fight.c",
+    "src/graphics.c",
+    "src/data/battle_anim.h"
+  ],
+  "resources": [
+    {
+      "name": "nine-0",
+      "png": "graphics/battle_anims/sprites/gold_ring.png",
+      "pal": "graphics/battle_anims/sprites/purple_ring.pal",
+      "sha256": "cdd37675349862c26c697b7bc7a49b4face6812dfb08bb5f8ec2529d88162973"
+    },
+    {
+      "name": "nine-1",
+      "png": "graphics/battle_anims/sprites/dragon_pulse.png",
+      "pal": "graphics/battle_anims/sprites/dragon_pulse.png",
+      "sha256": "e9b43208eef5773ffc852ef2dbc31ce6f241bde672596009480a5c0a6a70835e"
+    },
+    {
+      "name": "nine-2",
+      "png": "graphics/battle_anims/sprites/slash.png",
+      "pal": "graphics/battle_anims/sprites/slash.png",
+      "sha256": "6977b7e8c06554fb69d0d49c2e72f99228db1cc1b58d505d25f557ea46ebe040"
+    },
+    {
+      "name": "nine-3",
+      "png": "graphics/battle_anims/sprites/circle_of_light.png",
+      "pal": "graphics/battle_anims/sprites/electric_orbs.png",
+      "sha256": "f7598c5a97e9054a633905dee75d4027862491d516657bbf73acfdbb8df3f0de"
+    },
+    {
+      "name": "nine-4",
+      "png": "graphics/battle_anims/sprites/impact_2.png",
+      "pal": "graphics/battle_anims/sprites/impact_2.png",
+      "sha256": "d5f247c683be848765f444a44bb54a840d520c3fd69a54f6bfca1740b54393f7"
+    },
+    {
+      "name": "nine-5",
+      "png": "graphics/battle_anims/sprites/aura_sphere.png",
+      "pal": "graphics/battle_anims/sprites/aura_sphere.png",
+      "sha256": "84e902d44632f6dee54fec3c41535c1dfa251e9bf699b73b7d50d210fd902319"
+    },
+    {
+      "name": "nine-6",
+      "png": "graphics/battle_anims/sprites/flash_cannon_ball.png",
+      "pal": "graphics/battle_anims/sprites/flash_cannon_ball.png",
+      "sha256": "a1cfa3c5f9da8efc475334e538ba7de1a85b32776a78bcb1961c49b9ae5e8dd4"
+    }
+  ],
+  "execution": "Sprites e paletas importados; movimentos adaptados ao navegador. Surf e brilho metálico usam desenho e filtros próprios."
+}

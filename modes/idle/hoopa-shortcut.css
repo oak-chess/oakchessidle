@@ -1,0 +1,44 @@
+body.idle-native-mode #stage #idle-legendary-event.is-hoopa-shortcut{width:68px;height:76px;min-height:0;max-width:none;padding:0!important;overflow:hidden;border-radius:14px;border:1px solid #9c793c!important;background:linear-gradient(145deg,#1c2333,#080f1d)!important;box-shadow:inset 0 1px 0 #d5f9ff42,inset 0 0 0 3px #0a1420,0 3px 10px #0008,0 0 10px #b88a2926!important;transition:width .22s ease,border-color .22s;isolation:isolate}
+body.idle-native-mode #stage #idle-legendary-event.is-hoopa-shortcut::before{content:'';display:block!important;position:absolute;inset:3px;border:1px solid #5bdce533;border-radius:10px;pointer-events:none;background:none;z-index:-1}
+body.idle-native-mode #stage #idle-legendary-event.is-hoopa-shortcut:is(:hover,:focus-within){width:240px;height:76px;border-color:#f6cf79!important;background:linear-gradient(130deg,#202a3c,#0b1524)!important}
+body.idle-native-mode #stage #idle-legendary-event.is-hoopa-shortcut>.ih-emblem{position:absolute;left:0;top:2px;width:66px;height:53px;display:block;overflow:visible;pointer-events:none}
+.ih-hoopa{position:absolute;left:-6px;top:1px;width:50px;height:50px;background:url('assets/mystery-portal/hoopa-conjuring.png') 0 0/200% 200% no-repeat;image-rendering:pixelated;filter:drop-shadow(0 0 3px #d787eb55);animation:ih-conjure 7.2s step-end infinite;z-index:2}
+.ih-ring{position:absolute;left:34px;top:7px;width:30px;height:40px;transform:rotate(-12deg);animation:ih-summon 7.2s ease-in-out infinite}
+.ih-ring svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible;filter:drop-shadow(0 0 3px #ffc75b)}
+.ih-ring ellipse{fill:none;stroke:#ffda67;stroke-width:3;stroke-linecap:round;stroke-dasharray:100;stroke-dashoffset:100;animation:ih-draw-ring 7.2s linear infinite}
+.ih-mouth{position:absolute;inset:4px;border-radius:50%;background:radial-gradient(circle at 30% 25%,#fff5bd 0 1px,transparent 1.4px),radial-gradient(circle at 70% 65%,#f4a7ff 0 1px,transparent 1.4px),radial-gradient(ellipse at 55% 65%,#59246b,#101329 70%);box-shadow:inset 0 0 6px #9b63d5,0 0 6px #e2b74566;opacity:0;transform:scaleX(0);animation:ih-open-portal 7.2s ease-in-out infinite}
+.ih-spell{position:absolute;left:29px;top:31px;width:13px;height:3px;background:linear-gradient(90deg,#fff4b8,#ffd15b,transparent);border-radius:50%;box-shadow:0 0 5px #ffe589;transform-origin:left center;opacity:0;animation:ih-casting-energy 7.2s ease-out infinite;z-index:3}
+body.idle-native-mode #stage #idle-legendary-event.is-hoopa-shortcut>.ih-count{position:absolute;left:5px;top:55px;width:58px;text-align:center;max-width:none;color:#ffdf91;font:800 11px/14px 'Trebuchet MS',sans-serif;white-space:nowrap;background:#050d17b0;border-radius:4px;text-shadow:0 0 5px #ffc56844}
+body.idle-native-mode #stage #idle-legendary-event.is-hoopa-shortcut>.ih-copy{left:78px;top:11px;width:150px;display:flex;align-items:flex-start;text-align:left;gap:3px;opacity:0;visibility:hidden;transform:translateX(5px);transition:opacity .18s,transform .18s}
+body.idle-native-mode #stage #idle-legendary-event.is-hoopa-shortcut:is(:hover,:focus-within)>.ih-copy{opacity:1;visibility:visible;transform:translateX(0)}
+body.idle-native-mode #stage #idle-legendary-event.is-hoopa-shortcut .ih-eyebrow{font:700 7px/9px Arial,sans-serif;color:#81e0ef;letter-spacing:.09em}
+body.idle-native-mode #stage #idle-legendary-event.is-hoopa-shortcut .ih-title{font:800 13px/15px 'Trebuchet MS',sans-serif;color:#ffe2a0}
+body.idle-native-mode #stage #idle-legendary-event.is-hoopa-shortcut .ih-status{font:400 10px/12px 'Trebuchet MS',sans-serif;color:#d0dce8;white-space:nowrap}
+body.idle-native-mode #stage #idle-legendary-event.is-hoopa-shortcut .ih-open{font:700 9px/11px 'Trebuchet MS',sans-serif;color:#7fe5ee}
+body.idle-native-mode #stage #idle-legendary-event.is-hoopa-shortcut[data-ready=false] .ih-ring{filter:saturate(.6)}
+@keyframes ih-conjure{0%,13%{background-position:0 0;transform:translateY(0)}14%,27%{background-position:100% 0;transform:translateY(-1px)}28%,50%{background-position:0 100%;transform:translateY(-2px)}51%,81%{background-position:100% 100%;transform:translateY(-2px)}82%,100%{background-position:0 0;transform:translateY(0)}}
+@keyframes ih-draw-ring{0%,22%{stroke-dashoffset:100}43%,82%{stroke-dashoffset:0}94%,100%{stroke-dashoffset:100}}
+@keyframes ih-summon{0%,20%{opacity:0;transform:translate(-8px,6px) rotate(-18deg) scale(.25)}28%{opacity:1;transform:translate(-3px,2px) rotate(-14deg) scale(.65)}47%,80%{opacity:1;transform:translate(0,0) rotate(-12deg) scale(1)}94%,100%{opacity:0;transform:translate(-8px,6px) rotate(-18deg) scale(.2)}}
+@keyframes ih-open-portal{0%,42%{opacity:0;transform:scaleX(0)}54%,79%{opacity:1;transform:scaleX(1)}90%,100%{opacity:0;transform:scaleX(0)}}
+@keyframes ih-casting-energy{0%,19%{opacity:0;transform:scaleX(0)}25%,39%{opacity:1;transform:scaleX(1)}49%,100%{opacity:0;transform:scaleX(.3)}}
+@media(prefers-reduced-motion:reduce){.ih-hoopa,.ih-ring,.ih-ring ellipse,.ih-mouth,.ih-spell{animation:none!important}.ih-hoopa{background-position:100% 100%}.ih-ring{opacity:1}.ih-ring ellipse{stroke-dashoffset:0}.ih-mouth{opacity:1;transform:scaleX(1)}.ih-spell{opacity:0}body.idle-native-mode #stage #idle-legendary-event.is-hoopa-shortcut{transition:none}}
+/* Hoopa is a flying scene character, never enclosed in a HUD card. */
+body.idle-native-mode #stage #idle-legendary-event.is-hoopa-shortcut,
+body.idle-native-mode #stage #idle-legendary-event.is-hoopa-shortcut:is(:hover,:focus-within){width:116px;height:94px;overflow:visible;border:0!important;border-radius:0;background:transparent!important;box-shadow:none!important;isolation:auto}
+body.idle-native-mode #stage #idle-legendary-event.is-hoopa-shortcut::before{display:none!important}
+body.idle-native-mode #stage #idle-legendary-event.is-hoopa-shortcut>.ih-emblem{left:0;top:0;width:116px;height:76px;animation:ih-flight 7.2s ease-in-out infinite}
+.ih-hoopa{left:0;top:0;width:64px;height:96px;background-image:url('../../assets/dex/pmd/720/Idle-Anim.png');background-size:1024px 768px;background-position:0 0;animation:ih-native-sprite 1.6s steps(16) infinite;filter:drop-shadow(0 3px 3px #0008);z-index:2}
+.ih-ring{left:65px;top:20px;width:38px;height:50px}
+.ih-spell{left:46px;top:48px;width:27px}
+body.idle-native-mode #stage #idle-legendary-event.is-hoopa-shortcut>.ih-count{left:65px;top:78px;width:40px;background:#101426c9;border:1px solid #d7ad6266;border-radius:8px;font-size:10px}
+body.idle-native-mode #stage #idle-legendary-event.is-hoopa-shortcut>.ih-copy{position:absolute;left:116px;top:12px;width:168px;padding:10px;background:#0b1425ed;border:1px solid #bd975a;border-radius:12px;box-shadow:0 4px 14px #0007;pointer-events:none}
+@keyframes ih-native-sprite{to{background-position:-1024px 0}}
+@keyframes ih-flight{0%,100%{transform:translate(-5px,3px) rotate(-3deg)}22%{transform:translate(1px,-9px) rotate(2deg)}48%{transform:translate(7px,-3px) rotate(-2deg)}73%{transform:translate(1px,-8px) rotate(2deg)}}
+@media(prefers-reduced-motion:reduce){body.idle-native-mode #stage #idle-legendary-event.is-hoopa-shortcut>.ih-emblem{animation:none}.ih-hoopa{animation:none;background-position:0 0}}
+
+/* A small portal caption, separate from the flying character. */
+body.idle-native-mode #stage #idle-legendary-event.is-hoopa-shortcut>.ih-copy{left:108px;top:23px;width:max-content;max-width:190px;padding:7px 11px;gap:3px;background:linear-gradient(90deg,#071622ef,#0b1a26db)!important;border:0;border-left:2px solid #f3ce72;border-radius:2px 10px 10px 2px;box-shadow:0 3px 9px #0005;backdrop-filter:blur(5px);text-align:left}
+body.idle-native-mode #stage #idle-legendary-event.is-hoopa-shortcut .ih-eyebrow{display:none}
+body.idle-native-mode #stage #idle-legendary-event.is-hoopa-shortcut .ih-title{font:700 12px/16px 'Trebuchet MS',sans-serif;color:#ffe2a0;letter-spacing:.01em}
+body.idle-native-mode #stage #idle-legendary-event.is-hoopa-shortcut .ih-status{font:400 10px/14px 'Trebuchet MS',sans-serif;color:#d4e8ee}
+body.idle-native-mode #stage #idle-legendary-event.is-hoopa-shortcut .ih-open{font:700 9px/13px 'Trebuchet MS',sans-serif;color:#7fe5ee}

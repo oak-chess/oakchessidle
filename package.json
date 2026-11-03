@@ -1,0 +1,12 @@
+{
+  "name": "oakchessidle",
+  "version": "1.0.0",
+  "private": true,
+  "description": "OakChess Idle — projeto independente",
+  "scripts": {
+    "test": "node scripts/check-standalone.cjs && node scripts/check-idle-tutorial-content.cjs"
+  },
+  "devDependencies": {
+    "playwright": "^1.56.0"
+  }
+}

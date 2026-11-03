@@ -1,0 +1,133 @@
+{
+  "tool": "built-in image_gen",
+  "gyms": [
+    {
+      "key": "striaton",
+      "source": "C:/Users/os_ap/.codex/generated_images/01a143cc-e15d-7e93-8b77-825e37488153/exec-c7b30aae-4713-4564-bfb7-0f0476e8a520.png",
+      "prompt": "Landscape 3:2 richly painted Pokemon anime RPG Striaton greenhouse restaurant, warm wood, glass, grass/fire/water alcoves, empty central terracotta floor for separate board. No people, Pokemon, text, interface, hexagons or transparency.",
+      "output": "modes/idle/unova/art/striaton.webp"
+    },
+    {
+      "key": "lenora",
+      "source": "C:\\Users\\os_ap\\.codex\\generated_images\\01a143cc-e15d-7e93-8b77-825e37488153\\exec-a876fdbe-d2c8-40ff-bdea-7c19362b301d.png",
+      "prompt": "Use case: stylized-concept. Single complete landscape 3:2 illustrated Pokemon anime RPG background, richly hand-painted textured materials, elevated three-quarter view looking down. Nacrene City natural history museum gym. Warm chestnut museum wood, cream stone, old library shelves, fossil skulls in glass display cases at back and outer edges, soft dusty golden sunbeams, teal drapery. Elegant curated gallery, no central exhibits. Composition: central 60 percent of the whole image must remain broad completely empty level ground for a separate battle board overlay; all decoration at outer sides and far back. Full bleed, coherent integrated architecture, generous width, no flat artificial vector props. No characters, Pokemon, readable text, logos, interface, hexagons, battle board or transparency. Do not draw a frame or vignette.",
+      "output": "modes/idle/unova/art/lenora.webp"
+    },
+    {
+      "key": "burgh",
+      "source": "C:\\Users\\os_ap\\.codex\\generated_images\\01a143cc-e15d-7e93-8b77-825e37488153\\exec-b7a87f25-05ba-42ae-9f38-f8ef353d77d2.png",
+      "prompt": "Use case: stylized-concept. Single complete landscape 3:2 illustrated Pokemon anime RPG background, richly hand-painted textured materials, elevated three-quarter view looking down. Castelia City insect artist gym. A beautiful organic amber honeycomb conservatory with translucent honey-colored glass arches, hanging delicate silk, forest-green climbing plants and lavender flowers along sides, golden light and actual physical textures. No giant insects, no honeycomb cells on the ground. Composition: central 60 percent of the whole image must remain broad completely empty level ground for a separate battle board overlay; all decoration at outer sides and far back. Full bleed, coherent integrated architecture, generous width, no flat artificial vector props. No characters, Pokemon, readable text, logos, interface, hexagons, battle board or transparency. Do not draw a frame or vignette.",
+      "output": "modes/idle/unova/art/burgh.webp"
+    },
+    {
+      "key": "elesa",
+      "source": "C:\\Users\\os_ap\\.codex\\generated_images\\01a143cc-e15d-7e93-8b77-825e37488153\\exec-68722b01-7ab8-4520-901f-c5f6e101c4f3.png",
+      "prompt": "Use case: stylized-concept. Single complete landscape 3:2 illustrated Pokemon anime RPG background, richly hand-painted textured materials, elevated three-quarter view looking down. Nimbasa City electric fashion runway and amusement gym. Cobalt indigo interior architecture, vivid magenta and electric yellow strips of stage light, roller-coaster structure silhouettes at far back, polished dark midnight blue matte floor, stylish coherent real architecture. Neon details integrated into physical materials, no floating abstract UI. Composition: central 60 percent of the whole image must remain broad completely empty level ground for a separate battle board overlay; all decoration at outer sides and far back. Full bleed, coherent integrated architecture, generous width, no flat artificial vector props. No characters, Pokemon, readable text, logos, interface, hexagons, battle board or transparency. Do not draw a frame or vignette.",
+      "output": "modes/idle/unova/art/elesa.webp"
+    },
+    {
+      "key": "clay",
+      "source": "C:\\Users\\os_ap\\.codex\\generated_images\\01a143cc-e15d-7e93-8b77-825e37488153\\exec-4d6df7fb-117e-456d-a3fc-5b3ef2352fa7.png",
+      "prompt": "Use case: stylized-concept. Single complete landscape 3:2 illustrated Pokemon anime RPG background, richly hand-painted textured materials, elevated three-quarter view looking down. Driftveil City mining gym. Deep underground excavated hall, rugged ochre sandstone and dark timber shoring, mine elevator and rail equipment against distant back wall, blue mineral seams and amber mining lanterns at outer sides. Broad level dusty stone ground in middle, natural rich texture. Composition: central 60 percent of the whole image must remain broad completely empty level ground for a separate battle board overlay; all decoration at outer sides and far back. Full bleed, coherent integrated architecture, generous width, no flat artificial vector props. No characters, Pokemon, readable text, logos, interface, hexagons, battle board or transparency. Do not draw a frame or vignette.",
+      "output": "modes/idle/unova/art/clay.webp"
+    },
+    {
+      "key": "skyla",
+      "source": "C:\\Users\\os_ap\\.codex\\generated_images\\01a143cc-e15d-7e93-8b77-825e37488153\\exec-b58a52a3-d219-414d-942f-5473234c5342.png",
+      "prompt": "Use case: stylized-concept. Single complete landscape 3:2 illustrated Pokemon anime RPG background, richly hand-painted textured materials, elevated three-quarter view looking down. Mistralton City flying gym in an airy aviation hangar. White-painted steel trusses, turquoise glass windows opening to a beautiful pale sky, windsocks and folded parachutes on outer walls, distant hangar doors, warm sunshine. Floor desaturated blue gray with broad empty central space. No vehicles in center. Composition: central 60 percent of the whole image must remain broad completely empty level ground for a separate battle board overlay; all decoration at outer sides and far back. Full bleed, coherent integrated architecture, generous width, no flat artificial vector props. No characters, Pokemon, readable text, logos, interface, hexagons, battle board or transparency. Do not draw a frame or vignette.",
+      "output": "modes/idle/unova/art/skyla.webp"
+    },
+    {
+      "key": "brycen",
+      "source": "C:\\Users\\os_ap\\.codex\\generated_images\\01a143cc-e15d-7e93-8b77-825e37488153\\exec-da59cee0-c86c-4e00-b0c1-8e9316944e5b.png",
+      "prompt": "Use case: stylized-concept. Single complete landscape 3:2 illustrated Pokemon anime RPG background, richly hand-painted textured materials, elevated three-quarter view looking down. Icirrus City ice gym. Beautiful quiet glacial pavilion with translucent aquamarine ice arches, deep blue stone understructure, powder snow at edges, icy stalactites far back, silver-cyan and gentle violet reflected light. Broad flat pale blue icy central ground, opaque visible floor. Composition: central 60 percent of the whole image must remain broad completely empty level ground for a separate battle board overlay; all decoration at outer sides and far back. Full bleed, coherent integrated architecture, generous width, no flat artificial vector props. No characters, Pokemon, readable text, logos, interface, hexagons, battle board or transparency. Do not draw a frame or vignette.",
+      "output": "modes/idle/unova/art/brycen.webp"
+    },
+    {
+      "key": "drayden",
+      "source": "C:\\Users\\os_ap\\.codex\\generated_images\\01a143cc-e15d-7e93-8b77-825e37488153\\exec-9221451d-8e9f-4f2d-becf-7b81c32681bd.png",
+      "prompt": "Use case: stylized-concept. Single complete landscape 3:2 illustrated Pokemon anime RPG background, richly hand-painted textured materials, elevated three-quarter view looking down. Opelucid City dragon gym. Grand ancient draconic stone hall, elegant carved dragon architecture at far back, slate basalt, deep purple banners without symbols or words, jade and muted brass details, amber braziers near walls. Monumental but grounded architecture, broad empty warm gray flagstone central floor. Composition: central 60 percent of the whole image must remain broad completely empty level ground for a separate battle board overlay; all decoration at outer sides and far back. Full bleed, coherent integrated architecture, generous width, no flat artificial vector props. No characters, Pokemon, readable text, logos, interface, hexagons, battle board or transparency. Do not draw a frame or vignette.",
+      "output": "modes/idle/unova/art/drayden.webp"
+    }
+  ],
+  "events": [
+    {
+      "key": "victini",
+      "prompt": "Use case: stylized-concept. One complete landscape 3:2 game environment illustration, hand-painted Pokemon anime RPG style, detailed natural textured materials, elevated three-quarter view looking down. Liberty Garden island sanctuary, charming old coastal lighthouse on far left, warm sunlit red brick tower, bright turquoise sea beyond garden hedges and flowering bushes at sides, welcoming golden atmosphere. Strict gameplay composition: CENTRAL 60 PERCENT of the entire image must remain completely empty broad flat level ground for a separate battle board overlay; all landmarks and props at outside edges and far back. Spacious full bleed scene, clear coherent physical perspective, artistic rich color, no vector-like artificial pasted props. No Pokemon, people, text, logos, UI, hexagons, battle board, transparency, frame or vignette.",
+      "source": "C:\\Users\\os_ap\\.codex\\generated_images\\01a143cc-e15d-7e93-8b77-825e37488153\\exec-e146e8fd-f92c-4631-9ff1-81de7e0c0627.png",
+      "output": "modes/idle/unova/art/victini.webp"
+    },
+    {
+      "key": "cobalion",
+      "prompt": "Use case: stylized-concept. One complete landscape 3:2 game environment illustration, hand-painted Pokemon anime RPG style, detailed natural textured materials, elevated three-quarter view looking down. Mistralton Cave's solemn iron chamber, immense blue-gray rough stone cavern, naturally embedded steel-blue mineral crystals on outer walls, ancient upright stone pillars in the back, cool turquoise reflected light, noble calm atmosphere. Strict gameplay composition: CENTRAL 60 PERCENT of the entire image must remain completely empty broad flat level ground for a separate battle board overlay; all landmarks and props at outside edges and far back. Spacious full bleed scene, clear coherent physical perspective, artistic rich color, no vector-like artificial pasted props. No Pokemon, people, text, logos, UI, hexagons, battle board, transparency, frame or vignette.",
+      "source": "C:\\Users\\os_ap\\.codex\\generated_images\\01a143cc-e15d-7e93-8b77-825e37488153\\exec-2c6ac281-8a97-4da7-9907-ae3dc9493e9a.png",
+      "output": "modes/idle/unova/art/cobalion.webp"
+    },
+    {
+      "key": "terrakion",
+      "prompt": "Use case: stylized-concept. One complete landscape 3:2 game environment illustration, hand-painted Pokemon anime RPG style, detailed natural textured materials, elevated three-quarter view looking down. Victory Road mountain terrace, towering weathered ochre rock cliffs and broken natural columns, warm terracotta ground, dramatic amber late afternoon sunlight, dusty but clear rugged mountain atmosphere. Strict gameplay composition: CENTRAL 60 PERCENT of the entire image must remain completely empty broad flat level ground for a separate battle board overlay; all landmarks and props at outside edges and far back. Spacious full bleed scene, clear coherent physical perspective, artistic rich color, no vector-like artificial pasted props. No Pokemon, people, text, logos, UI, hexagons, battle board, transparency, frame or vignette.",
+      "source": "C:\\Users\\os_ap\\.codex\\generated_images\\01a143cc-e15d-7e93-8b77-825e37488153\\exec-53f5a74d-4d3e-4b52-994a-21cc9fbbe01d.png",
+      "output": "modes/idle/unova/art/terrakion.webp"
+    },
+    {
+      "key": "virizion",
+      "prompt": "Use case: stylized-concept. One complete landscape 3:2 game environment illustration, hand-painted Pokemon anime RPG style, detailed natural textured materials, elevated three-quarter view looking down. Deep Pinwheel Forest clearing, tall slender old trees at sides, luminous fresh green foliage, delicate flowers and fallen ancient stones at the edges, dappled sunlight, refined quiet natural sanctuary. Strict gameplay composition: CENTRAL 60 PERCENT of the entire image must remain completely empty broad flat level ground for a separate battle board overlay; all landmarks and props at outside edges and far back. Spacious full bleed scene, clear coherent physical perspective, artistic rich color, no vector-like artificial pasted props. No Pokemon, people, text, logos, UI, hexagons, battle board, transparency, frame or vignette.",
+      "source": "C:\\Users\\os_ap\\.codex\\generated_images\\01a143cc-e15d-7e93-8b77-825e37488153\\exec-fa6f311e-9eeb-416f-bb90-cd58801016f3.png",
+      "output": "modes/idle/unova/art/virizion.webp"
+    },
+    {
+      "key": "tornadus",
+      "prompt": "Use case: stylized-concept. One complete landscape 3:2 game environment illustration, hand-painted Pokemon anime RPG style, detailed natural textured materials, elevated three-quarter view looking down. Wind-swept Unova grassland plateau under a green-gray storm sky, twisting cloud bands on the distant horizon, bent grasses at outside edges, scattered broad flat stones, pale emerald turbulent atmosphere. Central earth level and empty. Strict gameplay composition: CENTRAL 60 PERCENT of the entire image must remain completely empty broad flat level ground for a separate battle board overlay; all landmarks and props at outside edges and far back. Spacious full bleed scene, clear coherent physical perspective, artistic rich color, no vector-like artificial pasted props. No Pokemon, people, text, logos, UI, hexagons, battle board, transparency, frame or vignette.",
+      "source": "C:\\Users\\os_ap\\.codex\\generated_images\\01a143cc-e15d-7e93-8b77-825e37488153\\exec-459b1aae-57f4-49f5-a791-65713c5bb1a2.png",
+      "output": "modes/idle/unova/art/tornadus.webp"
+    },
+    {
+      "key": "thundurus",
+      "prompt": "Use case: stylized-concept. One complete landscape 3:2 game environment illustration, hand-painted Pokemon anime RPG style, detailed natural textured materials, elevated three-quarter view looking down. Unova thunderstorm plain, dark indigo thunderheads, distant jagged lightning behind basalt outcrops at outer edges, rain-wet ground with cobalt and violet reflections, strong electric blue environmental light. No rain streaks blocking central ground. Strict gameplay composition: CENTRAL 60 PERCENT of the entire image must remain completely empty broad flat level ground for a separate battle board overlay; all landmarks and props at outside edges and far back. Spacious full bleed scene, clear coherent physical perspective, artistic rich color, no vector-like artificial pasted props. No Pokemon, people, text, logos, UI, hexagons, battle board, transparency, frame or vignette.",
+      "source": "C:\\Users\\os_ap\\.codex\\generated_images\\01a143cc-e15d-7e93-8b77-825e37488153\\exec-6e4ae6a1-57ca-461e-84e2-7cd96f701415.png",
+      "output": "modes/idle/unova/art/thundurus.webp"
+    },
+    {
+      "key": "landorus",
+      "prompt": "Use case: stylized-concept. One complete landscape 3:2 game environment illustration, hand-painted Pokemon anime RPG style, detailed natural textured materials, elevated three-quarter view looking down. Abundant Shrine in Unova, rural fertile landscape with golden crop fields at distant sides, venerable shrine beneath a large tree at back, warm amber autumn sunlight and russet leaves, natural earthy green and orange palette. Strict gameplay composition: CENTRAL 60 PERCENT of the entire image must remain completely empty broad flat level ground for a separate battle board overlay; all landmarks and props at outside edges and far back. Spacious full bleed scene, clear coherent physical perspective, artistic rich color, no vector-like artificial pasted props. No Pokemon, people, text, logos, UI, hexagons, battle board, transparency, frame or vignette.",
+      "source": "C:\\Users\\os_ap\\.codex\\generated_images\\01a143cc-e15d-7e93-8b77-825e37488153\\exec-8a252715-0ab3-4bda-a31d-f7f032915dfe.png",
+      "output": "modes/idle/unova/art/landorus.webp"
+    },
+    {
+      "key": "reshiram",
+      "prompt": "Use case: stylized-concept. One complete landscape 3:2 game environment illustration, hand-painted Pokemon anime RPG style, detailed natural textured materials, elevated three-quarter view looking down. Sanctuary of truth in Unova, monumental white limestone architecture at back and sides, soaring pale stone pillars, subtle white-blue flames in braziers along perimeter, warm ivory and pale gold light, serene majestic atmosphere. Strict gameplay composition: CENTRAL 60 PERCENT of the entire image must remain completely empty broad flat level ground for a separate battle board overlay; all landmarks and props at outside edges and far back. Spacious full bleed scene, clear coherent physical perspective, artistic rich color, no vector-like artificial pasted props. No Pokemon, people, text, logos, UI, hexagons, battle board, transparency, frame or vignette.",
+      "source": "C:\\Users\\os_ap\\.codex\\generated_images\\01a143cc-e15d-7e93-8b77-825e37488153\\exec-c9d170fe-b154-4c67-8d78-85e03c181a4b.png",
+      "output": "modes/idle/unova/art/reshiram.webp"
+    },
+    {
+      "key": "zekrom",
+      "prompt": "Use case: stylized-concept. One complete landscape 3:2 game environment illustration, hand-painted Pokemon anime RPG style, detailed natural textured materials, elevated three-quarter view looking down. Sanctuary of ideals in Unova, monumental black basalt architecture with tall angular physical columns around perimeter, cracks with cobalt blue light, stormy distant sky, cool slate and electric cyan lighting. Ground opaque dark gray. Strict gameplay composition: CENTRAL 60 PERCENT of the entire image must remain completely empty broad flat level ground for a separate battle board overlay; all landmarks and props at outside edges and far back. Spacious full bleed scene, clear coherent physical perspective, artistic rich color, no vector-like artificial pasted props. No Pokemon, people, text, logos, UI, hexagons, battle board, transparency, frame or vignette.",
+      "source": "C:\\Users\\os_ap\\.codex\\generated_images\\01a143cc-e15d-7e93-8b77-825e37488153\\exec-f2e0184f-18a9-4e7b-abab-2d2406bcae3a.png",
+      "output": "modes/idle/unova/art/zekrom.webp"
+    },
+    {
+      "key": "kyurem",
+      "prompt": "Use case: stylized-concept. One complete landscape 3:2 game environment illustration, hand-painted Pokemon anime RPG style, detailed natural textured materials, elevated three-quarter view looking down. Giant Chasm crater in winter, uneven massive ice cliffs and broken dead trees along perimeter, misty distant frozen forest, pale gray sky, glacial turquoise and desaturated lavender. Broad flat opaque snow-covered central ground. Strict gameplay composition: CENTRAL 60 PERCENT of the entire image must remain completely empty broad flat level ground for a separate battle board overlay; all landmarks and props at outside edges and far back. Spacious full bleed scene, clear coherent physical perspective, artistic rich color, no vector-like artificial pasted props. No Pokemon, people, text, logos, UI, hexagons, battle board, transparency, frame or vignette.",
+      "source": "C:\\Users\\os_ap\\.codex\\generated_images\\01a143cc-e15d-7e93-8b77-825e37488153\\exec-54ff3481-2d92-4da8-8cf0-5282c3c9e8a3.png",
+      "output": "modes/idle/unova/art/kyurem.webp"
+    },
+    {
+      "key": "keldeo",
+      "prompt": "Use case: stylized-concept. One complete landscape 3:2 game environment illustration, hand-painted Pokemon anime RPG style, detailed natural textured materials, elevated three-quarter view looking down. Training meadow beside a clear mountain lake in Unova, noble ancient standing stones at far back, waterfall beyond shore, lush emerald turf, bright cerulean reflections, gentle hopeful morning light. Strict gameplay composition: CENTRAL 60 PERCENT of the entire image must remain completely empty broad flat level ground for a separate battle board overlay; all landmarks and props at outside edges and far back. Spacious full bleed scene, clear coherent physical perspective, artistic rich color, no vector-like artificial pasted props. No Pokemon, people, text, logos, UI, hexagons, battle board, transparency, frame or vignette.",
+      "source": "C:\\Users\\os_ap\\.codex\\generated_images\\01a143cc-e15d-7e93-8b77-825e37488153\\exec-1c219e98-1f78-4c02-b628-387a27500902.png",
+      "output": "modes/idle/unova/art/keldeo.webp"
+    },
+    {
+      "key": "meloetta",
+      "prompt": "Use case: stylized-concept. One complete landscape 3:2 game environment illustration, hand-painted Pokemon anime RPG style, detailed natural textured materials, elevated three-quarter view looking down. Intimate musical cafe theatre in Castelia, elegant deep burgundy curtains framing sides, warm walnut wall panels, old upright piano and string instruments against back wall, subtle amber lamps, dreamy dusty rose and gold theatrical light. Broad empty level wooden central floor, no seats in middle. Strict gameplay composition: CENTRAL 60 PERCENT of the entire image must remain completely empty broad flat level ground for a separate battle board overlay; all landmarks and props at outside edges and far back. Spacious full bleed scene, clear coherent physical perspective, artistic rich color, no vector-like artificial pasted props. No Pokemon, people, text, logos, UI, hexagons, battle board, transparency, frame or vignette.",
+      "source": "C:\\Users\\os_ap\\.codex\\generated_images\\01a143cc-e15d-7e93-8b77-825e37488153\\exec-936c6c52-3a92-44ce-844c-441660ae097d.png",
+      "output": "modes/idle/unova/art/meloetta.webp"
+    },
+    {
+      "key": "genesect",
+      "prompt": "Use case: stylized-concept. One complete landscape 3:2 game environment illustration, hand-painted Pokemon anime RPG style, detailed natural textured materials, elevated three-quarter view looking down. Secret P2 Laboratory in Unova, grounded richly painted industrial research facility, aged metal consoles and physical tanks along outer walls, deep graphite steel, crimson-red powered machinery glow, cables and worn panels integrated coherently, broad clear dark metal central floor. Strict gameplay composition: CENTRAL 60 PERCENT of the entire image must remain completely empty broad flat level ground for a separate battle board overlay; all landmarks and props at outside edges and far back. Spacious full bleed scene, clear coherent physical perspective, artistic rich color, no vector-like artificial pasted props. No Pokemon, people, text, logos, UI, hexagons, battle board, transparency, frame or vignette.",
+      "source": "C:\\Users\\os_ap\\.codex\\generated_images\\01a143cc-e15d-7e93-8b77-825e37488153\\exec-b110564a-0b9a-4bda-ab14-bb674cf19cd1.png",
+      "output": "modes/idle/unova/art/genesect.webp"
+    }
+  ]
+}

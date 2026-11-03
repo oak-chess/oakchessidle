@@ -1,0 +1,494 @@
+#idle-gachapon{font-family: "Trebuchet MS", Arial, sans-serif; color: rgb(247, 237, 245); background: rgb(12, 16, 26); --rose: #f24879; --muted: #aaa8bd; --rarity: #c4c4d3;}
+#idle-gachapon *{box-sizing: border-box;}
+#idle-gachapon{margin: 0px; background: radial-gradient(at 12% 10%, rgba(65, 33, 57, 0.333), transparent 50%), radial-gradient(at 90% 45%, rgba(35, 60, 95, 0.267), transparent 50%), rgb(12, 16, 26);}
+#idle-gachapon button,#idle-gachapon select{font: inherit;}
+#idle-gachapon button{cursor: pointer; color: rgb(232, 220, 232); background: rgb(36, 34, 51); border: 1px solid rgb(85, 80, 107); padding: 9px 13px; border-radius: 9px; font-size: 12px; transition: background 0.15s, transform 0.15s;}
+#idle-gachapon button:hover:not(:disabled){background: rgb(62, 43, 71); transform: translateY(-1px);}
+#idle-gachapon button:disabled{opacity: 0.45; cursor: not-allowed;}
+#idle-gachapon button:focus-visible,#idle-gachapon select:focus-visible,#idle-gachapon a:focus-visible,#idle-gachapon summary:focus-visible{outline: rgb(255, 211, 125) solid 2px; outline-offset: 4px;}
+#idle-gachapon button[hidden]{display: none !important;}
+#idle-gachapon .app{max-width: 1220px; margin: auto; padding: 0px 30px 30px;}
+#idle-gachapon .top{display: flex; align-items: center; gap: 20px; padding: 23px 0px; border-bottom: 1px solid rgba(255, 255, 255, 0.07);}
+#idle-gachapon .brand{font-size: 18px; font-weight: 900; letter-spacing: 2px; color: rgb(255, 255, 255); text-decoration: none;}
+#idle-gachapon .brand span{color: rgb(251, 107, 148);}
+#idle-gachapon .prototype{font-size: 9px; letter-spacing: 1px; color: rgb(195, 171, 192);}
+#idle-gachapon .top button{margin-left: auto; background: transparent;}
+#idle-gachapon .intro{display: flex; align-items: center; justify-content: space-between; padding: 33px 0px 26px;}
+#idle-gachapon .eyebrow{font-size: 9px; font-weight: bold; letter-spacing: 1.7px; color: rgb(238, 135, 173); margin: 0px 0px 10px;}
+#idle-gachapon h1{font-size: 38px; line-height: 1.05; letter-spacing: -1px; margin: 0px 0px 13px;}
+#idle-gachapon .intro p:not(.eyebrow){font-size: 13px; line-height: 1.7; color: rgb(183, 177, 197); margin: 0px;}
+#idle-gachapon .wallet{text-align: right; padding: 19px 23px; border-radius: 14px; background: linear-gradient(125deg, rgb(51, 41, 56), rgb(27, 32, 48)); border: 1px solid rgb(109, 78, 72);}
+#idle-gachapon .wallet > span{font-size: 8px; letter-spacing: 1.4px; color: rgb(201, 180, 160);}
+#idle-gachapon .wallet strong{display: block; font-size: 30px; color: rgb(255, 219, 138); margin: 5px 0px 10px;}
+#idle-gachapon .wallet button{font-size: 10px; padding: 5px 9px; background: transparent; border-color: rgb(112, 92, 93);}
+#idle-gachapon #ig-regions{display: flex; gap: 8px; margin-bottom: 15px;}
+#idle-gachapon #ig-regions button{display: flex; align-items: center; gap: 10px; min-width: 170px; text-align: left; background: rgb(25, 29, 43); border-color: rgb(52, 51, 69); padding: 10px 14px;}
+#idle-gachapon #ig-regions button[aria-pressed="true"]{background: rgb(67, 38, 60); border-color: rgb(238, 107, 153); box-shadow: rgba(242, 72, 121, 0.07) 0px 0px 20px;}
+#idle-gachapon #ig-regions img{width: 31px; height: 31px; image-rendering: pixelated;}
+#idle-gachapon #ig-regions b{display: block; font-size: 13px;}
+#idle-gachapon #ig-regions small{font-size: 9px; color: rgb(173, 165, 189);}
+#idle-gachapon .workspace{display: grid; grid-template-columns: minmax(0px, 1.12fr) minmax(0px, 1fr); gap: 16px; align-items: start;}
+#idle-gachapon .station{position: sticky; top: 16px; border: 1px solid rgb(110, 69, 100); border-radius: 19px; overflow: hidden; background: radial-gradient(at 50% 40%, rgba(115, 63, 99, 0.25), transparent 60%), linear-gradient(140deg, rgb(32, 33, 48), rgb(22, 26, 40)); box-shadow: rgba(0, 0, 0, 0.267) 0px 15px 45px;}
+#idle-gachapon .station-head{display: flex; justify-content: space-between; gap: 10px; padding: 15px 18px; border-bottom: 1px solid rgba(255, 255, 255, 0.055); font-size: 9px; color: rgb(182, 168, 194); letter-spacing: 0.7px;}
+#idle-gachapon .station-head b{color: rgb(246, 191, 211);}
+#idle-gachapon .status-dot{display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: rgb(128, 226, 187); box-shadow: rgba(128, 226, 187, 0.533) 0px 0px 9px; margin-right: 6px;}
+#idle-gachapon .stage{position: relative; min-height: 300px; display: flex; align-items: center; justify-content: center; overflow: hidden;}
+#idle-gachapon .orbit{position: absolute; width: 310px; height: 310px; border: 1px solid rgba(136, 96, 130, 0.133); border-radius: 50%;}
+#idle-gachapon .orbit.two{width: 380px; height: 380px; border-style: dashed; opacity: 0.5;}
+#idle-gachapon .machine{position: relative; width: 205px; z-index: 1; filter: drop-shadow(rgba(0, 0, 0, 0.467) 0px 13px 12px);}
+#idle-gachapon .machine-cap{display: flex; align-items: center; gap: 6px; padding: 15px 17px; border-radius: 26px 26px 7px 7px; background: linear-gradient(rgb(239, 82, 126), rgb(157, 35, 76)); border: 1px solid rgb(255, 138, 167); box-shadow: rgba(255, 185, 202, 0.208) 0px 3px inset;}
+#idle-gachapon .machine-cap > span{flex: 1 1 0%; font-size: 11px; font-weight: 900; letter-spacing: 2px;}
+#idle-gachapon .machine-cap i{width: 5px; height: 5px; border-radius: 50%; background: rgb(255, 204, 136); box-shadow: rgb(255, 212, 139) 0px 0px 7px;}
+#idle-gachapon .glass{position: relative; height: 164px; margin: 0px 8px; border-width: 0px 1px; border-style: none solid; border-color: currentcolor rgba(137, 191, 217, 0.29); border-image: none; background: linear-gradient(110deg, rgba(115, 165, 190, 0.14), rgba(46, 37, 60, 0.2) 20%, rgb(18, 24, 37) 70%, rgba(136, 190, 213, 0.11)); overflow: hidden;}
+#idle-gachapon .glass::after{content: ""; position: absolute; width: 22px; height: 150%; background: rgba(183, 221, 255, 0.047); left: 22px; top: -20px; transform: rotate(18deg); pointer-events: none;}
+#idle-gachapon .capsules{position: absolute; inset: 0px; display: flex; justify-content: center; align-items: center;}
+#idle-gachapon .capsules i{position: absolute; width: 47px; height: 56px; border-radius: 50% 50% 44% 44%; background: radial-gradient(at 35% 30%, rgb(233, 220, 184), rgb(161, 125, 139) 65%); border: 2px solid rgba(255, 255, 255, 0.133); box-shadow: rgba(0, 0, 0, 0.333) 0px 6px 8px;}
+#idle-gachapon .capsules i:nth-child(1){transform: translate(-40px, 23px) rotate(-15deg);}
+#idle-gachapon .capsules i:nth-child(2){transform: translate(38px, 25px) rotate(12deg); background: rgb(140, 191, 163);}
+#idle-gachapon .capsules i:nth-child(3){transform: translate(0px, -24px); background: rgb(192, 148, 193);}
+#idle-gachapon .capsules i:nth-child(4){transform: translate(-55px, -30px) scale(0.65); opacity: 0.6;}
+#idle-gachapon .capsules i:nth-child(5){transform: translate(55px, -30px) scale(0.65); opacity: 0.6;}
+#idle-gachapon .machine-base{padding: 10px 13px 14px; background: linear-gradient(rgb(169, 45, 83), rgb(108, 31, 63)); border: 1px solid rgb(230, 92, 134); border-radius: 8px 8px 24px 24px; text-align: center;}
+#idle-gachapon .machine-base > span{font-size: 6px; letter-spacing: 2px; color: rgb(228, 168, 191);}
+#idle-gachapon .slot{width: 70px; height: 16px; margin: 7px auto 0px; border-radius: 8px; background: rgb(20, 19, 29); border: 1px solid rgba(223, 117, 148, 0.333); box-shadow: rgba(0, 0, 0, 0.533) 0px 4px 5px inset;}
+#idle-gachapon .plinth{position: absolute; width: 270px; height: 43px; bottom: 12px; border: 1px solid rgba(191, 110, 154, 0.2); background: radial-gradient(rgba(193, 101, 156, 0.133), transparent 70%); border-radius: 50%;}
+#idle-gachapon .scan{position: absolute; inset: 0px; background: linear-gradient(transparent, rgba(252, 140, 191, 0.133), transparent); transform: translateY(-100%); pointer-events: none;}
+#idle-gachapon .flash{position: absolute; inset: 0px; background: rgb(255, 241, 249); opacity: 0; pointer-events: none;}
+#idle-gachapon .reveal{min-height: 101px; text-align: center; padding: 0px 20px;}
+#idle-gachapon .reveal > span{font-size: 9px; letter-spacing: 1.4px; color: var(--rarity);}
+#idle-gachapon .reveal h2{font-size: 25px; margin: 7px 0px; color: rgb(255, 240, 246);}
+#idle-gachapon .reveal p{font-size: 11px; line-height: 1.5; color: rgb(184, 171, 192); margin: 0px;}
+#idle-gachapon .draw-actions{display: flex; justify-content: center; gap: 9px; padding: 15px 18px 0px; flex-wrap: wrap;}
+#idle-gachapon .primary{background: linear-gradient(110deg, rgb(233, 54, 109), rgb(179, 41, 107)); border: 1px solid rgb(255, 135, 177); box-shadow: rgba(233, 54, 109, 0.133) 0px 4px 15px; padding: 12px 24px; font-size: 13px; font-weight: bold;}
+#idle-gachapon .primary span{display: block; font-size: 10px; font-weight: normal; color: rgb(255, 220, 233); margin-top: 4px;}
+#idle-gachapon .station-note{font-size: 9px; line-height: 1.5; text-align: center; margin: 13px 16px 18px; color: rgb(156, 139, 164);}
+#idle-gachapon .panel{background: rgb(27, 29, 43); border: 1px solid rgb(54, 52, 72); border-radius: 14px; padding: 17px;}
+#idle-gachapon .information{display: flex; flex-direction: column; gap: 12px;}
+#idle-gachapon .section-title{display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 13px;}
+#idle-gachapon .section-title h2{font-size: 14px; margin: 0px;}
+#idle-gachapon .section-title .eyebrow{display: block; font-size: 8px; margin-bottom: 5px;}
+#idle-gachapon .badge{font-size: 8px; border: 1px solid rgb(87, 80, 100); color: rgb(191, 176, 202); padding: 4px 6px; border-radius: 6px; white-space: nowrap;}
+#idle-gachapon #ig-odds{display: flex; flex-direction: column; gap: 6px;}
+#idle-gachapon .odds-row{display: flex; align-items: center; gap: 10px; background: rgb(19, 23, 36); border: 1px solid rgba(255, 255, 255, 0.027); padding: 5px 9px; border-radius: 8px; color: var(--rarity);}
+#idle-gachapon .odds-row .egg-svg{width: 23px; height: 29px; flex: 0 0 auto;}
+#idle-gachapon .odds-row b{font-size: 11px; flex: 1 1 0%;}
+#idle-gachapon .odds-row span{font-size: 9px; border: 1px solid; padding: 2px 4px; border-radius: 4px;}
+#idle-gachapon .odds-row strong{font-size: 12px; min-width: 35px; text-align: right;}
+#idle-gachapon .muted{font-size: 9px; line-height: 1.65; color: rgb(170, 160, 182); margin: 10px 0px 0px;}
+#idle-gachapon .muted strong{color: rgb(242, 194, 214);}
+#idle-gachapon .guarantee{margin: 10px 0px 0px;}
+#idle-gachapon .guarantee > div:first-child{display: flex; justify-content: space-between; gap: 10px; font-size: 10px;}
+#idle-gachapon .guarantee b{color: rgb(239, 174, 206);}
+#idle-gachapon .track{height: 5px; background: rgb(14, 18, 32); border-radius: 5px; margin: 7px 0px 4px; overflow: hidden;}
+#idle-gachapon .track i{display: block; height: 100%; border-radius: inherit; background: linear-gradient(90deg, rgb(175, 56, 133), rgb(255, 146, 190));}
+#idle-gachapon .guarantee small{font-size: 8px; color: rgb(163, 152, 175);}
+#idle-gachapon #ig-pool{display: grid; grid-template-columns: repeat(6, 1fr); gap: 4px;}
+#idle-gachapon #ig-pool > div{display: flex; align-items: center; flex-direction: column; padding: 3px 0px; background: rgb(19, 23, 36); border-radius: 7px;}
+#idle-gachapon #ig-pool img{width: 40px; height: 40px; object-fit: contain; image-rendering: pixelated;}
+#idle-gachapon #ig-pool small{font-size: 8px; color: rgb(198, 185, 205); max-width: 100%; overflow: hidden;}
+#idle-gachapon .collection{margin-top: 17px;}
+#idle-gachapon .collection h2 span{font-size: 10px; color: rgb(169, 155, 183); font-weight: normal; margin-left: 8px;}
+#idle-gachapon #ig-collection{display: grid; grid-template-columns: repeat(5, minmax(0px, 1fr)); gap: 9px;}
+#idle-gachapon .empty{grid-column: 1 / -1; padding: 19px; text-align: center; color: rgb(153, 139, 168); font-size: 12px;}
+#idle-gachapon .egg-card{display: flex; flex-direction: column; align-items: center; gap: 5px; text-align: center; border: 1px solid color-mix(in srgb,var(--rarity) 40%,#252232); border-radius: 10px; padding: 12px 6px; background: linear-gradient(145deg,color-mix(in srgb,var(--rarity) 8%,#141724),#141724);}
+#idle-gachapon .egg-card .egg-svg{width: 44px; height: 57px;}
+#idle-gachapon .egg-card img{width: 57px; height: 57px; object-fit: contain; image-rendering: pixelated;}
+#idle-gachapon .egg-card b{font-size: 12px; color: var(--rarity);}
+#idle-gachapon .egg-card small{font-size: 9px; color: rgb(175, 164, 189);}
+#idle-gachapon .egg-card button{font-size: 10px; padding: 5px 10px; margin-top: 4px;}
+#idle-gachapon .egg-card .iv-tag{font-size: 10px; color: rgb(154, 221, 195);}
+#idle-gachapon .egg-svg{display: block; overflow: visible;}
+#idle-gachapon .egg-svg .egg-body{fill: var(--egg-shell,#e4d6bc); stroke: var(--rarity); stroke-width: 2;}
+#idle-gachapon .egg-svg .egg-spot{fill: var(--rarity); opacity: 0.8;}
+#idle-gachapon .egg-svg .egg-glint{fill: none; stroke: rgb(255, 255, 255); opacity: 0.5; stroke-width: 2;}
+#idle-gachapon .egg-svg .egg-crack{display: none; stroke: rgb(35, 25, 43); stroke-width: 2; fill: none;}
+#idle-gachapon #ig-hero-egg{display: none; position: absolute; inset: 0px; align-items: center; justify-content: center;}
+#idle-gachapon #ig-hero-egg .egg-svg{width: 92px; height: 118px; filter: drop-shadow(0 0 18px color-mix(in srgb,var(--rarity) 45%,transparent));}
+#idle-gachapon #ig-hatch-sprite{display: none; position: absolute; inset: 0px; align-items: center; justify-content: center;}
+#idle-gachapon #ig-hatch-sprite img{width: 135px; height: 135px; object-fit: contain; image-rendering: pixelated; filter: drop-shadow(0 0 16px color-mix(in srgb,var(--rarity) 40%,transparent));}
+#idle-gachapon .sparkles{display: none; position: absolute; inset: 0px; color: var(--rarity); font-size: 25px; pointer-events: none;}
+#idle-gachapon .sparkles > span{position: absolute; right: 15px; top: 55px;}
+#idle-gachapon .sparkles > b{position: absolute; left: 15px; bottom: 25px;}
+#idle-gachapon .sparkles > em{position: absolute; right: 40px; bottom: 10px; font-style: normal;}
+#idle-gachapon .station[data-phase="drawing"] .capsules{animation: 0.32s linear 0s infinite normal none running ig-mix;}
+#idle-gachapon .station[data-phase="drawing"] .scan{animation: 0.8s linear 0s infinite normal none running ig-scan;}
+#idle-gachapon .station[data-phase="drawing"] .machine{animation: 0.18s linear 0s infinite normal none running ig-shake;}
+#idle-gachapon .station[data-phase="revealed"] .capsules,#idle-gachapon .station[data-phase="hatching"] .capsules,#idle-gachapon .station[data-phase="hatched"] .capsules{display: none;}
+#idle-gachapon .station[data-phase="revealed"] #ig-hero-egg,#idle-gachapon .station[data-phase="hatching"] #ig-hero-egg{display: flex; animation: 0.5s ease-out 0s 1 normal none running ig-appear;}
+#idle-gachapon .station[data-phase="revealed"] .sparkles,#idle-gachapon .station[data-phase="hatched"] .sparkles{display: block; animation: 1.6s ease-in-out 0s infinite alternate none running ig-twinkle;}
+#idle-gachapon .station[data-phase="hatching"] #ig-hero-egg{animation: 0.13s linear 0s infinite normal none running ig-shake;}
+#idle-gachapon .station[data-phase="hatching"] .egg-crack{display: block;}
+#idle-gachapon .station[data-phase="hatching"] .flash{animation: 1s ease-in 0s 1 normal forwards running ig-hatch-flash;}
+#idle-gachapon .station[data-phase="hatched"] #ig-hatch-sprite{display: flex; animation: 0.5s ease-out 0s 1 normal none running ig-appear;}
+#idle-gachapon .station[data-tier="5"] #ig-hero-egg .egg-svg{animation: 2s ease-in-out 0s infinite normal none running ig-crystal;}
+#idle-gachapon .iv-bars{display: grid; grid-template-columns: repeat(6, 1fr); gap: 4px; max-width: 250px; margin: 9px auto;}
+#idle-gachapon .iv-bars span{font-size: 8px; color: rgb(198, 179, 203);}
+#idle-gachapon .iv-bars b{display: block; color: rgb(181, 227, 208); font-size: 11px;}
+#idle-gachapon .iv-bars i{display: block; height: 3px; background: linear-gradient(90deg,#7bd2b1 var(--iv),#323045 var(--iv)); margin: 3px 0px; border-radius: 3px;}
+#idle-gachapon footer{display: flex; justify-content: space-between; align-items: start; gap: 25px; padding: 17px 0px 5px; font-size: 9px; line-height: 1.7; color: rgb(156, 143, 167);}
+#idle-gachapon footer > span{max-width: 460px;}
+#idle-gachapon footer details{max-width: 350px; text-align: right;}
+#idle-gachapon summary{cursor: pointer; color: rgb(212, 182, 203);}
+#idle-gachapon footer label{display: flex; gap: 8px; align-items: center; font-size: 10px; margin-top: 10px;}
+#idle-gachapon select{min-width: 0px; max-width: 100%; background: rgb(36, 34, 51); color: rgb(238, 224, 237); border: 1px solid rgb(101, 71, 94); border-radius: 7px; padding: 6px; font-size: 10px;}
+#idle-gachapon footer p{font-size: 9px; margin-bottom: 0px;}
+@keyframes ig-mix { 
+  100% { transform: rotate(360deg); }
+}
+@keyframes ig-shake { 
+  0%, 100% { transform: translateX(0px) rotate(0deg); }
+  25% { transform: translateX(-2px) rotate(-1deg); }
+  75% { transform: translateX(2px) rotate(1deg); }
+}
+@keyframes ig-scan { 
+  100% { transform: translateY(100%); }
+}
+@keyframes ig-appear { 
+  0% { opacity: 0; transform: scale(0.55) translateY(15px); }
+  100% { opacity: 1; transform: scale(1) translateY(0px); }
+}
+@keyframes ig-twinkle { 
+  0% { opacity: 0.25; }
+  100% { opacity: 0.9; }
+}
+@keyframes ig-crystal { 
+  50% { filter: drop-shadow(rgba(255, 215, 128, 0.733) 0px 0px 24px) brightness(1.15); }
+}
+@keyframes ig-hatch-flash { 
+  0%, 40% { opacity: 0; }
+  75% { opacity: 1; }
+  100% { opacity: 0; }
+}
+@media (max-width: 850px){#idle-gachapon .app{padding: 0px 18px 20px;}
+#idle-gachapon .workspace{grid-template-columns: 1fr;}
+#idle-gachapon .station{position: relative; top: 0px;}
+#idle-gachapon .information{display: grid; grid-template-columns: 1fr 1fr;}
+#idle-gachapon .inhabitants{grid-column: 1 / -1;}
+#idle-gachapon .stage{min-height: 260px;}
+#idle-gachapon .intro{padding-top: 25px;}
+#idle-gachapon h1{font-size: 32px;}
+#idle-gachapon #ig-collection{grid-template-columns: repeat(3, minmax(0px, 1fr));}}
+@media (max-width: 520px){#idle-gachapon .app{padding: 0px 12px 15px;}
+#idle-gachapon .top{padding: 15px 0px; gap: 10px;}
+#idle-gachapon .prototype{max-width: 100px; font-size: 7px;}
+#idle-gachapon .brand{font-size: 13px;}
+#idle-gachapon .top button{padding: 6px; font-size: 9px;}
+#idle-gachapon .intro{gap: 12px; align-items: start;}
+#idle-gachapon h1{font-size: 27px;}
+#idle-gachapon .intro p:not(.eyebrow){font-size: 10px;}
+#idle-gachapon .eyebrow{font-size: 7px;}
+#idle-gachapon .wallet{padding: 12px; min-width: 125px;}
+#idle-gachapon .wallet > span{font-size: 6px;}
+#idle-gachapon .wallet strong{font-size: 23px;}
+#idle-gachapon .wallet button{font-size: 8px;}
+#idle-gachapon #ig-regions{gap: 5px;}
+#idle-gachapon #ig-regions button{min-width: 0px; flex: 1 1 0%; padding: 8px; gap: 5px;}
+#idle-gachapon #ig-regions img{width: 24px; height: 24px;}
+#idle-gachapon #ig-regions b{font-size: 11px;}
+#idle-gachapon #ig-regions small{font-size: 7px;}
+#idle-gachapon .information{display: flex;}
+#idle-gachapon .panel{padding: 13px;}
+#idle-gachapon .section-title h2{font-size: 12px;}
+#idle-gachapon #ig-pool{grid-template-columns: repeat(4, 1fr);}
+#idle-gachapon #ig-collection{grid-template-columns: repeat(2, minmax(0px, 1fr));}
+#idle-gachapon footer{flex-direction: column; gap: 12px;}
+#idle-gachapon footer details{text-align: left;}
+#idle-gachapon .station-head{font-size: 8px; padding: 12px;}
+#idle-gachapon .reveal h2{font-size: 22px;}}
+@media (prefers-reduced-motion: reduce){#idle-gachapon *,#idle-gachapon ::before,#idle-gachapon ::after{animation: auto ease 0s 1 normal none running none !important; transition: none !important;}}
+#idle-gachapon .station .stage{min-height: 395px; padding: 12px 0px 33px;}
+#idle-gachapon .station .machine{width: 238px; height: 338px; filter: drop-shadow(rgba(0, 0, 0, 0.6) 0px 16px 16px);}
+#idle-gachapon .station .machine-cap{height: 39px; margin: 0px 6px; padding: 9px 17px; border-radius: 24px 24px 8px 8px; border: 1px solid rgb(239, 130, 172); background: linear-gradient(165deg, rgb(240, 99, 145), rgb(168, 37, 89) 75%); box-shadow: rgba(255, 192, 216, 0.25) 0px 2px 0px inset, rgba(230, 69, 129, 0.15) 0px 2px 14px;}
+#idle-gachapon .machine-cap > span{font-size: 10px; letter-spacing: 2px;}
+#idle-gachapon .machine-cap small{display: block; font-size: 6px; letter-spacing: 2px; color: rgb(248, 192, 214); margin-top: 2px;}
+#idle-gachapon .station .glass{height: 184px; margin: 0px 13px; border-radius: 47% 47% 19% 19% / 31% 31% 12% 12%; border: 2px solid rgba(148, 198, 227, 0.4); background: radial-gradient(at 30% 20%, rgba(199, 230, 255, 0.153), transparent 55%), linear-gradient(115deg, rgba(126, 171, 196, 0.17), rgb(16, 27, 42) 65%, rgba(49, 84, 109, 0.333)); box-shadow: rgba(112, 187, 213, 0.11) 0px 0px 26px inset, rgba(224, 244, 255, 0.07) 4px 0px 6px inset, rgba(105, 176, 228, 0.098) 0px 0px 18px; overflow: hidden;}
+#idle-gachapon .station .glass::after{width: 21px; height: 145%; left: 18px; top: -30px; background: linear-gradient(90deg, rgba(210, 243, 255, 0.075), rgba(210, 243, 255, 0.008)); transform: rotate(23deg);}
+#idle-gachapon .glass::before{content: ""; position: absolute; inset: 8px; border: 1px solid rgba(195, 233, 255, 0.047); border-radius: inherit; pointer-events: none;}
+#idle-gachapon .chamber-ring{position: absolute; left: 12px; right: 12px; height: 25px; bottom: 5px; border-radius: 50%; border: 2px solid rgba(130, 213, 235, 0.4); box-shadow: rgba(85, 209, 238, 0.2) 0px 0px 11px; background: radial-gradient(rgba(34, 70, 93, 0.133), rgba(85, 191, 232, 0.133));}
+#idle-gachapon .station .capsules{inset: 0px; display: block; animation: auto ease 0s 1 normal none running none !important; transform: none !important;}
+#idle-gachapon .station .capsules > i{display: flex; align-items: center; justify-content: center; position: absolute; left: 50%; top: 50%; width: 43px; height: 43px; border: 1px solid rgba(206, 232, 242, 0.48); border-radius: 50%; box-shadow: rgba(228, 245, 255, 0.196) 2px 3px 4px inset, rgba(0, 0, 0, 0.333) 0px 5px 6px; opacity: 1; transform: translate(calc(-50% + var(--x)),calc(-50% + var(--y))) rotate(var(--angle,0deg)); isolation: isolate; background: linear-gradient(140deg, rgba(184, 232, 246, 0.176), rgba(21, 34, 55, 0.65)) !important;}
+#idle-gachapon .capsules > i::before{content: ""; position: absolute; left: 1px; right: 1px; top: 50%; height: 3px; background: rgba(225, 106, 151, 0.68); box-shadow: rgba(9, 13, 28, 0.533) 0px 1px 0px; z-index: 1;}
+#idle-gachapon .capsules > i::after{content: ""; position: absolute; width: 7px; height: 7px; background: rgb(213, 236, 246); border: 2px solid rgb(168, 52, 103); border-radius: 50%; top: calc(50% - 4px); left: calc(50% - 4px); z-index: 2;}
+#idle-gachapon .capsules .egg-svg{width: 23px; height: 30px; opacity: 0.8;}
+#idle-gachapon .station .capsules > i:nth-child(1){--x: -62px; --y: 41px; --angle: -20deg; --move-x: 46px; --move-y: -36px;}
+#idle-gachapon .station .capsules > i:nth-child(2){--x: 59px; --y: 42px; --angle: 24deg; --move-x: -57px; --move-y: -44px;}
+#idle-gachapon .station .capsules > i:nth-child(3){--x: 0px; --y: 43px; --angle: 4deg; --move-x: 64px; --move-y: -12px;}
+#idle-gachapon .station .capsules > i:nth-child(4){--x: -32px; --y: 7px; --angle: -30deg; --move-x: 32px; --move-y: -50px;}
+#idle-gachapon .station .capsules > i:nth-child(5){--x: 34px; --y: 4px; --angle: 28deg; --move-x: -60px; --move-y: 22px;}
+#idle-gachapon .station .capsules > i:nth-child(6){--x: -61px; --y: -27px; --angle: -10deg; --move-x: 40px; --move-y: 39px;}
+#idle-gachapon .station .capsules > i:nth-child(7){--x: 57px; --y: -29px; --angle: 8deg; --move-x: -28px; --move-y: 34px;}
+#idle-gachapon .station .capsules > i:nth-child(8){--x: -5px; --y: -36px; --angle: 13deg; --move-x: -38px; --move-y: 27px;}
+#idle-gachapon .station .machine-base{height: 123px; margin-top: -5px; position: relative; padding: 11px 13px; border-radius: 16px 16px 27px 27px; border: 1px solid rgb(211, 119, 162); background: linear-gradient(125deg, rgb(73, 67, 84), rgb(42, 41, 57) 48%, rgb(29, 30, 45)); box-shadow: rgba(223, 184, 212, 0.11) 0px 3px 1px inset, rgba(0, 0, 0, 0.267) 0px -6px 9px inset; z-index: 2;}
+#idle-gachapon .machine-base::before,#idle-gachapon .machine-base::after{content: ""; position: absolute; width: 4px; height: 57px; top: 31px; background: rgb(242, 73, 138); border-radius: 4px; box-shadow: rgba(242, 73, 138, 0.533) 0px 0px 10px;}
+#idle-gachapon .machine-base::before{left: 5px;}
+#idle-gachapon .machine-base::after{right: 5px;}
+#idle-gachapon .console{display: flex; align-items: center; justify-content: space-between; gap: 9px; margin: 0px 6px;}
+#idle-gachapon .display{flex: 1 1 0%; padding: 5px 8px; border: 1px solid rgb(85, 130, 159); border-radius: 6px; background: rgb(13, 33, 48); box-shadow: rgba(101, 190, 229, 0.07) 0px 0px 9px inset; color: rgb(142, 228, 241);}
+#idle-gachapon .display > span{display: block; font: 5px monospace; letter-spacing: 1.8px; color: rgb(116, 152, 175);}
+#idle-gachapon .display > b{font: 700 12px monospace; letter-spacing: 2px; text-shadow: rgba(89, 213, 238, 0.42) 0px 0px 9px;}
+#idle-gachapon .signal{display: flex; gap: 3px; margin-top: 3px;}
+#idle-gachapon .signal i{width: 12px; height: 2px; background: rgb(102, 184, 209); border-radius: 1px;}
+#idle-gachapon .signal i:nth-child(4),#idle-gachapon .signal i:nth-child(5){opacity: 0.3;}
+#idle-gachapon .dial{position: relative; width: 39px; height: 39px; border: 3px solid rgb(140, 118, 148); border-radius: 50%; background: radial-gradient(circle, rgb(206, 78, 133) 36%, rgb(116, 44, 88) 39%, rgb(36, 28, 49) 44%, rgb(117, 90, 120) 55%, rgb(48, 35, 55) 60%); box-shadow: rgba(229, 81, 136, 0.2) 0px 0px 8px, rgba(221, 221, 221, 0.067) 0px 2px 0px inset;}
+#idle-gachapon .dial i{position: absolute; left: 15px; top: 3px; width: 3px; height: 10px; background: rgb(255, 224, 237); border-radius: 2px;}
+#idle-gachapon .outlet{position: relative; height: 52px; margin: 7px 10px 0px; border: 2px solid rgb(108, 83, 111); border-radius: 9px 9px 17px 17px; background: radial-gradient(at 50% 100%, rgb(99, 56, 79), rgb(11, 16, 32) 70%); box-shadow: rgba(0, 0, 0, 0.733) 0px 5px 9px inset, rgba(183, 133, 161, 0.157) 0px 2px 0px; overflow: hidden;}
+#idle-gachapon .outlet::after{content: ""; position: absolute; left: 5px; right: 5px; height: 3px; bottom: 3px; background: rgba(239, 106, 171, 0.48); box-shadow: rgba(246, 108, 173, 0.333) 0px 0px 10px; border-radius: 3px;}
+#idle-gachapon .outlet > span{position: absolute; bottom: 7px; left: 0px; right: 0px; text-align: center; font: 5px monospace; letter-spacing: 1.4px; color: rgb(188, 120, 155); z-index: 2;}
+#idle-gachapon .shutter{position: absolute; inset: 0px; background: repeating-linear-gradient(rgb(52, 51, 68) 0px, rgb(52, 51, 68) 7px, rgb(33, 31, 47) 8px, rgb(33, 31, 47) 9px); border-bottom: 2px solid rgb(179, 162, 185); transform: translateY(0px); transition: transform 0.35s; z-index: 1;}
+#idle-gachapon .machine-feet::before,#idle-gachapon .machine-feet::after{content: ""; position: absolute; bottom: -5px; width: 36px; height: 8px; background: rgb(11, 13, 21); border: 1px solid rgb(81, 64, 82); border-radius: 3px;}
+#idle-gachapon .machine-feet::before{left: 28px;}
+#idle-gachapon .machine-feet::after{right: 28px;}
+#idle-gachapon .delivery-capsule{display: none; position: absolute; width: 42px; height: 42px; left: 50%; top: 126px; z-index: 5; transform: translate(-50%, 0px); filter: drop-shadow(rgba(0, 0, 0, 0.533) 0px 4px 4px);}
+#idle-gachapon .delivery-capsule > div{position: absolute; left: 0px; right: 0px; height: 50%; border: 1px solid rgb(255, 169, 203); box-shadow: rgba(255, 255, 255, 0.137) 5px 3px 5px inset;}
+#idle-gachapon .capsule-top{top: 0px; background: linear-gradient(130deg, rgb(243, 114, 167), rgb(166, 38, 100)); border-radius: 50px 50px 0px 0px;}
+#idle-gachapon .capsule-bottom{bottom: 0px; background: linear-gradient(130deg, rgb(224, 237, 242), rgb(118, 137, 162)); border-radius: 0px 0px 50px 50px;}
+#idle-gachapon .delivery-capsule > i{position: absolute; inset: calc(50% - 5px) auto auto calc(50% - 5px); width: 10px; height: 10px; border: 2px solid rgb(68, 33, 61); border-radius: 50%; background: rgb(188, 231, 240); box-shadow: rgb(195, 240, 251) 0px 0px 5px;}
+#idle-gachapon .station #ig-hero-egg{inset: 249px auto auto 50%; width: 90px; height: 90px; transform: translateX(-50%); z-index: 6; pointer-events: none;}
+#idle-gachapon .station #ig-hero-egg .egg-svg{width: 60px; height: 78px;}
+#idle-gachapon .station #ig-hatch-sprite{inset: 236px auto auto 50%; width: 110px; height: 110px; transform: translateX(-50%); z-index: 6;}
+#idle-gachapon .station #ig-hatch-sprite img{width: 108px; height: 108px;}
+#idle-gachapon .station .flash{inset: 240px 32px 0px; border-radius: 20px; z-index: 7;}
+#idle-gachapon .station .sparkles{inset: 239px 40px 0px; z-index: 8; font-size: 19px;}
+#idle-gachapon .station .sparkles > span{right: 0px; top: 17px;}
+#idle-gachapon .station .sparkles > b{left: 8px; bottom: 4px;}
+#idle-gachapon .station .sparkles > em{right: 35px; bottom: 0px;}
+#idle-gachapon .station .plinth{bottom: 33px; width: 290px; background: radial-gradient(rgba(221, 97, 151, 0.2), rgba(103, 57, 80, 0.133) 60%, transparent 70%); border-color: rgba(189, 98, 149, 0.23);}
+#idle-gachapon .sequence-label{position: absolute; left: 0px; right: 0px; bottom: 9px; text-align: center; font: 7px monospace; letter-spacing: 1.7px; color: rgb(154, 162, 187);}
+#idle-gachapon .station[data-phase="drawing"] .machine{animation: auto ease 0s 1 normal none running none;}
+#idle-gachapon .station[data-step="mix"] .capsules > i{animation-duration: 0.84s; animation-timing-function: cubic-bezier(0.35, 0.05, 0.6, 0.95); animation-iteration-count: infinite; animation-direction: normal; animation-fill-mode: none; animation-play-state: running; animation-name: ig-capsule-tumble; animation-timeline: auto; animation-range: normal; animation-delay: var(--delay);}
+#idle-gachapon .station[data-step="mix"] .chamber-ring{animation: 1s linear 0s infinite normal none running ig-rotor;}
+#idle-gachapon .station[data-step="mix"] .dial{animation: 0.6s linear 0s infinite normal none running ig-rotor;}
+#idle-gachapon .station[data-phase="drawing"] .signal i{animation-duration: 0.3s; animation-timing-function: ease; animation-iteration-count: infinite; animation-direction: alternate; animation-fill-mode: none; animation-play-state: running; animation-name: ig-signal-pulse; animation-timeline: auto; animation-range: normal; animation-delay: calc(var(--n,1)*.1s);}
+#idle-gachapon .station[data-step="select"] .capsules > i:nth-child(4){opacity: 0;}
+#idle-gachapon .station[data-step="select"] .selector-beam{position: absolute; inset: 0px; background: linear-gradient(90deg, transparent 37%, rgba(185, 241, 255, 0.14) 50%, transparent 63%); animation: 0.25s ease 0s infinite alternate none running ig-twinkle;}
+#idle-gachapon .station[data-step="select"] .delivery-capsule{display: block; animation: 0.5s ease-out 0s 1 normal both running ig-select-capsule;}
+#idle-gachapon .station[data-step="drop"] .delivery-capsule{display: block; animation: 0.95s linear 0s 1 normal both running ig-deliver-capsule;}
+#idle-gachapon .station[data-step="drop"] .shutter,#idle-gachapon .station[data-step="open"] .shutter,#idle-gachapon .station[data-phase="revealed"] .shutter,#idle-gachapon .station[data-phase="hatching"] .shutter,#idle-gachapon .station[data-phase="hatched"] .shutter{transform: translateY(-110%);}
+#idle-gachapon .station[data-step="drop"] .capsules > i:nth-child(4),#idle-gachapon .station[data-step="open"] .capsules > i:nth-child(4){visibility: hidden;}
+#idle-gachapon .station[data-step="open"] .delivery-capsule{display: block; transform: translate(-50%, 153px) scale(1.2);}
+#idle-gachapon .station[data-step="open"] .capsule-top{animation: 0.65s ease-out 0s 1 normal both running ig-open-cap-top;}
+#idle-gachapon .station[data-step="open"] .capsule-bottom{animation: 0.65s ease-out 0s 1 normal both running ig-open-cap-bottom;}
+#idle-gachapon .station[data-step="open"] .delivery-capsule > i{animation: 0.3s ease 0s 1 normal both running ig-fade-cap;}
+#idle-gachapon .station[data-phase="revealed"] .capsules,#idle-gachapon .station[data-phase="hatching"] .capsules,#idle-gachapon .station[data-phase="hatched"] .capsules{display: block; opacity: 0.42;}
+#idle-gachapon .station[data-phase="revealed"] #ig-hero-egg,#idle-gachapon .station[data-phase="hatching"] #ig-hero-egg{display: flex; animation: auto ease 0s 1 normal none running none;}
+#idle-gachapon .station[data-phase="revealed"] #ig-hero-egg > span{animation: 0.5s ease-out 0s 1 normal both running ig-egg-out;}
+#idle-gachapon .station[data-phase="hatching"] #ig-hero-egg > span{animation: 0.13s linear 0s infinite normal none running ig-shake;}
+#idle-gachapon .station[data-phase="hatched"] #ig-hatch-sprite{display: flex; animation: auto ease 0s 1 normal none running none;}
+#idle-gachapon .station[data-phase="hatched"] #ig-hatch-sprite img{animation: 0.5s ease-out 0s 1 normal both running ig-appear;}
+@keyframes ig-capsule-tumble { 
+  0%, 100% { transform: translate(calc(-50% + var(--x)),calc(-50% + var(--y))) rotate(0); }
+  25% { transform: translate(calc(-50% + var(--move-x)),calc(-50% - 37px)) rotate(90deg); }
+  55% { transform: translate(calc(-50% - var(--x)),calc(-50% + var(--move-y))) rotate(210deg); }
+  80% { transform: translate(calc(-50% - var(--move-x)),calc(-50% + 47px)) rotate(300deg); }
+}
+@keyframes ig-rotor { 
+  100% { transform: rotate(360deg); }
+}
+@keyframes ig-signal-pulse { 
+  100% { opacity: 0.2; }
+}
+@keyframes ig-select-capsule { 
+  0% { opacity: 0.3; transform: translate(-85%, -17px) scale(0.8); }
+  100% { opacity: 1; transform: translate(-50%, 0px); }
+}
+@keyframes ig-deliver-capsule { 
+  0% { transform: translate(-50%, 0px) rotate(0deg); }
+  30% { transform: translate(-50%, 42px) rotate(85deg); }
+  50% { transform: translate(-50%, 77px) scale(0.83) rotate(145deg); opacity: 0.4; }
+  65% { transform: translate(-50%, 135px) scale(1.15) rotate(230deg); opacity: 1; }
+  80% { transform: translate(-50%, 153px) scale(1.2) rotate(345deg); }
+  90% { transform: translate(-50%, 143px) scale(1.2) rotate(360deg); }
+  100% { transform: translate(-50%, 153px) scale(1.2) rotate(360deg); }
+}
+@keyframes ig-open-cap-top { 
+  100% { transform: translateY(-34px) rotate(-18deg); opacity: 0; }
+}
+@keyframes ig-open-cap-bottom { 
+  100% { transform: translateY(18px) rotate(16deg); opacity: 0; }
+}
+@keyframes ig-fade-cap { 
+  100% { opacity: 0; }
+}
+@keyframes ig-egg-out { 
+  0% { opacity: 0; transform: translateY(17px) scale(0.6); }
+  70% { opacity: 1; transform: translateY(-5px) scale(1.05); }
+  100% { transform: translateY(0px) scale(1); }
+}
+@media (max-width: 520px){#idle-gachapon .station .stage{min-height: 375px;}
+#idle-gachapon .station .machine{transform: scale(0.94);}
+#idle-gachapon .sequence-label{font-size: 6px; letter-spacing: 1px;}}
+@media (prefers-reduced-motion: reduce){#idle-gachapon .shutter{transition: none !important;}}
+#idle-gachapon .station .stage{min-height: 418px; padding: 13px 0px 34px;}
+#idle-gachapon .station .machine{width: 238px; height: 367px; border: 1px solid rgb(163, 107, 145); border-radius: 28px 28px 23px 23px; background: linear-gradient(100deg, rgb(85, 80, 100), rgb(40, 43, 61) 16%, rgb(35, 37, 54) 82%, rgb(76, 64, 86)); box-shadow: rgba(223, 212, 239, 0.133) 2px 0px 1px inset, rgba(9, 11, 25, 0.6) -2px 0px 1px inset; filter: drop-shadow(rgba(0, 0, 0, 0.533) 0px 12px 12px);}
+#idle-gachapon .station .machine-cap{height: 38px; width: 100%; margin: 0px; padding: 7px 17px; border-width: 0px 0px 1px; border-style: none none solid; border-color: currentcolor currentcolor rgba(250, 154, 194, 0.3); border-image: none; border-radius: 27px 27px 0px 0px; background: linear-gradient(130deg, rgb(216, 76, 130), rgb(160, 42, 94)); box-shadow: rgba(255, 214, 229, 0.19) 0px 2px 0px inset;}
+#idle-gachapon .station .glass{height: 176px; margin: 8px 9px 0px; border: 1px solid rgba(143, 189, 211, 0.4); border-radius: 15px 15px 12px 12px; background: radial-gradient(at 28% 18%, rgba(199, 230, 255, 0.125), transparent 55%), linear-gradient(115deg, rgba(69, 106, 126, 0.4), rgb(18, 29, 43) 65%, rgba(46, 74, 94, 0.4)); box-shadow: rgba(0, 0, 0, 0.267) 0px 0px 18px inset, rgba(224, 244, 255, 0.07) 2px 0px 4px inset;}
+#idle-gachapon .station .glass::after{left: 15px; width: 22px;}
+#idle-gachapon .station .machine-base{height: 143px; margin: 0px; padding: 10px 13px 9px; border-width: 1px 0px 0px; border-style: solid none none; border-color: rgba(142, 101, 130, 0.4) currentcolor currentcolor; border-image: none; border-radius: 0px 0px 22px 22px; background: linear-gradient(110deg, rgb(60, 58, 77), rgb(38, 40, 58) 54%, rgb(48, 38, 55)); box-shadow: rgba(223, 184, 212, 0.047) 0px 2px 1px inset, rgba(0, 0, 0, 0.2) 0px -4px 6px inset;}
+#idle-gachapon .machine-base::before,#idle-gachapon .machine-base::after{height: 76px; top: 53px; width: 3px; opacity: 0.8;}
+#idle-gachapon .machine-base::before{left: 5px;}
+#idle-gachapon .machine-base::after{right: 5px;}
+#idle-gachapon .console{height: 39px; margin: 0px 3px; gap: 10px;}
+#idle-gachapon .display{height: 37px; padding: 4px 7px; border-color: rgb(102, 137, 160);}
+#idle-gachapon .display > b{font-size: 10px;}
+#idle-gachapon .display > span{font-size: 5px;}
+#idle-gachapon .signal{margin-top: 2px;}
+#idle-gachapon .dial{width: 34px; height: 34px; flex: 0 0 auto;}
+#idle-gachapon .dial i{left: 12px; top: 2px; height: 9px;}
+#idle-gachapon .outlet{height: 77px; margin: 7px 3px 0px; border: 1px solid rgb(125, 102, 131); border-radius: 9px 9px 14px 14px; box-shadow: rgba(0, 0, 0, 0.733) 0px 4px 8px inset, rgba(201, 163, 186, 0.2) 0px 1px 0px; background: radial-gradient(at 50% 95%, rgba(111, 60, 91, 0.4), rgb(11, 16, 32) 75%);}
+#idle-gachapon .outlet > span{bottom: 5px; font-size: 5px; letter-spacing: 1px;}
+#idle-gachapon .outlet::after{left: 4px; right: 4px; height: 2px; bottom: 2px;}
+#idle-gachapon .machine-feet::before,#idle-gachapon .machine-feet::after{height: 5px; bottom: -5px; width: 39px;}
+#idle-gachapon .machine-feet::before{left: 25px;}
+#idle-gachapon .machine-feet::after{right: 25px;}
+#idle-gachapon .station #ig-hero-egg{top: 275px; width: 76px; height: 70px;}
+#idle-gachapon .station #ig-hero-egg .egg-svg{width: 48px; height: 63px;}
+#idle-gachapon .station #ig-hatch-sprite{top: 267px; width: 82px; height: 82px;}
+#idle-gachapon .station #ig-hatch-sprite img{width: 82px; height: 82px;}
+#idle-gachapon .station .flash{inset: 269px 19px 16px; border-radius: 10px;}
+#idle-gachapon .station .sparkles{inset: 276px 28px 19px; font-size: 15px;}
+#idle-gachapon .station .sparkles > span{top: 8px;}
+#idle-gachapon .station .sparkles > b{bottom: 0px;}
+#idle-gachapon .station .sparkles > em{bottom: 2px; right: 22px;}
+#idle-gachapon .delivery-capsule{top: 145px;}
+#idle-gachapon .station .plinth{bottom: 26px; width: 280px;}
+#idle-gachapon .sequence-label{bottom: 5px;}
+@media (max-width: 520px){#idle-gachapon .station .stage{min-height: 400px;}
+#idle-gachapon .station .machine{transform: scale(0.94);}}
+#idle-gachapon .station #ig-hatch-sprite{top: 278px; width: 72px; height: 72px;}
+#idle-gachapon .station #ig-hatch-sprite img{width: 72px; height: 72px;}
+#idle-gachapon .station #ig-hero-egg{top: 282px;}
+#idle-gachapon .station #ig-hatch-sprite{top: 282px; width: 68px; height: 68px;}
+#idle-gachapon .station #ig-hatch-sprite img{width: 68px; height: 68px;}
+#idle-gachapon .station[data-step="mix"] .capsules > i{will-change: transform; animation: auto ease 0s 1 normal none running none !important;}
+#idle-gachapon .station[data-step="mix"] .chamber-ring{animation: 0.45s ease-in-out 0s infinite alternate none running ig-mixer-glow;}
+@keyframes ig-mixer-glow { 
+  100% { border-color: rgb(152, 233, 251); box-shadow: rgba(85, 209, 238, 0.4) 0px 0px 15px; }
+}
+@keyframes ig-select-capsule { 
+  0% { opacity: 1; transform: translate(calc(-50% + var(--pick-x,0px)),var(--pick-y,0px)) scale(1); }
+  100% { opacity: 1; transform: translate(-50%, 0px) scale(1); }
+}
+@media (prefers-reduced-motion: reduce){#idle-gachapon .station[data-step="mix"] .chamber-ring{animation: auto ease 0s 1 normal none running none !important;}}
+#idle-gachapon .station[data-step="select"] .capsules > i:nth-child(4),#idle-gachapon .station[data-step="drop"] .capsules > i:nth-child(4),#idle-gachapon .station[data-step="open"] .capsules > i:nth-child(4){opacity: 1; visibility: visible;}
+#idle-gachapon .station .delivery-capsule{width: 43px; height: 43px;}
+#idle-gachapon .station .delivery-capsule > .moving-capsule{position: relative; inset: 0px auto auto 0px; display: flex; align-items: center; justify-content: center; isolation: isolate; width: 43px; height: 43px; border: 1px solid rgba(206, 232, 242, 0.48); border-radius: 50%; background: linear-gradient(140deg, rgba(184, 232, 246, 0.176), rgba(21, 34, 55, 0.65)); box-shadow: rgba(228, 245, 255, 0.196) 2px 3px 4px inset, rgba(0, 0, 0, 0.333) 0px 5px 6px; opacity: 1; animation: auto ease 0s 1 normal none running none !important;}
+#idle-gachapon .moving-capsule > .capsule-half{display: none;}
+#idle-gachapon .moving-capsule::before{content: ""; position: absolute; left: 1px; right: 1px; top: 50%; height: 3px; background: rgba(225, 106, 151, 0.68); box-shadow: rgba(9, 13, 28, 0.533) 0px 1px 0px; z-index: 1;}
+#idle-gachapon .moving-capsule::after{content: ""; position: absolute; width: 7px; height: 7px; background: rgb(213, 236, 246); border: 2px solid rgb(168, 52, 103); border-radius: 50%; top: calc(50% - 4px); left: calc(50% - 4px); z-index: 2;}
+#idle-gachapon .moving-capsule .egg-svg{width: 23px; height: 30px; opacity: 0.8;}
+#idle-gachapon .station[data-step="open"] .moving-capsule{background: transparent; border-color: transparent; box-shadow: none;}
+#idle-gachapon .station[data-step="open"] .moving-capsule::before,#idle-gachapon .station[data-step="open"] .moving-capsule::after{animation: 0.25s ease 0s 1 normal both running ig-fade-cap;}
+#idle-gachapon .station[data-step="open"] .moving-capsule > .capsule-half{display: block; position: absolute; left: -1px; right: -1px; height: 22px; background: linear-gradient(140deg, rgba(184, 232, 246, 0.176), rgba(21, 34, 55, 0.65)); border: 1px solid rgba(206, 232, 242, 0.48); box-shadow: rgba(228, 245, 255, 0.196) 2px 3px 4px inset; pointer-events: none;}
+#idle-gachapon .station[data-step="open"] .moving-capsule > .upper{top: -1px; border-radius: 50px 50px 0px 0px; animation: 0.65s ease-out 0s 1 normal both running ig-open-cap-top;}
+#idle-gachapon .station[data-step="open"] .moving-capsule > .lower{bottom: -1px; border-radius: 0px 0px 50px 50px; animation: 0.65s ease-out 0s 1 normal both running ig-open-cap-bottom;}
+#idle-gachapon .station[data-step="open"] .moving-capsule > span{animation: 0.65s ease-out 0s 1 normal both running ig-egg-unseal;}
+@keyframes ig-egg-unseal { 
+  100% { transform: scale(1.35); filter: drop-shadow(0 0 8px var(--rarity)); }
+}
+#idle-gachapon .machine-cap i{animation: 3s ease-in-out 0s infinite normal none running ig-led-chase; will-change: opacity; box-shadow: rgb(255, 212, 139) 0px 0px 5px, rgba(255, 195, 108, 0.4) 0px 0px 10px;}
+#idle-gachapon .machine-cap i:nth-of-type(2){animation-delay: 0.6s;}
+#idle-gachapon .machine-cap i:nth-of-type(3){animation-delay: 1.2s;}
+#idle-gachapon .machine-base::before,#idle-gachapon .machine-base::after{animation: 3.2s ease-in-out 0s infinite normal none running ig-rail-breathe;}
+#idle-gachapon .machine-base::after{animation-delay: 1.6s;}
+#idle-gachapon .station .glass::after{animation: 7s ease-in-out 0s infinite normal none running ig-glass-shimmer;}
+#idle-gachapon .display{position: relative; overflow: hidden; animation: 4s ease-in-out 0s infinite normal none running ig-console-glow;}
+#idle-gachapon .display::after{content: ""; position: absolute; left: 0px; right: 0px; height: 2px; top: 0px; background: linear-gradient(90deg, transparent, rgba(139, 223, 246, 0.23), transparent); box-shadow: rgba(158, 234, 255, 0.133) 0px 0px 8px; animation: 5s linear 0s infinite normal none running ig-console-sweep; pointer-events: none;}
+#idle-gachapon .signal i{animation: 3.6s ease-in-out 0s infinite normal none running ig-signal-idle;}
+#idle-gachapon .signal i:nth-child(2){animation-delay: 0.3s;}
+#idle-gachapon .signal i:nth-child(3){animation-delay: 0.6s;}
+#idle-gachapon .signal i:nth-child(4){animation-delay: 0.9s;}
+#idle-gachapon .signal i:nth-child(5){animation-delay: 1.2s;}
+#idle-gachapon .dial{animation: 4s ease-in-out 0s infinite normal none running ig-dial-glow;}
+#idle-gachapon .station .chamber-ring{animation: 4s ease-in-out 0s infinite normal none running ig-ring-idle;}
+#idle-gachapon .station[data-phase="drawing"] .machine-cap i{animation-duration: 1.4s;}
+#idle-gachapon .station[data-step="drop"] .machine-base::before,#idle-gachapon .station[data-step="drop"] .machine-base::after{animation: 0.95s ease-out 0s 1 normal both running ig-delivery-rail;}
+#idle-gachapon .station[data-step="open"] .outlet,#idle-gachapon .station[data-phase="revealed"] .outlet{box-shadow: inset 0 4px 8px #0008,0 0 14px color-mix(in srgb,var(--rarity) 22%,transparent); border-color: color-mix(in srgb,var(--rarity) 65%,#60485d);}
+#idle-gachapon .station[data-phase="revealed"] .machine-base::before,#idle-gachapon .station[data-phase="revealed"] .machine-base::after{background: var(--rarity); box-shadow: 0 0 10px color-mix(in srgb,var(--rarity) 50%,transparent);}
+@keyframes ig-led-chase { 
+  0%, 65%, 100% { opacity: 0.4; filter: brightness(0.8); }
+  20%, 40% { opacity: 1; filter: brightness(1.3); }
+}
+@keyframes ig-rail-breathe { 
+  0%, 100% { opacity: 0.35; filter: brightness(0.8); }
+  50% { opacity: 0.85; filter: brightness(1.15); }
+}
+@keyframes ig-glass-shimmer { 
+  0%, 30%, 100% { opacity: 0.35; }
+  50%, 60% { opacity: 0.85; }
+}
+@keyframes ig-console-glow { 
+  0%, 100% { box-shadow: rgba(101, 190, 229, 0.035) 0px 0px 9px inset, rgba(102, 205, 239, 0.035) 0px 0px 3px; }
+  50% { box-shadow: rgba(101, 190, 229, 0.106) 0px 0px 12px inset, rgba(102, 205, 239, 0.09) 0px 0px 8px; }
+}
+@keyframes ig-console-sweep { 
+  0% { transform: translateY(-4px); opacity: 0; }
+  15%, 70% { opacity: 0.8; }
+  100% { transform: translateY(40px); opacity: 0; }
+}
+@keyframes ig-signal-idle { 
+  0%, 70%, 100% { opacity: 0.25; }
+  20%, 45% { opacity: 0.9; }
+}
+@keyframes ig-dial-glow { 
+  0%, 100% { box-shadow: rgba(229, 81, 136, 0.133) 0px 0px 5px, rgba(221, 221, 221, 0.067) 0px 2px 0px inset; }
+  50% { box-shadow: rgba(229, 81, 136, 0.4) 0px 0px 12px, rgba(221, 221, 221, 0.067) 0px 2px 0px inset; }
+}
+@keyframes ig-ring-idle { 
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 0.9; }
+}
+@keyframes ig-delivery-rail { 
+  0% { opacity: 0.25; filter: brightness(0.7); }
+  60%, 100% { opacity: 1; filter: brightness(1.6); }
+}
+@media (prefers-reduced-motion: reduce){#idle-gachapon .machine-cap i,#idle-gachapon .machine-base::before,#idle-gachapon .machine-base::after,#idle-gachapon .station .glass::after,#idle-gachapon .display,#idle-gachapon .display::after,#idle-gachapon .signal i,#idle-gachapon .dial,#idle-gachapon .station .chamber-ring{opacity: 1; animation: auto ease 0s 1 normal none running none !important;}}
+#idle-gachapon .station{--sign-color: #ffd0e4;}
+#idle-gachapon .station[data-region="johto"]{--sign-color: #ffe4a0;}
+#idle-gachapon .station[data-region="hoenn"]{--sign-color: #acfff1;}
+#idle-gachapon .machine-cap > span{min-width: 0px;}
+#idle-gachapon #ig-machine-name{display: block; white-space: nowrap; font: 900 10px / 14px "Trebuchet MS", Arial, sans-serif; letter-spacing: 0.65px; color: var(--sign-color); text-shadow: 0 0 3px var(--sign-color),0 0 10px color-mix(in srgb,var(--sign-color) 65%,transparent),0 0 19px color-mix(in srgb,var(--sign-color) 35%,transparent); animation: 2.8s ease-in-out 0s infinite normal none running ig-sign-breathe, 8s linear 0s infinite normal none running ig-sign-blink;}
+#idle-gachapon .machine-cap small{font-size: 5px; line-height: 7px; letter-spacing: 1.7px; color: rgb(248, 210, 228); opacity: 0.7; margin-top: 1px;}
+@keyframes ig-sign-breathe { 
+  0%, 100% { filter: brightness(0.92); text-shadow: 0 0 3px var(--sign-color),0 0 7px color-mix(in srgb,var(--sign-color) 55%,transparent); }
+  50% { filter: brightness(1.2); text-shadow: 0 0 4px var(--sign-color),0 0 13px var(--sign-color),0 0 23px color-mix(in srgb,var(--sign-color) 50%,transparent); }
+}
+@keyframes ig-sign-blink { 
+  0%, 70%, 80%, 100% { opacity: 1; }
+  73%, 77% { opacity: 0.5; }
+  75%, 79% { opacity: 1; }
+}
+@media (prefers-reduced-motion: reduce){#idle-gachapon #ig-machine-name{filter: none; text-shadow: 0 0 5px color-mix(in srgb,var(--sign-color) 55%,transparent); animation: auto ease 0s 1 normal none running none !important;}}
+#idle-gachapon .draw-actions [data-quantity]{padding: 10px 17px; min-width: 100px; font-size: 13px;}
+#idle-gachapon .draw-actions [data-quantity="5"]{background: linear-gradient(110deg, rgb(158, 57, 128), rgb(109, 58, 138)); border-color: rgb(203, 135, 196);}
+#idle-gachapon .draw-actions [data-quantity="10"]{background: linear-gradient(110deg, rgb(141, 88, 51), rgb(107, 60, 80)); border-color: rgb(219, 173, 112); color: rgb(255, 227, 177);}
+@media (max-width: 520px){#idle-gachapon .draw-actions{gap: 6px; padding-left: 12px; padding-right: 12px;}
+#idle-gachapon .draw-actions [data-quantity]{flex: 1 1 0%; min-width: 80px; padding: 9px 8px; font-size: 12px;}
+#idle-gachapon .draw-actions [data-quantity] span{font-size: 9px;}}
+#idle-gachapon .station .machine-cap{display: grid; grid-template-columns: 19px minmax(0px, 1fr) 19px; align-items: center; gap: 5px; padding: 6px 10px;}
+#idle-gachapon .machine-cap .machine-title{text-align: center; min-width: 0px;}
+#idle-gachapon .machine-cap .cap-leds{display: flex; gap: 3px; align-items: center; justify-content: center; width: 19px; min-width: 19px;}
+#idle-gachapon .machine-cap .cap-leds i{display: block; width: 4px; height: 4px; flex: 0 0 auto; margin: 0px;}
+#idle-gachapon .machine-cap .cap-leds:first-child i:nth-child(1){animation-delay: 1.2s;}
+#idle-gachapon .machine-cap .cap-leds:first-child i:nth-child(2){animation-delay: 0.6s;}
+#idle-gachapon .machine-cap .cap-leds:first-child i:nth-child(3){animation-delay: 0s;}
+#idle-gachapon #ig-machine-name{font-size: 9px; letter-spacing: 0.4px; text-align: center;}
+#idle-gachapon .machine-cap .machine-title small{text-align: center; font-size: 5px; letter-spacing: 1.3px;}
+#idle-gachapon .batch-delivery{display: grid; grid-template-columns: repeat(5, minmax(0px, 1fr)); gap: 6px; margin: 0px 20px 13px;}
+#idle-gachapon .batch-delivery[hidden]{display: none !important;}
+#idle-gachapon .batch-egg{position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; min-width: 0px; height: 65px; border: 1px dashed rgb(85, 66, 89); background: rgba(18, 23, 37, 0.533); border-radius: 8px; color: rgb(127, 120, 143);}
+#idle-gachapon .batch-egg > small{position: absolute; top: 4px; left: 5px; font: 7px monospace; color: rgb(142, 126, 155);}
+#idle-gachapon .batch-egg > span:not(:has(svg)){font-size: 17px;}
+#idle-gachapon .batch-egg[data-delivered="true"]{border-style: solid; border-color: color-mix(in srgb,var(--rarity) 50%,#302735); box-shadow: inset 0 0 12px color-mix(in srgb,var(--rarity) 7%,transparent);}
+#idle-gachapon .batch-egg .egg-svg{width: 27px; height: 35px;}
+#idle-gachapon .batch-egg > b{font-size: 9px; color: var(--rarity); margin-top: 2px;}
+#idle-gachapon .station[data-step="delivered"] #ig-hero-egg{display: flex; animation: auto ease 0s 1 normal none running none;}
+#idle-gachapon .station[data-step="delivered"] #ig-hero-egg > span{animation: 0.3s ease-out 0s 1 normal both running ig-egg-out;}
+#idle-gachapon .station[data-step="delivered"] .shutter{transform: translateY(-110%);}
+#idle-gachapon .station[data-step="delivered"] .capsules{opacity: 0.42;}
+@media (max-width: 520px){#idle-gachapon .batch-delivery{margin-left: 12px; margin-right: 12px; gap: 4px;}
+#idle-gachapon .batch-egg{height: 59px;}}
+#idle-gachapon .top #ig-music{margin-left: auto;}
+#idle-gachapon .top #ig-sound{margin-left: 0px;}
+@media (max-width: 520px){#idle-gachapon .top .prototype{display: none;}
+#idle-gachapon .top{gap: 8px;}
+#idle-gachapon .top #ig-music,#idle-gachapon .top #ig-sound{font-size: 9px; padding: 7px;}}

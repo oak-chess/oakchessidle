@@ -1,0 +1,62 @@
+[
+  {
+    "key": "forest",
+    "file": "HGSS 218 Viridian Forest.ogg"
+  },
+  {
+    "key": "meadow",
+    "file": "HGSS 109 Route 29.ogg"
+  },
+  {
+    "key": "garden",
+    "file": "HGSS 158 National Park.ogg"
+  },
+  {
+    "key": "cave",
+    "file": "HGSS 128 Union Cave.ogg"
+  },
+  {
+    "key": "water",
+    "file": "HGSS 170 Surf.ogg"
+  },
+  {
+    "key": "ghost",
+    "file": "HGSS 162 Burned Tower.ogg"
+  },
+  {
+    "key": "ice",
+    "file": "HGSS 179 Ice Path.ogg"
+  },
+  {
+    "key": "dragon",
+    "file": "HGSS 181 Dragon_s Den.ogg"
+  },
+  {
+    "key": "volcano",
+    "file": "HGSS 230 Cinnabar Island.ogg"
+  },
+  {
+    "key": "center",
+    "file": "HGSS 115 Poke Center.ogg"
+  },
+  {
+    "key": "shop",
+    "file": "HGSS 125 Poke Mart.ogg"
+  },
+  {
+    "key": "gym",
+    "file": "HGSS 204 Battle! (Gym Leader Kanto).ogg"
+  },
+  {
+    "key": "birds",
+    "file": "HGSS 168 Battle! (Raikou).ogg"
+  },
+  {
+    "key": "mewtwo",
+    "file": "HGSS 275 Battle! (Lugia).ogg"
+  },
+  {
+    "key": "trainer",
+    "file": "HGSS 118 Battle! (Trainer Battle Johto).ogg"
+  }
+]

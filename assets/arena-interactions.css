@@ -1,0 +1,11 @@
+
+ #world .unit.arena-react-electrocuted .bob{animation:none!important}
+ #world .unit.arena-react-whirlwind .bob{animation:none!important}
+ #world .unit.arena-react-whirlwind canvas.pmdc,#world .unit.arena-react-whirlwind .spr>img{animation:none!important}
+ @keyframes prototypeWhirlSpin{0%,100%{rotate:-18deg}50%{rotate:18deg}}
+ @media(prefers-reduced-motion:reduce){#world .unit.arena-react-whirlwind canvas.pmdc,#world .unit.arena-react-whirlwind .spr>img{animation:none!important}}
+ #world .unit.arena-react-electrocuted canvas.pmdc,#world .unit.arena-react-electrocuted .spr>img{animation:prototypeShockShake .12s steps(2,end) infinite,prototypeShockFlash .32s steps(2,end) infinite!important;will-change:transform,filter}
+ @keyframes prototypeShockShake{0%,100%{transform:translate(-7px,1px)}50%{transform:translate(7px,-2px)}}
+ @keyframes prototypeShockFlash{0%,100%{filter:brightness(2) sepia(1) saturate(3) drop-shadow(0 0 5px #ffe04f)}50%{filter:brightness(.48) sepia(1) saturate(2) drop-shadow(0 0 3px #f5b731)}}
+ @media(prefers-reduced-motion:reduce){#world .unit.arena-react-electrocuted canvas.pmdc,#world .unit.arena-react-electrocuted .spr>img{animation:none!important;filter:sepia(1) saturate(2) drop-shadow(0 0 4px #ffe04f)}}
+body.game-paused .unit.arena-react-electrocuted canvas.pmdc,body.game-paused .unit.arena-react-electrocuted .spr>img{animation-play-state:paused!important}

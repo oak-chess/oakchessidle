@@ -1,0 +1,17 @@
+/* Compact digital roster; floating XP uses actual cumulative gains, including level-ups. */
+body.idle-native-mode #stage .is-team .is-team-card{min-height:56px;padding:7px 8px;grid-template-columns:38px minmax(0,1fr);gap:8px;border:1px solid #71425e!important;border-radius:9px!important;background:linear-gradient(115deg,#352235ef,#1c1927f5 72%)!important;box-shadow:0 3px 10px #0005,inset 0 1px #fff1!important;overflow:hidden;isolation:isolate}
+body.idle-native-mode #stage .is-team .is-team-card::before{content:'';position:absolute;left:0;top:10px;bottom:10px;width:2px;border-radius:2px;background:#d44a78;box-shadow:0 0 8px #db387f55;pointer-events:none}
+body.idle-native-mode #stage .is-team .is-team-card:hover{background:linear-gradient(115deg,#553047f2,#2b2034f5)!important;border-color:#ef8eae!important;transform:translateX(2px)}
+body.idle-native-mode #stage .is-team .is-team-card>.is-card-sprite{width:36px;height:37px;position:relative;z-index:1;margin-bottom:3px;filter:drop-shadow(0 2px 3px #0008)}
+body.idle-native-mode #stage .is-card-heading{gap:3px;margin-bottom:6px}body.idle-native-mode #stage .is-card-heading>b{font-size:10px;color:#fff0f7}body.idle-native-mode #stage .is-card-level{font-size:8px;color:#e4c3d8;font-variant-numeric:tabular-nums}
+body.idle-native-mode #stage .is-card-hp-track{height:4px;background:#090c15;border-radius:3px}body.idle-native-mode #stage .is-card-hp-track i{background:linear-gradient(90deg,#48a796,#9ae5b6)}body.idle-native-mode #stage .is-card-health>span{font-size:7px;min-width:32px;color:#bedfd0}
+body.idle-native-mode #stage .is-card-xp-track{height:3px;margin-top:5px;margin-right:0;background:#0c1826;border-radius:3px}body.idle-native-mode #stage .is-card-xp-track i{background:linear-gradient(90deg,#4b91d5,#9de2ff);box-shadow:0 0 5px #8bcfff55}
+.is-card-types{position:absolute;left:12px;bottom:4px;display:flex;justify-content:center;gap:2px;width:32px;z-index:2;pointer-events:none}.is-card-types img{width:11px;height:9px;object-fit:contain;image-rendering:pixelated;filter:drop-shadow(0 1px 1px #0009)}
+body.idle-native-mode #stage .is-team .is-team-card[data-health=low]{border-color:#b97a45!important}.is-team-card[data-health=low] .is-card-hp-track i{background:linear-gradient(90deg,#db954d,#f8cd7d)!important}body.idle-native-mode #stage .is-team .is-team-card[data-health=fainted]{border-color:#58404f!important;background:linear-gradient(110deg,#30232d,#1a1720)!important}body.idle-native-mode #stage .is-team .is-team-card[data-health=fainted]>.is-card-sprite{filter:grayscale(1) brightness(.6)}
+.is-card-xp-gain{position:absolute;right:8px;bottom:2px;z-index:5;pointer-events:none;white-space:nowrap;color:#bcecff;text-shadow:0 1px 2px #000,0 0 7px #3897ffb0;font:800 11px/1.2 'Trebuchet MS',sans-serif;padding:2px 5px;border-radius:4px;background:#111b31dd;animation:idle-team-xp-rise 1.5s ease-out both}
+@keyframes idle-team-xp-rise{0%{opacity:0;translate:0 4px;scale:.9}13%,65%{opacity:1}28%{scale:1}100%{opacity:0;translate:0 -30px}}
+@media(prefers-reduced-motion:reduce){.is-card-xp-gain{animation:none;bottom:5px}}
+
+/* Visible XP percentage beside the compact progress bar. */
+body.idle-native-mode #stage .is-card-xp-track{position:relative;overflow:visible;margin-right:48px}
+body.idle-native-mode #stage .is-card-xp-track::after{content:attr(data-xp);position:absolute;left:calc(100% + 5px);top:50%;transform:translateY(-50%);width:44px;white-space:nowrap;color:#bce5ff;font:700 8px/1.2 "Trebuchet MS",sans-serif;font-variant-numeric:tabular-nums}

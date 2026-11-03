@@ -1,0 +1,29 @@
+#idle-arena-trainer{position:absolute;z-index:32;display:grid;place-items:center;width:74px;height:110px;transform:translate(-50%,-100%);margin:0;padding:0;border:0;border-radius:50%;background:radial-gradient(ellipse 29px 8px at 50% 97%,#172a2866 95%,transparent);cursor:pointer;pointer-events:auto}
+#idle-arena-trainer .idle-trainer-sprite{display:block;background-repeat:no-repeat;image-rendering:pixelated;transform-origin:50% 90%;filter:drop-shadow(0 3px 1px #16304255)}
+#idle-arena-trainer .idle-trainer-hand{position:absolute;width:4px;height:4px;right:17px;top:56px;pointer-events:none}
+#idle-arena-trainer:hover{filter:drop-shadow(0 0 4px #f2e4ae88)}
+#idle-arena-trainer:focus-visible,#idleTrainerLaunch:focus-visible{outline:2px solid #efd28c;outline-offset:3px}
+#idleTrainerLaunch{display:inline-flex!important;align-items:center;justify-content:center;width:32px;height:32px;padding:0;border:0;border-radius:5px;background:transparent;cursor:pointer}
+#idleTrainerLaunch .idle-trainer-launch-sprite{display:block;width:24px;height:32px;background:url('../../assets/trainer-profile/sprites/red_normal.png') no-repeat 0 0 / auto 48px;image-rendering:pixelated}
+.idle-trainer-fx{position:absolute;inset:0;z-index:58;pointer-events:none;overflow:hidden}
+.idle-recall-mon{position:absolute;width:72px;height:72px;object-fit:contain;image-rendering:pixelated;transform:translate(-50%,-50%)}
+.idle-recall-beam{position:absolute;height:5px;margin-top:-2px;background:linear-gradient(#ffd3df,#ef638f,#ffd3df);box-shadow:0 0 8px #ef638f;transform-origin:left center}
+.idle-recall-ball{position:absolute;width:24px;height:24px;transform:translate(-50%,-50%);object-fit:contain;image-rendering:pixelated;filter:drop-shadow(0 0 5px #f7b2d0)}
+/* Face the field from the walkway beside the bench. */
+#idle-arena-trainer{width:80px;height:128px;align-items:end;padding-bottom:5px}
+#idle-arena-trainer .idle-trainer-hand{right:14px;top:66px}
+body.idle-native-mode #collectionShortcuts #idleTrainerLaunch{display:inline-flex!important;position:static!important;flex:none;width:32px!important;min-width:32px!important;height:32px!important;min-height:32px!important;padding:0!important;margin:0!important;border:0!important;background:transparent!important;overflow:hidden;box-shadow:none!important}
+body.idle-native-mode #collectionShortcuts #idleTrainerLaunch .idle-trainer-launch-sprite{display:block!important;flex:none;width:24px;height:32px;background-size:auto 48px;image-rendering:pixelated}
+/* Match campaign/tower: ground anchor (345,590), 120px sprite, mirrored frame 2. */
+#idle-arena-trainer{height:120px;width:80px;padding:0;align-items:center;background:none}
+#idle-arena-trainer::before{content:'';position:absolute;bottom:-6px;left:13px;width:54px;height:16px;border-radius:50%;background:#17201a73;pointer-events:none}
+#idle-arena-trainer .idle-trainer-sprite{position:relative;transform:scaleX(-1)}
+#idle-arena-trainer .idle-trainer-hand{right:14px;top:61px}
+/* Clear feedback at the trainer's hand while a partner returns. */
+#idle-arena-trainer[data-action=recall] .idle-trainer-hand::after{content:'';position:absolute;left:-8px;top:-8px;width:20px;height:20px;border-radius:50%;background:#ffbed6;box-shadow:0 0 15px 5px #f27fa890}
+.idle-recall-beam{z-index:1}.idle-recall-mon{z-index:2}.idle-recall-ball{z-index:3}
+/* Native campaign renderer: exact board canvas coordinates and foreground ordering. */
+body.idle-native-mode #world #arenaView>canvas#idleTrainerCanvas{position:absolute!important;left:0!important;top:0!important;width:1280px!important;height:800px!important;transform:none!important;z-index:2501;pointer-events:none;visibility:visible!important}
+#idle-arena-trainer{background:none;z-index:2502}
+#idle-arena-trainer::before{display:none}
+#idle-arena-trainer .idle-trainer-hand{left:64px;right:auto;top:52px}

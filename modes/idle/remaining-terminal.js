@@ -1,0 +1,2 @@
+/* Mark native service windows only; never retheme the phone, arena or combat HUD. */
+(()=>{const ids=['idle-party','idle-pc','idle-world','idle-evolution','idle-hunts','idle-field-notes','idle-wiki','idle-safari','idle-gachapon'];function start(){const stage=document.getElementById('stage');if(!stage){requestAnimationFrame(start);return}const mark=()=>{for(const id of ids)document.getElementById(id)?.classList.add('idle-store-finish')};mark();new MutationObserver(mark).observe(stage,{childList:true})}start()})();

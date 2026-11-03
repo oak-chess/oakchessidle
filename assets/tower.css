@@ -1,0 +1,483 @@
+/* Tower uses the game's illustrated collectible cards. No enclosing blue panel. */
+#towerHexMarks{position:absolute;inset:0;width:1280px;height:800px;pointer-events:none;z-index:0}
+#towerHexMarks[hidden],#towerHud[hidden]{display:none!important}
+body.tower-active #runChallengeTracker,body.tower-active #hint,body.tower-active .rpop{display:none!important}
+body.tower-active #rchips i{font:700 11px monospace;display:grid;place-items:center;color:#e5d69d}
+#towerOverlay{--tower-pixel:'Press Start 2P',monospace;position:fixed;inset:0;z-index:110000;display:grid;place-items:center;padding:20px;background:#08090dd6;backdrop-filter:blur(3px);overflow:auto;color:#eee8d8;font:13px/1.5 'Trebuchet MS','Segoe UI',sans-serif}
+#towerOverlay *{box-sizing:border-box}
+#towerOverlay .tower-dialog{width:min(1000px,100%);max-height:calc(100dvh - 40px);overflow:auto;padding:10px 12px;background:none;border:0;border-radius:0;box-shadow:none;scrollbar-width:thin;scrollbar-color:#b6a279 #171619}
+#towerOverlay header{text-align:center;margin:0 0 20px;text-shadow:2px 3px #000;max-width:720px;margin-inline:auto}
+#towerOverlay .tower-eyebrow{display:none}#towerOverlay h2{font:13px/1.8 var(--tower-pixel);color:#f1d997;margin:0 0 8px}
+#towerOverlay header p{margin:0;color:#c3bfb2;font-size:12px;line-height:1.5}
+#towerOverlay footer{display:flex;gap:14px;justify-content:center;align-items:center;flex-wrap:wrap;margin-top:20px}
+#towerOverlay .tower-button{display:inline-flex;align-items:center;justify-content:center;flex:0 0 auto;min-height:30px;max-width:220px;padding:7px 12px;border:1px solid #b8a57f;background:#352d24;color:#f0deb6;box-shadow:inset 1px 1px #c7aa6633,2px 3px #07070b;border-radius:0;font:8px/1.6 var(--tower-pixel);cursor:pointer;overflow-wrap:anywhere}
+#towerOverlay .tower-button.secondary{background:#1e1b18cc;color:#c6c0b3;border-color:#807464;box-shadow:1px 2px #07070b}
+#towerOverlay .tower-button:hover{color:#fff0bb;border-color:#efd79a;background:#4a3c29}
+#towerOverlay .tower-button:active{transform:translateY(1px)}
+#towerOverlay .tower-card-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;width:min(810px,100%);margin:auto;padding:4px 4px 10px}
+#towerOverlay .tower-card-grid.two{grid-template-columns:repeat(2,minmax(0,1fr));width:min(550px,100%)}
+#towerOverlay .tower-collectible{--card-base:#665440;--card-deep:#2c251f;--card-accent:var(--tower-accent);min-width:0;perspective:1100px}
+#towerOverlay .tower-card{display:block;width:100%;height:354px;padding:0;border:0;background:none;color:#f2edde;text-align:left;font:inherit;cursor:pointer;border-radius:8px;transform-style:preserve-3d;transition:transform .18s,filter .18s}
+#towerOverlay .tower-card-front{position:absolute;inset:0;display:flex;flex-direction:column;padding:11px;border:6px solid var(--tower-accent);border-radius:8px;overflow:hidden;background:linear-gradient(135deg,color-mix(in srgb,var(--tower-accent) 32%,#453828),#2b2523 85%);box-shadow:inset 0 0 0 2px #1c1714,inset 0 0 0 4px #ffffff25,0 7px 16px #0008;backface-visibility:hidden}
+#towerOverlay .tower-card:hover:not(:disabled){transform:translateY(-5px);filter:drop-shadow(0 0 6px #e4c98555)}
+#towerOverlay .tower-card:active:not(:disabled){transform:translateY(-1px) scale(.99)}
+#towerOverlay .tower-card:focus-visible,#towerOverlay .tower-button:focus-visible,#towerOverlay summary:focus-visible,#towerHud button:focus-visible{outline:2px solid #ffe6a6;outline-offset:4px}
+#towerOverlay .tower-card:disabled{opacity:.5;cursor:default}
+#towerOverlay .tower-card-top{display:flex;flex-direction:column;justify-content:center;min-height:43px;gap:4px;padding:0 2px 10px}
+#towerOverlay .tower-card-top small{font:7px/1.5 'Trebuchet MS',sans-serif;color:var(--tower-accent);letter-spacing:1px}
+#towerOverlay .tower-card-top b{font:8px/1.8 var(--tower-pixel);color:#f6eedc;overflow-wrap:anywhere;text-shadow:1px 2px #241c16}
+#towerOverlay .tower-card-art{display:block;width:100%;aspect-ratio:3/2;flex:none;border:2px solid var(--tower-accent);background:#171612;box-shadow:0 2px #0004;overflow:hidden}
+#towerOverlay .tower-card-art>img{display:block;width:100%;height:100%;object-fit:contain;object-position:center;image-rendering:pixelated;border:0;border-radius:0;filter:none;max-height:none}
+#towerOverlay .tower-card-text{padding:13px 3px 10px;font:13px/1.5 'Trebuchet MS',sans-serif;color:#eee4d2;flex:1;min-height:0}
+#towerOverlay .tower-card-foot{display:flex;align-items:center;justify-content:space-between;font:7px/1.4 'Trebuchet MS',sans-serif;color:var(--tower-accent);border-top:1px solid #ffffff26;padding:7px 2px 0}
+#towerOverlay .tower-card-foot i{font-style:normal}#towerOverlay .tower-card-shine{border-radius:4px;opacity:.45;pointer-events:none}
+#towerOverlay .tower-entry{width:min(350px,100%);margin:auto;padding:5px}
+#towerOverlay .tower-entry .tower-card{height:390px}#towerOverlay .tower-entry .tower-card-front{border-color:#ccb78b;background:linear-gradient(135deg,#5b4b56,#2b222f)}
+#towerOverlay .tower-entry .tower-card-top{min-height:40px}#towerOverlay .tower-entry .tower-card-top small{display:none}
+#towerOverlay .tower-entry .tower-card-art{aspect-ratio:3/2;border-color:#bfa8cf}
+#towerOverlay .tower-entry .tower-card-text{flex:0;padding:10px 3px;color:#cabcb2;font-size:12px}
+#towerOverlay .tower-entry-action{display:block;font:8px/1.8 var(--tower-pixel);text-align:center;color:#f4d997;padding:7px 3px 12px;margin:auto 0 0}
+#towerOverlay .tower-entry-dialog>footer{gap:12px;margin-top:15px}
+#towerOverlay .tower-note{max-width:620px;text-align:center;margin:14px auto;color:#c1b6a4;line-height:1.6;font-size:12px;text-shadow:1px 2px #000}
+#towerOverlay .tower-map{list-style:none;width:min(640px,100%);padding:0;margin:auto;display:grid;gap:7px}
+#towerOverlay .tower-map li{display:flex;align-items:center;gap:12px;padding:9px 12px;border:1px solid #72644c;background:#211e19e6;box-shadow:inset 2px 0 #5a4b35,1px 3px #070708}
+#towerOverlay .tower-map li>span{display:grid;place-items:center;width:24px;flex:none;color:#e1c78e;font:9px var(--tower-pixel)}
+#towerOverlay .tower-floor-mon{width:42px;height:42px;object-fit:contain;image-rendering:pixelated;flex:none}
+#towerOverlay .tower-map li>div{min-width:0}#towerOverlay .tower-map small{font:7px 'Trebuchet MS',sans-serif;color:#ac9f88;letter-spacing:1px}
+#towerOverlay .tower-map b{display:block;font-size:13px;color:#e5d8bd;margin:1px 0}#towerOverlay .tower-map p{font-size:12px;color:#d0c5b0;margin:6px 0 0;line-height:1.5}
+#towerOverlay .tower-map .done{opacity:.65}#towerOverlay .tower-map .current{border-color:#d2b374;box-shadow:inset 2px 0 #d2b374}
+#towerOverlay .tower-map summary,.tower-rule summary{font-size:11px;color:#c9b886;cursor:pointer;min-height:22px;line-height:22px}
+#towerOverlay .tower-relic-list{display:flex;gap:8px;flex-wrap:wrap;max-width:700px;margin:15px auto 0;justify-content:center;color:#baaf9a;font-size:11px}
+#towerOverlay .tower-relic-chip{display:flex;align-items:center;gap:6px;border:1px solid #817053;background:#282218de;padding:5px 8px}
+#towerOverlay .tower-relic-chip img{width:25px;height:25px;image-rendering:pixelated;object-fit:contain}
+#towerHud{position:absolute;top:62px;left:16px;z-index:55;width:196px;padding:9px;background:#241f18ed;border:1px solid #a08a62;box-shadow:inset 1px 1px #d5bd8826,2px 3px #08090b;display:grid;gap:7px;color:#daceb7}
+#towerHud>div{display:flex;justify-content:space-between;gap:5px;align-items:center}#towerHud small{font:6px/1.7 'Press Start 2P',monospace;color:#b8a582}#towerHud b{font-size:12px;color:#edd28e}
+#towerHud button{background:#3b3020;border:1px solid #9c835d;color:#e9d6b0;box-shadow:inset 1px 1px #c9a46926,1px 2px #0d0b07;font:7px/1.5 'Press Start 2P',monospace;padding:6px;cursor:pointer;min-height:27px}
+#towerHud button:disabled{opacity:.45;cursor:default}#towerHud em{font-style:normal;color:#eed296}.tower-rule{border-top:1px solid #8e784644;padding-top:2px}.tower-rule p{font-size:11px;line-height:1.5;margin:4px 0;color:#cdbfa4}
+.tower-lb{display:grid;gap:4px;padding:8px;background:#272018;color:#e2d2b4}.tower-lb small{font-size:8px;color:#cfb77d}.tower-lb b{font-size:12px}.tower-lb span{font-size:10px;color:#b7a88f}
+#towerOverlay .tower-results{display:flex;align-items:center;justify-content:center;gap:18px;flex-wrap:wrap;padding:20px;background:none;border:0;text-shadow:1px 2px #000}
+#towerOverlay .tower-results>b{font:24px/1.8 var(--tower-pixel);color:#f1d997;text-align:center}#towerOverlay .tower-results small{display:block;font-size:7px;color:#b9ae98}#towerOverlay .tower-results>span{font-size:12px;color:#ded2bb}
+#towerOverlay .tower-records{width:min(640px,100%);margin:auto;padding:0;list-style:none}#towerOverlay .tower-records li{display:flex;justify-content:space-between;gap:12px;padding:10px;border-bottom:1px solid #8f795955;background:#231e16b8}#towerOverlay .tower-records b{color:#f1d997}#towerOverlay .tower-records small{color:#b4a68f}
+#towerOverlay .tower-pack-area{display:flex;justify-content:center;padding:8px 0}
+#towerOverlay .tower-pack{position:relative;width:190px;height:285px;padding:0;border:0;background:none;cursor:pointer;filter:drop-shadow(0 8px 10px #0009);transition:transform .18s}
+#towerOverlay .tower-pack img{display:block;width:100%;height:100%;object-fit:contain;image-rendering:pixelated}
+#towerOverlay .tower-pack>span{position:absolute;inset:14% 15% auto;text-align:center;color:#f7e4ac;font:9px/1.8 var(--tower-pixel);text-shadow:1px 2px #251409}
+#towerOverlay .tower-pack small{display:block;font-size:7px}#towerOverlay .tower-pack:hover{transform:translateY(-4px) rotate(-1deg)}#towerOverlay .tower-pack:focus-visible{outline:2px solid #f4d795;outline-offset:5px}
+#towerOverlay.tower-opening .tower-pack{animation:towerOpen .42s ease forwards}
+@keyframes towerOpen{0%{transform:scale(1)}45%{transform:scale(1.06) rotate(-2deg);filter:brightness(1.25)}100%{transform:scale(1.12);opacity:0;filter:brightness(1.7)}}
+body #ttl #towerPreview{border-radius:8px;background:#392f28;border:4px solid #c6b389;box-shadow:inset 0 0 0 2px #1b1713,3px 5px #0b0b10}
+body #ttl #towerPreview>.mode-art{background:#171219}body #ttl #towerPreview .mode-art img{object-fit:contain;object-position:center;width:100%;height:100%}
+body #ttl #towerPreview>b{font:8px/1.7 'Press Start 2P',monospace;color:#f0d591}body #ttl #towerPreview>small{color:#cdbfa8;font-size:10px;line-height:1.4}body #ttl #towerPreview>i{border-radius:0;background:#564126;border:1px solid #baa06b;color:#f1dfb6;font-family:monospace}body #ttl #towerPreview::before{background:none}body #ttl #towerNotice{display:none!important}
+@media(max-width:700px){#towerOverlay{padding:12px}#towerOverlay .tower-dialog{padding:8px 5px;max-height:calc(100dvh - 24px)}#towerOverlay .tower-card-grid{gap:11px}#towerOverlay .tower-card{height:332px}#towerOverlay .tower-card-front{padding:8px;border-width:5px}#towerOverlay .tower-card-top b{font-size:7px}#towerOverlay .tower-card-top small{font-size:6px}#towerOverlay .tower-card-text{font-size:12px;padding:10px 2px}#towerOverlay h2{font-size:11px}#towerOverlay .tower-card-foot{font-size:6px}#towerOverlay .tower-entry{max-width:310px}#towerOverlay .tower-entry .tower-card{height:365px}}
+@media(max-width:480px){#towerOverlay .tower-card-grid,#towerOverlay .tower-card-grid.two{grid-template-columns:1fr;width:min(270px,100%);gap:18px}#towerOverlay .tower-card{height:340px}#towerOverlay .tower-card-art{aspect-ratio:3/2}#towerOverlay .tower-card-top b{font-size:8px}#towerOverlay .tower-records li{flex-wrap:wrap}}
+@media(prefers-reduced-motion:reduce){#towerOverlay .tower-card,#towerOverlay .tower-pack{transition:none}#towerOverlay .tower-card:hover:not(:disabled),#towerOverlay .tower-pack:hover{transform:none}#towerOverlay .tower-opening .tower-pack{animation:none}#towerOverlay .tower-card-shine{animation:none}}
+#towerOverlay .tower-card-art{position:relative}
+#towerOverlay .tower-card-art>img.tower-art-character{position:absolute;inset:auto;bottom:7%;width:42%;height:76%;object-fit:contain;image-rendering:pixelated;filter:drop-shadow(2px 4px #0009);border:0}
+#towerOverlay .tower-card-art>img.tower-art-character.solo{left:29%;width:44%;height:84%}
+#towerOverlay .tower-card-art>img.tower-art-character.left{left:9%;width:37%}
+#towerOverlay .tower-card-art>img.tower-art-character.right{right:7%;width:45%;height:70%}
+#towerOverlay .tower-pack>span{top:12.2%;font-size:8px;line-height:1.5}
+#towerOverlay .tower-pack small{font-size:6px;line-height:1.5}
+#towerOverlay .tower-summary-art{display:block;width:min(330px,100%);height:auto;aspect-ratio:3/2;object-fit:contain;margin:0 auto 16px;border:4px solid #bba77c;box-shadow:2px 4px #0008;image-rendering:pixelated}
+/* Traditional card proportions and rounded collector frames. */
+#towerOverlay .tower-card-grid{width:min(738px,100%);gap:24px}
+#towerOverlay .tower-card-grid.two{width:min(484px,100%)}
+#towerOverlay .tower-card{height:auto;aspect-ratio:63/95;border-radius:16px}
+#towerOverlay .tower-card-front{border-radius:16px}
+#towerOverlay .tower-card-art{border-radius:4px}
+#towerOverlay .tower-card-shine{border-radius:10px}
+#towerOverlay .tower-entry{width:min(280px,100%)}
+#towerOverlay .tower-entry .tower-card{height:auto;aspect-ratio:63/95}
+#towerOverlay .tower-entry .tower-card-front{border-radius:16px}
+#towerOverlay .tower-deal-packet{position:fixed;z-index:8;pointer-events:none;filter:drop-shadow(0 9px 13px #0008)}
+#towerOverlay .tower-deal-packet img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;image-rendering:pixelated}
+#towerOverlay .tower-deal-wrapper{clip-path:inset(17% 0 0 0)}
+#towerOverlay .tower-deal-lid{clip-path:inset(0 0 83% 0);transform-origin:20% 15%}
+#towerOverlay .tower-deal-back{position:absolute;inset:0;z-index:5;border:6px solid #c7b184;border-radius:16px;background:#302541 url('boon-art/card-back.webp') center/100% 100% no-repeat;pointer-events:none;box-shadow:inset 0 0 0 2px #21182d}
+#towerOverlay.tower-dealing .tower-dialog{overflow:visible}
+#towerOverlay .tower-dealing .tower-collectible{position:relative;z-index:3}
+#towerOverlay.tower-dealing .tower-card:disabled{opacity:1;filter:none}
+#towerOverlay.tower-dealing .tower-card{transition:none}
+@media(max-width:700px){#towerOverlay .tower-card-grid{gap:12px}#towerOverlay .tower-card-front{border-radius:14px}#towerOverlay .tower-card{border-radius:14px}}
+@media(max-width:480px){#towerOverlay .tower-card-grid,#towerOverlay .tower-card-grid.two{width:min(240px,100%);gap:20px}}
+@media(prefers-reduced-motion:reduce){#towerOverlay .tower-deal-packet{display:none}}
+/* Leave the left synergy rail clear; tower tools live under the round header. */
+#towerHud{left:50%;right:auto;top:55px;transform:translateX(-50%);width:max-content;max-width:calc(100% - 220px);grid-template-columns:auto auto auto auto;align-items:center;gap:9px;padding:6px 9px}
+#towerHud>div{gap:9px;white-space:nowrap}
+#towerHud button{white-space:nowrap;padding:5px 8px;min-height:25px}
+#towerHud .tower-rule{position:relative;padding:0;border:0}
+#towerHud .tower-rule summary{white-space:nowrap;line-height:25px;min-height:25px;font-size:10px}
+#towerHud .tower-rule p{position:absolute;top:calc(100% + 8px);right:0;width:280px;max-width:60vw;margin:0;padding:10px 12px;background:#241f18f5;border:1px solid #a08a62;box-shadow:2px 3px #08090b;white-space:normal}
+/* Illustrated entrance: a complete scene with a compact progress strip. */
+#towerOverlay .tower-entry{width:min(430px,100%);padding:0}
+#towerOverlay .tower-entry-dialog{width:min(520px,100%)}
+#towerOverlay .tower-entry-dialog header{margin-bottom:16px}
+#towerOverlay .tower-entrance-cover{display:block;width:100%;padding:7px;border:4px solid #bda67d;border-radius:12px;background:linear-gradient(135deg,#514253,#251f29);color:#f2e9d6;text-align:left;cursor:pointer;box-shadow:inset 0 0 0 2px #1b1720,0 8px 24px #0008;font:inherit;overflow:hidden}
+#towerOverlay .tower-cover-art{display:block;position:relative;border:1px solid #a892bd;border-radius:5px;overflow:hidden;background:#231c2d}
+#towerOverlay .tower-cover-art img{display:block;width:100%;height:auto;aspect-ratio:3/2;object-fit:contain;image-rendering:pixelated}
+#towerOverlay .tower-cover-art>small{position:absolute;top:9px;left:9px;padding:5px 7px;background:#211a2be8;border:1px solid #bda67d;color:#ecd39a;font:7px/1.6 var(--tower-pixel)}
+#towerOverlay .tower-cover-info{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:13px 7px 10px}
+#towerOverlay .tower-cover-info b{font:9px/1.8 var(--tower-pixel);color:#f1d997}
+#towerOverlay .tower-cover-info small{font-size:11px;color:#d0c0cc}
+#towerOverlay .tower-cover-progress{display:flex;gap:7px;padding:0 7px 13px}
+#towerOverlay .tower-cover-progress span{flex:1;text-align:center;padding:4px;border:1px solid #756477;background:#211c25;color:#a99eab;font:8px/1.6 var(--tower-pixel)}
+#towerOverlay .tower-cover-progress .done{background:#514532;color:#e7ce95;border-color:#9d895e}
+#towerOverlay .tower-cover-progress .current{background:#675335;color:#fff0bc;border-color:#e1c17b;box-shadow:inset 0 -2px #bc9753}
+#towerOverlay .tower-cover-action{display:flex;justify-content:center;gap:14px;border-top:1px solid #bda67d66;padding:11px 6px 5px;color:#f4d891;font:8px/1.8 var(--tower-pixel)}
+#towerOverlay .tower-cover-action i{font-style:normal}
+#towerOverlay .tower-entrance-cover:hover{border-color:#f0d294;filter:brightness(1.08)}
+#towerOverlay .tower-entrance-cover:focus-visible{outline:2px solid #ffe6a6;outline-offset:4px}
+body #ttl #towerPreview{padding:0!important;display:flex;flex-direction:column;justify-content:flex-start;gap:0;background:#2c2430;border:3px solid #bca77e;border-radius:10px}
+body #ttl #towerPreview>.mode-art{position:relative;inset:auto;display:block;flex:1 1 auto;min-height:0;width:100%;overflow:hidden;background:#241b2e}
+body #ttl #towerPreview .mode-art img{display:block;object-fit:contain;filter:none;opacity:1;transform:none}
+body #ttl #towerPreview>b{position:relative;display:block;flex:0 0 auto;width:100%;padding:8px 10px 3px;margin:0;background:#302632;border-top:1px solid #bca77e88;text-align:left}
+body #ttl #towerPreview>small{position:relative;display:block;flex:0 0 auto;width:100%;padding:0 10px 9px;margin:0;background:#302632;text-align:left;color:#d8c9bc}
+body #ttl #towerPreview>.mode-lock{display:none}
+body #ttl #towerPreview>i{top:7px;right:7px;font-size:8px;padding:3px 5px;background:#302237ed;border-color:#bca77e}
+@media(max-width:480px){#towerOverlay .tower-cover-info{align-items:flex-start;flex-direction:column;gap:4px}#towerOverlay .tower-cover-info b{font-size:8px}}
+/* Sector completion uses the same illustrated frame as the entrance. */
+#towerOverlay .tower-finish-dialog{width:min(480px,100%)}
+#towerOverlay .tower-finish-dialog header{margin-bottom:15px}
+#towerOverlay .tower-finish-card{padding:7px;border:4px solid #bda67d;border-radius:12px;background:linear-gradient(135deg,#514253,#251f29);box-shadow:inset 0 0 0 2px #1b1720,0 8px 24px #0008;overflow:hidden}
+#towerOverlay .tower-finish-art{position:relative;border:1px solid #a892bd;border-radius:5px;overflow:hidden}
+#towerOverlay .tower-finish-art img{display:block;width:100%;height:auto;aspect-ratio:3/2;object-fit:contain;image-rendering:pixelated}
+#towerOverlay .tower-finish-art>span{position:absolute;bottom:9px;left:50%;transform:translateX(-50%);white-space:nowrap;padding:6px 9px;background:#241d2cf0;border:1px solid #cdb17d;font:7px/1.7 var(--tower-pixel);color:#f0d591}
+#towerOverlay .tower-finish-score{text-align:center;padding:17px 5px 12px;color:#f1d997}
+#towerOverlay .tower-finish-score>b{display:block;font:25px/1.6 var(--tower-pixel);text-shadow:2px 3px #211a26}
+#towerOverlay .tower-finish-score>small{font:7px/1.8 var(--tower-pixel);color:#ccbdcb}
+#towerOverlay .tower-finish-stats{display:grid;grid-template-columns:repeat(3,1fr);padding:10px 0;border-block:1px solid #bda67d55;background:#211b254d}
+#towerOverlay .tower-finish-stats>span{text-align:center;border-right:1px solid #bda67d44}
+#towerOverlay .tower-finish-stats>span:last-child{border-right:0}
+#towerOverlay .tower-finish-stats b{display:block;color:#f1dcaa;font:10px/1.8 var(--tower-pixel)}
+#towerOverlay .tower-finish-stats small{color:#cbbfc9;font-size:11px}
+#towerOverlay .tower-finish-note{text-align:center;margin:10px 0 4px;font-size:10px;color:#bfb1bf}
+#towerOverlay .tower-cover-progress{display:grid;grid-template-columns:repeat(5,1fr);gap:5px}
+#towerOverlay .tower-sector-gate{width:min(430px,100%);margin:auto;padding:8px;border:4px solid #bca1d3;border-radius:12px;background:linear-gradient(135deg,#49354f,#251e2c);text-align:center;box-shadow:0 8px 24px #0008}
+#towerOverlay .tower-sector-scene{position:relative;overflow:hidden;border:1px solid #9d83b3;border-radius:5px}
+#towerOverlay .tower-sector-scene>img:first-child{display:block;width:100%;aspect-ratio:3/2;object-fit:contain;image-rendering:pixelated}
+#towerOverlay .tower-sector-scene>.tower-sector-oracle{position:absolute;bottom:9%;left:27%;width:46%;height:76%;object-fit:contain;image-rendering:pixelated;filter:drop-shadow(2px 4px #0009)}
+#towerOverlay .tower-sector-gate>b{display:block;margin:14px 0 8px;color:#edd0ff;font:9px/1.8 var(--tower-pixel)}
+#towerOverlay .tower-sector-gate p{font-size:12px;margin:6px 0;color:#d7c7dc}
+#towerOverlay .tower-sector-gate>small{display:block;margin:10px 0;color:#ead29a;font-size:11px}
+#towerOverlay .tower-relic-illustration{position:relative;display:block;width:100%;height:100%;overflow:hidden;background:#201b24}
+#towerOverlay .tower-relic-illustration>img:first-child{display:block;width:100%;height:100%;object-fit:cover;filter:brightness(.55) saturate(.7)}
+#towerOverlay .tower-relic-object{position:absolute;left:25%;top:13%;width:50%;height:74%;object-fit:contain;image-rendering:pixelated;filter:drop-shadow(0 0 8px var(--tower-accent)) drop-shadow(2px 5px #000b)}
+/* Compact illustrated sector selection. */
+#towerOverlay .tower-preview-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;width:min(900px,100%);margin:auto}
+#towerOverlay .tower-sector-choice{display:flex;flex-direction:column;gap:6px;padding:6px 6px 10px;min-width:0;border:3px solid #bca77e;border-radius:9px;background:linear-gradient(135deg,#483848,#251f29);color:#ecd9b0;box-shadow:inset 0 0 0 1px #17131c,2px 4px #08070a;cursor:pointer;text-align:left}
+#towerOverlay .tower-sector-choice>span{display:block;position:relative;width:100%;aspect-ratio:3/2;overflow:hidden;border-radius:3px}
+#towerOverlay .tower-sector-choice>span>img:first-child{width:100%;height:100%;object-fit:cover;image-rendering:pixelated}
+#towerOverlay .tower-sector-choice .tower-sector-portrait{position:absolute;left:25%;bottom:4%;width:50%;height:88%;object-fit:contain;image-rendering:pixelated;filter:drop-shadow(2px 4px #0009)}
+#towerOverlay .tower-sector-choice>small{font-size:9px;color:#c1afc2;padding:0 3px}
+#towerOverlay .tower-sector-choice>b{font:7px/1.8 var(--tower-pixel);padding:0 3px;overflow-wrap:anywhere}
+#towerOverlay .tower-sector-choice:hover{border-color:#f0d294;filter:brightness(1.12)}
+#towerOverlay .tower-sector-choice:focus-visible{outline:2px solid #ffe6a6;outline-offset:3px}
+#towerOverlay .tower-cover-progress{grid-template-columns:repeat(6,1fr)}
+#towerWatcher{position:absolute;left:1030px;top:70px;width:110px;pointer-events:none;z-index:8;text-align:center;filter:drop-shadow(0 5px 4px #0008)}
+#towerWatcher>img{display:block;width:90px;height:90px;margin:auto;object-fit:contain;image-rendering:pixelated;animation:towerWatchFlight 3s ease-in-out infinite}
+#towerWatcher>small{font:7px/1.8 monospace;color:#f0d79f;white-space:nowrap;text-shadow:1px 2px #000}
+body.combat #towerWatcher>img{animation:none;transform:translateY(8px)}
+#towerMirrors{position:absolute;inset:0;z-index:9;pointer-events:none}
+#towerMirrors img{position:absolute;width:46px;height:60px;object-fit:contain;image-rendering:pixelated;opacity:.45;filter:sepia(1) saturate(2) hue-rotate(210deg)}
+@keyframes towerWatchFlight{50%{transform:translateY(-13px)}}
+@media(max-width:700px){#towerOverlay .tower-preview-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}}
+@media(max-width:480px){#towerOverlay .tower-preview-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(prefers-reduced-motion:reduce){#towerWatcher>img{animation:none}}
+body.reduce-fx #towerWatcher>img{animation:none}
+/* Companion cards follow the campaign collector frame, with short role text. */
+#towerOverlay .tower-starter-dialog{width:min(1180px,100%)}
+#towerOverlay .tower-starter-grid{width:100%;grid-template-columns:repeat(5,minmax(0,1fr));gap:16px;padding:6px 5px 12px}
+#towerOverlay .tower-starter-grid .tower-card{aspect-ratio:63/115}
+#towerOverlay .tower-starter-grid .tower-card-front{background:radial-gradient(ellipse at 0 0,#ffffff20,transparent 65%),linear-gradient(145deg,color-mix(in srgb,var(--tower-accent) 24%,#3e3839),#211d25);border-width:6px;padding:10px}
+#towerOverlay .tower-starter-grid .tower-card-top{min-height:44px;padding-bottom:8px}
+#towerOverlay .tower-starter-grid .tower-card-top b{font:9px/1.7 var(--tower-pixel)}
+#towerOverlay .tower-starter-grid .tower-card-top small{font-weight:800;font-size:7px;letter-spacing:.8px}
+#towerOverlay .tower-starter-grid .tower-card-art{aspect-ratio:6/5;border:2px solid var(--tower-accent);flex-shrink:0}
+#towerOverlay .tower-starter-grid .tower-card-art>img:first-child{width:100%;height:100%;object-fit:contain;background:#241f27}
+#towerOverlay .tower-starter-grid .tower-card-text{font-size:12px;line-height:1.45;padding:10px 2px 8px;flex:1}
+#towerOverlay .tower-starter-types{display:flex;gap:4px;flex-wrap:wrap;padding:0 1px 9px}
+#towerOverlay .tower-starter-types>span{font:700 9px/1.5 'Trebuchet MS',sans-serif;padding:2px 6px;border:1px solid var(--type-color);border-radius:3px;background:color-mix(in srgb,var(--type-color) 22%,#221e26);color:#f7eedf}
+#towerOverlay .tower-starter-pick{display:flex;justify-content:space-between;gap:6px;padding:8px 2px;border-top:1px solid #ffffff35;font:7px/1.6 var(--tower-pixel);color:#f1dda7}
+#towerOverlay .tower-starter-pick i{font-style:normal}
+#towerOverlay .tower-starter-grid .tower-card-foot{padding-top:5px;font-size:6px}
+@media(max-width:1000px){#towerOverlay .tower-starter-grid{display:flex;flex-wrap:wrap;justify-content:center;gap:18px}#towerOverlay .tower-starter-grid>.tower-collectible{flex:0 0 210px;max-width:100%}}
+@media(max-width:480px){#towerOverlay .tower-starter-grid>.tower-collectible{flex-basis:240px}}
+#towerOverlay .tower-starter-grid .tower-painted-companion{align-self:start}
+#towerOverlay .tower-painted-card{position:relative;display:block;width:100%;padding:0;border:0;border-radius:13px;background:transparent;cursor:pointer;overflow:visible;transition:transform .18s,filter .18s;box-shadow:0 5px 14px #0008}
+#towerOverlay .tower-painted-card>img{display:block;width:100%;height:auto;aspect-ratio:2/3;object-fit:contain;border-radius:13px;image-rendering:auto}
+#towerOverlay .tower-painted-action{display:flex;justify-content:center;gap:7px;margin:8px auto 0;padding:7px 4px;font:7px/1.7 var(--tower-pixel);color:#f0d69c;text-shadow:1px 2px #000}
+#towerOverlay .tower-painted-action i{font-style:normal}
+#towerOverlay .tower-painted-card:hover{transform:translateY(-5px);filter:brightness(1.07)}
+#towerOverlay .tower-painted-card:focus-visible{outline:2px solid #ffe6a6;outline-offset:5px}
+@media(prefers-reduced-motion:reduce){#towerOverlay .tower-painted-card{transition:none}#towerOverlay .tower-painted-card:hover{transform:none}}
+/* Elemental life stays inside the illustration; lettering remains unobstructed. */
+#towerOverlay .tower-card-surface{position:relative;display:block;overflow:hidden;border-radius:13px;isolation:isolate;box-shadow:0 4px 12px #0008,0 0 13px color-mix(in srgb,var(--card-glow) 18%,transparent);transition:box-shadow .2s}
+#towerOverlay .tower-card-surface>img{display:block;width:100%;height:auto;aspect-ratio:2/3;object-fit:contain;border-radius:13px}
+#towerOverlay .tower-painted-card{transform:perspective(850px) rotateX(var(--tilt-x,0deg)) rotateY(var(--tilt-y,0deg));transform-style:preserve-3d;box-shadow:none;filter:none;transition:transform .16s ease-out}
+#towerOverlay .tower-painted-card:hover,#towerOverlay .tower-painted-card:focus-visible{transform:perspective(850px) translateY(-5px) rotateX(var(--tilt-x,0deg)) rotateY(var(--tilt-y,0deg));filter:none}
+#towerOverlay .tower-painted-card:hover .tower-card-surface,#towerOverlay .tower-painted-card:focus-visible .tower-card-surface{box-shadow:0 9px 20px #0009,0 0 0 1px var(--card-glow),0 0 22px color-mix(in srgb,var(--card-glow) 45%,transparent)}
+#towerOverlay .tower-painted-foil{position:absolute;inset:0;pointer-events:none;background:linear-gradient(112deg,transparent 36%,#fff5cc00 43%,#fff5cc32 49%,#ffffff15 51%,transparent 59%);background-size:350% 100%;mix-blend-mode:screen;animation:towerCardFoil 9s ease-in-out infinite;opacity:.55}
+#towerOverlay .tower-painted-companion:nth-child(2) .tower-painted-foil{animation-delay:-1.8s}#towerOverlay .tower-painted-companion:nth-child(3) .tower-painted-foil{animation-delay:-3.6s}#towerOverlay .tower-painted-companion:nth-child(4) .tower-painted-foil{animation-delay:-5.4s}#towerOverlay .tower-painted-companion:nth-child(5) .tower-painted-foil{animation-delay:-7.2s}
+#towerOverlay .tower-card-particles{position:absolute;inset:17% 7% 28%;overflow:hidden;pointer-events:none;opacity:.65;transition:opacity .2s}
+#towerOverlay .tower-painted-card:hover .tower-card-particles{opacity:1}
+#towerOverlay .tower-card-particles>i{position:absolute;left:var(--px);bottom:-12px;width:4px;height:4px;background:var(--card-glow);box-shadow:0 0 6px var(--card-glow);opacity:0;animation:towerCardRise 4.8s linear infinite;animation-delay:var(--wait)}
+#towerOverlay [data-element=leaf] .tower-card-particles>i{width:7px;height:4px;background:#b1db79;clip-path:polygon(0 45%,30% 0,100% 0,80% 85%,40% 100%);box-shadow:none;animation-name:towerCardLeaves;animation-duration:6s}
+#towerOverlay [data-element=ember] .tower-card-particles>i{background:#ffcf76;width:3px;height:5px;box-shadow:0 0 5px #ff9d46;animation-duration:3.6s}
+#towerOverlay [data-element=bubble] .tower-card-particles>i{width:7px;height:7px;background:#d6fbff14;border:1px solid #c2f6ffc9;border-radius:50%;box-shadow:inset 1px 1px #fff5;animation-duration:5.4s}
+#towerOverlay [data-element=spark] .tower-card-particles>i{width:10px;height:18px;background:#fff0a1;clip-path:polygon(58% 0,9% 55%,44% 54%,26% 100%,95% 35%,58% 38%);box-shadow:none;bottom:calc(10% + var(--p)*11%);animation:towerCardSpark 4s steps(2,end) infinite;animation-delay:var(--wait)}
+#towerOverlay [data-element=mote] .tower-card-particles>i{width:4px;height:4px;background:#f9de9a;box-shadow:0 0 7px #f7d98d;animation-duration:7s}
+@keyframes towerCardFoil{0%,55%{background-position:120% 0}85%,100%{background-position:-30% 0}}
+@keyframes towerCardRise{0%{opacity:0;transform:translate(0,0) scale(.6)}15%{opacity:.8}80%{opacity:.5}100%{opacity:0;transform:translate(8px,-180px) scale(.9)}}
+@keyframes towerCardLeaves{0%{opacity:0;transform:translate(-4px,-180px) rotate(-30deg)}15%{opacity:.65}80%{opacity:.45}100%{opacity:0;transform:translate(10px,0) rotate(100deg)}}
+@keyframes towerCardSpark{0%,71%,81%,100%{opacity:0;transform:scale(.6)}73%,79%{opacity:.85;transform:scale(1)}76%{opacity:.2;transform:scale(.8)}}
+body.game-paused #towerOverlay .tower-painted-foil,body.game-paused #towerOverlay .tower-card-particles>i{animation-play-state:paused}
+body.reduce-fx #towerOverlay .tower-painted-foil,body.reduce-fx #towerOverlay .tower-card-particles{display:none}
+body.reduce-fx #towerOverlay .tower-painted-card,body.reduce-fx #towerOverlay .tower-painted-card:hover{transform:none;transition:none}
+@media(prefers-reduced-motion:reduce){#towerOverlay .tower-painted-foil,#towerOverlay .tower-card-particles{display:none}#towerOverlay .tower-painted-card,#towerOverlay .tower-painted-card:hover,#towerOverlay .tower-painted-card:focus-visible{transform:none;transition:none}}
+#towerHud .tower-position-guide{position:absolute;top:calc(100% + 5px);left:50%;transform:translateX(-50%);display:flex;justify-content:center;flex-wrap:wrap;gap:5px 14px;width:max-content;max-width:75vw;padding:4px 9px;background:#211e28e8;border:1px solid #9d88ac66;box-shadow:1px 2px #08070b;font:10px/1.6 'Trebuchet MS',sans-serif;pointer-events:none}
+#towerHud .tower-position-guide span{white-space:nowrap}
+/* Tower controls and positional bonuses sit below the menus on the right. */
+#towerHud{left:auto;right:16px;top:62px;transform:none;max-width:calc(100% - 32px)}
+#towerHud .tower-position-guide{left:auto;right:0;transform:none;justify-content:flex-end;max-width:100%}
+/* Compact pixel frame for the right-side tower tools and relic guide. */
+#towerHud{width:294px;max-width:calc(100% - 32px);display:flex;flex-direction:column;align-items:stretch;gap:7px;padding:10px 11px 9px;background:linear-gradient(135deg,#37303cfa,#201b25fa);border:2px solid #b39a71;border-radius:3px;box-shadow:inset 0 0 0 1px #131016,inset 0 0 0 3px #b39a7122,3px 4px #100c17aa}
+#towerHud::before,#towerHud::after{content:'';position:absolute;top:4px;width:3px;height:3px;background:#e0c999;box-shadow:0 0 0 1px #47382a;pointer-events:none}
+#towerHud::before{left:4px}#towerHud::after{right:4px}
+#towerHud .tower-hud-heading{display:flex;align-items:center;justify-content:flex-start;gap:9px;white-space:normal}
+#towerHud .tower-hud-emblem{display:grid;place-items:center;flex:0 0 29px;width:29px;height:32px;color:var(--tower-hud-accent);background:#16121dc9;border:1px solid #9f866766;box-shadow:inset 1px 1px #ffffff0c}
+#towerHud .tower-hud-emblem svg{width:17px;height:23px;shape-rendering:crispEdges}
+#towerHud .tower-hud-title{display:flex;flex:1;min-width:0;flex-direction:column;gap:4px}
+#towerHud .tower-hud-title>small{font:6px/1.5 'Press Start 2P',monospace;color:#baaa96;letter-spacing:.25px}
+#towerHud .tower-hud-title>b{font:700 12px/1.3 'Trebuchet MS',sans-serif;color:#f0dfbc;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#towerHud .tower-hud-floor{display:flex;align-items:baseline;gap:3px;padding-left:8px;border-left:1px solid #a68d6844;white-space:nowrap}
+#towerHud .tower-hud-floor>b{font:14px/1.5 'Press Start 2P',monospace;color:var(--tower-hud-accent);text-shadow:1px 2px #110d18}
+#towerHud .tower-hud-floor>small{font:10px/1.5 monospace;color:#a99bab}
+#towerHud .tower-hud-progress{display:flex;gap:4px;padding:0;justify-content:stretch}
+#towerHud .tower-hud-progress>i{display:block;flex:1;height:4px;background:#15111e;border:1px solid #76677a66;box-shadow:inset 0 1px #0004}
+#towerHud .tower-hud-progress>.done{background:#a99261;border-color:#cdb382}
+#towerHud .tower-hud-progress>.current{background:var(--tower-hud-accent);border-color:#ead8ab;box-shadow:0 0 4px color-mix(in srgb,var(--tower-hud-accent) 35%,transparent)}
+#towerHud .tower-hud-actions{display:grid;grid-template-columns:auto 1fr auto;gap:6px;align-items:center;white-space:normal}
+#towerHud .tower-hud-actions>button,#towerHud .tower-rule summary{display:flex;align-items:center;justify-content:center;gap:6px;min-height:25px;padding:4px 7px;background:linear-gradient(#45394a,#302635);border:1px solid #9f8872;box-shadow:inset 0 1px #ffffff16,0 2px #100c17;border-radius:2px;color:#e8d5af;font:6px/1.7 'Press Start 2P',monospace;cursor:pointer}
+#towerHud .tower-hud-actions>button:hover:not(:disabled),#towerHud .tower-rule summary:hover{background:#55435b;border-color:#e1c68e;color:#fff0cb}
+#towerHud .tower-hud-actions>button:disabled{opacity:.4;cursor:default}
+#towerHud em{display:inline-grid;place-items:center;min-width:14px;height:14px;padding:1px 3px;background:#1c1723;border:1px solid #b8a27d55;color:var(--tower-hud-accent);font:700 10px monospace}
+#towerHud .tower-rule{z-index:2;margin:0}
+#towerHud .tower-rule summary{list-style:none;white-space:nowrap}
+#towerHud .tower-rule summary::-webkit-details-marker{display:none}
+#towerHud .tower-rule[open] summary{border-color:#e1c68e;background:#55435b}
+#towerHud .tower-rule p{background:#27202ef8;border:1px solid #b39a71;border-radius:2px;color:#e0d1bc;font:11px/1.6 'Trebuchet MS',sans-serif}
+#towerHud .tower-position-guide{top:calc(100% + 7px);right:-2px;left:auto;width:294px;max-width:calc(100% + 4px);transform:none;display:flex;flex-direction:column;align-items:stretch;gap:5px;padding:6px 8px;background:linear-gradient(135deg,#302735fa,#211b28fa);border:2px solid #9e88ae;border-radius:3px;box-shadow:inset 0 0 0 1px #15101b,3px 4px #100c1788;white-space:normal}
+#towerHud .tower-position-bonus{display:flex;align-items:center;gap:8px;color:var(--bonus-color);white-space:normal}
+#towerHud .tower-position-bonus>i{display:grid;place-items:center;flex:0 0 19px;height:19px;background:#18131fc9;border:1px solid color-mix(in srgb,var(--bonus-color) 45%,transparent);font:14px/1 monospace;font-style:normal}
+#towerHud .tower-position-bonus>b{font:700 10px/1.5 'Trebuchet MS',sans-serif;color:var(--bonus-color);white-space:normal}
+/* Independent scroll areas: the complete route and owned relics. */
+#towerOverlay .tower-map-dialog{width:min(980px,100%)}
+#towerOverlay .tower-map-layout{display:grid;grid-template-columns:minmax(0,1fr) 250px;gap:16px;align-items:start}
+#towerOverlay .tower-map-route,#towerOverlay .tower-map-inventory{min-width:0;padding:8px;background:#211b26d9;border:2px solid #a38c67;box-shadow:inset 0 0 0 1px #17121c,3px 4px #07070a80;border-radius:3px}
+#towerOverlay .tower-map-inventory{border-color:#9d86ae;background:#251d2bd9}
+#towerOverlay .tower-map-heading{display:flex;justify-content:space-between;align-items:center;gap:8px;margin:2px 3px 10px;padding:3px 0 9px;border-bottom:1px solid #bca37644;color:#f0d699;font:8px/1.8 var(--tower-pixel)}
+#towerOverlay .tower-map-heading>small{font:10px/1.5 'Trebuchet MS',sans-serif;color:#b8aab9}
+#towerOverlay .tower-map-layout .tower-map{position:relative;display:flex;flex-direction:column;gap:7px;width:100%;height:clamp(220px,calc(100dvh - 255px),510px);margin:0;padding:0 6px 6px 0;overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin;scrollbar-color:#b79c72 #1a151f;scroll-padding-top:8px}
+#towerOverlay .tower-map-layout .tower-map li{flex-shrink:0;padding:8px;gap:9px}
+#towerOverlay .tower-map-layout .tower-map .tower-map-sector{display:block;padding:12px 3px 5px;margin:0;background:none;box-shadow:none;border:0;border-bottom:1px solid #ad916244}
+#towerOverlay .tower-map-sector h3{margin:0;font:7px/1.8 var(--tower-pixel);color:#dcc28e}
+#towerOverlay .tower-map-sector h3>span{display:block;font:700 12px/1.5 'Trebuchet MS',sans-serif;color:#c1b2c8;margin-top:3px}
+#towerOverlay .tower-map-layout .tower-map .current{border-color:#efd297;box-shadow:inset 3px 0 #efd297,0 0 7px #e9c58418;opacity:1}
+#towerOverlay .tower-map-relics{display:flex;flex-direction:column;gap:8px;height:clamp(220px,calc(100dvh - 255px),510px);padding:0 4px 6px 0;overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin;scrollbar-color:#a48cb5 #1a151f}
+#towerOverlay .tower-map-relic{border:1px solid #a48ab066;background:#34293dcc;padding:7px;box-shadow:inset 0 1px #ffffff09}
+#towerOverlay .tower-map-relic summary{display:flex;gap:8px;align-items:center;cursor:pointer;list-style:none}
+#towerOverlay .tower-map-relic summary::-webkit-details-marker{display:none}
+#towerOverlay .tower-map-relic summary>img{width:28px;height:28px;flex:none;object-fit:contain;image-rendering:pixelated}
+#towerOverlay .tower-map-relic summary>b{font:700 12px/1.4 'Trebuchet MS',sans-serif;color:#e4d3ea}
+#towerOverlay .tower-map-relic summary::after{content:'+';margin-left:auto;color:#c4a7d4;font:14px monospace}
+#towerOverlay .tower-map-relic[open] summary::after{content:'−'}
+#towerOverlay .tower-map-relic p{font:11px/1.6 'Trebuchet MS',sans-serif;color:#ccbfce;margin:7px 0 0;padding-top:6px;border-top:1px solid #a48ab033}
+#towerOverlay .tower-map-empty{font-size:12px;color:#bbacbf;padding:5px;line-height:1.6}
+#towerOverlay .tower-map:focus-visible,#towerOverlay .tower-map-relics:focus-visible{outline:1px solid #f0d699;outline-offset:2px}
+@media(max-width:620px){#towerOverlay .tower-map-layout{grid-template-columns:minmax(0,1fr);gap:12px}#towerOverlay .tower-map-layout .tower-map{height:45dvh;min-height:220px}#towerOverlay .tower-map-relics{height:auto;max-height:200px;min-height:60px}}
+/* Denser right HUD, with restrained animated pixel accents. */
+#towerHud{width:252px;padding:7px 8px 6px;gap:5px}
+#towerHud .tower-hud-heading{gap:7px}
+#towerHud .tower-hud-emblem{flex-basis:23px;width:23px;height:27px}
+#towerHud .tower-hud-emblem svg{width:14px;height:20px}
+#towerHud .tower-hud-title{gap:2px}
+#towerHud .tower-hud-title>small{font-size:5px}
+#towerHud .tower-hud-title>b{font-size:11px}
+#towerHud .tower-hud-floor{padding-left:6px;gap:2px}
+#towerHud .tower-hud-floor>b{font-size:12px}
+#towerHud .tower-hud-floor>small{font-size:9px}
+#towerHud .tower-hud-progress{gap:3px}
+#towerHud .tower-hud-progress>i{height:3px}
+#towerHud .tower-hud-progress>.current{animation:towerHudProgress 3.2s ease-in-out infinite}
+#towerHud .tower-hud-actions{grid-template-columns:auto auto auto;gap:5px;justify-content:space-between}
+#towerHud .tower-hud-actions>button,#towerHud .tower-rule summary{min-height:23px;padding:3px 6px;font-size:6px}
+#towerHud .tower-hud-actions>button{transition:border-color .15s,box-shadow .15s,background .15s}
+#towerHud .tower-hud-actions>button:hover:not(:disabled),#towerHud .tower-rule summary:hover{box-shadow:inset 0 1px #ffffff20,0 2px #100c17,0 0 7px #e5c88d25}
+#towerHud .tower-position-guide{width:252px;padding:4px 6px;gap:4px;top:calc(100% + 5px)}
+#towerHud .tower-position-bonus{gap:6px}
+#towerHud .tower-position-bonus>i{flex-basis:16px;height:16px;font-size:12px;animation:towerRelicRune 4s ease-in-out infinite}
+#towerHud .tower-position-bonus>b{font-size:10px;line-height:1.4}
+#towerHud .tower-hud-emblem{position:relative;overflow:hidden}
+#towerHud .tower-hud-emblem::after{content:'';position:absolute;inset:-40%;pointer-events:none;background:linear-gradient(120deg,transparent 42%,#f9e5ab55 49%,transparent 56%);transform:translateX(-120%);animation:towerHudGlint 7s ease-in-out infinite}
+#towerHud::before{animation:towerHudCorner 5s ease-in-out infinite}
+#towerHud::after{animation:towerHudCorner 5s 2.5s ease-in-out infinite}
+@keyframes towerHudProgress{0%,100%{filter:brightness(.95);box-shadow:0 0 2px var(--tower-hud-accent)}50%{filter:brightness(1.2);box-shadow:0 0 6px color-mix(in srgb,var(--tower-hud-accent) 55%,transparent)}}
+@keyframes towerRelicRune{0%,100%{box-shadow:inset 0 0 3px color-mix(in srgb,var(--bonus-color) 8%,transparent);text-shadow:none}50%{box-shadow:inset 0 0 6px color-mix(in srgb,var(--bonus-color) 20%,transparent);text-shadow:0 0 5px var(--bonus-color)}}
+@keyframes towerHudGlint{0%,65%{transform:translateX(-120%)}90%,100%{transform:translateX(120%)}}
+@keyframes towerHudCorner{0%,100%{opacity:.6;box-shadow:0 0 0 1px #47382a}50%{opacity:1;box-shadow:0 0 0 1px #47382a,0 0 5px #ead39d66}}
+body.reduce-fx #towerHud::before,body.reduce-fx #towerHud::after,body.reduce-fx #towerHud .tower-hud-emblem::after,body.reduce-fx #towerHud .tower-hud-progress>.current,body.reduce-fx #towerHud .tower-position-bonus>i{animation:none}
+@media(prefers-reduced-motion:reduce){#towerHud::before,#towerHud::after,#towerHud .tower-hud-emblem::after,#towerHud .tower-hud-progress>.current,#towerHud .tower-position-bonus>i{animation:none}}
+/* More visible frame feedback, with no automatic repeating sound. */
+#towerHud{transition:box-shadow .2s,border-color .2s}
+#towerHud:hover,#towerHud:focus-within{border-color:#e7cf9c;box-shadow:inset 0 0 0 1px #131016,inset 0 0 0 3px #b39a7133,3px 4px #100c17aa,0 0 15px color-mix(in srgb,var(--tower-hud-accent) 23%,transparent)}
+#towerHud .tower-hud-frame-fx{position:absolute;inset:2px;border-radius:2px;overflow:hidden;pointer-events:none}
+#towerHud .tower-hud-frame-fx::before{content:'';position:absolute;inset:0;background:linear-gradient(110deg,transparent 36%,#fff4c700 43%,#fff4c733 49%,#fff4c700 55%,transparent 65%);background-size:380% 100%;animation:towerPanelSheen 8s ease-in-out infinite;opacity:.7}
+#towerHud .tower-hud-frame-fx>i{position:absolute;left:1px;bottom:8%;width:2px;height:3px;background:#f0d498;box-shadow:0 0 4px var(--tower-hud-accent);opacity:0;animation:towerFramePixel 4s ease-out infinite}
+#towerHud .tower-hud-frame-fx>i:nth-child(2){left:auto;right:1px;animation-delay:-1s}
+#towerHud .tower-hud-frame-fx>i:nth-child(3){bottom:40%;animation-delay:-2s}
+#towerHud .tower-hud-frame-fx>i:nth-child(4){left:auto;right:1px;bottom:30%;animation-delay:-3s}
+#towerHud:hover .tower-hud-emblem svg{filter:drop-shadow(0 0 4px var(--tower-hud-accent))}
+#towerHud .tower-hud-actions>button:active,#towerHud .tower-rule summary:active{transform:translateY(1px);box-shadow:inset 0 1px 3px #0005}
+#towerHud .tower-position-guide{pointer-events:auto;transition:border-color .2s,box-shadow .2s}
+#towerHud .tower-position-guide:hover{border-color:#cfb6e2;box-shadow:inset 0 0 0 1px #15101b,3px 4px #100c1788,0 0 12px #c6a0ed22}
+#towerHud .tower-position-bonus{transition:background .2s}
+#towerHud .tower-position-bonus:hover{background:#ffffff07}
+#towerHud .tower-position-bonus:hover>i{box-shadow:0 0 8px color-mix(in srgb,var(--bonus-color) 40%,transparent);border-color:var(--bonus-color)}
+@keyframes towerPanelSheen{0%,58%{background-position:120% 0}88%,100%{background-position:-25% 0}}
+@keyframes towerFramePixel{0%{opacity:0;transform:translateY(0)}20%{opacity:.8}80%{opacity:.5}100%{opacity:0;transform:translateY(-50px)}}
+body.reduce-fx #towerHud .tower-hud-frame-fx{display:none}
+@media(prefers-reduced-motion:reduce){#towerHud .tower-hud-frame-fx{display:none}#towerHud .tower-hud-actions>button:active,#towerHud .tower-rule summary:active{transform:none}}
+/* Readable text at the game's scaled resolution. */
+#towerHud{width:278px;background:linear-gradient(135deg,#302735,#1a1520);border-color:#c4ad81;padding:8px 9px;gap:7px}
+#towerHud .tower-hud-heading{gap:8px}
+#towerHud .tower-hud-title{gap:4px}
+#towerHud .tower-hud-title>small{font:700 10px/1.3 'Trebuchet MS','Segoe UI',sans-serif;color:#e3ccaa;letter-spacing:.7px}
+#towerHud .tower-hud-title>b{font:700 14px/1.35 'Trebuchet MS','Segoe UI',sans-serif;color:#fff1ce;text-shadow:0 1px #000}
+#towerHud .tower-hud-floor>b{font:16px/1.5 'Press Start 2P',monospace;color:#ffe1a0}
+#towerHud .tower-hud-floor>small{font:700 12px/1.5 monospace;color:#dfd2e3}
+#towerHud .tower-hud-emblem{flex-basis:27px;width:27px;height:32px;color:#ffe1a0;border-color:#bda67c}
+#towerHud .tower-hud-emblem svg{width:17px;height:23px}
+#towerHud .tower-hud-progress>i{height:5px;border-color:#978298;background:#151019}
+#towerHud .tower-hud-actions{grid-template-columns:auto 1fr auto;gap:6px}
+#towerHud .tower-hud-actions>button,#towerHud .tower-rule summary{font:700 12px/1.35 'Trebuchet MS','Segoe UI',sans-serif;color:#fff0c9;min-height:28px;padding:4px 8px;border-color:#b69b7e;background:linear-gradient(#4b3b4f,#302536);text-shadow:0 1px #000}
+#towerHud em{font:700 12px/1.2 monospace;min-width:17px;height:18px;color:#ffdf9a;border-color:#b59b74;background:#17121d}
+#towerHud .tower-position-guide{width:278px;padding:6px 8px;background:#231b2b;border-color:#b89acb}
+#towerHud .tower-position-bonus{gap:8px}
+#towerHud .tower-position-bonus>b{font:700 12px/1.45 'Trebuchet MS','Segoe UI',sans-serif;color:#eddbff;text-shadow:0 1px #000}
+#towerHud .tower-position-bonus>i{flex-basis:20px;height:20px;font-size:15px;color:var(--bonus-color)}
+#towerHud .tower-rule p{font:13px/1.65 'Trebuchet MS','Segoe UI',sans-serif;color:#f4e7d4;background:#221a29;border-color:#d0b78d}
+/* Keep moving highlights on the frame instead of sweeping over lettering. */
+#towerHud .tower-hud-frame-fx::before{inset:0 auto auto 0;width:100%;height:2px;opacity:.85}
+/* Position bonuses and danger marks must be above the floor, below units. */
+body.tower-active #arenaView>#towerHexMarks{z-index:2}
+body.tower-active #arenaView>#units{z-index:3}
+body.tower-active #arenaView>#npc{z-index:4}
+body.tower-active #arenaView>#fx{z-index:5}
+/* Small item icons show applied, waiting and already-triggered relic effects. */
+body.tower-active .unit .tower-unit-buffs{position:absolute;left:50%;top:-19px;transform:translateX(-50%);display:flex;justify-content:center;gap:2px;align-items:center;min-width:16px;white-space:nowrap;padding:2px 3px;background:#181221e8;border:1px solid #c0a57688;border-radius:3px;pointer-events:auto;z-index:5;box-shadow:0 2px 3px #0006}
+body.tower-active .tower-unit-buffs>img{width:13px;height:13px;object-fit:contain;image-rendering:pixelated;flex:none}
+body.tower-active .tower-unit-buffs>.active{filter:drop-shadow(0 0 2px #e4d29a66)}
+body.tower-active .tower-unit-buffs>.waiting{opacity:.35;filter:grayscale(.8)}
+body.tower-active .tower-unit-buffs>.used{opacity:.6;filter:sepia(.4)}
+body.tower-active .tower-unit-buffs>b{font:700 8px/1.2 monospace;color:#eed8aa;padding-left:1px}
+body:not(.tower-active) .tower-unit-buffs{display:none}
+/* Relic details appear on inspection; keep the field clear during play. */
+body.tower-active .unit .tower-unit-buffs{opacity:0;pointer-events:none;transition:opacity .15s}
+body.tower-active .unit .in:hover .tower-unit-buffs,body.tower-active .unit .in:focus-within .tower-unit-buffs{opacity:1;pointer-events:auto}
+@media(prefers-reduced-motion:reduce){body.tower-active .unit .tower-unit-buffs{transition:none}}
+/* Top-bar menus must cover the tower tools, including their relic legend. */
+body.tower-active #towerHud{z-index:4}
+/* Equipped relics share a limited loadout; stored relics remain collectible. */
+.tower-route-grid .tower-card-text{font:700 13px/1.65 'Trebuchet MS','Segoe UI',sans-serif}
+#towerOverlay .tower-route-grid{width:min(810px,100%);align-items:start}
+#towerOverlay .tower-route-description{position:absolute;left:8%;right:8%;bottom:8%;height:22%;display:flex;flex-direction:column;justify-content:center;gap:3px;padding:4px;background:radial-gradient(ellipse,#fff0c7,#ecd09a);color:#35200e;text-align:center;font:700 12px/1.35 Georgia,'Times New Roman',serif;border:1px solid #a97e37;border-radius:5px;box-shadow:inset 0 0 8px #9a622a55;text-shadow:none}
+#towerOverlay .tower-route-description>strong{font-size:12px;color:#532613}
+#towerOverlay .tower-route-description>small{font:700 11px/1.35 Georgia,'Times New Roman',serif;color:#523718}
+#towerOverlay .tower-route-painted .tower-card-particles{inset:19% 9% 33%}
+#towerOverlay .tower-event-title{position:absolute;left:13%;right:13%;top:var(--event-title-top,5.5%);height:var(--event-title-height,9.5%);display:grid;place-items:center;text-align:center;color:#30200e;text-shadow:0 1px #fff1cf;z-index:4;padding:0 2px}
+#towerOverlay .tower-event-title>small{display:none}
+#towerOverlay .tower-event-title>b{display:block;margin:0;width:100%;min-width:0;max-width:100%;font:800 18px/1.15 'Trebuchet MS','Segoe UI',sans-serif;white-space:nowrap;overflow-wrap:normal;text-wrap:nowrap}
+#towerOverlay .tower-event-description{position:absolute;left:12%;right:12%;top:var(--event-description-top,71.5%);height:var(--event-description-height,19%);display:grid;place-content:center;text-align:center;color:#30200e;text-shadow:0 1px #fff0ce;font:700 var(--event-copy-size,14px)/1.4 'Trebuchet MS','Segoe UI',sans-serif;padding:2px;z-index:4;text-wrap:pretty}
+#towerOverlay [data-art=item]{--event-title-top:4%;--event-title-height:8.5%;--event-description-top:71%;--event-description-height:19%}
+#towerOverlay [data-art=shop]{--event-title-top:4.5%;--event-title-height:9.5%}
+#towerOverlay [data-art=heal]{--event-title-top:6%;--event-title-height:9.5%;--event-description-top:68%;--event-description-height:22%}
+#towerOverlay [data-art=cursed-chest]{--event-title-top:7%;--event-title-height:10%}
+#towerOverlay [data-art=upgrade]{--event-title-top:6%;--event-title-height:11%}
+#towerOverlay [data-art=defense]{--event-title-top:4.5%;--event-title-height:9%}
+#towerOverlay [data-art=relic]{--event-title-top:4.5%;--event-title-height:9.5%}
+#towerOverlay .tower-event-painted:disabled .tower-painted-action{color:#c5bca8}
+#towerOverlay .tower-event-painted:disabled .tower-painted-foil,#towerOverlay .tower-event-painted:disabled .tower-card-particles{display:none}
+#towerOverlay .tower-event-relic-art .tower-relic-object{filter:drop-shadow(0 0 8px var(--card-glow)) drop-shadow(2px 5px #000b)}
+#towerOverlay .tower-event-painted .tower-card-particles{inset:20% 9% 31%}
+#towerOverlay .tower-event-painted:disabled{opacity:.48;cursor:default;filter:grayscale(.65)}
+#towerOverlay .tower-event-painted:disabled:hover{transform:none}
+#towerOverlay .tower-event-relic-art{position:absolute;top:20%;left:9%;right:9%;height:49%;display:block;overflow:hidden;border:2px solid #b28b4a;box-shadow:0 0 9px #130b19;border-radius:3px}
+#towerOverlay .tower-event-relic-art>img,#towerOverlay .tower-event-relic-art>span,#towerOverlay .tower-event-relic-art>span>img:first-child{display:block;width:100%;height:100%;object-fit:cover}
+@media(max-width:700px) and (min-width:481px){#towerOverlay .tower-card-grid:has(.tower-event-painted){grid-template-columns:1fr;width:min(270px,100%);gap:24px}}
+@media(max-width:700px) and (min-width:481px){#towerOverlay .tower-route-grid{grid-template-columns:1fr;width:min(270px,100%);gap:24px}}
+.tower-route-record{display:inline-block;margin-top:7px;padding:4px 7px;border:1px solid #bda57988;background:#17121d;color:#ffe3a0;font:700 12px/1.4 'Trebuchet MS','Segoe UI',sans-serif}
+.tower-loadout-section{display:flex;flex-direction:column;gap:7px;min-width:0}
+.tower-loadout-section h4{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:2px 0 4px;color:#ffe3a0;font:700 14px/1.4 'Trebuchet MS','Segoe UI',sans-serif}
+.tower-loadout-section h4>b{padding:2px 7px;border:1px solid #bda579;background:#17121d;color:#fff1cd;font:700 12px/1.3 monospace}
+.tower-map-relic.equipped{border-color:#d4b46f;background:linear-gradient(120deg,#433729,#2c2531);box-shadow:inset 3px 0 #e2c585}
+.tower-map-relic.stored{border-color:#887b93;background:#292331}
+#towerOverlay .tower-map-relic button{display:block;margin:7px 0 0 auto;padding:6px 10px;min-height:29px;font:700 12px/1.3 'Trebuchet MS','Segoe UI',sans-serif;color:#ffedbb;border:1px solid #bda579;background:linear-gradient(#514356,#302837);cursor:pointer}
+#towerOverlay .tower-map-relic button:hover:not(:disabled){border-color:#ffe3a0;box-shadow:0 0 7px #e4c88b44}
+#towerOverlay .tower-map-relic button:disabled{opacity:.45;cursor:default}
+.tower-loadout-empty-slot{padding:13px 9px;border:1px dashed #bba57988;background:#17121c88;color:#d7c6a8;font:12px/1.4 'Trebuchet MS','Segoe UI',sans-serif}
+.tower-loadout-hint{margin:5px 0;color:#d7c9df;font:12px/1.6 'Trebuchet MS','Segoe UI',sans-serif}
+.tower-map-relics>.tower-loadout-section+.tower-loadout-section{border-top:1px solid #9881a466;margin-top:8px;padding-top:12px}
+.tower-loadout-migration{display:grid;grid-template-columns:1fr 1fr;gap:18px;text-align:left;max-height:calc(100dvh - 260px);overflow-y:auto;padding:10px;scrollbar-color:#b99a66 #211a29}
+.tower-loadout-migration>.tower-loadout-hint{grid-column:1/-1}
+.tower-loadout-migration .tower-map-relic summary{font-size:13px}
+.tower-loadout-migration .tower-map-relic p{font:13px/1.6 'Trebuchet MS','Segoe UI',sans-serif;color:#eee1d1}
+@media(max-width:620px){.tower-loadout-migration{grid-template-columns:1fr;max-height:55dvh;gap:12px}}
+
+/* Drag relics between equipped and stored sections. */
+[data-relic-id] summary{cursor:grab;touch-action:none}
+[data-relic-id] summary:active{cursor:grabbing}
+.tower-loadout-section[data-relic-zone]{min-height:76px;transition:background .15s,box-shadow .15s}
+.tower-loadout-section.relic-drop-target{background:#d6b76a20;box-shadow:inset 0 0 0 2px #e4c77e}
+.tower-loadout-section.relic-drop-full{background:#d74d4d20;box-shadow:inset 0 0 0 2px #d77878}
+.relic-drag-source{opacity:.35}
+.tower-relic-drag-ghost{position:fixed!important;z-index:110100!important;pointer-events:none!important;margin:0!important;opacity:.95;box-shadow:0 8px 24px #0009;background:#30243d;color:#f4e8cf;border:1px solid #d6b76a;padding:10px}
+.tower-relic-drag-ghost summary{display:flex;gap:10px;align-items:center;list-style:none}
+.tower-relic-drag-ghost img{width:24px;height:24px;object-fit:contain}
+.tower-relic-drag-ghost p,.tower-relic-drag-ghost button{display:none}
+
+.tower-relic-drag-ghost,.tower-relic-drag-ghost *{user-select:none;pointer-events:none!important}
+[data-relic-id] summary{user-select:none;-webkit-user-select:none}
+
+.tower-map-relic.relic-swap-target{outline:2px solid #f5d57c;outline-offset:1px;background:#6a542f!important;box-shadow:0 0 12px #f5d57c44}
+.tower-relic-drag-ghost{opacity:.82;overflow:hidden;padding:10px 12px;border-radius:0;transform:none!important}
+.tower-relic-drag-ghost summary{height:100%;font:inherit;line-height:1.3}
+.tower-relic-drag-ghost summary b{font:inherit;font-weight:700}
+
+/* Equipped and stored relics share two adjacent columns. */
+#towerOverlay .tower-map-dialog{width:min(1140px,100%)}
+#towerOverlay .tower-map-layout{grid-template-columns:minmax(260px,1fr) minmax(440px,1.1fr)}
+#towerOverlay .tower-map-relics{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-content:start;align-items:start;gap:14px}
+#towerOverlay .tower-map-relics>.tower-loadout-section{min-width:0}
+#towerOverlay .tower-map-relics>.tower-loadout-section+.tower-loadout-section{border-top:0;border-left:1px solid #9881a466;margin-top:0;padding-top:0;padding-left:12px}
+#towerOverlay .tower-map-relics>.tower-loadout-hint{grid-column:1/-1;margin-top:0}
+#towerOverlay .tower-loadout-section>.tower-map-relic,#towerOverlay .tower-loadout-section>.tower-loadout-empty-slot{flex:0 0 auto}
+@media(max-width:820px){#towerOverlay .tower-map-layout{grid-template-columns:minmax(0,1fr)}#towerOverlay .tower-map-layout .tower-map{height:30dvh;min-height:150px}#towerOverlay .tower-map-relics{height:auto;max-height:45dvh;min-height:120px}}
+@media(max-width:440px){#towerOverlay .tower-map-relics{gap:8px}#towerOverlay .tower-map-relics>.tower-loadout-section+.tower-loadout-section{padding-left:7px}#towerOverlay .tower-map-relic summary{padding:8px 5px;gap:5px;font-size:10px}#towerOverlay .tower-loadout-section h4{font-size:12px;gap:4px}}
+
+/* Compact inventory with two clearly separated drop zones. */
+#towerOverlay .tower-map-inventory{align-self:start;padding:10px}
+#towerOverlay .tower-map-relics{height:auto;min-height:0;max-height:clamp(220px,calc(100dvh - 255px),510px);padding:0 2px 2px;gap:10px;align-items:start}
+#towerOverlay .tower-map-relics>.tower-loadout-section{padding:9px;margin:0;border:1px solid #b79b6266;border-radius:6px;background:#342b20aa;gap:7px}
+#towerOverlay .tower-map-relics>.tower-loadout-section+.tower-loadout-section{padding:9px;margin:0;border:1px solid #a78ab966;border-radius:6px;background:#221c30cc}
+#towerOverlay .tower-map-relics>.tower-loadout-section h4{padding-bottom:8px;margin:0 0 2px;border-bottom:1px solid #bda57944}
+#towerOverlay .tower-map-relics>[data-relic-zone="stored"] h4{color:#ddc6f3;border-bottom-color:#a78ab944}
+#towerOverlay .tower-map-relics>.tower-loadout-hint{margin:0;padding:8px 2px 0;border-top:1px solid #9881a433;font-size:11px;line-height:1.5;color:#c1b5c6}
+#towerOverlay .tower-map-relics>.tower-loadout-section.relic-drop-target{background:#64532f66;box-shadow:inset 0 0 0 2px #e4c77e}
+#towerOverlay .tower-map-relics>.tower-loadout-section.relic-drop-full{background:#652b3566;box-shadow:inset 0 0 0 2px #d77878}
+@media(max-width:820px){#towerOverlay .tower-map-relics{max-height:45dvh;min-height:0}}
+@media(max-width:440px){#towerOverlay .tower-map-relics{gap:7px}#towerOverlay .tower-map-relics>.tower-loadout-section,#towerOverlay .tower-map-relics>.tower-loadout-section+.tower-loadout-section{padding:6px}}
+
+#towerOverlay .tower-relic-pages{display:flex;align-items:center;justify-content:center;gap:10px;margin-top:3px;padding-top:7px;border-top:1px solid #a78ab933;font:700 11px 'Trebuchet MS',sans-serif;color:#ddc6f3}
+#towerOverlay .tower-relic-pages button{min-width:26px;width:26px;height:25px;margin:0;padding:0;border:1px solid #a78ab9;border-radius:4px;background:#34263f;color:#f4dfa9;font:700 20px/20px 'Trebuchet MS',sans-serif;cursor:pointer}
+#towerOverlay .tower-relic-pages button:disabled{opacity:.3;cursor:default}
+#towerOverlay .tower-relic-pages button:not(:disabled):hover{background:#574064;border-color:#f0d499}

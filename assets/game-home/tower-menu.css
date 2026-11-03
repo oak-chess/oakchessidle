@@ -1,0 +1,42 @@
+
+/* Tower lobby follows the library's console surfaces and controls. */
+body.stream-themed #towerOverlay{background:#030d19bb;backdrop-filter:blur(9px);color:#dcebf4}
+body.stream-themed #towerOverlay .tower-button{border-radius:5px;border:1px solid #51748d;background:#193a52;color:#c9e0ee;font:600 11px/1.5 Arial;padding:10px 17px;min-height:38px;box-shadow:inset 0 1px #b9dcf015;transition:background .18s,border-color .18s,transform .18s}
+body.stream-themed #towerOverlay .tower-button:hover{background:#284f68;border-color:#a4c5d4;color:#fff}
+body.stream-themed #towerOverlay.tower-pixel-entry{--tower-gold:#dfc88f;--tower-edge:#55758d;color:#dcebf4}
+body.stream-themed #towerOverlay.tower-pixel-entry .window{max-width:720px;border:1px solid #66849b;border-radius:10px;overflow:hidden;background:linear-gradient(125deg,#173449,#0d2337);box-shadow:0 25px 90px #0008,inset 0 1px #d7edff16}
+body.stream-themed #towerOverlay.tower-pixel-entry .corner{display:none}
+body.stream-themed #towerOverlay.tower-pixel-entry .head{background:linear-gradient(100deg,#21435a,#173146);border-bottom:1px solid #60849d55;padding:20px 24px;text-align:left;text-shadow:none;max-width:none;margin:0}
+body.stream-themed #towerOverlay.tower-pixel-entry .eyebrow{font:8px Arial;letter-spacing:2px;color:#8eb6cd;margin-bottom:8px}
+body.stream-themed #towerOverlay.tower-pixel-entry h2{font:700 24px/1.2 Arial;color:#edf4f7}
+body.stream-themed #towerOverlay.tower-pixel-entry .unlocked{font:10px Arial;color:#b7d5e5;border:1px solid #56768b;background:#102b3d;border-radius:5px;padding:9px 11px;cursor:pointer}
+body.stream-themed #towerOverlay.tower-pixel-entry .hero{height:184px;border-bottom:1px solid #5c7e954d}
+body.stream-themed #towerOverlay.tower-pixel-entry .hero img{image-rendering:auto}
+body.stream-themed #towerOverlay.tower-pixel-entry .hero:after{background:linear-gradient(0deg,#0d2337f5,transparent 85%)}
+body.stream-themed #towerOverlay.tower-pixel-entry .hero-note b{font:700 18px Arial;color:#f0f5f9;margin-bottom:7px}
+body.stream-themed #towerOverlay.tower-pixel-entry .hero-note span{font:11px Arial;color:#a9c6da}
+body.stream-themed #towerOverlay.tower-pixel-entry .seal{border:1px solid #6a859b66;background:#0f293dd9;border-radius:4px;font:9px Arial;letter-spacing:1px;padding:8px 10px}
+body.stream-themed #towerOverlay.tower-pixel-entry .content{padding:20px 24px 16px}
+body.stream-themed #towerOverlay.tower-pixel-entry .save-label{font:11px Arial;color:#9dc8c1}
+body.stream-themed #towerOverlay.tower-pixel-entry :is(.save-row small,.section-title small,.sector-note,.legend,.progress-heading span){font:10px Arial;color:#87aac2}
+body.stream-themed #towerOverlay.tower-pixel-entry .progress-heading strong{font:700 25px Arial;color:#e2ce98}
+body.stream-themed #towerOverlay.tower-pixel-entry .progress-track{height:4px;border-radius:3px;background:#36526988;overflow:hidden}
+body.stream-themed #towerOverlay.tower-pixel-entry .encounter{background:#17394e;border:1px solid #42657d66;border-left:3px solid #d4be89;border-radius:5px;padding:8px 12px}
+body.stream-themed #towerOverlay.tower-pixel-entry .encounter small{font:8px Arial;letter-spacing:1px;color:#8fb3cb}
+body.stream-themed #towerOverlay.tower-pixel-entry .encounter b{font:600 13px Arial;color:#d9eaf5}
+body.stream-themed #towerOverlay.tower-pixel-entry .boss-tag{font:8px Arial;letter-spacing:1px;border-color:#a18b5e66;border-radius:3px}
+body.stream-themed #towerOverlay.tower-pixel-entry .section-title b{font:600 12px Arial;color:#d7e7f0}
+body.stream-themed #towerOverlay.tower-pixel-entry .sector{min-height:37px;border:1px solid #446680;background:#122e44;color:#91b3ca;border-radius:4px;font:600 11px Arial;cursor:pointer;transition:background .18s,border-color .18s,transform .18s}
+body.stream-themed #towerOverlay.tower-pixel-entry .sector:hover{background:#2a5069;border-color:#a1c6d7;color:#e7f4fb;transform:translateY(-2px)}
+body.stream-themed #towerOverlay.tower-pixel-entry .sector.active{border:1px solid #ddc68e;background:#415053;color:#f1dfb3;box-shadow:inset 0 -2px #cdb77e}
+body.stream-themed #towerOverlay.tower-pixel-entry .sector.selected:not(.active){border-color:#94c3d9;background:#29506a;color:#edf7ff}
+body.stream-themed #towerOverlay.tower-pixel-entry .actions{padding:0 24px 20px}
+body.stream-themed #towerOverlay.tower-pixel-entry .continue{min-height:47px;border:1px solid #ec8b82;border-radius:5px;background:linear-gradient(#d76157,#ae3d3f);color:#fff4ee;font:700 13px Arial;box-shadow:inset 0 1px #ffdbbd33,0 3px #742d36;padding:13px 40px;cursor:pointer;transition:filter .18s,transform .18s}
+body.stream-themed #towerOverlay.tower-pixel-entry .secondary{gap:10px;margin-top:13px}
+body.stream-themed #towerOverlay.tower-pixel-entry .secondary button{min-height:38px;border:1px solid #476e89;border-radius:5px;background:#18374e;color:#bad4e7;font:600 11px Arial;cursor:pointer;transition:background .18s,border-color .18s}
+body.stream-themed #towerOverlay.tower-pixel-entry .secondary button:hover{background:#2a5069;border-color:#9bc0d3;color:#fff}
+body.stream-themed #towerOverlay.tower-pixel-entry .footer{background:#0d2335;border-top:1px solid #52758c55;padding:13px 24px;margin:0;justify-content:space-between}
+body.stream-themed #towerOverlay.tower-pixel-entry .footer button{font:11px Arial;color:#b4d0e3;cursor:pointer}
+body.stream-themed #towerOverlay.tower-pixel-entry .footer small{font:9px Arial;color:#789bb3}
+body.stream-themed #towerOverlay button:focus-visible{outline:2px solid #e4cd99;outline-offset:3px}
+@media(max-width:540px){body.stream-themed #towerOverlay.tower-pixel-entry h2{font-size:20px}body.stream-themed #towerOverlay.tower-pixel-entry .head{padding:17px;flex-wrap:wrap}body.stream-themed #towerOverlay.tower-pixel-entry .hero-note{align-items:start;flex-direction:column}body.stream-themed #towerOverlay.tower-pixel-entry .hero-note b{font-size:16px}body.stream-themed #towerOverlay.tower-pixel-entry .content{padding:17px}body.stream-themed #towerOverlay.tower-pixel-entry .actions{padding:0 17px 17px}body.stream-themed #towerOverlay.tower-pixel-entry .secondary button{font-size:10px}}

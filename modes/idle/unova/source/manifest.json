@@ -1,0 +1,15 @@
+{
+  "checkedAt": "2026-10-29T21:18:12.028Z",
+  "pokemonData": "https://github.com/PokeAPI/pokeapi/tree/master/data/v2/csv",
+  "sprites": {
+    "repository": "https://github.com/PMDCollab/SpriteCollab",
+    "revision": "5a30a861d5f5408cab8a133edd009a0edf7f13f7"
+  },
+  "sha256": {
+    "pokemon_species.csv": "e66e2eeb25fd3836b0ebab6bf87bbf01960aa3c0555e2bac495fa8393c5e0c45",
+    "pokemon_species_names.csv": "820cde17074cdb1c2b0595c997fb8f998e773bd5da3bb525dec85703c86c5fd9",
+    "pokemon_types.csv": "f1fc4bfd657a034ea3bf6972423b10276424aa068577b304a78a08996425ba05",
+    "pokemon_evolution.csv": "e78be51c8805551fffccd5551a556e752e4a76ff1b52482b53b409dd3882e1dd",
+    "pokemon_moves.csv": "327f9f457aafbd4338d927e025b1a12347550e82eca07a74cafb70839f960425"
+  }
+}

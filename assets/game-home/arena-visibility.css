@@ -1,0 +1,25 @@
+
+/* Keep the live battlefield readable while protecting the text column. */
+body #ttl.stream-browsing{background:transparent!important}
+body #ttl.stream-browsing:before{background:none!important}
+body #ttl.stream-browsing .stream-home{background:linear-gradient(90deg,#081725fa 0%,#0a1929ed 23%,#0b1d30b8 31%,#10203338 44%,#0b1b2d12 72%,#0b1b2d28 100%),linear-gradient(0deg,#091725 0%,#0a1a2aef 18%,#0a192a80 31%,transparent 49%)}
+.stream-viewfinder{left:36%;right:1%;top:22px;bottom:13px;opacity:.75;border:0;background:radial-gradient(ellipse at center,#d9f2ff05,transparent 72%)}
+.stream-viewfinder i{width:25px;height:25px;border-color:#afd9e36b;filter:drop-shadow(0 1px #06132288)}
+.stream-viewfinder>span{font:7px Arial;letter-spacing:1.5px;color:#b7d8df;background:#0b223666;padding:5px 7px;bottom:7px;right:7px}
+.stream-live{background:#0d293cd9;color:#d0e9ef;border-color:#7eaebe77;box-shadow:0 2px 10px #0003}
+.stream-feature-copy{padding:12px 0;max-width:440px}
+.stream-feature-copy h1{text-shadow:0 3px 12px #03111ee6}
+.stream-description{color:#b5c8d7;text-shadow:0 1px 3px #03111e}
+@media(max-width:800px){body #ttl.stream-browsing .stream-home{background:linear-gradient(90deg,#081725f7 0%,#0a1929de 35%,#10203344 60%,#0b1b2d22),linear-gradient(0deg,#091725 0%,#0a1a2aef 20%,transparent 60%)}.stream-viewfinder{display:none}}
+
+/* Arena identity belongs beside the live preview, away from the brand. */
+body #ttl.stream-browsing .stream-hero #tloc{display:flex!important;position:absolute!important;left:auto!important;right:0!important;top:47px!important;bottom:auto!important;max-width:285px;width:auto;z-index:4;opacity:1!important;visibility:visible!important;transform:none!important;animation:none!important;pointer-events:none;background:linear-gradient(110deg,#102e43ed,#122d43d9);border:1px solid #80abc466;border-radius:5px;box-shadow:inset 0 1px #d4efff11,0 4px 12px #0003;padding:10px 13px;color:#deedf6;text-shadow:none}
+body #ttl.stream-browsing #tloc #tlt{font:bold 11px/1.5 Arial;color:#deedf6;letter-spacing:.2px;text-shadow:none}
+body #ttl.stream-browsing #tloc #tlt small{display:block;font:9px/1.5 Arial;color:#8fb6cc;margin-top:2px;letter-spacing:0}
+@media(max-width:800px){body #ttl.stream-browsing .stream-hero #tloc{top:13px!important;max-width:210px;padding:8px 10px}body #ttl.stream-browsing #tloc #tlt{font-size:10px}}
+@media(max-width:540px){body #ttl.stream-browsing .stream-hero #tloc{top:0!important;max-width:180px;right:0!important;padding:6px 8px}body #ttl.stream-browsing #tloc #tlt{font-size:9px}body #ttl.stream-browsing #tloc #tlt small{font-size:8px}.stream-hero-mark{margin-top:35px}}
+
+body #ttl.stream-browsing .stream-hero #tloc{padding-bottom:15px}
+.stream-arena-progress{position:absolute;left:12px;right:12px;bottom:6px;height:2px;overflow:hidden;background:#a7c6d414;border-radius:2px;pointer-events:none}
+.stream-arena-progress>i{display:block;width:100%;height:100%;transform:scaleX(0);transform-origin:left center;background:#9ebdce6b;border-radius:2px;transition:transform .12s linear;box-shadow:none}
+@media(prefers-reduced-motion:reduce){.stream-arena-progress>i{transition:none}}

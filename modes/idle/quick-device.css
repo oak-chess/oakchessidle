@@ -1,0 +1,23 @@
+/* Right-aligned clipping reveals the approved artwork without moving its icon. */
+body.idle-native-mode #stage .is-quick.is-device-quick{right:20px!important;width:196px!important;max-width:none!important;gap:7px!important;pointer-events:none;align-items:flex-end;overflow:visible!important;transform:translateY(-50%) scale(.82)!important;transform-origin:right center}
+body.idle-native-mode #stage .is-quick.is-device-quick>button{
+ position:relative!important;flex:none!important;width:108px!important;height:var(--quick-device-height,60px)!important;min-height:0!important;min-width:0!important;
+ padding:0!important;margin:0!important;border:0!important;background:transparent!important;box-shadow:none!important;border-radius:0!important;
+ display:block!important;overflow:hidden!important;pointer-events:auto;cursor:pointer;transform:none!important;font-size:0!important;
+ clip-path:polygon(19px 0,100% 0,100% 100%,19px 100%,0 calc(100% - 14px),0 22px,16px 8px,19px 8px);
+ transition:width .24s cubic-bezier(.2,.75,.25,1)!important;
+}
+body.idle-native-mode #stage .is-quick.is-device-quick>button>*{visibility:hidden!important;pointer-events:none!important}
+.is-device-quick>button::before{content:'';position:absolute;right:0;top:0;width:196px;height:100%;background:url('assets/quick-menu/buttons-atlas.png') -89.711443px var(--quick-device-y) / 374.447761px auto no-repeat;pointer-events:none}
+/* The left bezel travels with the drawer, closing the frame at every width.
+   At full width it overlays its identical original pixels; closed, it caps the icon bay. */
+.is-device-quick>button::after{content:'';position:absolute;left:0;top:0;width:19px;height:100%;background:url('assets/quick-menu/buttons-atlas.png') -89.711443px var(--quick-device-y) / 374.447761px auto no-repeat;pointer-events:none;z-index:1}
+.is-device-quick>[data-quick-device=shop]{--quick-device-y:-4.875622px;--quick-device-height:62px}
+.is-device-quick>[data-quick-device=automation]{--quick-device-y:-67.283582px;--quick-device-height:60px}
+.is-device-quick>[data-quick-device=report]{--quick-device-y:-128.716418px;--quick-device-height:59px}
+.is-device-quick>[data-quick-device=rewards]{--quick-device-y:-187.223881px;--quick-device-height:60px}
+body.idle-native-mode #stage .is-quick.is-device-quick>button:hover,
+body.idle-native-mode #stage .is-quick.is-device-quick>button:focus-visible{width:196px!important;background:transparent!important;border:0!important;box-shadow:none!important;filter:drop-shadow(0 0 3px #24caff77)}
+body.idle-native-mode #stage .is-quick.is-device-quick>button:focus-visible{outline:1px solid #81ecff!important;outline-offset:3px!important;border-radius:10px!important}
+body.idle-native-mode #stage .is-quick.is-device-quick>button:active{filter:brightness(.88)}
+@media(prefers-reduced-motion:reduce){body.idle-native-mode #stage .is-quick.is-device-quick>button{transition:none!important}}

@@ -1,0 +1,40 @@
+/* A painted world prop, with a compact hit area above the right edge of the board. */
+body.idle-native-mode #idle-mega-portal{position:absolute;z-index:83;right:350px;top:50px;width:105px;height:155px;min-width:0;min-height:0;margin:0;padding:0;display:block;overflow:visible;border:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important;cursor:pointer;color:#f6deff;--rift-color:#56bbef;isolation:isolate;outline:none;touch-action:manipulation}
+#idle-mega-portal .mp-frame{position:absolute;inset:0 0 16px;display:block;pointer-events:none;transform-origin:50% 85%;animation:mp-breathe 4.8s ease-in-out infinite}
+#idle-mega-portal .mp-art{position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:fill;filter:drop-shadow(0 0 5px #a26cff66);pointer-events:none}
+#idle-mega-portal[data-mega=charizard-x] .mp-art{filter:hue-rotate(-64deg) saturate(1.25) drop-shadow(0 0 6px #44bfff88)}
+#idle-mega-portal[data-mega=mawile] .mp-art{filter:hue-rotate(42deg) saturate(.85) brightness(1.12) drop-shadow(0 0 5px #ff99cf88)}
+#idle-mega-portal .mp-vortex{position:absolute;left:23%;top:25%;width:56%;height:49%;border-radius:50%;overflow:hidden;mix-blend-mode:screen;opacity:.5;mask-image:radial-gradient(ellipse,#000 10%,#0009 50%,transparent 73%)}
+#idle-mega-portal .mp-vortex::before{content:'';position:absolute;inset:-50%;background:repeating-conic-gradient(from 10deg,transparent 0deg,var(--rift-color) 19deg,transparent 38deg,transparent 72deg);animation:mp-vortex 9s linear infinite;filter:blur(3px)}
+#idle-mega-portal .mp-energy{position:absolute;left:17%;top:17%;width:65%;height:66%;border-radius:50%;background:radial-gradient(ellipse,transparent 40%,var(--rift-color) 65%,transparent 72%);mix-blend-mode:screen;opacity:.2;animation:mp-energy 3.5s ease-in-out infinite}
+#idle-mega-portal .mp-pokemon{position:absolute;left:25%;top:34%;width:51%;height:39%;object-fit:contain;image-rendering:pixelated;opacity:.85;filter:drop-shadow(0 0 5px var(--rift-color));animation:mp-apparition 5s ease-in-out infinite;pointer-events:none}
+#idle-mega-portal .mp-shadow{position:absolute;left:12%;right:12%;height:14px;bottom:23px;border-radius:50%;background:radial-gradient(ellipse,var(--rift-color),transparent 70%);filter:blur(5px);opacity:.35;pointer-events:none}
+#idle-mega-portal .mp-particles{position:absolute;inset:0;overflow:visible;pointer-events:none}
+#idle-mega-portal .mp-particles i{position:absolute;left:50%;top:54%;width:3px;height:6px;background:var(--rift-color);border-radius:50%;box-shadow:0 0 5px var(--rift-color);animation:mp-particle 3.8s ease-out infinite;animation-delay:var(--delay)}
+#idle-mega-portal[data-mega=charizard-x] .mp-particles i{width:4px;height:10px;border-radius:80% 10% 65% 50%;background:linear-gradient(#c9faff,#399dff 65%,transparent);filter:drop-shadow(0 0 2px #368cff)}
+#idle-mega-portal[data-mega=gengar] .mp-particles i{width:8px;height:8px;background:radial-gradient(#b47fff88,transparent);filter:blur(1px)}
+#idle-mega-portal[data-mega=mawile] .mp-particles i{width:5px;height:8px;border-radius:0;background:linear-gradient(135deg,#fff0ff,#ef83b7 55%,#b08bc4);clip-path:polygon(50% 0,100% 40%,55% 100%,0 55%)}
+#idle-mega-portal .mp-caption{position:absolute;left:-12px;right:-12px;bottom:7px;text-align:center;font:700 8px/12px 'Trebuchet MS',Arial,sans-serif;letter-spacing:1.1px;color:#f1dcff;text-shadow:0 1px 3px #080516,0 0 5px #10071e;pointer-events:none}
+#idle-mega-portal .mp-name{position:absolute;top:calc(100% - 2px);left:50%;transform:translate(-50%,-3px);width:max-content;max-width:165px;padding:5px 9px;border:1px solid #bb78be55;border-radius:6px;background:#211429ed;color:#fae8ff;font:700 10px/13px 'Trebuchet MS',Arial,sans-serif;text-align:center;opacity:0;visibility:hidden;transition:opacity .16s,transform .16s;pointer-events:none}
+#idle-mega-portal:is(:hover,:focus-visible) .mp-name{opacity:1;visibility:visible;transform:translate(-50%,0)}
+#idle-mega-portal:focus-visible::after{content:'';position:absolute;inset:9px 0 12px;border:1px solid #e9bcff;border-radius:50%;box-shadow:0 0 9px var(--rift-color);pointer-events:none}
+#idle-mega-portal:is(:hover,:focus-visible) .mp-art{filter:brightness(1.2) drop-shadow(0 0 9px var(--rift-color))}
+#idle-mega-portal[data-mega=charizard-x]:is(:hover,:focus-visible) .mp-art{filter:hue-rotate(-64deg) saturate(1.25) brightness(1.2) drop-shadow(0 0 9px #44bfff)}
+#idle-mega-portal[data-mega=mawile]:is(:hover,:focus-visible) .mp-art{filter:hue-rotate(42deg) brightness(1.2) drop-shadow(0 0 9px #ff99cf)}
+@keyframes mp-vortex{to{transform:rotate(360deg)}}
+@keyframes mp-breathe{50%{transform:scale(1.025,1.015)}}
+@keyframes mp-energy{50%{opacity:.45;transform:scale(.95,1.04)}}
+@keyframes mp-apparition{0%,100%{opacity:.68;transform:translateY(1px)}50%{opacity:.95;transform:translateY(-3px)}}
+@keyframes mp-particle{0%{opacity:0;transform:translate(0,15px) rotate(var(--turn)) scale(.4)}20%{opacity:.9}100%{opacity:0;transform:translate(var(--dx),var(--dy)) rotate(calc(var(--turn) + 90deg)) scale(.2)}}
+@media(prefers-reduced-motion:reduce){#idle-mega-portal .mp-frame,#idle-mega-portal .mp-vortex::before,#idle-mega-portal .mp-energy,#idle-mega-portal .mp-pokemon,#idle-mega-portal .mp-particles i{animation:none!important}#idle-mega-portal .mp-particles{display:none}#idle-mega-portal .mp-name{transition:none}}
+/* Exploration entrances stay outside the Pokémon Center interior. */
+body.idle-native-mode.idle-center-view #idle-mega-portal,body.idle-native-mode.idle-center-view #idle-legendary-event{display:none!important;pointer-events:none!important}
+#idle-mega-portal[data-mega=alakazam] .mp-art{filter:hue-rotate(12deg) brightness(1.15) drop-shadow(0 0 7px #e5baff88)}
+#idle-mega-portal[data-mega=houndoom] .mp-art{filter:hue-rotate(95deg) saturate(1.8) drop-shadow(0 0 7px #ff795b88)}
+#idle-mega-portal[data-mega=gardevoir] .mp-art{filter:hue-rotate(-125deg) brightness(1.18) drop-shadow(0 0 7px #a6f0dc88)}
+#idle-mega-portal[data-mega=alakazam] .mp-particles i{width:5px;height:5px;border-radius:0;transform:rotate(45deg);background:#e5baff;box-shadow:0 0 6px #fbe7ff}
+#idle-mega-portal[data-mega=houndoom] .mp-particles i{width:4px;height:9px;border-radius:70% 10%;background:linear-gradient(#ffe0a2,#ff674b 65%,transparent)}
+#idle-mega-portal[data-mega=gardevoir] .mp-particles i{width:5px;height:8px;border-radius:80% 0 80% 0;background:linear-gradient(#ecfff8,#8ee5cd);box-shadow:0 0 6px #baffed}
+#idle-mega-portal[data-mega=alakazam]:is(:hover,:focus-visible) .mp-art{filter:hue-rotate(12deg) brightness(1.3) drop-shadow(0 0 9px #e5baff)}
+#idle-mega-portal[data-mega=houndoom]:is(:hover,:focus-visible) .mp-art{filter:hue-rotate(95deg) saturate(1.8) brightness(1.2) drop-shadow(0 0 9px #ff795b)}
+#idle-mega-portal[data-mega=gardevoir]:is(:hover,:focus-visible) .mp-art{filter:hue-rotate(-125deg) brightness(1.3) drop-shadow(0 0 9px #a6f0dc)}

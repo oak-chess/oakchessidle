@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 570">
+<defs>
+ <linearGradient id="wall" x2="0" y2="1"><stop stop-color="#ebe6dc"/><stop offset="1" stop-color="#bec5c6"/></linearGradient>
+ <linearGradient id="floor" x2="0" y2="1"><stop stop-color="#b3c3c6"/><stop offset="1" stop-color="#e3e4d9"/></linearGradient>
+ <linearGradient id="counter" x2="0" y2="1"><stop stop-color="#e16970"/><stop offset=".3" stop-color="#ba4453"/><stop offset=".31" stop-color="#f1eade"/><stop offset="1" stop-color="#bbc5ca"/></linearGradient>
+ <linearGradient id="glass" x2="0" y2="1"><stop stop-color="#2e7081"/><stop offset="1" stop-color="#153643"/></linearGradient>
+ <pattern id="tile" width="66" height="52" patternUnits="userSpaceOnUse"><rect width="66" height="52" fill="none" stroke="#7e9a9f" stroke-opacity=".24" stroke-width="1"/><path d="M3 3h60v46" fill="none" stroke="#fff" stroke-opacity=".23"/></pattern>
+ <filter id="shadow"><feDropShadow dx="0" dy="9" stdDeviation="9" flood-opacity=".2"/></filter>
+</defs>
+<!-- The room is an idle-only vector asset, not a replacement for battle arenas. -->
+<rect x="48" y="14" width="1004" height="535" rx="33" fill="#0b1a24" stroke="#657a83" stroke-width="3"/>
+<rect x="64" y="27" width="972" height="203" rx="21" fill="url(#wall)"/>
+<rect x="64" y="70" width="972" height="18" fill="#b13d50"/><rect x="64" y="88" width="972" height="4" fill="#f1b7ae"/>
+<path d="M64 214h972v310q0 16-19 16H83q-19 0-19-16Z" fill="url(#floor)"/>
+<path d="M64 214h972v310q0 16-19 16H83q-19 0-19-16Z" fill="url(#tile)"/>
+<rect x="64" y="208" width="972" height="13" fill="#697f86"/><rect x="64" y="208" width="972" height="3" fill="#e6e9df"/>
+<!-- recessed wall panels -->
+<rect x="100" y="111" width="156" height="75" rx="9" fill="#7d999f" stroke="#f1f0e7" stroke-width="6"/>
+<path d="M112 125h132m-132 12h132m-132 12h80" stroke="#bdd6da" stroke-width="3" opacity=".7"/>
+<rect x="844" y="111" width="156" height="75" rx="9" fill="#7d999f" stroke="#f1f0e7" stroke-width="6"/>
+<path d="M856 125h132m-132 12h132m-132 12h80" stroke="#bdd6da" stroke-width="3" opacity=".7"/>
+<!-- medical emblem and warm light -->
+<rect x="422" y="34" width="256" height="68" rx="16" fill="#fcf3df" stroke="#879aa0" stroke-width="3"/>
+<circle cx="550" cy="67" r="24" fill="#bf4f5c"/><path d="M533 63h34v8h-34m13-21h8v34h-8" fill="#fff4e7"/>
+<!-- recovery bay, counter -->
+<rect x="376" y="119" width="348" height="88" rx="12" fill="#557781" stroke="#9bb2b9" stroke-width="5"/>
+<rect x="392" y="133" width="316" height="53" rx="9" fill="#193c48"/>
+<path d="M406 159h45l8-14 13 29 10-15h41m15 0h34l8-14 13 29 10-15h41m12 0h27" fill="none" stroke="#8ce4bd" stroke-width="3"/>
+<ellipse cx="550" cy="260" rx="225" ry="28" fill="#3c5c65" opacity=".2"/>
+<path d="M337 193q0-16 18-16h390q18 0 18 16v57q0 18-20 18H357q-20 0-20-18Z" fill="url(#counter)" stroke="#71848d" stroke-width="3" filter="url(#shadow)"/>
+<rect x="470" y="205" width="160" height="34" rx="6" fill="#748d98"/>
+<circle cx="495" cy="222" r="8" fill="#dc7c7d"/><circle cx="523" cy="222" r="8" fill="#dc7c7d"/><circle cx="550" cy="222" r="8" fill="#dc7c7d"/><circle cx="577" cy="222" r="8" fill="#dc7c7d"/><circle cx="605" cy="222" r="8" fill="#dc7c7d"/>
+<!-- PC terminal -->
+<ellipse cx="202" cy="305" rx="67" ry="15" fill="#506773" opacity=".2"/>
+<rect x="153" y="209" width="98" height="94" rx="8" fill="#d6e1dd" stroke="#647e8c" stroke-width="4"/>
+<rect x="164" y="220" width="76" height="48" rx="5" fill="url(#glass)"/>
+<path d="M175 234h42m-42 9h53m-53 9h28" stroke="#8bd7ce" stroke-width="3"/>
+<rect x="173" y="278" width="55" height="8" rx="3" fill="#637e8c"/><circle cx="236" cy="282" r="4" fill="#a75765"/>
+<!-- supply store -->
+<rect x="835" y="209" width="128" height="94" rx="9" fill="#dbe0d3" stroke="#738795" stroke-width="4"/>
+<rect x="843" y="217" width="112" height="58" rx="5" fill="#607c88"/>
+<path d="M843 244h112m-76-27v58m37-58v58" stroke="#bacacb" stroke-width="3"/>
+<rect x="841" y="278" width="116" height="16" rx="4" fill="#b74a5c"/>
+<!-- evolution station -->
+<ellipse cx="204" cy="427" rx="70" ry="19" fill="#637985" opacity=".2"/>
+<path d="M144 379h120l-7 42H151Z" fill="#8295a1" stroke="#526e7c" stroke-width="3"/>
+<ellipse cx="204" cy="380" rx="60" ry="20" fill="#d3d6cb" stroke="#8b9fa9" stroke-width="3"/>
+<ellipse cx="204" cy="377" rx="43" ry="12" fill="#6c6986"/><path d="m204 326 17 28-17 20-17-20Z" fill="#c8dcb4" stroke="#6d907e" stroke-width="3"/>
+<!-- task notice board -->
+<rect x="835" y="348" width="128" height="87" rx="7" fill="#8b6655" stroke="#d8caa8" stroke-width="6"/>
+<path d="M848 361h39v26h-39Zm53 0h46v45h-46Zm-53 34h39v26h-39Z" fill="#eee1bd"/>
+<path d="M853 368h27m-27 7h20m27-5h30m-30 8h26m-73 25h22" stroke="#978d79" stroke-width="2"/>
+<!-- center floor insignia -->
+<circle cx="550" cy="382" r="80" fill="#eef0e2" opacity=".62"/>
+<path d="M470 382a80 80 0 0 1 160 0Z" fill="#c56a70" opacity=".5"/>
+<path d="M471 382h158" stroke="#617f87" stroke-width="9"/><circle cx="550" cy="382" r="23" fill="#e4e7d9" stroke="#617f87" stroke-width="8"/><circle cx="550" cy="382" r="10" fill="#a8b9b5"/>
+<!-- seats, plants and exit -->
+<rect x="352" y="472" width="122" height="16" rx="8" fill="#bd636a"/><rect x="626" y="472" width="122" height="16" rx="8" fill="#bd636a"/>
+<path d="M363 488v14m99-14v14m175-14v14m99-14v14" stroke="#758c93" stroke-width="5"/>
+<g fill="#718d74"><circle cx="107" cy="461" r="21"/><circle cx="993" cy="461" r="21"/></g><g fill="#c5a889"><path d="M93 470h28l-4 30H97Zm886 0h28l-4 30h-20Z"/></g>
+<rect x="493" y="509" width="114" height="31" rx="5" fill="#6d8190"/><path d="m537 524 13 8 13-8" fill="none" stroke="#e4dcb7" stroke-width="3"/>
+</svg>

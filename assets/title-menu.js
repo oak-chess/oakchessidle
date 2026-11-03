@@ -1,0 +1,19 @@
+/* Visible title-screen tools, arranged in two rows. */
+(function(){
+const root=document.getElementById('tpress'),menu=document.getElementById('tmain');if(!root||!menu)return;
+const icons={
+ pokedex:'<path d="M4 1h9v14H3V3h1z"/><path d="M5 8h6v4H5zM7 3h4v3H7z" fill="#14283b"/><path d="M4 2h2v2H4zM5 13h2v1H5z" fill="#fff2be"/>',
+ achievements:'<path d="M6 1h4v3h4v3h-2v2h-2v5H6V9H4V7H2V4h4z"/><path d="M7 10h2v3H7z" fill="#14283b"/>',
+ history:'<path d="M5 1h6v2h2v2h2v6h-2v2h-2v2H5v-2H3v-2H1V5h2V3h2z"/><path d="M5 3h6v2h2v6h-2v2H5v-2H3V5h2z" fill="#14283b"/><path d="M7 4h2v4h3v2H7z"/>',
+ scores:'<path d="M4 1h8v2h3v6h-3v2H9v2h3v2H4v-2h3v-2H4V9H1V3h3z"/><path d="M3 5h1v2H3zM12 5h1v2h-1z" fill="#14283b"/>',
+ battleReports:'<path d="M3 1h8v2h2v12H3z"/><path d="M5 5h6v1H5zM5 8h2v4H5zM8 7h2v5H8zM11 9h1v3h-1z" fill="#14283b"/>',
+ options:'<path d="M6 1h4v2h3v3h2v4h-2v3h-3v2H6v-2H3v-3H1V6h2V3h3z"/><path d="M6 5h4v1h1v4h-1v1H6v-1H5V6h1z" fill="#14283b"/>'
+};
+
+const descriptions={pokedex:'Pokémon e animações',achievements:'Desafios e recompensas',history:'Suas jornadas',scores:'Melhores resultados',battleReports:'Detalhes dos combates',options:'Áudio e preferências',trainerProfile:'Personagem e parceiro'};
+const order=['trainerProfile','pokedex','achievements','history','scores','battleReports','options'];let signature='';
+function arrange(){const row=menu.querySelector('.r2');if(!row)return;const items=[...row.querySelectorAll('.ti')],key=items.map(el=>el.dataset.act).sort().join('|');if(key===signature)return;signature=key;menu.querySelectorAll('.title-tools-heading,.title-tools-group,.title-menu-divider').forEach(el=>el.remove());
+for(const action of [...order,...items.map(el=>el.dataset.act).filter(id=>!order.includes(id))]){const el=items.find(item=>item.dataset.act===action);if(!el)continue;el.dataset.priority=['trainerProfile','pokedex','achievements'].includes(action)?'primary':action==='options'?'settings':'records';el.tabIndex=0;el.setAttribute('role','menuitem');if(!el.querySelector('.title-tools-icon')){const icon=document.createElement('span');icon.className='title-tools-icon';icon.setAttribute('aria-hidden','true');icon.innerHTML='<svg viewBox="0 0 16 16" fill="currentColor" shape-rendering="crispEdges">'+(action==='trainerProfile'?'<path d="M6 1h4v2h2v4h-2v2H6V7H4V3h2zM5 10h6v2h2v3H3v-3h2z"/>':icons[action]||icons.options)+'</svg>';const copy=document.createElement('span');copy.className='title-tools-copy';const title=el.querySelector('.tl');if(title)copy.append(title);const note=document.createElement('small');note.textContent=descriptions[action]||'';copy.append(note);el.prepend(icon);el.append(copy)}row.append(el)}const records=document.createElement('div');records.className='title-menu-divider';records.setAttribute('role','presentation');records.textContent='REGISTROS';const firstRecord=row.querySelector('[data-priority=records]');if(firstRecord)row.insertBefore(records,firstRecord);menu.inert=false;}
+arrange();new MutationObserver(arrange).observe(menu,{childList:true,subtree:true});
+window.addEventListener('keydown',e=>{if(LAB.st!=='title'||!menu.contains(e.target)||e.target.closest('.r2')===null)return;const all=[...menu.querySelectorAll('.r2 .ti')],i=all.indexOf(e.target.closest('.ti'));if(i<0)return;const columns=getComputedStyle(menu.querySelector('.r2')).gridTemplateColumns.split(' ').length;let next=i;if(e.key==='ArrowRight')next=(i+1)%all.length;else if(e.key==='ArrowLeft')next=(i-1+all.length)%all.length;else if(e.key==='ArrowDown')next=Math.min(all.length-1,i+columns);else if(e.key==='ArrowUp')next=Math.max(0,i-columns);else if(e.key==='Home')next=0;else if(e.key==='End')next=all.length-1;else if(e.key==='Enter'||e.key===' '){e.preventDefault();e.stopImmediatePropagation();if(!e.repeat)all[i].click();return}else return;e.preventDefault();e.stopImmediatePropagation();all[next].focus()},true);
+})();

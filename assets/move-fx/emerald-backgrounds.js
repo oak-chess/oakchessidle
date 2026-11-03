@@ -1,0 +1,1 @@
+window.EMERALD_BACKGROUNDS=["attract","aurora","cosmic","dark","drill","fissure","ghost","guillotine","highspeed","ice","impact","in_air","psychic","sandstorm_brew","scary_face","thunder","water"];

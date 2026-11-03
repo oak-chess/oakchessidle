@@ -1,0 +1,100 @@
+/* Collection views share the sheet's spacing, readable meters and restrained accents. */
+body.idle-native-mode #tip:has(.idle-tip-compact){width:326px!important;padding:13px!important;border:1px solid #7894a66b!important;border-radius:13px!important;background:#1a2631!important;box-shadow:0 12px 36px #0009!important;outline:0!important}
+body.idle-native-mode #tip .idle-tip-compact{display:flex;flex-direction:column;gap:10px}
+body.idle-native-mode #tip .idle-tip-context{font-size:9px;color:#8ea9ba;letter-spacing:.3px}
+body.idle-native-mode #tip .idle-tip-compact .uh{gap:11px;align-items:center}
+body.idle-native-mode #tip .idle-tip-compact .um{width:48px;height:48px;border:1px solid #7298ab40;border-radius:10px;background:#11212c}
+body.idle-native-mode #tip .idle-tip-compact .um img{max-width:44px;max-height:44px;image-rendering:pixelated}
+body.idle-native-mode #tip .idle-tip-compact .uhc h4{font-family:Arial,sans-serif;font-size:16px;line-height:20px;color:#f1f6f8;margin:0 0 5px}
+body.idle-native-mode #tip .idle-tip-compact .tys .ty{font-size:9px;border-radius:4px;padding:2px 5px}
+#tip .idle-tip-quality{display:flex;flex-wrap:wrap;gap:5px}
+#tip .idle-tip-quality>span{font-size:9px;color:#b3c9d6;background:#ffffff06;border:1px solid #ffffff16;border-radius:4px;padding:3px 5px}
+#tip .idle-tip-quality>[data-quality='2']{color:#83d1ad}#tip .idle-tip-quality>[data-quality='3']{color:#89c8ef}#tip .idle-tip-quality>[data-quality='4']{color:#c7a8f2}#tip .idle-tip-quality>[data-quality='5']{color:#f1d17e}
+body.idle-native-mode #tip .idle-tip-compact .bar{height:21px;border-radius:5px;background:#10212b;overflow:hidden;padding:0 7px}
+body.idle-native-mode #tip .idle-tip-compact .bar i{background:#4f8f7c}
+body.idle-native-mode #tip .idle-tip-compact .bar.lo i{background:#b75e68}
+body.idle-native-mode #tip .idle-tip-compact .bar span{font-size:9px}
+body.idle-native-mode #tip .idle-tip-compact .bar b{font-size:11px}
+body.idle-native-mode #tip .idle-tip-compact .sts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:5px}
+body.idle-native-mode #tip .idle-tip-compact .sts>div{padding:7px 3px;border:1px solid #ffffff09;background:#ffffff04;border-radius:6px;text-align:center}
+body.idle-native-mode #tip .idle-tip-compact .sts i{display:block;font-style:normal;font-size:9px;color:#95b2c5}
+body.idle-native-mode #tip .idle-tip-compact .sts b{font-size:14px;color:#e5f0f6}
+body.idle-native-mode #tip .idle-tip-passive{padding:9px 10px;border:1px solid #d9bd6e20;border-radius:7px;background:#d9bd6e08;margin:0}
+body.idle-native-mode #tip .idle-tip-passive span{font-size:9px;color:#b9ab80}
+body.idle-native-mode #tip .idle-tip-passive b{font-size:11px;color:#e7cb89}
+body.idle-native-mode #tip .idle-tip-compact p{font-size:10px;line-height:15px;color:#b9cbd7;margin:5px 0 0}
+body.idle-native-mode #tip .idle-tip-moves{display:grid;gap:6px}
+body.idle-native-mode #tip .idle-tip-moves>div{padding:8px 10px;border:1px solid color-mix(in srgb,var(--move-color) 25%,transparent);border-radius:7px;background:#ffffff03;margin:0}
+body.idle-native-mode #tip .idle-tip-moves b{font-size:11px;color:#e6f1f6}
+body.idle-native-mode #tip .idle-tip-hint{font-size:9px;color:#91adbf;border-top:1px solid #ffffff0c;padding-top:8px;margin:0}
+body.idle-native-mode #idle-party[data-view=overview],body.idle-native-mode #idle-evolution,body.idle-native-mode #idle-pc{top:50%!important;max-height:calc(100% - 36px)!important;max-width:calc(100% - 36px)!important;width:min(1120px,calc(100% - 36px));height:700px;box-sizing:border-box;background:#1b232c!important;opacity:1}
+body.idle-native-mode #idle-party[data-view=overview]{height:620px}
+body.idle-native-mode #idle-party[data-view=overview] #ip-party-detail{grid-template-columns:150px minmax(0,1fr);grid-template-rows:62px minmax(0,1fr)}
+body.idle-native-mode #idle-party[data-view=overview] .ip-selection-tools>nav button{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.ip-group-count{font-size:10px;min-width:22px;padding:3px;border-radius:5px;background:#ffffff12;text-align:center;color:#d5e2eb}
+body.idle-native-mode #idle-party[data-view=overview] .ip-selection-grid{gap:12px;padding:4px 18px 18px;overflow-y:auto}
+body.idle-native-mode #idle-party[data-view=overview] .ip-selection-entry>.ip-selection-card{width:100%;min-height:148px;padding:30px 12px 12px!important;display:grid;grid-template-columns:54px minmax(0,1fr);gap:10px;text-align:left;background:linear-gradient(140deg,#223540,#1b2b36)!important;transition:border-color .15s}
+body.idle-native-mode #idle-party[data-view=overview] .ip-selection-entry>.ip-selection-card:hover{border-color:#8baaba!important}
+body.idle-native-mode #idle-party[data-view=overview] .ip-selection-sprite{width:54px;height:64px;object-fit:contain;image-rendering:pixelated}
+body.idle-native-mode #idle-party[data-view=overview] .ip-selection-name{padding:0;display:flex;flex-direction:column;align-items:flex-start;gap:4px}
+body.idle-native-mode #idle-party[data-view=overview] .ip-selection-name b{font-size:13px;line-height:16px}
+body.idle-native-mode #idle-party[data-view=overview] .ip-selection-copy{min-width:0;width:100%}
+body.idle-native-mode #idle-party[data-view=overview] .ip-selection-health{margin-top:8px}
+body.idle-native-mode #idle-party[data-view=overview] .ip-selection-health small{display:block;font-size:9px;color:#b7cbd5;margin-bottom:5px}
+body.idle-native-mode #idle-party[data-view=overview] .ip-selection-health>div{height:5px;background:#101c25;border-radius:5px;overflow:hidden}
+body.idle-native-mode #idle-party[data-view=overview] .ip-selection-health i{display:block;height:100%;background:#83c8a7;border-radius:inherit}
+body.idle-native-mode #idle-party[data-view=overview] [data-health=low] .ip-selection-health i{background:#edb277}
+body.idle-native-mode #idle-party[data-view=overview] [data-health=fainted] .ip-selection-sprite{filter:grayscale(1);opacity:.55}
+body.idle-native-mode #idle-party[data-view=overview] .ip-team-genetics{margin:5px 0}
+/* Evolution is a readable path, with requirements separate from the stages. */
+body.idle-native-mode #idle-evolution{width:min(1080px,calc(100% - 36px));height:710px}
+#idle-evolution .is-evo-shell{grid-template-columns:235px minmax(0,1fr)}
+#idle-evolution .is-evo-main{padding:18px;gap:14px}
+body.idle-native-mode #idle-evolution .is-evo-identity{background:linear-gradient(110deg,#253e3b,#20323f);padding:12px 16px}
+body.idle-native-mode #idle-evolution .is-evo-identity>img{width:56px;height:56px}
+#idle-evolution .is-evo-identity b{font-size:15px}
+#idle-evolution .is-evo-pair{padding:12px;gap:10px;flex-wrap:nowrap;background:#182933;border-radius:12px}
+#idle-evolution .is-evo-pair>div{flex:1;min-width:0;align-self:stretch;justify-content:center;gap:7px;padding:10px 6px;border:1px solid #ffffff0c;border-radius:9px;text-align:center;background:#ffffff03}
+#idle-evolution .is-evo-pair>[data-stage=current]{border-color:#76bba34d;background:#76bba30c}
+#idle-evolution .is-evo-pair>[data-stage=next]{border-color:#ba819c55;background:#ba819c0b}
+#idle-evolution .is-evo-pair .is-stage-label{font-size:8px;letter-spacing:.6px;text-transform:uppercase;color:#9fb6c4}
+#idle-evolution .is-evo-pair img,#idle-evolution .is-evo-future img{width:68px;height:68px}
+#idle-evolution .is-evo-future{opacity:1}
+#idle-evolution .is-evo-pair small{line-height:14px;max-width:160px;min-height:28px}
+body.idle-native-mode #idle-evolution .is-evo-requirements{padding:15px;background:#1c2c37}
+#idle-evolution .is-evo-requirements h3{font-size:13px;margin-bottom:6px}
+#idle-evolution .is-evo-status{font-size:10px;color:#a9bfcb}
+#idle-evolution .is-requirements{list-style:none;padding:0;margin:12px 0 0}
+body.idle-native-mode #idle-evolution .is-requirements li{font-size:10px;line-height:16px;padding:9px;background:#b18e4412;border:1px solid #b18e4430}
+body.idle-native-mode #idle-evolution .is-requirements li[data-ready=true]{background:#75bca410;border-color:#75bca433}
+#idle-evolution .is-evo-progress>small{font-size:10px}
+#idle-evolution .is-evo-progress>div{height:7px}
+body.idle-native-mode #idle-evolution .is-evo-actions{bottom:-18px;margin:auto -18px 0;padding:13px 18px}
+/* PC: aligned filters, horizontal cards and a compact selected partner. */
+body.idle-native-mode #idle-pc{grid-template-columns:140px minmax(0,1fr);height:730px}
+body.idle-native-mode #idle-pc>.ipc-tools{grid-template-columns:minmax(0,1fr) 145px 145px;padding:12px 16px;gap:9px}
+#idle-pc .ipc-filter-field{display:flex!important;flex-direction:column;align-items:stretch!important;gap:5px!important;min-width:0;font-size:9px;color:#9db6c5}
+#idle-pc .ipc-filter-field>span{text-transform:capitalize}
+#idle-pc .ipc-extra-filters{align-items:end;gap:9px}
+body.idle-native-mode #idle-pc>.ipc-layout{grid-template-columns:minmax(0,1fr) 242px;padding:0 16px 10px;gap:14px}
+body.idle-native-mode #idle-pc .ipc-grid{grid-auto-rows:minmax(98px,1fr);gap:8px}
+body.idle-native-mode #idle-pc .ipc-cell[data-potency]{min-height:98px;padding:14px 10px!important;gap:10px;align-items:center;flex-direction:row!important;justify-content:flex-start!important}
+body.idle-native-mode #idle-pc .ipc-cell>img{width:44px;height:52px}
+body.idle-native-mode #idle-pc .ipc-card-copy>b{font-size:12px;line-height:16px}
+body.idle-native-mode #idle-pc .ipc-card-copy>small{font-size:9px}
+body.idle-native-mode #idle-pc .ipc-badges>span{font-size:8px}
+#idle-pc .ipc-selected-identity{display:grid;grid-template-columns:56px minmax(0,1fr);gap:5px 10px;align-items:center;padding-bottom:10px;border-bottom:1px solid #ffffff12}
+#idle-pc .ipc-selected-identity>img{grid-row:1/3;width:56px;height:64px;object-fit:contain;image-rendering:pixelated}
+#idle-pc .ipc-selected-identity>h3{font-size:17px;line-height:20px;margin:0;color:#edf5f8}
+#idle-pc .ipc-selected-identity>.ipc-badges{justify-content:flex-start}
+body.idle-native-mode #idle-pc .ipc-detail[data-potency]{gap:9px;padding:13px;background:linear-gradient(150deg,#233943,#192a35)}
+body.idle-native-mode #idle-pc .ipc-detail>:is(p,small){font-size:10px;line-height:16px}
+body.idle-native-mode #idle-pc .ipc-detail>.ip-button{font-size:10px!important}
+body.idle-native-mode #idle-pc .ipc-detail>.idle-protection-tools{padding:7px 0;margin:0}
+body.idle-native-mode #idle-pc .ipc-detail>.ip-help{font-size:9px;line-height:14px}
+#idle-pc .ipc-iv-comparison>div{display:grid;grid-template-columns:1fr auto;gap:5px}
+#idle-pc .ipc-iv-track{grid-column:1/-1;height:5px;background:#111d27;border-radius:4px;overflow:hidden}
+#idle-pc .ipc-iv-track>i{height:100%;display:block;background:#83acc6}
+#idle-pc .ipc-iv-comparison [data-best=true] .ipc-iv-track>i{background:#84d5b0}
+@media(max-width:850px){body.idle-native-mode #idle-pc>.ipc-layout{grid-template-columns:minmax(0,1fr) 215px}body.idle-native-mode #idle-pc .ipc-grid{grid-template-columns:repeat(2,minmax(0,1fr))}body.idle-native-mode #idle-party[data-view=overview] .ip-selection-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:620px){body.idle-native-mode #idle-party[data-view=overview] #ip-party-detail{grid-template-columns:110px minmax(0,1fr)}body.idle-native-mode #idle-party[data-view=overview] .ip-selection-grid{grid-template-columns:1fr}#idle-evolution .is-evo-shell{grid-template-columns:150px minmax(0,1fr)}#idle-evolution .is-evo-pair{flex-wrap:wrap}#idle-evolution .is-evo-pair>div{flex-basis:90px}#idle-evolution .is-requirements{grid-template-columns:1fr}body.idle-native-mode #idle-pc{grid-template-columns:105px minmax(0,1fr)}body.idle-native-mode #idle-pc>.ipc-tools{grid-template-columns:1fr 1fr}#idle-pc .ipc-tools>.ipc-filter-field:first-child{grid-column:1/-1}#idle-pc .ipc-extra-filters{grid-template-columns:1fr 1fr!important}body.idle-native-mode #idle-pc>.ipc-layout{overflow-y:auto;display:block}body.idle-native-mode #idle-pc .ipc-grid{grid-auto-rows:108px;overflow:visible}body.idle-native-mode #idle-pc .ipc-detail{margin-top:12px;overflow:visible}}

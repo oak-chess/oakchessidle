@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" shape-rendering="crispEdges" role="img" aria-label="Fragmento de Escritura">
+ <path fill="#172331" d="M5 2h13v2h2v10h-2v3h-3v3h-4v2H4v-3H2V6h3z"/>
+ <path fill="#a9753e" d="M5 4h12v2h1v8h-3v3h-4v3H5v-3H4V7h1z"/>
+ <path fill="#f2d59a" d="M6 4h10v2h2v6h-3v3h-4v3H5V7h1z"/>
+ <path fill="#fff0bd" d="M7 4h8v2H7zM5 7h2v8H5z"/>
+ <path fill="#8b633f" d="M8 7h7v1H8zM8 9h5v1H8zM7 15h3v2H7z"/>
+ <path fill="#64324b" d="M12 11h5v2h1v3h-2v2h-4v-2h-2v-3h2z"/>
+ <path fill="#e94472" d="M13 12h3v2h1v1h-2v2h-2v-2h-2v-1h2z"/>
+ <path fill="#ffd36a" d="M13 13h2v2h-2z"/>
+ <path fill="#ffe6b0" d="M3 20h3v2H3zM19 17h2v3h-2z"/>
+</svg>

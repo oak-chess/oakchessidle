@@ -1,0 +1,60 @@
+/* Authoritative Village state: all spending and individual transfers commit here. */
+window.createIdleVillageService=function(ctx){
+ const s=ctx.state,P=window.RURAL_PROPERTIES,E=window.FISHING_BUCKET_ECONOMY,keys=['hp','atk','def','spa','spd','spe'];let serial=0;const replies=new Map();
+ const names=['Magikarp','Goldeen','Poliwag','Psyduck','Wooper','Barboach','Tentacool','Krabby','Horsea','Remoraid','Slowpoke','Chinchou','Corsola','Staryu','Feebas','Poliwhirl','Seaking','Whiscash','Gyarados','Dratini','Lapras'],ids=[129,118,60,54,194,339,72,98,116,223,79,170,222,120,349,61,119,340,130,147,131],rank={129:1,118:1,60:1,54:1,79:2,119:2,130:3,147:3,339:1,194:1,61:2,340:3,349:2,72:1,98:1,120:2,116:1,222:2,170:2,223:1,131:3};
+ const pools=[[129,118,60,54,79,119,130,147],[129,60,339,194,61,340,349,130],[129,72,98,116,120,222,170,223,131]],unlock=Object.fromEntries(ids.map((id,i)=>[id,i?i*10:1])),orders=[{id:'magikarp',species:129,count:3,gold:60,xp:30},{id:'goldeen',species:118,count:2,gold:90,xp:45},{id:'poliwag',species:60,count:2,gold:120,xp:60}];
+ const clone=x=>JSON.parse(JSON.stringify(x)),line=id=>ctx.lines.find(l=>l.ids.includes(id)),uid=()=>crypto.randomUUID(),v=()=>s.village;
+ function init(){if(!s.village||s.village.version!==1)s.village={version:1,gold:s.gold,tier:null,metFisher:false,metFarmer:false,questClaimed:false,roster:[],history:[],lastRoll:[],rolling:null,materials:0};P.economy(v());v().fishing??={ownedRods:[],fishingLevel:1,fishingXP:0,lastXP:0,catches:[],totalCaught:0,attempts:0,missed:0,completedOrders:[],activeCast:null};refreshRoster()}
+ function refreshRoster(){const old=new Map((v().roster||[]).map(p=>[p.key,p]));v().roster=s.collection.map(m=>{const L=ctx.lines.find(l=>l.names[0]===m.name);if(!L)return null;const prior=old.get(m.id),reserved=!!prior?.houseId&&v().houses.some(h=>h.id===prior.houseId);return {key:m.id,species:L.ids[m.star-1],name:L.names[m.star-1],level:m.level,xp:m.xp||0,ivs:keys.map(k=>m.ivs?.[k]||0),potency:m.potency||1,favorite:!!m.favorite,locked:!!m.locked,shiny:!!m.shiny,place:reserved?'farm':ctx.busy?.(m)?'busy':'pc',houseId:reserved?prior.houseId:undefined,trainingCarry:prior?.trainingCarry||0,trained:prior?.trained||0}}).filter(Boolean);v().gold=s.gold}
+ function snapshot(){init();const copy=clone(v());copy.activityVolume=typeof CFG!=='undefined'?(CFG.mute?0:CFG.sfx):1;copy.gold=s.gold;copy.fishing.gold=s.gold;copy.fishing.catalog={};for(const id of ids){const L=line(id);if(L)copy.fishing.catalog[id]={cost:L.c||1,star:L.ids.indexOf(id)+1}}return copy}
+ function syncMembers(){for(const p of v().roster){if(p.place!=='farm')continue;const m=s.collection.find(m=>m.id===p.key);if(m){m.level=p.level;m.xp=p.xp;m.xpSchema=2}}}
+ const fail=message=>{throw Error(message)};
+ function commit(action,data={}){
+  init();const backup={v:clone(v()),gold:s.gold,collection:clone(s.collection),shiny:s.shinyProgress===undefined?undefined:clone(s.shinyProgress),discovered:clone(s.discovered||[]),log:clone(s.captureLog||[])};let result={};const f=v().fishing;
+  try{
+   switch(action){
+    case 'cancelFish':f.activeCast=null;break;
+    case 'meet':if(!['fisher','farmer'].includes(data.who))fail('Morador inválido.');v()[data.who==='fisher'?'metFisher':'metFarmer']=true;break;
+    case 'starter':if(!v().metFisher||!v().metFarmer||!P.start(v()))fail('A missão inicial já foi recolhida ou ainda não está pronta.');break;
+    case 'selectHouse':{const h=v().houses.find(h=>h.id===data.id);if(!h)fail('Casa não encontrada.');v().activeHouseId=h.id;v().tier=h.tier;break}
+    case 'rename':{const h=v().houses.find(h=>h.id===data.id),name=String(data.name||'').trim().slice(0,40);if(!h||!name)fail('Informe um nome para a casa.');h.name=name;break}
+    case 'assign':{const m=s.collection.find(m=>m.id===data.key);if(!m||ctx.busy?.(m)||!P.assign(v(),data.key,data.id))fail('Parceiro indisponível ou casa cheia.');break}
+    case 'return':{const p=v().roster.find(p=>p.key===data.key&&p.place==='farm');if(!p)fail('Parceiro não encontrado nesta casa.');p.place='pc';delete p.houseId;break}
+    case 'buyDeeds':if(!v().questClaimed||!P.buy(v(),data.count,Math.random,data.currency||'gold'))fail('Recurso insuficiente ou sorteio já em andamento.');break;
+    case 'weeklyHouse':if(!v().questClaimed||!P.claimWeekly(v()))fail('Complete 100 vitórias nesta semana ou confira se já recolheu.');break;
+    case 'fuseDeeds':{const deed=P.fuse(v(),data.ids);if(!deed)fail('Selecione cinco escrituras guardadas, livres e da mesma qualidade: Comum ou Incomum.');result.deed=deed;break}
+    case 'settleDeeds':{const results=P.settle(v());if(results.length){v().lastRoll=results;for(const d of results)v().history.unshift({...d,action:'Escritura guardada',time:new Date().toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'})});v().history=v().history.slice(0,30)}result.results=results;break}
+    case 'install':if(!P.install(v(),data.id))fail('Limite de quatro casas ou escritura indisponível.');break;
+    case 'pack':if(!P.pack(v(),data.id))fail('Casa não encontrada.');break;
+    case 'deedLock':{const d=v().deeds.find(d=>d.id===data.id);if(!d)fail('Escritura não encontrada.');d.locked=!d.locked;break}
+    case 'dispose':if(!P.dispose(v(),data.id,data.mode))fail('Escritura protegida ou indisponível.');break;
+    case 'upgrade':if(!P.upgrade(v(),data.id,data.level))fail('Materiais insuficientes ou melhoria já aplicada.');break;
+    case 'decorate':if(!P.decorate(v(),data.id,data.key))fail('Materiais insuficientes ou decoração já construída.');break;
+    case 'toggleDecor':{const h=v().houses.find(h=>h.id===data.id);if(!h?.decorOwned?.includes(data.key))fail('Decoração indisponível.');h.decorEnabled??=[];h.decorEnabled=h.decorEnabled.includes(data.key)?h.decorEnabled.filter(k=>k!==data.key):[...h.decorEnabled,data.key];break}
+    case 'rod':{const i=data.index;if(!Number.isInteger(i)||i<0||i>2||f.ownedRods.includes(i)||f.fishingLevel<[1,10,30][i])fail('Vara indisponível.');if(data.method==='quest'){if(f.totalCaught<[0,3,8][i])fail('Complete a missão da vara.')}else if(data.method==='buy'&&i>0){const price=[0,1200,4500][i];if(s.gold<price)fail('Ouro insuficiente.');s.gold-=price}else fail('Opção inválida.');f.ownedRods.push(i);break}
+    case 'cast':{
+     const {spot,rod,depth,bait}=data;if(f.catches.length>=300)fail('Balde cheio: venda ou envie capturas ao PC.');if(!Number.isInteger(spot)||spot<0||spot>2||!Number.isInteger(rod)||!f.ownedRods.includes(rod)||f.fishingLevel<[1,10,30][spot])fail('Adquira a vara e alcance o nível deste local.');if(!['bank','channel','deep'].includes(depth))fail('Ponto inválido.');if(depth==='channel'&&(rod<1||f.fishingLevel<10)||depth==='deep'&&(rod<2||f.fishingLevel<30))fail('Este ponto exige outra vara.');
+     const pool=pools[spot].filter(id=>f.fishingLevel>=unlock[id]&&rank[id]<=rod+1&&(depth==='bank'?rank[id]===1:depth==='channel'?rank[id]<=2:rank[id]>=2));if(!pool.length)fail('Nenhuma espécie liberada neste ponto.');const weighted=pool.flatMap(id=>Array(rank[id]===1?(bait==='rare'?8:14):rank[id]===2?(bait==='rare'?9:6):(bait==='rare'?5:2)).fill(id)),roll=Math.random(),count=f.fishingLevel>=50?(roll<.15?3:roll<.6?2:1):f.fishingLevel>=20&&roll<.3?2:1;
+     const shoal=Array.from({length:Math.min(count,300-f.catches.length)},()=>weighted[Math.floor(Math.random()*weighted.length)]);f.activeCast={id:uid(),shoal,started:Date.now()};f.attempts++;result.cast=clone(f.activeCast);break;
+    }
+    case 'finish':{
+     const cast=f.activeCast;if(!cast||cast.id!==data.id)fail('Esta fisgada já foi concluída.');f.activeCast=null;
+     if(data.won){const captures=cast.shoal.map(id=>{const L=line(id),genes=window.IDLE_INDIVIDUALS.roll(L,'fishing:'+uid(),true);window.IDLE_SHINY.register(s,genes,L,id,'fishing');const level=({119:33,130:20,61:25,340:30}[id]||5+rank[id]*5)+Math.floor(Math.random()*6);return {uid:uid(),id,name:L.names[L.ids.indexOf(id)],level,ivs:keys.map(k=>genes.ivs[k]),potency:genes.potency,favorite:genes.shiny===true,locked:genes.shiny===true,shiny:genes.shiny===true,genes,time:new Date().toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'})}});f.catches.unshift(...captures);f.totalCaught+=captures.length;fishXP(40+Math.max(...cast.shoal.map(id=>rank[id]))*10);result.captures=captures;for(const c of captures){const family=line(c.id).names[0];s.discovered??=[];if(!s.discovered.includes(family))s.discovered.push(family);s.captureLog??=[];s.captureLog.unshift({name:c.name,result:'Pescado · guardado no balde',status:'caught',attempted:true,source:'fishing',place:'Pesca da Vila',speciesId:c.id,level:c.level,potency:c.potency,ivTotal:c.ivs.reduce((a,b)=>a+b,0),shiny:c.shiny,time:Date.now(),destination:'bucket'});window.IDLE_ACTIVITY?.captureLater(s,s.captureLog[0]);s.captureLog=s.captureLog.slice(0,200)}}else{f.missed++;fishXP(5)}break;
+    }
+    case 'fishFlag':{const c=f.catches.find(c=>c.uid===data.id);if(!c||!['favorite','locked'].includes(data.flag))fail('Captura indisponível.');c[data.flag]=!c[data.flag];break}
+    case 'sellFish':{const catalog={};for(const L of ctx.lines)L.ids.forEach((id,i)=>catalog[id]={cost:L.c||1,star:i+1});const local={gold:s.gold,catches:f.catches};const sale=E.sell(local,Array.isArray(data.ids)?data.ids:[],catalog);if(!sale.count)fail('Nenhuma captura disponível para venda.');f.catches=local.catches;s.gold=local.gold;result.sale=sale;break}
+    case 'fishPC':{const c=f.catches.find(c=>c.uid===data.id);if(!c)fail('Esta captura já saiu do balde.');if(s.collection.length>=300)fail('PC cheio. Libere uma vaga no Centro.');const L=line(c.id);s.collection.push({id:'fishing-'+c.uid,name:L.names[0],star:L.ids.indexOf(c.id)+1,level:c.level,xp:0,xpSchema:2,condition:1,items:[],...clone(c.genes),favorite:c.favorite,locked:c.locked,origin:L.names[0]});f.catches=f.catches.filter(p=>p.uid!==c.uid);break}
+    case 'order':{const o=orders.find(o=>o.id===data.id);if(!o||f.completedOrders.includes(o.id))fail('Pedido já entregue ou inválido.');const available=f.catches.filter(c=>c.id===o.species&&c.potency<=2&&!c.favorite&&!c.locked).sort((a,b)=>a.potency-b.potency||a.ivs.reduce((x,y)=>x+y,0)-b.ivs.reduce((x,y)=>x+y,0));if(available.length<o.count)fail('Faltam capturas livres P1 ou P2 no balde.');const chosen=new Set(available.slice(0,o.count).map(c=>c.uid));f.catches=f.catches.filter(c=>!chosen.has(c.uid));f.completedOrders.push(o.id);s.gold+=o.gold;fishXP(o.xp);break}
+    default:fail('Operação desconhecida.');
+   }
+   // Property operations use the same wallet as the rest of Idle.
+   if(['buyDeeds','dispose'].includes(action))s.gold=v().gold;
+   if(!Number.isFinite(s.gold)||s.gold<0)fail('Saldo inválido.');syncMembers();refreshRoster();ctx.save();return {ok:true,...result,state:snapshot()};
+  }catch(error){s.village=backup.v;s.gold=backup.gold;s.collection=backup.collection;if(backup.shiny===undefined)delete s.shinyProgress;else s.shinyProgress=backup.shiny;s.discovered=backup.discovered;s.captureLog=backup.log;return {ok:false,reason:error.message,state:snapshot()}}
+ }
+ function fishXP(amount){const f=v().fishing;f.lastXP=amount;f.fishingXP+=amount;while(f.fishingLevel<200&&f.fishingXP>=60+(f.fishingLevel-1)*12){f.fishingXP-=60+(f.fishingLevel-1)*12;f.fishingLevel++}if(f.fishingLevel===200)f.fishingXP=0}
+ function reward(amount){init();if(!Number.isFinite(amount)||amount<=0)return;P.reward(v(),'hunt-'+Date.now()+'-'+(++serial),amount);if(v().huntReceipts.length>2048)v().huntReceipts=v().huntReceipts.slice(-2048);syncMembers();ctx.save()}
+ function action(request,name,data){if(typeof request!=='string')return {ok:false,reason:'Requisição inválida.'};if(replies.has(request))return replies.get(request);const reply=name==='sync'?{ok:true,state:snapshot()}:commit(name,data);replies.set(request,reply);if(replies.size>128)replies.delete(replies.keys().next().value);return reply}
+ function event(fn){init();const backup=clone(v());try{const count=fn(v());ctx.save();return count}catch(e){s.village=backup;throw e}}
+ return {snapshot,action,reward,victory:()=>event(v=>P.victory(v)),boss:key=>event(v=>P.boss(v,key))};
+};

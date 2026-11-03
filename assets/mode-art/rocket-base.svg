@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 360">
+ <defs><linearGradient id="wall" x2="0" y2="1"><stop stop-color="#473b3d"/><stop offset="1" stop-color="#1d2027"/></linearGradient><linearGradient id="floor" x2="0" y2="1"><stop stop-color="#756550"/><stop offset="1" stop-color="#302b2b"/></linearGradient><radialGradient id="light"><stop stop-color="#d64e3e" stop-opacity=".4"/><stop offset="1" stop-color="#d64e3e" stop-opacity="0"/></radialGradient></defs>
+ <path fill="url(#wall)" d="M0 0h720v360H0z"/><path fill="url(#floor)" d="M0 240h720v120H0z"/>
+ <g fill="none" stroke="#aa9371" stroke-opacity=".15" stroke-width="2"><path d="M0 80h720M0 160h720M0 240h720M0 300h720M100 0v240M250 0v240M470 0v240M620 0v240M360 240v120M100 360l90-120M620 360l-90-120"/></g>
+ <path fill="#13171d" stroke="#897459" stroke-width="7" d="M280 40h160v232H280z"/><path fill="#343138" d="M299 58h122v200H299z"/>
+ <text x="360" y="210" text-anchor="middle" font-family="Arial,sans-serif" font-weight="900" font-size="165" fill="#bc3d35" stroke="#ea8e62" stroke-width="1">R</text>
+ <g stroke="#a18b65" stroke-width="4"><path fill="#4c463c" d="M25 230h120v100H25zM575 230h120v100H575z"/><path d="m25 230 120 100m-120 0 120-100m430 0 120 100m-120 0 120-100"/></g>
+ <g><path fill="#252a2b" stroke="#8f7d5c" stroke-width="5" d="M164 122h84v100h-84zM472 122h84v100h-84z"/><path fill="#93b3a1" d="M176 136h60v45h-60zM484 136h60v45h-60z"/><path fill="#375c55" d="M181 148h35v4h-35zm0 10h47v4h-47zm308-10h35v4h-35zm0 10h47v4h-47z"/><path fill="#cf6553" d="M178 195h12v8h-12zm308 0h12v8h-12z"/><path fill="#d6bf7c" d="M204 195h12v8h-12zm308 0h12v8h-12z"/></g>
+ <ellipse fill="url(#light)" cx="360" cy="80" rx="260" ry="160"/><path fill="#c4463c" d="M347 20h26v13h-26z"/><path fill="#f0c586" d="M349 20h22v4h-22z"/>
+</svg>

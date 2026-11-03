@@ -1,0 +1,44 @@
+/* Digital activity terminal: restrained scanline texture, luminous telemetry and compact cards. */
+#idle-inventory .pf-app-icon[data-app=activities]{background:linear-gradient(145deg,#468e9c,#583876)}
+#idle-inventory .pf-app-icon[data-app=languages]{background:linear-gradient(145deg,#d97367,#9b3e63)}
+#idle-inventory .pa-terminal{position:relative;isolation:isolate;padding-top:1px}
+#idle-inventory .pa-terminal:before{content:'';position:absolute;inset:0;pointer-events:none;z-index:-1;background:repeating-linear-gradient(0deg,transparent 0 4px,#87dfff04 4px 5px);border-radius:14px}
+#idle-inventory .pa-status{display:flex;align-items:center;justify-content:space-between;color:#85dfd2;font-size:8px;letter-spacing:.6px;padding:7px 0 12px;gap:8px}
+#idle-inventory .pa-status span{text-shadow:0 0 10px #65e7d844;animation:pa-signal 3s ease-in-out infinite}
+#idle-inventory .pa-status small{color:#baa8bf;font-size:8px;letter-spacing:0}
+#idle-inventory .pa-controls{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:6px;margin-bottom:12px}
+body.idle-native-mode #idle-inventory .pa-controls select,#idle-inventory .pa-history-tools :is(select,input),#idle-inventory .pa-goal-form :is(select,input){width:100%;min-width:0;max-width:100%;box-sizing:border-box;background:#171522!important;color:#f3e8f3!important;border:1px solid #785273!important;border-radius:8px;padding:8px;font:11px system-ui,sans-serif}
+#idle-inventory .pa-metrics{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px;margin-bottom:12px}
+#idle-inventory .pa-metric{padding:11px;border:1px solid #655175;border-radius:12px;background:linear-gradient(135deg,#2e243b,#211e2e);min-width:0;box-shadow:inset 0 1px #ffffff0b}
+#idle-inventory .pa-metric small{display:block;color:#cdbbd2;font-size:9px}
+#idle-inventory .pa-metric strong{display:block;font:700 16px/1.4 system-ui,sans-serif;overflow-wrap:anywhere;color:#e5e2f5;font-variant-numeric:tabular-nums}
+#idle-inventory .pa-metric[data-tone=blue] strong{color:#94d8ff}#idle-inventory .pa-metric[data-tone=gold] strong{color:#ffda85}#idle-inventory .pa-metric[data-tone=mint] strong{color:#91e3bf}#idle-inventory .pa-metric[data-tone=pink] strong{color:#ff94be}
+#idle-inventory .pa-card{border:1px solid #5f496f;border-radius:12px;padding:11px;margin-bottom:9px;background:linear-gradient(145deg,#2d2436,#242130);overflow:hidden}
+#idle-inventory .pa-card h4{font:650 12px/1.5 system-ui,sans-serif;margin:0 0 7px;color:#e9d9f2}
+#idle-inventory .pa-card p{font-size:11px;line-height:1.6;color:#cbb8ce;margin:6px 0}
+#idle-inventory .pa-card small{font-size:9px;color:#ae9bbb}
+#idle-inventory .pa-card .pf-metric{font-size:10px}
+#idle-inventory .pa-card[data-done=true]{border-color:#65bf9c}
+#idle-inventory .pa-chart{height:105px;display:flex;align-items:flex-end;gap:5px;overflow-x:auto;margin:8px 0}
+#idle-inventory .pa-chart-day{flex:1;min-width:19px;text-align:center}
+#idle-inventory .pa-chart-day>div{display:flex;align-items:flex-end;justify-content:center;height:82px;gap:2px}
+#idle-inventory .pa-chart-day i{display:block;width:7px;border-radius:3px 3px 0 0;background:#8de4c0;box-shadow:0 0 8px #83e2c029}
+#idle-inventory .pa-chart-day i[data-kind=expense]{background:#f77ca9;box-shadow:0 0 8px #f77ca929}
+#idle-inventory .pa-chart-day small{font-size:7px!important;white-space:nowrap}
+#idle-inventory .pa-history-tools{display:grid;gap:7px;margin-bottom:10px}
+#idle-inventory .pa-mon{float:right;width:48px;height:48px;object-fit:contain;image-rendering:pixelated;margin:0 0 6px 5px}
+#idle-inventory .pa-export{display:flex;flex-wrap:wrap;gap:6px;padding-top:11px;border-top:1px solid #73507466;margin-top:12px}
+#idle-inventory .pa-export small{color:#b6a1bd;font-size:9px;line-height:1.5;display:block;width:100%;margin-top:3px}
+#idle-inventory .pa-goal-form{display:grid;gap:7px;margin-bottom:12px}
+#idle-inventory .pa-pagination{display:flex;gap:8px;align-items:center;justify-content:space-between;margin:10px 0}
+#idle-inventory .pa-pagination small{font-size:9px;color:#c5afc9}
+#idle-inventory .pa-notice{font-size:10px;color:#ffca80}
+#idle-inventory .pa-help{font-size:10px;line-height:1.5;color:#c0adcb}
+#idle-inventory .pf-language{display:flex;align-items:center;justify-content:space-between;width:100%;margin:7px 0;padding:12px!important;gap:8px}
+body.idle-native-mode #idle-inventory .pf-language[aria-pressed=true]{border-color:#8addc4!important;background:#25443f!important}
+@keyframes pa-signal{50%{opacity:.65}}
+@media(prefers-reduced-motion:reduce){#idle-inventory .pa-status span{animation:none}}
+#idle-inventory .pf-app-grid{gap:14px 8px}
+#idle-inventory .pf-app-icon{width:54px;height:54px;border-radius:16px}
+#idle-inventory .pf-home-hero{padding:7px 4px 13px}
+#idle-inventory .pf-app-grid>button>span:last-child{line-height:1.25;max-width:100%;overflow-wrap:normal}

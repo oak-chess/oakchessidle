@@ -1,0 +1,8 @@
+.rocket-duo-retro{text-align:center;margin:8px auto 12px;color:#e8d5a0}
+.rocket-duo-retro>small{font:700 9px Arial;letter-spacing:1.5px}
+.rocket-duo-retro>div{display:flex;justify-content:center;gap:32px;margin-top:10px}
+.rocket-duo-retro figure{margin:0;font:700 11px Arial}
+.rocket-duo-retro figure>span{display:block;width:76px;height:76px;overflow:hidden;background:#29212d;border:1px solid #9b5266}
+.rocket-duo-retro img{display:block!important;width:76px!important;height:auto!important;max-width:none!important;max-height:none!important;image-rendering:pixelated}
+.rocket-duo-retro figcaption{margin-top:5px}
+@media(max-height:650px){.rocket-duo-retro>div{margin-top:5px}.rocket-duo-retro{margin-block:4px}.rocket-duo-retro figure>span{width:48px;height:48px}.rocket-duo-retro img{width:48px!important}}

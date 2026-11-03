@@ -1,0 +1,15 @@
+body.idle-native-mode #stage button.is-trainer{appearance:none;display:flex;align-items:center;gap:10px;width:174px;height:83px;min-height:83px;padding:8px 11px 8px 8px;box-sizing:border-box;text-align:left;cursor:pointer;border:1px solid #ad6082!important;border-radius:12px!important;background:radial-gradient(ellipse at 10% 0,#b34e7b22,transparent 75%),linear-gradient(125deg,#2c2135f7,#17141ff5)!important;box-shadow:0 5px 17px #0006,inset 0 1px #efd7ff15!important;color:#f9f0f8;transition:border-color .18s,box-shadow .18s}
+body.idle-native-mode #stage button.is-trainer:hover{border-color:#ff92b1!important;box-shadow:0 5px 20px #0007,0 0 12px #db3b6c25,inset 0 1px #fff1!important}
+body.idle-native-mode #stage button.is-trainer:focus-visible{outline:2px solid #ffd47e;outline-offset:3px}
+.is-trainer-avatar{display:grid;place-items:center;width:37px;height:57px;flex:none;border-radius:8px;border:1px solid #85608055;background:linear-gradient(145deg,#68405a55,#18172355);overflow:hidden}.is-trainer-avatar img{width:33px;height:54px;object-fit:contain;image-rendering:pixelated;filter:drop-shadow(0 2px 2px #0006)}
+body.idle-native-mode #stage .is-trainer-copy{flex:1;min-width:0}body.idle-native-mode #stage .is-trainer-copy>small{display:block;max-width:100%;padding-right:5px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;color:#e6b6cd;font:700 10px/1.2 'Trebuchet MS',sans-serif;letter-spacing:.1px}
+body.idle-native-mode #stage .is-trainer-copy>b{font:800 16px/1.2 'Trebuchet MS',sans-serif;margin:3px 0 6px;color:#fff1f8}.is-trainer-open{position:absolute;right:5px;top:6px;font:16px/1 Arial;color:#d18ba8;opacity:.8}
+body.idle-native-mode #stage .is-trainer-progress{height:4px;border-radius:4px;background:#0b0b14;box-shadow:inset 0 1px #0007}body.idle-native-mode #stage .is-trainer-progress i{background:linear-gradient(90deg,#e33262,#ffcb7a);box-shadow:0 0 7px #ff88ad44}
+body.idle-native-mode #stage .is-trainer .idle-wallet{display:block;margin-top:4px;font:700 9px/1.3 'Trebuchet MS',sans-serif;color:#ffda80;white-space:nowrap}
+@media(prefers-reduced-motion:reduce){body.idle-native-mode #stage button.is-trainer{transition:none}}
+
+body.idle-native-mode #stage .is-trainer .is-trainer-xp-gain{bottom:18px;color:#ffdf91;text-shadow:0 1px 2px #000,0 0 7px #f4a64ca0;background:#2a1c30ed}
+
+/* Visible XP percentage beside the compact progress bar. */
+body.idle-native-mode #stage .is-trainer-progress{position:relative;overflow:visible;margin-right:48px}
+body.idle-native-mode #stage .is-trainer-progress::after{content:attr(data-xp);position:absolute;left:calc(100% + 5px);top:50%;transform:translateY(-50%);width:44px;white-space:nowrap;color:#bce5ff;font:700 8px/1.2 "Trebuchet MS",sans-serif;font-variant-numeric:tabular-nums}

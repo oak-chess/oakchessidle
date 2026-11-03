@@ -1,0 +1,177 @@
+{
+  "tool": "built-in image_gen",
+  "prompts": [
+    {
+      "key": "blastoise",
+      "path": "C:\\Users\\os_ap\\.codex\\generated_images\\01a143cc-e15d-7e93-8b77-825e37488153\\exec-e70bae7b-a16c-4acd-8be4-a87da509dfcf.png",
+      "prompt": "Create a wide 16:9 high resolution illustrated background for a polished Pok\u00e9mon fan tactical board game, painterly environment with convincing material textures, integrated environmental decorations, slightly elevated fixed camera looking across the floor toward the rear scenery, no characters, no creatures, no UI, no letters, no text, no grid, no battle board, no logos. The game draws its own large opaque hexagonal board over the central 55 percent of the image; keep the center floor calm and broad, put distinctive architecture and details along the outside edges and upper third. Natural coherent lighting and depth, richly colored but readable, crisp hand-painted game environment, avoid simple geometric props or symmetrical pasted decorations. Mega Blastoise habitat: an ancient coastal fortress and tidal artillery harbor built in rough blue-grey stone, huge weathered arches and integrated empty cannon embrasures around outer walls, sea visible through rear arches, deep cobalt waves, turquoise foam, wet stone foreground with tiny puddles, coiled ropes and barnacled mooring bollards at margins, bright sea-blue daylight, strong ocean-blue palette.",
+      "asset": "modes/idle/mega/assets/arena-blastoise.webp"
+    },
+    {
+      "key": "lucario",
+      "path": "C:\\Users\\os_ap\\.codex\\generated_images\\01a143cc-e15d-7e93-8b77-825e37488153\\exec-8b02464a-c61d-4b0e-82dd-f9bb94de7ec1.png",
+      "prompt": "Create a wide 16:9 high resolution illustrated background for a polished Pok\u00e9mon fan tactical board game, painterly environment with convincing material textures, integrated environmental decorations, slightly elevated fixed camera looking across the floor toward the rear scenery, no characters, no creatures, no UI, no letters, no text, no grid, no battle board, no logos. The game draws its own large opaque hexagonal board over the central 55 percent of the image; keep the center floor calm and broad, put distinctive architecture and details along the outside edges and upper third. Natural coherent lighting and depth, richly colored but readable, crisp hand-painted game environment, avoid simple geometric props or symmetrical pasted decorations. Mega Lucario habitat: a secluded high mountain martial sanctuary of aura, weathered stone training courtyard, indigo and warm sandstone architecture integrated into cliffs, blue crystalline aura veins embedded naturally into peripheral rocks, fabric streamers on carved pillars at edges, distant rugged peaks and low mist, dawn side-light with amber highlights and electric blue energy accents, refined calm spiritual atmosphere, do not draw a central arena or platform.",
+      "asset": "modes/idle/mega/assets/arena-lucario.webp"
+    },
+    {
+      "key": "swampert",
+      "path": "C:\\Users\\os_ap\\.codex\\generated_images\\01a143cc-e15d-7e93-8b77-825e37488153\\exec-44f89635-5f05-4d4d-9528-e1604e942602.png",
+      "prompt": "Create a wide 16:9 high resolution illustrated background for a polished Pok\u00e9mon fan tactical board game, painterly environment with convincing material textures, integrated environmental decorations, slightly elevated fixed camera looking across the floor toward the rear scenery. Mega Swampert habitat: an ancient flooded mangrove delta and monsoon river shrine, massive natural mangrove roots arching around the outside edges, wet dark clay and broad slate riverbed in the center, turquoise channels and blue-grey rainwater pools along the margins, mossy half-sunken carved stone embankments, rich emerald foliage and orange flowers, distant misty tropical marsh with a clearing sky after rain. Deep cobalt blue, lush green, warm ochre mud and soft bright daylight. No characters, no creatures, no UI, no letters, no text, no grid, no battle board, no logos. The game draws its own large opaque hexagonal board over the central 55 percent of the image; keep the center broad and uncluttered, details along outside edges and upper third. Natural coherent lighting and depth, crisp hand-painted game environment, avoid simple geometric props or symmetrical pasted decorations. No central raised platform.",
+      "asset": "modes/idle/mega/assets/arena-swampert.webp"
+    },
+    {
+      "key": "venusaur",
+      "name": "Jardim da Flor Ancestral",
+      "prompt": "Wide 16:9 illustrated environment background for a polished Pok\u00e9mon fan tactical board game. Rich hand-painted material textures, convincing lighting, coherent environmental decorations, slightly elevated fixed camera looking across the floor to the distant scene. A lush giant tropical greenhouse opening into an ancient garden, enormous naturally integrated flowering vines and broad-leaved plants around the edges, moss-covered stone irrigation channels, soft sunbeams through foliage, rich leaf green and magenta blossoms. The native game overlays its own large opaque hexagonal board across the central 55 percent: keep this center broad, calm and clear, concentrate visual landmarks at the outer margins and upper third. No characters, no Pok\u00e9mon, no animals, no HUD, no words, no lettering, no symbols or logos, no grid, no drawn battle board, no central raised platform. Avoid simple artificial geometric props and repeated pasted objects. Immersive colorful painterly game environment with depth and natural weathering.",
+      "path": "C:\\Users\\os_ap\\.codex\\generated_images\\01a143cc-e15d-7e93-8b77-825e37488153\\exec-f6311e4d-b899-4348-b3fc-686bdf2fc6b3.png",
+      "asset": "modes/idle/mega/assets/arena-venusaur.webp"
+    },
+    {
+      "key": "charizard-y",
+      "name": "Cume do Sol Ardente",
+      "prompt": "Wide 16:9 illustrated environment background for a polished Pok\u00e9mon fan tactical board game. Rich hand-painted material textures, convincing lighting, coherent environmental decorations, slightly elevated fixed camera looking across the floor to the distant scene. A high volcanic mountain summit under blazing golden sunshine, weathered ochre basalt terraces at the margins, distant caldera and thin smoke plumes, flame-orange banners mounted in stone cliff shrines, blue sky and orange-gold light. Avoid blue flames. The native game overlays its own large opaque hexagonal board across the central 55 percent: keep this center broad, calm and clear, concentrate visual landmarks at the outer margins and upper third. No characters, no Pok\u00e9mon, no animals, no HUD, no words, no lettering, no symbols or logos, no grid, no drawn battle board, no central raised platform. Avoid simple artificial geometric props and repeated pasted objects. Immersive colorful painterly game environment with depth and natural weathering.",
+      "path": "C:\\Users\\os_ap\\.codex\\generated_images\\01a143cc-e15d-7e93-8b77-825e37488153\\exec-faa70ae5-303b-4257-8d8b-6cb12b799a93.png",
+      "asset": "modes/idle/mega/assets/arena-charizard-y.webp"
+    },
+    {
+      "key": "tyranitar",
+      "name": "Basti\u00e3o da Tempestade de Areia",
+      "prompt": "Wide 16:9 illustrated environment background for a polished Pok\u00e9mon fan tactical board game. Rich hand-painted material textures, convincing lighting, coherent environmental decorations, slightly elevated fixed camera looking across the floor to the distant scene. An immense desert canyon fortress eroded into layered sandstone cliffs, crumbling stone ramparts and huge angular rock formations naturally framing the edges, distant moving sand haze, broad cracked ochre floor center, amber and dark olive palette. The native game overlays its own large opaque hexagonal board across the central 55 percent: keep this center broad, calm and clear, concentrate visual landmarks at the outer margins and upper third. No characters, no Pok\u00e9mon, no animals, no HUD, no words, no lettering, no symbols or logos, no grid, no drawn battle board, no central raised platform. Avoid simple artificial geometric props and repeated pasted objects. Immersive colorful painterly game environment with depth and natural weathering.",
+      "path": "C:\\Users\\os_ap\\.codex\\generated_images\\01a143cc-e15d-7e93-8b77-825e37488153\\exec-d63346f2-a056-4dab-9393-2e72ea340a78.png",
+      "asset": "modes/idle/mega/assets/arena-tyranitar.webp"
+    },
+    {
+      "key": "gyarados",
+      "name": "Garganta da Mar\u00e9 Furiosa",
+      "prompt": "Wide 16:9 illustrated environment background for a polished Pok\u00e9mon fan tactical board game. Rich hand-painted material textures, convincing lighting, coherent environmental decorations, slightly elevated fixed camera looking across the floor to the distant scene. A storm-swept ocean strait between dramatic dark rocky sea cliffs, ruined coastal stone archways framing the far edges, huge white surf and waterfalls beyond the broad center wet rock floor, navy sea, scarlet coral details and storm silver. The native game overlays its own large opaque hexagonal board across the central 55 percent: keep this center broad, calm and clear, concentrate visual landmarks at the outer margins and upper third. No characters, no Pok\u00e9mon, no animals, no HUD, no words, no lettering, no symbols or logos, no grid, no drawn battle board, no central raised platform. Avoid simple artificial geometric props and repeated pasted objects. Immersive colorful painterly game environment with depth and natural weathering.",
+      "path": "C:\\Users\\os_ap\\.codex\\generated_images\\01a143cc-e15d-7e93-8b77-825e37488153\\exec-2eee62f5-f738-459c-86c0-c271f1c651fc.png",
+      "asset": "modes/idle/mega/assets/arena-gyarados.webp"
+    },
+    {
+      "key": "sceptile",
+      "name": "Copa da Floresta Drac\u00f4nica",
+      "prompt": "Wide 16:9 illustrated environment background for a polished Pok\u00e9mon fan tactical board game. Rich hand-painted material textures, convincing lighting, coherent environmental decorations, slightly elevated fixed camera looking across the floor to the distant scene. An elevated ancient forest sanctuary amid colossal rainforest trees, emerald canopy overhead and distant misty jungle, integrated weathered stone footbridges and natural roots at the outer margins, fern-rich edges and red seed-like blossoms, bright leaf green with subtle turquoise light. The native game overlays its own large opaque hexagonal board across the central 55 percent: keep this center broad, calm and clear, concentrate visual landmarks at the outer margins and upper third. No characters, no Pok\u00e9mon, no animals, no HUD, no words, no lettering, no symbols or logos, no grid, no drawn battle board, no central raised platform. Avoid simple artificial geometric props and repeated pasted objects. Immersive colorful painterly game environment with depth and natural weathering.",
+      "path": "C:\\Users\\os_ap\\.codex\\generated_images\\01a143cc-e15d-7e93-8b77-825e37488153\\exec-b7fdb2c8-62b1-49a4-ba6a-97a4d03e248e.png",
+      "asset": "modes/idle/mega/assets/arena-sceptile.webp"
+    },
+    {
+      "key": "aerodactyl",
+      "name": "Penhasco dos Ventos Primitivos",
+      "prompt": "Wide 16:9 illustrated environment background for a polished Pok\u00e9mon fan tactical board game. Rich hand-painted material textures, convincing lighting, coherent environmental decorations, slightly elevated fixed camera looking across the floor to the distant scene. A prehistoric windswept limestone plateau with fossil-bearing rock faces and soaring stone arches at the outside edges, distant canyon and ancient fern groves below, violet-grey limestone and pale sky, atmospheric midday wind and broad rocky center. The native game overlays its own large opaque hexagonal board across the central 55 percent: keep this center broad, calm and clear, concentrate visual landmarks at the outer margins and upper third. No characters, no Pok\u00e9mon, no animals, no HUD, no words, no lettering, no symbols or logos, no grid, no drawn battle board, no central raised platform. Avoid simple artificial geometric props and repeated pasted objects. Immersive colorful painterly game environment with depth and natural weathering.",
+      "path": "C:\\Users\\os_ap\\.codex\\generated_images\\01a143cc-e15d-7e93-8b77-825e37488153\\exec-72522039-159e-4d31-a906-e1e4ead497ac.png",
+      "asset": "modes/idle/mega/assets/arena-aerodactyl.webp"
+    },
+    {
+      "key": "blaziken",
+      "name": "Templo das Brasas do Amanhecer",
+      "prompt": "Wide 16:9 illustrated environment background for a polished Pok\u00e9mon fan tactical board game. Rich hand-painted material textures, convincing lighting, coherent environmental decorations, slightly elevated fixed camera looking across the floor to the distant scene. A mountain martial training temple of weathered red stone and dark wood, fire braziers integrated into peripheral stairs, distant sunrise mountains, ember-red fabric streamers and charcoal ash at the margins, broad center flagstone floor, intense vermilion and warm cream lighting. The native game overlays its own large opaque hexagonal board across the central 55 percent: keep this center broad, calm and clear, concentrate visual landmarks at the outer margins and upper third. No characters, no Pok\u00e9mon, no animals, no HUD, no words, no lettering, no symbols or logos, no grid, no drawn battle board, no central raised platform. Avoid simple artificial geometric props and repeated pasted objects. Immersive colorful painterly game environment with depth and natural weathering.",
+      "path": "C:\\Users\\os_ap\\.codex\\generated_images\\01a143cc-e15d-7e93-8b77-825e37488153\\exec-a8fc5132-d651-4824-a337-99a4825bf36c.png",
+      "asset": "modes/idle/mega/assets/arena-blaziken.webp"
+    },
+    {
+      "key": "scizor",
+      "name": "Forja das L\u00e2minas Rubras",
+      "prompt": "Wide 16:9 illustrated environment background for a polished Pok\u00e9mon fan tactical board game. Rich hand-painted material textures, convincing lighting, coherent environmental decorations, slightly elevated fixed camera looking across the floor to the distant scene. An ancient open-air artisan forge sheltered by a cliff, weathered dark metal and red-lacquered stone architectural accents, integrated inactive forge furnaces glowing softly at margins, hanging red maple branches and stone workbenches at edges, charcoal and crimson light. The native game overlays its own large opaque hexagonal board across the central 55 percent: keep this center broad, calm and clear, concentrate visual landmarks at the outer margins and upper third. No characters, no Pok\u00e9mon, no animals, no HUD, no words, no lettering, no symbols or logos, no grid, no drawn battle board, no central raised platform. Avoid simple artificial geometric props and repeated pasted objects. Immersive colorful painterly game environment with depth and natural weathering.",
+      "path": "C:\\Users\\os_ap\\.codex\\generated_images\\01a143cc-e15d-7e93-8b77-825e37488153\\exec-a8945989-6c5d-4b15-b506-6a75dfbb282c.png",
+      "asset": "modes/idle/mega/assets/arena-scizor.webp"
+    },
+    {
+      "key": "heracross",
+      "name": "Bosque dos Troncos Colossais",
+      "prompt": "Wide 16:9 illustrated environment background for a polished Pok\u00e9mon fan tactical board game. Rich hand-painted material textures, convincing lighting, coherent environmental decorations, slightly elevated fixed camera looking across the floor to the distant scene. A humid ancient woodland clearing with enormous sap-rich oak trunks and fallen hollow logs at edges, visible bark texture, amber sap beads and mushrooms naturally embedded near roots, blue-black shadows with fresh leaf green, clear broad packed earth center. The native game overlays its own large opaque hexagonal board across the central 55 percent: keep this center broad, calm and clear, concentrate visual landmarks at the outer margins and upper third. No characters, no Pok\u00e9mon, no animals, no HUD, no words, no lettering, no symbols or logos, no grid, no drawn battle board, no central raised platform. Avoid simple artificial geometric props and repeated pasted objects. Immersive colorful painterly game environment with depth and natural weathering.",
+      "path": "C:\\Users\\os_ap\\.codex\\generated_images\\01a143cc-e15d-7e93-8b77-825e37488153\\exec-37b593cd-7e71-4910-9075-b9ebde819a81.png",
+      "asset": "modes/idle/mega/assets/arena-heracross.webp"
+    },
+    {
+      "key": "aggron",
+      "name": "Fortaleza da Armadura Antiga",
+      "prompt": "Wide 16:9 illustrated environment background for a polished Pok\u00e9mon fan tactical board game. Rich hand-painted material textures, convincing lighting, coherent environmental decorations, slightly elevated fixed camera looking across the floor to the distant scene. An abandoned mountain bastion built from heavy slate and iron, broken gate towers and weathered riveted metal reinforcing rocky cliffs at margins, distant mountains through arches, muted ivory stone and charcoal iron, dramatic clean daylight on a broad flagstone floor. The native game overlays its own large opaque hexagonal board across the central 55 percent: keep this center broad, calm and clear, concentrate visual landmarks at the outer margins and upper third. No characters, no Pok\u00e9mon, no animals, no HUD, no words, no lettering, no symbols or logos, no grid, no drawn battle board, no central raised platform. Avoid simple artificial geometric props and repeated pasted objects. Immersive colorful painterly game environment with depth and natural weathering.",
+      "path": "C:\\Users\\os_ap\\.codex\\generated_images\\01a143cc-e15d-7e93-8b77-825e37488153\\exec-352b7a7c-90f2-46ce-a6c1-21f5297a729d.png",
+      "asset": "modes/idle/mega/assets/arena-aggron.webp"
+    },
+    {
+      "key": "absol",
+      "name": "Mirante da Lua Pressagiosa",
+      "prompt": "Wide 16:9 illustrated environment background for a polished Pok\u00e9mon fan tactical board game. Rich hand-painted material textures, convincing lighting, coherent environmental decorations, slightly elevated fixed camera looking across the floor to the distant scene. A lonely mountain observatory ruin beneath an enormous luminous moon and fast clouds, weathered white stone arches and dark slate steps at the edges, frost-touched grass and pale flowers, moonlit indigo and silvery lavender, broad worn stone center, ominous but serene. The native game overlays its own large opaque hexagonal board across the central 55 percent: keep this center broad, calm and clear, concentrate visual landmarks at the outer margins and upper third. No characters, no Pok\u00e9mon, no animals, no HUD, no words, no lettering, no symbols or logos, no grid, no drawn battle board, no central raised platform. Avoid simple artificial geometric props and repeated pasted objects. Immersive colorful painterly game environment with depth and natural weathering.",
+      "path": "C:\\Users\\os_ap\\.codex\\generated_images\\01a143cc-e15d-7e93-8b77-825e37488153\\exec-ccbc1338-3e77-4c24-9bd1-cd3cb93add64.png",
+      "asset": "modes/idle/mega/assets/arena-absol.webp"
+    },
+    {
+      "key": "steelix",
+      "name": "Galeria do Ferro Profundo",
+      "prompt": "Wide 16:9 illustrated environment background for a polished Pok\u00e9mon fan tactical board game. Rich hand-painted material textures, convincing lighting, coherent environmental decorations, slightly elevated fixed camera looking across the floor to the distant scene. A cavernous underground iron mine and natural crystalline rock chamber, immense metallic ore veins and worn mine retaining walls integrated at edges, rusty tracks disappearing along margins, smoky quartz clusters, cool steel blue with amber lanterns, broad solid dark rock floor. The native game overlays its own large opaque hexagonal board across the central 55 percent: keep this center broad, calm and clear, concentrate visual landmarks at the outer margins and upper third. No characters, no Pok\u00e9mon, no animals, no HUD, no words, no lettering, no symbols or logos, no grid, no drawn battle board, no central raised platform. Avoid simple artificial geometric props and repeated pasted objects. Immersive colorful painterly game environment with depth and natural weathering.",
+      "path": "C:\\Users\\os_ap\\.codex\\generated_images\\01a143cc-e15d-7e93-8b77-825e37488153\\exec-d9fe93a4-8501-4640-b4a5-d05635c99a7f.png",
+      "asset": "modes/idle/mega/assets/arena-steelix.webp"
+    },
+    {
+      "key": "manectric",
+      "name": "Esta\u00e7\u00e3o do Raio Azul",
+      "prompt": "Wide 16:9 illustrated environment background for a polished Pok\u00e9mon fan tactical board game. Rich hand-painted material textures, convincing lighting, coherent environmental decorations, slightly elevated fixed camera looking across the floor to the distant scene. A weathered hydroelectric mountain station with old copper conductors and grounded lightning towers built coherently into stone walls at edges, rain-wet pavement and distant storm valley, electric cyan and yellow sparks only near peripheral coils, midnight blue and brass. The native game overlays its own large opaque hexagonal board across the central 55 percent: keep this center broad, calm and clear, concentrate visual landmarks at the outer margins and upper third. No characters, no Pok\u00e9mon, no animals, no HUD, no words, no lettering, no symbols or logos, no grid, no drawn battle board, no central raised platform. Avoid simple artificial geometric props and repeated pasted objects. Immersive colorful painterly game environment with depth and natural weathering.",
+      "path": "C:\\Users\\os_ap\\.codex\\generated_images\\01a143cc-e15d-7e93-8b77-825e37488153\\exec-76c29da5-1d78-4179-82c1-790788f464a8.png",
+      "asset": "modes/idle/mega/assets/arena-manectric.webp"
+    },
+    {
+      "key": "altaria",
+      "name": "Jardim das Nuvens Cantantes",
+      "prompt": "Wide 16:9 illustrated environment background for a polished Pok\u00e9mon fan tactical board game. Rich hand-painted material textures, convincing lighting, coherent environmental decorations, slightly elevated fixed camera looking across the floor to the distant scene. A serene high-altitude terraced garden floating above white cloud banks, pale blue stone arches and flowering shrubs at the edges, distant turquoise mountains, soft pastel sky and warm sunrise, flowing airy architecture integrated with rock and moss, broad cream stone floor. The native game overlays its own large opaque hexagonal board across the central 55 percent: keep this center broad, calm and clear, concentrate visual landmarks at the outer margins and upper third. No characters, no Pok\u00e9mon, no animals, no HUD, no words, no lettering, no symbols or logos, no grid, no drawn battle board, no central raised platform. Avoid simple artificial geometric props and repeated pasted objects. Immersive colorful painterly game environment with depth and natural weathering.",
+      "path": "C:\\Users\\os_ap\\.codex\\generated_images\\01a143cc-e15d-7e93-8b77-825e37488153\\exec-480ef171-cd88-4542-a414-9c8668f30860.png",
+      "asset": "modes/idle/mega/assets/arena-altaria.webp"
+    },
+    {
+      "key": "salamence",
+      "name": "Baluarte das Asas Crescentes",
+      "prompt": "Wide 16:9 illustrated environment background for a polished Pok\u00e9mon fan tactical board game. Rich hand-painted material textures, convincing lighting, coherent environmental decorations, slightly elevated fixed camera looking across the floor to the distant scene. A rugged dragon mountain aerie of red volcanic stone soaring above dramatic clouds, ancient sweeping crescent-shaped ruin arches at outer edges, red mineral seams and blue-green sky, strong clear sunlight and broad slate plateau center. The native game overlays its own large opaque hexagonal board across the central 55 percent: keep this center broad, calm and clear, concentrate visual landmarks at the outer margins and upper third. No characters, no Pok\u00e9mon, no animals, no HUD, no words, no lettering, no symbols or logos, no grid, no drawn battle board, no central raised platform. Avoid simple artificial geometric props and repeated pasted objects. Immersive colorful painterly game environment with depth and natural weathering.",
+      "path": "C:\\Users\\os_ap\\.codex\\generated_images\\01a143cc-e15d-7e93-8b77-825e37488153\\exec-f0b62e53-5a1b-49d6-a8fd-9fc126345361.png",
+      "asset": "modes/idle/mega/assets/arena-salamence.webp"
+    },
+    {
+      "key": "banette",
+      "name": "Ateli\u00ea dos Fios Esquecidos",
+      "prompt": "Wide 16:9 illustrated environment background for a polished Pok\u00e9mon fan tactical board game. Rich hand-painted material textures, convincing lighting, coherent environmental decorations, slightly elevated fixed camera looking across the floor to the distant scene. An abandoned antique puppet workshop courtyard with broken windows, worn wooden beams, dusty sewing tables and loose ribbons at the edges, cracked purple-grey stone center, dim warm lamps through cold fog, subtle unsettling magenta aura, no dolls or characters. The native game overlays its own large opaque hexagonal board across the central 55 percent: keep this center broad, calm and clear, concentrate visual landmarks at the outer margins and upper third. No characters, no Pok\u00e9mon, no animals, no HUD, no words, no lettering, no symbols or logos, no grid, no drawn battle board, no central raised platform. Avoid simple artificial geometric props and repeated pasted objects. Immersive colorful painterly game environment with depth and natural weathering.",
+      "path": "C:\\Users\\os_ap\\.codex\\generated_images\\01a143cc-e15d-7e93-8b77-825e37488153\\exec-c8e25bf3-4fb7-4ebc-92e2-95c94dab72a0.png",
+      "asset": "modes/idle/mega/assets/arena-banette.webp"
+    },
+    {
+      "key": "garchomp",
+      "name": "Ravina das Presas do Deserto",
+      "prompt": "Wide 16:9 illustrated environment background for a polished Pok\u00e9mon fan tactical board game. Rich hand-painted material textures, convincing lighting, coherent environmental decorations, slightly elevated fixed camera looking across the floor to the distant scene. A harsh cracked sandstone basin with towering fin-like natural rock formations and layers of fossilized sea sediment at edges, wind-carved red cliffs, deep cobalt shadows and ochre sunlight, broad dusty stone center with distant sandstorm. The native game overlays its own large opaque hexagonal board across the central 55 percent: keep this center broad, calm and clear, concentrate visual landmarks at the outer margins and upper third. No characters, no Pok\u00e9mon, no animals, no HUD, no words, no lettering, no symbols or logos, no grid, no drawn battle board, no central raised platform. Avoid simple artificial geometric props and repeated pasted objects. Immersive colorful painterly game environment with depth and natural weathering.",
+      "path": "C:\\Users\\os_ap\\.codex\\generated_images\\01a143cc-e15d-7e93-8b77-825e37488153\\exec-851b303a-801d-48a5-bbe7-cd4df6bac4fb.png",
+      "asset": "modes/idle/mega/assets/arena-garchomp.webp"
+    },
+    {
+      "key": "gallade",
+      "name": "Sal\u00e3o das L\u00e2minas da Aurora",
+      "prompt": "Wide 16:9 illustrated environment background for a polished Pok\u00e9mon fan tactical board game. Rich hand-painted material textures, convincing lighting, coherent environmental decorations, slightly elevated fixed camera looking across the floor to the distant scene. An elegant ancient swordsmanship sanctuary courtyard, green and ivory weathered stone columns with abstract leaf-blade carvings at edges, red fabric tied to side pillars and a distant sunrise through ruined arches, luminous emerald highlights and calm warm stone center. The native game overlays its own large opaque hexagonal board across the central 55 percent: keep this center broad, calm and clear, concentrate visual landmarks at the outer margins and upper third. No characters, no Pok\u00e9mon, no animals, no HUD, no words, no lettering, no symbols or logos, no grid, no drawn battle board, no central raised platform. Avoid simple artificial geometric props and repeated pasted objects. Immersive colorful painterly game environment with depth and natural weathering.",
+      "path": "C:\\Users\\os_ap\\.codex\\generated_images\\01a143cc-e15d-7e93-8b77-825e37488153\\exec-93bd634f-27d9-4604-b717-573523b335ce.png",
+      "asset": "modes/idle/mega/assets/arena-gallade.webp"
+    },
+    {
+      "key": "sableye",
+      "name": "Gruta do Cristal Carmesim",
+      "prompt": "Wide 16:9 illustrated environment background for a polished Pok\u00e9mon fan tactical board game. Rich hand-painted material textures, convincing lighting, coherent environmental decorations, slightly elevated fixed camera looking across the floor to the distant scene. A richly textured underground gem cavern, enormous ruby-like mineral clusters naturally embedded into outer rock walls and a narrow subterranean stream along the margin, purple-black basalt and deep crimson gem reflections, center broad dark smooth stone. The native game overlays its own large opaque hexagonal board across the central 55 percent: keep this center broad, calm and clear, concentrate visual landmarks at the outer margins and upper third. No characters, no Pok\u00e9mon, no animals, no HUD, no words, no lettering, no symbols or logos, no grid, no drawn battle board, no central raised platform. Avoid simple artificial geometric props and repeated pasted objects. Immersive colorful painterly game environment with depth and natural weathering.",
+      "path": "C:\\Users\\os_ap\\.codex\\generated_images\\01a143cc-e15d-7e93-8b77-825e37488153\\exec-3685d306-e95e-4403-9106-d76170af3767.png",
+      "asset": "modes/idle/mega/assets/arena-sableye.webp"
+    },
+    {
+      "key": "abomasnow",
+      "name": "Santu\u00e1rio da Nevasca Eterna",
+      "prompt": "Wide 16:9 illustrated environment background for a polished Pok\u00e9mon fan tactical board game. Rich hand-painted material textures, convincing lighting, coherent environmental decorations, slightly elevated fixed camera looking across the floor to the distant scene. A snow-covered alpine shrine clearing framed by massive frosted fir trees and ice-encrusted stone ruins at edges, wind-blown powder and distant snowy peaks, icy teal and blue-white palette with warm low sun, center broad compacted icy rock floor. The native game overlays its own large opaque hexagonal board across the central 55 percent: keep this center broad, calm and clear, concentrate visual landmarks at the outer margins and upper third. No characters, no Pok\u00e9mon, no animals, no HUD, no words, no lettering, no symbols or logos, no grid, no drawn battle board, no central raised platform. Avoid simple artificial geometric props and repeated pasted objects. Immersive colorful painterly game environment with depth and natural weathering.",
+      "path": "C:\\Users\\os_ap\\.codex\\generated_images\\01a143cc-e15d-7e93-8b77-825e37488153\\exec-c07f76e3-8673-4a94-8059-88acdc6e0f5e.png",
+      "asset": "modes/idle/mega/assets/arena-abomasnow.webp"
+    },
+    {
+      "key": "slowbro",
+      "name": "Ba\u00eda das Conchas Serenas",
+      "prompt": "Wide 16:9 illustrated environment background for a polished Pok\u00e9mon fan tactical board game. Rich hand-painted material textures, convincing lighting, coherent environmental decorations, slightly elevated fixed camera looking across the floor to the distant scene. A tranquil tropical lagoon sanctuary, enormous empty fossil seashell formations naturally embedded in the outer limestone cliffs, calm turquoise pools and coral-pink coastal flowers at edges, relaxed bright daylight, broad warm pale wet stone center. The native game overlays its own large opaque hexagonal board across the central 55 percent: keep this center broad, calm and clear, concentrate visual landmarks at the outer margins and upper third. No characters, no Pok\u00e9mon, no animals, no HUD, no words, no lettering, no symbols or logos, no grid, no drawn battle board, no central raised platform. Avoid simple artificial geometric props and repeated pasted objects. Immersive colorful painterly game environment with depth and natural weathering.",
+      "path": "C:\\Users\\os_ap\\.codex\\generated_images\\01a143cc-e15d-7e93-8b77-825e37488153\\exec-5b217ab5-62f1-49a6-8c0f-9d52039af122.png",
+      "asset": "modes/idle/mega/assets/arena-slowbro.webp"
+    },
+    {
+      "key": "medicham",
+      "name": "Mosteiro dos Ecos Interiores",
+      "prompt": "Wide 16:9 illustrated environment background for a polished Pok\u00e9mon fan tactical board game. Rich hand-painted material textures, convincing lighting, coherent environmental decorations, slightly elevated fixed camera looking across the floor to the distant scene. A remote Himalayan-inspired meditation monastery courtyard with carved rose stone and ivory plaster architecture integrated into a mountain cliff, prayer streamers and small hanging bells at edges, dawn mist and distant snow peaks, rose pink, burgundy and warm gold, broad quiet stone center. The native game overlays its own large opaque hexagonal board across the central 55 percent: keep this center broad, calm and clear, concentrate visual landmarks at the outer margins and upper third. No characters, no Pok\u00e9mon, no animals, no HUD, no words, no lettering, no symbols or logos, no grid, no drawn battle board, no central raised platform. Avoid simple artificial geometric props and repeated pasted objects. Immersive colorful painterly game environment with depth and natural weathering.",
+      "path": "C:\\Users\\os_ap\\.codex\\generated_images\\01a143cc-e15d-7e93-8b77-825e37488153\\exec-e19c608a-53f4-41bf-8928-b9f45a5949bf.png",
+      "asset": "modes/idle/mega/assets/arena-medicham.webp"
+    }
+  ]
+}

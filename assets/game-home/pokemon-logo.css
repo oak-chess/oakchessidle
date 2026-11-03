@@ -1,0 +1,7 @@
+
+/* Transparent title artwork, replacing the CSS text wordmark. */
+.stream-pokemon-logo{display:block;position:relative;width:390px;max-width:100%;margin:0 0 28px;padding:0;text-align:left;pointer-events:none;filter:drop-shadow(0 5px 8px #04122166)}
+.stream-pokemon-logo-art{display:block;width:100%;height:auto;object-fit:contain;user-select:none;-webkit-user-drag:none}
+@media(max-height:750px){.stream-pokemon-logo{width:330px;margin-bottom:22px}.stream-hero{padding-top:10px;padding-bottom:14px}}
+@media(max-width:800px){.stream-pokemon-logo{width:325px;margin-bottom:23px}}
+@media(max-width:540px){.stream-pokemon-logo{width:260px;margin-bottom:20px}}

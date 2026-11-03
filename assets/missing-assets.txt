@@ -1,0 +1,2 @@
+assets\showdown\trainers\lorelei.png
+assets\showdown\trainers\agatha.png

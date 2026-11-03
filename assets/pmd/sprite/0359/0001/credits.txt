@@ -1,0 +1,2 @@
+PAdventures Sprites by DistTopic: https://github.com/DistTopic/padventures-sprites
+Original repository contributions CC BY-NC-SA 4.0. Adapted layout: cardinal rows duplicated into PMD direction slots; animation names aliased. Not PMDCollab artwork. Pokémon rights remain with their owners.

@@ -1,0 +1,13 @@
+.idle-level-aura{position:absolute;inset:0;z-index:3;pointer-events:none;border-radius:inherit;overflow:hidden;background:radial-gradient(ellipse at 25% 55%,#ffe88e55,transparent 70%);animation:idle-level-glow 2.1s ease-out both}
+.idle-level-aura i{position:absolute;left:7px;top:9px;width:33px;height:33px;border:1px solid #ffe38d;border-radius:50%;box-shadow:0 0 8px #ffdc7c80;animation:idle-level-ring 1.3s ease-out both;animation-delay:calc(var(--i)*.24s)}
+.idle-level-toast{position:absolute;right:5px;top:3px;z-index:7;pointer-events:none;padding:3px 5px;border:1px solid #e1b757;border-radius:4px;background:#30203bef;color:#ffe49a;font:800 9px/1.2 'Trebuchet MS',sans-serif;white-space:nowrap;text-shadow:0 1px 2px #000;animation:idle-level-label 2.1s ease-out both}
+#stage .rv-native-mon .idle-level-aura{inset:7px -10px -3px;overflow:visible;border-radius:50%;background:radial-gradient(ellipse,#ffdc6d45,transparent 65%)}
+#stage .rv-native-mon .idle-level-aura i{left:17px;top:43px;width:55px;height:17px;box-shadow:0 0 13px #ffdf6b80}
+#stage .rv-native-mon .idle-level-toast{left:50%;right:auto;top:-12px;translate:-50% 0;font-size:10px;padding:4px 7px;box-shadow:0 2px 8px #0008}
+#stage .rv-native-mon.idle-level-celebrating>span{opacity:0!important}
+.idle-farm-xp{position:absolute;left:50%;bottom:62px;z-index:8;pointer-events:none;white-space:nowrap;font:800 12px/1.3 'Trebuchet MS',sans-serif;color:#b7edff;text-shadow:0 2px 2px #000,0 0 7px #124e8a;background:#121c32c9;padding:2px 5px;border-radius:4px;translate:-50% 0;animation:idle-farm-xp-rise 1.7s ease-out both}
+@keyframes idle-level-glow{0%,100%{opacity:0}20%,50%{opacity:1}}
+@keyframes idle-level-ring{0%{opacity:0;scale:.65}20%{opacity:1}100%{opacity:0;scale:1.9}}
+@keyframes idle-level-label{0%{opacity:0;transform:translateY(6px) scale(.9)}16%,78%{opacity:1;transform:translateY(0) scale(1)}100%{opacity:0;transform:translateY(-7px)}}
+@keyframes idle-farm-xp-rise{0%{opacity:0;transform:translateY(5px)}15%,65%{opacity:1}100%{opacity:0;transform:translateY(-38px)}}
+@media(prefers-reduced-motion:reduce){.idle-level-aura{display:none}.idle-level-toast,.idle-farm-xp{animation:none}}

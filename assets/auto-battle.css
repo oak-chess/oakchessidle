@@ -1,0 +1,30 @@
+#autoBattleToggle[hidden]{display:none!important}
+body.car-on #autoBattleToggle,body.car-on #combatbtn{display:none!important}
+#autoBattleToggle{position:absolute;left:calc(50% + 480px);top:602px;width:76px;height:44px;z-index:4;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;padding:4px;border:2px solid #a28f6b;border-radius:2px;background:linear-gradient(#3d3543,#251f2c);color:#dfd0b5;box-shadow:inset 1px 1px #ffffff22,2px 4px #11101b;cursor:pointer;font:7px/1.5 'Press Start 2P',monospace}
+#autoBattleToggle>b{font:700 9px/1.2 'Trebuchet MS',sans-serif;color:#b8aabe}
+#autoBattleToggle.on{border-color:#d7dc8b;background:linear-gradient(#46553a,#293928);color:#f5e9ac;box-shadow:inset 1px 1px #ffffff22,2px 4px #11101b,0 0 8px #b8db731f}
+#autoBattleToggle.on>b{color:#cce8a7}
+#autoBattleToggle:hover{filter:brightness(1.15)}
+#autoBattleToggle:focus-visible{outline:2px solid #ffe6a6;outline-offset:4px}
+#autoBattleToggle>small{position:absolute;left:50%;bottom:calc(100% + 7px);transform:translateX(-50%);white-space:nowrap;padding:4px 6px;background:#201a2aea;border:1px solid #a58c6c;color:#f3dfb3;font:10px/1.4 'Trebuchet MS',sans-serif;pointer-events:none}
+/* One circular control: fight first, then toggle automatic battles. */
+body.unified-combat-control #combatbtn{display:none!important}
+body.unified-combat-control #autoBattleToggle{left:calc(50% + 420px);top:596px;width:58px;height:58px;border-radius:50%;gap:2px;padding:5px;border:3px solid #b7a782;background:radial-gradient(circle at 35% 25%,#f17e5f,#c34036 58%,#702e35);color:#fff0d5;box-shadow:inset 0 0 0 2px #5c2931,0 0 0 2px #192036,0 4px #182034}
+body.unified-combat-control #autoBattleToggle>span{font:19px/1.1 'Trebuchet MS',sans-serif;text-shadow:1px 2px #51212c}
+body.unified-combat-control #autoBattleToggle>b{font:6px/1.5 'Press Start 2P',monospace;color:#fff0d5;text-shadow:1px 1px #51212c}
+body.unified-combat-control #autoBattleToggle.on{border-color:#e0dc9b;background:radial-gradient(circle at 35% 25%,#99b86b,#496c3f 60%,#2e3b32);box-shadow:inset 0 0 0 2px #2b4230,0 0 0 2px #192036,0 4px #182034,0 0 10px #c3df6d33}
+body.unified-combat-control #autoBattleToggle:active{transform:translateY(2px)}
+body.unified-combat-control #autoBattleToggle{touch-action:manipulation;user-select:none;-webkit-user-select:none}
+body.unified-combat-control #autoBattleToggle.holding{animation:autoBattleHold .65s linear forwards}
+@keyframes autoBattleHold{from{outline:2px solid #ffe5a100;outline-offset:1px}to{outline:4px solid #ffe5a1;outline-offset:4px}}
+@media(prefers-reduced-motion:reduce){body.unified-combat-control #autoBattleToggle.holding{animation:none;outline:3px solid #ffe5a1;outline-offset:3px}}
+body.unified-combat-control.combat #speedbtns{width:110px;height:44px;left:calc(50% + 300px);top:603px;gap:3px}
+body.unified-combat-control.combat #speedbtns button{font-size:13px;min-width:0}
+/* Circular team capacity indicator, aligned with the battle control. */
+body.unified-combat-control #boardcnt{left:calc(50% + 350px);top:596px;width:58px;height:58px;border:3px solid #9aaac2;border-radius:50%;padding:7px!important;display:flex;flex-wrap:wrap;align-content:center;align-items:center;justify-content:center;gap:2px;background:radial-gradient(circle at 35% 25%,#425470,#25334e 60%,#182239);box-shadow:inset 0 0 0 2px #152035,0 0 0 2px #192036,0 4px #182034;overflow:visible;cursor:help}
+body.unified-combat-control #boardcnt .pb{width:12px;height:12px;flex:0 0 12px}
+body.unified-combat-control #boardcnt.full{border-color:#dfc77e;background:radial-gradient(circle at 35% 25%,#6a5937,#3d3541 65%,#252539)}
+body.unified-combat-control #boardcnt::after{content:attr(data-count);position:absolute;bottom:-8px;left:50%;transform:translateX(-50%);padding:1px 5px;border:1px solid #9aaac2;border-radius:3px;background:#1a2337;color:#f1dcad;font:700 10px/1.3 monospace;white-space:nowrap}
+body.unified-combat-control #boardcnt.full::after{border-color:#dfc77e;color:#ffe39b}
+body.unified-combat-control #boardcnt:hover{filter:brightness(1.1)}
+body.unified-combat-control.combat #speedbtns{left:calc(50% + 300px);top:666px;width:172px;height:28px}

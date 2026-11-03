@@ -1,0 +1,9 @@
+# Arte do portal dimensional
+
+Arquivo final: `assets/dimensional-portal-v1.png` (384 × 576, PNG com transparência). Gerado com a ferramenta integrada de imagens; redimensionado para uso no jogo, preservando transparência. Animações e variações de cor/partículas em portal.css; navegação em portal.js. Sem alterações no tabuleiro ou nas regras de recompensa.
+
+## Prompt final
+Create a production game asset: ONE beautifully painted dimensional portal, isolated on genuinely transparent background. Front view, tall upright oval, centered, full asset visible with 12% transparent margin. Style: polished hand-painted fantasy environment prop for a colorful Pokémon-inspired 2D arena, readable when displayed only 95px wide. An irregular obsidian and amethyst crystal rim, curling luminous violet-blue plasma licking its inner edge, deep midnight purple swirling interior with a small dark center, delicate wisps and sparse bright sparks near the rim. Ground contact is a subtle translucent oval violet glow immediately under the portal. Strong depth, rich saturated color, clear silhouette, not a flat UI ring or neon circle, no rectangular backing, no text, no letters, no characters, no Pokémon, no scenery, no UI. The portal should feel naturally painted, magical and dimensional, with material texture. Keep all elements within the transparent canvas. This asset will have animated particles and an interior vortex layered over it in the game.
+
+## Integração
+Charizard X: chama azul. Gengar: energia violeta e névoa. Mawile: cristais metálicos rosados. Rotação a cada 12 segundos, suspensa ao passar o mouse, usar o teclado, abrir o painel ou ocultar a aba. Durante desafio Mega, acompanha o boss atual. Movimento reduzido do sistema desliga animações decorativas. Clique somente navega; o combate continua exigindo confirmação no painel.

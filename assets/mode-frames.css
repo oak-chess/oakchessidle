@@ -1,0 +1,42 @@
+/* Art and copy stay inside the frame's inner window. */
+body #ttl #modePreview :is(#campaignPreview,#towerPreview){position:relative;display:grid!important;grid-template-columns:minmax(0,1fr)!important;grid-template-rows:auto auto auto;justify-content:stretch!important;justify-items:stretch!important;align-items:start!important;align-content:start;gap:5px!important;width:100%!important;aspect-ratio:auto!important;height:auto!important;min-height:0!important;max-height:none!important;flex:0 0 auto;border:0!important;border-radius:0!important;padding:18px 14px 20px!important;background:transparent!important;box-shadow:none!important;outline:none;isolation:isolate;overflow:visible;transition:filter .18s,transform .18s}
+body #ttl #modePreview :is(#campaignPreview,#towerPreview)::after{content:'';display:block!important;position:absolute;inset:0;z-index:6;border:solid transparent;border-width:20px 14px;border-image-source:var(--mode-frame);border-image-slice:12% 12% 22% 12%;border-image-width:20px 14px;border-image-repeat:stretch;background:none;pointer-events:none}
+body #ttl #modePreview #campaignPreview{--mode-frame:url('mode-art/frames/campaign-v1.png');--mode-interior:#122736}
+body #ttl #modePreview #towerPreview{--mode-frame:url('mode-art/frames/tower-v1.png');--mode-interior:#251d31}
+body #ttl #modePreview :is(#campaignPreview,#towerPreview)::before{content:'';position:absolute;inset:7px;z-index:0;border-radius:8px;background:var(--mode-interior);pointer-events:none}
+body #ttl #modePreview :is(#campaignPreview,#towerPreview)>.mode-art{position:relative!important;inset:auto!important;grid-column:1!important;grid-row:1!important;justify-self:stretch!important;width:100%!important;min-width:0;height:auto!important;aspect-ratio:3/2;display:block!important;margin:0;min-height:0;flex:none;overflow:hidden;background:var(--mode-interior);border-radius:10px 10px 0 0;z-index:1}
+body #ttl #modePreview #towerPreview .mode-art img{width:100%;height:100%;object-fit:contain;object-position:center;filter:none;transform:none}
+body #ttl #modePreview :is(#campaignPreview,#towerPreview)>b{grid-column:1!important;grid-row:2!important;min-width:0;justify-self:stretch!important}
+body #ttl #modePreview :is(#campaignPreview,#towerPreview)>small{grid-column:1!important;grid-row:3!important;min-width:0;justify-self:stretch!important}
+body #ttl #modePreview :is(#campaignPreview,#towerPreview)>b{position:relative!important;inset:auto!important;display:block;width:100%!important;margin:0!important;padding:0!important;border:0;background:none!important;color:#fff0c8!important;font:800 15px/19px 'Trebuchet MS','Segoe UI',sans-serif!important;text-align:center!important;text-shadow:1px 1px #10212e;white-space:nowrap;z-index:3}
+body #ttl #modePreview :is(#campaignPreview,#towerPreview)>small{position:relative!important;inset:auto!important;display:block;width:100%!important;margin:0!important;padding:0!important;background:none!important;color:#e0d8c8!important;font:700 10px/13px 'Trebuchet MS','Segoe UI',sans-serif!important;text-align:center!important;text-shadow:0 1px #10212e;white-space:normal;overflow-wrap:anywhere;z-index:3}
+body #ttl #modePreview #campaignPreview>i,body #ttl #modePreview #towerPreview>i{position:absolute!important;top:11%;right:9%;z-index:7;border:1px solid #c7a869;border-radius:4px;padding:3px 5px;font:800 8px/11px 'Trebuchet MS',sans-serif;letter-spacing:.3px;box-shadow:0 1px #10212e}
+body #ttl #modePreview #campaignPreview>i{background:#194a39;color:#f9ebc7}
+body #ttl #modePreview #towerPreview>i{background:#34223e;color:#f4dba9}
+body #ttl #modePreview .mode-preview-card.selected{outline:none;box-shadow:none;filter:drop-shadow(0 2px 4px #e0c47b44)}
+body #ttl #modePreview .mode-preview-card:hover{filter:brightness(1.08);transform:translateY(-2px)}
+body #ttl #modePreview .mode-preview-card:focus-visible{outline:2px solid #ffe4a0;outline-offset:3px}
+@media(max-width:540px){body #ttl #modePreview :is(#campaignPreview,#towerPreview){width:calc(50% - 4px)!important;min-width:0;flex:1 1 0;padding:14px 12px 18px!important}body #ttl #modePreview :is(#campaignPreview,#towerPreview)>b{font-size:12px!important;line-height:15px!important}body #ttl #modePreview :is(#campaignPreview,#towerPreview)>small{font-size:9px!important;line-height:11px!important}body #ttl #modePreview :is(#campaignPreview,#towerPreview)>i{font-size:6px;line-height:8px;padding:2px 3px}}
+@media(prefers-reduced-motion:reduce){body #ttl #modePreview .mode-preview-card{transition:none}body #ttl #modePreview .mode-preview-card:hover{transform:none}}
+
+/* Full illustration behind the title and description. */
+body #ttl #modePreview :is(#campaignPreview,#towerPreview){grid-template-rows:1fr auto auto;min-height:230px!important;padding:18px 14px 20px!important;gap:5px!important}
+body #ttl #modePreview :is(#campaignPreview,#towerPreview)>.mode-art{position:absolute!important;inset:7px!important;width:auto!important;height:auto!important;aspect-ratio:auto!important;border-radius:8px;z-index:1}
+body #ttl #modePreview :is(#campaignPreview,#towerPreview)>.mode-art::after{content:'';position:absolute;inset:0;z-index:5;background:linear-gradient(to bottom,transparent 48%,rgba(9,15,26,.28) 65%,rgba(9,15,26,.92) 100%);pointer-events:none}
+body #ttl #modePreview #towerPreview .mode-art img{object-fit:cover}
+body #ttl #modePreview :is(#campaignPreview,#towerPreview)>b{align-self:end;text-shadow:0 2px 3px #000,1px 1px #000}
+body #ttl #modePreview :is(#campaignPreview,#towerPreview)>small{text-shadow:0 1px 3px #000,1px 1px #000}
+@media(max-width:540px){body #ttl #modePreview :is(#campaignPreview,#towerPreview){min-height:210px!important;padding:14px 12px 18px!important}}
+
+/* Anchor full-bleed art to the card, rather than its padded grid cell. */
+body #ttl #modePreview :is(#campaignPreview,#towerPreview)>.mode-art{grid-area:auto!important;inset:5px!important;width:calc(100% - 10px)!important;height:calc(100% - 10px)!important;max-width:none!important;max-height:none!important;border-radius:5px}
+body #ttl #modePreview :is(#campaignPreview,#towerPreview)>i{top:16px!important;right:18px!important}
+
+/* Preserve the illustrated ornaments instead of compressing them into border slices. */
+body #ttl #modePreview :is(#campaignPreview,#towerPreview)::after{inset:-5px!important;border:0!important;border-image:none!important;background:var(--mode-frame) center/100% 100% no-repeat!important;image-rendering:auto}
+body #ttl #modePreview :is(#campaignPreview,#towerPreview){padding-bottom:28px!important}
+body #ttl #modePreview :is(#campaignPreview,#towerPreview)>.mode-art{inset:6px!important;width:calc(100% - 12px)!important;height:calc(100% - 12px)!important;border-radius:10px}
+
+/* Keep both the artwork and its backing inside the ornate frame opening. */
+body #ttl #modePreview :is(#campaignPreview,#towerPreview)::before{inset:10px!important;border-radius:22px!important}
+body #ttl #modePreview :is(#campaignPreview,#towerPreview)>.mode-art{inset:10px!important;width:calc(100% - 20px)!important;height:calc(100% - 20px)!important;border-radius:22px!important;clip-path:inset(0 round 22px);overflow:hidden!important}

@@ -1,0 +1,3 @@
+/* The old direct-choice UI has been replaced by the mystery portal. Keep its integration fixture. */
+const fixture={gold:50000,wins:5,balls:100,items:[],area:24,trainerLevel:350,last:Date.now(),world:{location:'field',badges:Array.from({length:32},(_,i)=>i),regionWins:Array(32).fill(20),legendaryWins:{Groudon:1,Kyogre:1},unlocks:{hoennRegis:true,hoennJirachi:true,hoennDeoxys:true,sinnohLakes:true,sinnohMyths:true,sinnohOrigin:true},tasks:[],eggs:[]},team:[{id:'mega-char',name:'Turtwig',star:3,level:350,xp:0,condition:1,shiny:true,potency:5,ivs:{hp:31,atk:31,def:31,spa:31,spd:31,spe:31},nature:'Hardy',items:[],pos:{z:'b',r:5,c:3}}],collection:[],tutorial:{complete:true,introduced:true}};
+require('./check-idle-mystery-browser.cjs');

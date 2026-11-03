@@ -1,0 +1,102 @@
+/* Compact native phone applications; the shared game save remains authoritative. */
+body.idle-native-mode #idle-inventory.idle-window:has(.pfc-app){grid-template-rows:37px 0 minmax(0,1fr) 76px 19px!important}
+body.idle-native-mode #idle-inventory:has(.pfc-app)>header{display:none!important}
+body.idle-native-mode #idle-inventory.idle-window #ip-bag-content:is([data-phone-page=badges],[data-phone-page=dex]){display:flex!important;overflow:hidden!important;padding:0!important;background:#14202e!important;border-radius:18px!important}
+#idle-inventory .pfc-app{display:flex;flex-direction:column;min-height:0;width:100%;height:100%;overflow:hidden;font:12px/1.5 system-ui;color:#edf1f7;background:#14202e}
+body.idle-native-mode #idle-inventory #ip-bag-content .pfc-app :is(h3,h4,b,strong){font-family:system-ui,sans-serif!important}
+#idle-inventory .pfc-badges{background:radial-gradient(ellipse at 0 0,#66502e33,transparent 60%),#171d2a}
+#idle-inventory .pfc-top{display:flex!important;align-items:center;gap:9px;padding:12px 10px!important;background:linear-gradient(130deg,#6b2943,#342339)!important;border:0!important;flex:none;min-height:59px;box-sizing:border-box}
+#idle-inventory .pfc-dex>.pfc-top{background:linear-gradient(130deg,#a9354b,#69263d)!important}
+#idle-inventory .pfc-top>img{width:32px;height:32px;image-rendering:auto;flex:none}
+#idle-inventory .pfc-top>div{min-width:0;flex:1}
+#idle-inventory .pfc-top small{font:600 7px system-ui;letter-spacing:1px;color:#ebbed0}
+#idle-inventory .pfc-top h3{font:650 17px/1.2 system-ui;margin:3px 0;color:#fff;letter-spacing:-.4px}
+body.idle-native-mode #idle-inventory #ip-bag-content .pfc-button{font:500 11px/1.3 system-ui!important;cursor:pointer;color:#d8e3f4!important;background:#26394e!important;border:1px solid #6f88aa33!important;border-radius:10px!important;box-shadow:none!important;padding:8px 10px!important;min-width:0}
+body.idle-native-mode #idle-inventory #ip-bag-content .pfc-button:disabled{cursor:default;opacity:.35}
+body.idle-native-mode #idle-inventory #ip-bag-content .pfc-back{font:25px/1 system-ui!important;border:0!important;background:transparent!important;padding:0 3px!important;color:#fff!important}
+#idle-inventory .pfc-scroll{flex:1;min-height:0;overflow-y:auto;overflow-x:hidden;overscroll-behavior:contain;padding:10px;scrollbar-width:thin;scrollbar-color:#9b758a55 transparent}
+#idle-inventory .pfc-region-tabs{display:flex;gap:4px;padding:10px 8px 4px;overflow:auto;flex:none;scrollbar-width:none}
+body.idle-native-mode #idle-inventory #ip-bag-content .pfc-region-tabs>.pfc-button{font-size:9px!important;padding:6px 7px!important;background:#242735!important;border:0!important;flex:1}
+body.idle-native-mode #idle-inventory #ip-bag-content .pfc-region-tabs>.pfc-button[aria-pressed=true]{background:#b88b36!important;color:#161d2a!important;font-weight:700!important}
+#idle-inventory .pfc-summary{display:grid;grid-template-columns:1fr auto;gap:7px;padding:10px 12px 6px;flex:none;align-items:center}
+#idle-inventory .pfc-summary b{font-size:13px;color:#ffe0a0}
+#idle-inventory .pfc-summary>span{font-size:10px;color:#c1bba9}
+#idle-inventory .pfc-summary progress{grid-column:1/-1;width:100%;height:4px;accent-color:#e7b654;border-radius:10px}
+#idle-inventory .pfc-summary progress::-webkit-progress-value{background:linear-gradient(90deg,#c89435,#ffe6a2);border-radius:9px}
+#idle-inventory .pfc-badge-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;padding:0 1px 5px}
+body.idle-native-mode #idle-inventory #ip-bag-content .pfc-badge-tile{position:relative;display:flex;align-items:center;flex-direction:column;justify-content:center;gap:4px;min-height:98px;padding:10px 5px!important;overflow:hidden;background:linear-gradient(145deg,#30333c,#202631)!important;border:1px solid #6b71802b!important;border-radius:14px!important;text-align:center}
+#idle-inventory .pfc-badge-tile>img{width:38px;height:38px;object-fit:contain;image-rendering:pixelated;filter:grayscale(1) brightness(.4);opacity:.6}
+#idle-inventory .pfc-badge-tile b{font:600 11px system-ui;color:#b6bbc7}
+#idle-inventory .pfc-badge-tile small{font-size:9px;color:#788696}
+body.idle-native-mode #idle-inventory #ip-bag-content .pfc-badge-tile[data-earned=true]{background:radial-gradient(circle at 50% 20%,#e6b34c25,transparent 80%),#29302e!important;border-color:#ddb05b55!important}
+#idle-inventory .pfc-badge-tile[data-earned=true]>img{filter:drop-shadow(0 0 7px #f3d29033);opacity:1}
+#idle-inventory .pfc-badge-tile[data-earned=true] b{color:#ffe7ac}
+#idle-inventory .pfc-badge-tile[data-earned=true] small{color:#91d5b3}
+body.idle-native-mode #idle-inventory #ip-bag-content .pfc-badge-tile[aria-pressed=true]{outline:1px solid #f1d095!important;outline-offset:-2px}
+#idle-inventory .pfc-badge-tile[data-new=true]:after{content:'';position:absolute;inset:-50%;background:linear-gradient(115deg,transparent 42%,#fff7 50%,transparent 58%);animation:pfc-badge-shine 1s ease-out both;pointer-events:none}
+#idle-inventory .pfc-badge-detail{margin-top:9px;padding:13px;border:1px solid #d7ad6155;border-radius:15px;background:#252b35}
+#idle-inventory .pfc-badge-detail p{font:11px/1.6 system-ui;color:#d1d7e1;margin:8px 0}
+#idle-inventory .pfc-badge-hero{display:flex;align-items:center;gap:12px}
+#idle-inventory .pfc-badge-hero>img{width:47px;height:47px;object-fit:contain;image-rendering:pixelated}
+#idle-inventory .pfc-badge-hero small{font:600 7px system-ui;letter-spacing:.6px;color:#d5b86e}
+#idle-inventory .pfc-badge-hero h4{font:650 14px system-ui;color:#ffe3a2;margin:4px 0}
+#idle-inventory .pfc-badge-hero p{font-size:10px;margin:0}
+#idle-inventory .pfc-muted{color:#91a1b5!important;font-size:10px!important}
+#idle-inventory .pfc-dex-tools{padding:10px 9px 5px;display:grid;gap:7px;flex:none}
+body.idle-native-mode #idle-inventory #ip-bag-content .pfc-dex-tools input,
+body.idle-native-mode #idle-inventory #ip-bag-content .pfc-selects select{box-sizing:border-box;border:1px solid #59728f55!important;background:#0d1927!important;color:#d7e2f1!important;border-radius:10px!important;padding:8px 10px!important;font:11px system-ui!important;min-width:0!important;width:100%;outline-offset:1px}
+#idle-inventory .pfc-selects{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+#idle-inventory .pfc-filters{display:flex;gap:4px;padding:2px 9px 5px;flex:none}
+body.idle-native-mode #idle-inventory #ip-bag-content .pfc-filters>.pfc-button{flex:1;background:#1c3044!important;border:0!important;padding:6px 4px!important;font-size:9px!important;border-radius:8px!important}
+body.idle-native-mode #idle-inventory #ip-bag-content .pfc-filters>.pfc-button[aria-pressed=true]{background:#bc3659!important;color:#fff!important}
+#idle-inventory .pfc-dex-summary{display:flex;align-items:center;justify-content:space-between;padding:5px 11px;flex:none;font:9px system-ui;color:#9cabc0}
+#idle-inventory .pfc-dex-summary b{color:#8ed7d2;font-weight:500}
+#idle-inventory .pfc-dex-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+body.idle-native-mode #idle-inventory #ip-bag-content .pfc-species-tile{display:flex;flex-direction:column;align-items:center;gap:3px;padding:6px 3px!important;border:1px solid #6483ab22!important;border-radius:11px!important;background:#1d2e40!important;min-height:89px;box-sizing:border-box;overflow:hidden}
+#idle-inventory .pfc-species-tile>small{align-self:flex-start;font:8px system-ui;color:#758ca8;padding-left:3px}
+#idle-inventory .pfc-species-tile>img{width:46px;height:42px;object-fit:contain;image-rendering:pixelated}
+#idle-inventory .pfc-species-tile[data-seen=false]>img{filter:brightness(.15) grayscale(1);opacity:.7}
+#idle-inventory .pfc-species-tile b{font:600 9px system-ui;color:#e0e9f4;white-space:nowrap;max-width:100%;overflow:hidden;text-overflow:ellipsis}
+#idle-inventory .pfc-species-tile>span{font:8px system-ui;color:#92a3b9;text-align:center}
+#idle-inventory .pfc-species-tile[data-caught=true]>span{color:#87cdb7}
+#idle-inventory .pfc-pagination{display:flex;align-items:center;justify-content:center;gap:14px;padding:7px 10px;flex:none;font:10px system-ui;color:#b8c7d9;background:#111e2e;border-top:1px solid #48617d22}
+body.idle-native-mode #idle-inventory #ip-bag-content .pfc-pagination>.pfc-button{padding:3px 11px!important;font:20px/1 system-ui!important;border:0!important;background:#26384d!important}
+#idle-inventory .pfc-empty{grid-column:1/-1;color:#a8b6c9;font:11px/1.7 system-ui;text-align:center;padding:20px 8px}
+#idle-inventory .pfc-species-hero{text-align:center;padding:14px 10px;border:1px solid #6d9abb33;border-radius:17px;background:radial-gradient(circle at 50% 25%,#649ca233,transparent 70%),#203448}
+#idle-inventory .pfc-species-hero>small{font:9px system-ui;color:#a3bbd4}
+#idle-inventory .pfc-species-portrait{display:block;width:104px;height:100px;object-fit:contain;image-rendering:pixelated;margin:10px auto;filter:drop-shadow(0 5px 8px #0003)}
+#idle-inventory .pfc-species-hero h4{font:650 20px system-ui;letter-spacing:-.4px;color:#f0f5ff;margin:2px 0 8px}
+#idle-inventory .pfc-types{display:flex;justify-content:center;gap:5px;flex-wrap:wrap}
+#idle-inventory .pfc-types>span{background:color-mix(in srgb,var(--type-color) 25%,#122132);border:1px solid color-mix(in srgb,var(--type-color) 65%,transparent);color:#f3f6ff;font:10px system-ui;padding:3px 9px;border-radius:6px}
+#idle-inventory .pfc-variants{display:flex;justify-content:center;gap:6px;margin-top:10px}
+body.idle-native-mode #idle-inventory #ip-bag-content .pfc-variants>.pfc-button{padding:5px 10px!important;font-size:9px!important;background:#132438!important;border:0!important}
+body.idle-native-mode #idle-inventory #ip-bag-content .pfc-variants>.pfc-button[aria-pressed=true]{background:#488284!important;color:#fff!important}
+#idle-inventory .pfc-info-card{margin-top:9px;padding:12px;border:1px solid #57718e33;border-radius:13px;background:#1b2b3d}
+#idle-inventory .pfc-info-card h4{font:650 12px system-ui;margin:0 0 8px;color:#acdfe3}
+#idle-inventory .pfc-info-card p{font:11px/1.6 system-ui;color:#c2cfe0;margin:6px 0}
+#idle-inventory .pfc-family{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
+body.idle-native-mode #idle-inventory #ip-bag-content .pfc-family>.pfc-button{display:flex;flex-direction:column;align-items:center;gap:4px;background:#142335!important;padding:8px 5px!important}
+#idle-inventory .pfc-family img{width:45px;height:42px;object-fit:contain;image-rendering:pixelated}
+#idle-inventory .pfc-family b{font:600 10px system-ui;color:#e2ebf7}
+#idle-inventory .pfc-family small{font:8px/1.4 system-ui;color:#9cb7cf;text-align:center}
+body.idle-native-mode #idle-inventory #ip-bag-content .pfc-family>.pfc-button[aria-pressed=true]{border-color:#79c9cf88!important}
+body.idle-native-mode #idle-inventory[data-theme] .pf-app-icon[data-app=badges]{background:url("assets/phone/badges.svg") center/contain no-repeat!important}
+body.idle-native-mode #idle-inventory[data-theme] .pf-app-icon[data-app=dex]{background:url("assets/phone/dex.svg") center/contain no-repeat!important}
+#idle-inventory>.ip-tabs>button[data-phone-dock=badges]:before{background:url("assets/phone/badges.svg") center/contain no-repeat!important}
+#idle-inventory>.ip-tabs>button[data-phone-dock=dex]:before{background:url("assets/phone/dex.svg") center/contain no-repeat!important}
+body.idle-native-mode #idle-inventory[data-orientation=landscape]:has(.pfc-app){grid-template-rows:32px 0 minmax(0,1fr) 57px 15px!important}
+#idle-inventory[data-orientation=landscape] .pfc-badge-grid{grid-template-columns:repeat(4,minmax(0,1fr))}
+#idle-inventory[data-orientation=landscape] .pfc-dex-grid{grid-template-columns:repeat(6,minmax(0,1fr))}
+#idle-inventory[data-orientation=landscape] .pfc-top{min-height:43px;padding:6px 12px!important}
+#idle-inventory[data-orientation=landscape] .pfc-top>img{width:25px;height:25px}
+#idle-inventory[data-orientation=landscape] .pfc-top h3{font-size:14px;margin:0}
+#idle-inventory[data-orientation=landscape] .pfc-region-tabs{justify-content:center;padding:5px 10px 0}
+#idle-inventory[data-orientation=landscape] .pfc-region-tabs>.pfc-button{max-width:100px}
+#idle-inventory[data-orientation=landscape] .pfc-dex-tools{grid-template-columns:1fr 1fr;padding:6px 10px 3px}
+#idle-inventory[data-orientation=landscape] .pfc-filters{max-width:350px;width:100%;align-self:center}
+#idle-inventory[data-orientation=landscape] .pfc-species-content{display:grid;grid-template-columns:1fr 1fr;gap:10px;align-items:start}
+#idle-inventory[data-orientation=landscape] .pfc-species-content>.pfc-info-card{margin:0}
+#idle-inventory[data-orientation=landscape] .pfc-species-hero{grid-row:span 2;position:sticky;top:0}
+#idle-inventory .pfc-app :is(button,input,select):focus-visible{outline:2px solid #8be2ee!important;outline-offset:2px}
+@keyframes pfc-badge-shine{from{transform:translateX(-70%)}to{transform:translateX(70%)}}
+@media(prefers-reduced-motion:reduce){#idle-inventory .pfc-badge-tile:after{animation:none!important}}

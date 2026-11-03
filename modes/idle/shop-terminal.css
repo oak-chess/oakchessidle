@@ -1,0 +1,85 @@
+/* Store terminal. Presentation only; existing purchase/sale safeguards stay native. */
+body.idle-native-mode #stage #idle-shop{width:min(1000px,calc(100% - 46px));height:min(670px,calc(100% - 48px));max-height:none;padding:0;overflow:hidden;border:1px solid #538491!important;border-radius:18px!important;background:linear-gradient(130deg,#10202b,#151520 55%,#201823)!important;box-shadow:0 0 0 3px #07121ccc,inset 0 1px #acf1ff44,0 18px 60px #0009!important;grid-template-columns:145px minmax(0,1fr);grid-template-rows:76px minmax(0,1fr)}
+body.idle-native-mode #stage #idle-shop:not([hidden]){display:grid}
+body.idle-native-mode #stage #idle-shop>header{grid-column:1/-1;grid-row:1;display:flex;align-items:center;justify-content:space-between;padding:12px 19px;border-bottom:1px solid #408298!important;background:linear-gradient(90deg,#102d3c,#171b29 70%,#302031)!important;position:relative;margin:0}
+body.idle-native-mode #stage #idle-shop>header::before{content:'';position:absolute;left:18px;right:18px;top:3px;height:2px;background:linear-gradient(90deg,#49e6ff,transparent 40%,transparent 75%,#ff426b);opacity:.8}
+body.idle-native-mode #stage #idle-shop>header>div{display:grid;grid-template-columns:auto auto;align-items:center;gap:5px 24px;min-width:0}
+body.idle-native-mode #stage #idle-shop>header small{grid-column:1;font-size:8px;letter-spacing:1.3px;color:#79d8ec}
+body.idle-native-mode #stage #idle-shop>header h2{grid-column:1;font:800 23px/1.1 'Trebuchet MS',sans-serif;color:#effcff;margin:0}
+body.idle-native-mode #stage #idle-shop>header .idle-wallet{grid-column:2;grid-row:1/3;margin:0;padding:8px 12px;border:1px solid #a8864e;border-radius:9px;background:#33291d;color:#ffe09b;font-size:12px}
+body.idle-native-mode #stage #idle-shop>.ip-tabs{grid-column:1;grid-row:2;display:flex;flex-direction:column;justify-content:flex-start;gap:5px;width:auto;padding:13px 9px;margin:0;border:0;border-right:1px solid #365369;border-radius:0;background:#101b25;overflow:auto}
+body.idle-native-mode #stage #idle-shop .is-shop-nav-label{font:700 8px/1.2 'Trebuchet MS',sans-serif;color:#79a9ba;letter-spacing:1px;margin:8px 6px 2px}
+body.idle-native-mode #stage #idle-shop>.ip-tabs>button{position:relative;flex:none;min-height:35px;text-align:left;padding:8px 19px 8px 10px!important;border:1px solid #456479!important;border-bottom-color:#223b4c!important;border-radius:8px!important;background:linear-gradient(180deg,#2b4253,#1a2c3b)!important;color:#e1edf6!important;font-size:11px!important;line-height:1.25;box-shadow:inset 0 1px #c4edff1c,0 2px 3px #0005!important;transition:background .15s,border-color .15s,translate .12s}
+body.idle-native-mode #stage #idle-shop>.ip-tabs>button::after{content:'›';position:absolute;right:8px;top:50%;transform:translateY(-50%);font:16px/1 Arial,sans-serif;color:#739aad;pointer-events:none}
+body.idle-native-mode #stage #idle-shop>.ip-tabs>button:hover{background:linear-gradient(180deg,#37586b,#243d50)!important;border-color:#81c4dc!important;color:#fff!important;box-shadow:inset 0 1px #d9f6ff2b,0 0 7px #1cbbdf25!important}
+body.idle-native-mode #stage #idle-shop>.ip-tabs>button:active{translate:0 1px;box-shadow:inset 0 2px 4px #0006!important}
+body.idle-native-mode #stage #idle-shop>.ip-tabs>button[aria-pressed=true]{border-color:#4bbed9!important;background:linear-gradient(100deg,#16445b,#172b3b)!important;color:#e9fbff!important;box-shadow:inset 3px 0 #64e7ff,0 0 8px #1cbbdf15!important}
+body.idle-native-mode #stage #idle-shop>.ip-tabs>button[aria-pressed=true]::after{color:#8ceaff;text-shadow:0 0 5px #38c9ff}
+@media(prefers-reduced-motion:reduce){body.idle-native-mode #stage #idle-shop>.ip-tabs>button{transition:none}}
+body.idle-native-mode #stage #idle-shop .is-shop-content{grid-column:2;grid-row:2;min-width:0;min-height:0;max-height:none!important;overflow:auto;padding:14px;gap:10px;align-content:start;scrollbar-width:thin;scrollbar-color:#437086 transparent;scrollbar-gutter:stable}
+body.idle-native-mode #stage #idle-shop .is-shop-section-title{grid-column:1/-1;flex:none;display:flex;align-items:center;min-height:22px;margin:0 0 2px}
+body.idle-native-mode #stage #idle-shop .is-shop-section-title h3{font:700 15px/1.3 'Trebuchet MS',sans-serif;color:#dcf5ff;margin:0}
+body.idle-native-mode #stage #idle-shop .is-shop-notice{flex:none;min-height:0;padding:8px 10px;border:1px solid #327d6d;border-radius:8px;background:#173a33;color:#b7ebd6;font-size:11px;line-height:1.4;gap:8px}
+body.idle-native-mode #stage #idle-shop .is-shop-notice span{max-height:42px;overflow:auto}
+body.idle-native-mode #stage #idle-shop :is(input:not([type=checkbox]),select){min-height:31px;border:1px solid #466071!important;border-radius:7px!important;background:#0c1b28!important;color:#e3f4ff!important;font:400 11px/1.2 'Trebuchet MS',sans-serif;padding:6px 8px}
+body.idle-native-mode #stage #idle-shop :is(input,select,button):focus-visible{outline:2px solid #72e8ff;outline-offset:2px}
+body.idle-native-mode #stage #idle-shop .ip-button{border:1px solid #6e455e!important;border-radius:7px!important;background:linear-gradient(#753147,#522538)!important;font:700 10px/1.2 'Trebuchet MS',sans-serif!important;min-height:28px;padding:6px 9px!important;box-shadow:inset 0 1px #ffffff16!important;color:#fff0f6!important}
+body.idle-native-mode #stage #idle-shop .ip-button:hover:not(:disabled){border-color:#f385aa!important;filter:brightness(1.14)}
+body.idle-native-mode #stage #idle-shop button:disabled{opacity:.48;cursor:not-allowed}
+body.idle-native-mode #stage #idle-shop .is-shop-quantities{display:flex;align-items:center;gap:5px;padding:8px 10px;margin:0;border:1px solid #345163;border-radius:9px;background:#102330}
+body.idle-native-mode #stage #idle-shop .is-shop-quantities>span{margin-right:auto;color:#b7d6e3;font-size:11px}
+body.idle-native-mode #stage #idle-shop .is-shop-quantities>input{width:90px}
+body.idle-native-mode #stage #idle-shop .is-sale-content{display:flex;flex-direction:column;gap:10px}
+body.idle-native-mode #stage #idle-shop .is-sale-controls{display:flex;flex-wrap:wrap;gap:7px;align-items:center;padding:0}
+body.idle-native-mode #stage #idle-shop .is-sale-controls input[type=search]{flex:1;min-width:160px}
+body.idle-native-mode #stage #idle-shop .is-sale-controls label{font-size:10px;color:#d4e3ec}
+body.idle-native-mode #stage #idle-shop input[type=checkbox]{accent-color:#26cce9;width:14px;height:14px}
+body.idle-native-mode #stage #idle-shop .is-sale-bar{position:static;min-height:51px;flex:none;padding:8px 10px;gap:6px;border:1px solid #3e6375;border-radius:9px;background:#132b3a;box-shadow:none}
+body.idle-native-mode #stage #idle-shop .is-sale-bar b{font-size:12px;color:#ffe2a1}
+body.idle-native-mode #stage #idle-shop .is-sale-bar small{font-size:10px;color:#a9c4d2;line-height:1.4}
+body.idle-native-mode #stage #idle-shop .is-sale-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px;align-items:start;flex:none}
+body.idle-native-mode #stage #idle-shop .is-shop-row{border:1px solid #3a5369!important;border-radius:10px!important;background:linear-gradient(140deg,#1d3342,#151e2c)!important;box-shadow:inset 0 1px #98d9ff0c!important;color:#dceef9}
+body.idle-native-mode #stage #idle-shop[data-render-tab=pokemon] .is-sale-grid .is-pokemon-sale{grid-template-columns:42px minmax(0,1fr);grid-template-rows:1fr auto;gap:7px;min-height:148px!important;padding:17px 9px 9px!important;align-content:start;height:auto!important}
+body.idle-native-mode #stage #idle-shop .is-sale-grid .is-pokemon-sale>img{width:42px;height:50px;object-fit:contain;align-self:center}
+body.idle-native-mode #stage #idle-shop .is-sale-grid .is-pokemon-sale>input{left:7px;top:6px;width:12px;height:12px}
+body.idle-native-mode #stage #idle-shop .is-sale-grid .is-pokemon-sale>div:not(.is-sale-card-actions){gap:5px;min-width:0}
+body.idle-native-mode #stage #idle-shop .is-sale-grid .is-pokemon-sale h3{font-size:12px;line-height:1.2;color:#f0faff;overflow-wrap:anywhere}
+body.idle-native-mode #stage #idle-shop .is-sale-grid .is-sale-genetics{font-size:9px;line-height:1.35;gap:3px}
+body.idle-native-mode #stage #idle-shop .is-sale-grid .is-sale-types>span{font-size:8px;line-height:1.2}
+body.idle-native-mode #stage #idle-shop .is-sale-grid .is-sale-price{position:static;font-size:12px;color:#ffdb87;line-height:1.2;margin:2px 0 0!important}
+body.idle-native-mode #stage #idle-shop .is-sale-grid .is-sale-card-actions{display:flex;justify-content:flex-end;grid-column:1/-1;gap:5px;padding:0!important;margin:0!important;min-height:28px}
+body.idle-native-mode #stage #idle-shop .is-sale-grid .is-sale-card-actions button{font-size:10px!important;padding:5px 8px!important;min-height:28px}
+body.idle-native-mode #stage #idle-shop .is-sale-grid [data-selected=true]{border-color:#64dcf7!important;box-shadow:inset 0 0 0 1px #64dcf740!important}
+body.idle-native-mode #stage #idle-shop .is-pokemon-sale-tools{justify-content:center;flex:none;gap:10px;margin:2px 0 0!important;padding:4px 0;min-height:32px}
+body.idle-native-mode #stage #idle-shop .ip-help{font-size:10px;line-height:1.4;color:#93afc1;margin:0!important}
+body.idle-native-mode #stage #idle-shop .is-shop-auto-loot{border-color:#327d6d;border-radius:9px;background:#13332d}
+@media(max-width:1150px){body.idle-native-mode #stage #idle-shop .is-sale-grid{grid-template-columns:repeat(3,minmax(0,1fr))}body.idle-native-mode #stage #idle-shop{grid-template-columns:132px minmax(0,1fr)}}
+@media(max-width:760px){body.idle-native-mode #stage #idle-shop .is-sale-grid{grid-template-columns:repeat(2,minmax(0,1fr))}body.idle-native-mode #stage #idle-shop>header .idle-wallet{font-size:10px;padding:6px}body.idle-native-mode #stage #idle-shop{grid-template-columns:116px minmax(0,1fr)}}
+body.idle-native-mode #stage #idle-shop .is-sale-advanced{flex:none;border:1px solid #36596e;border-radius:8px;background:#10212d;padding:0 10px}
+body.idle-native-mode #stage #idle-shop .is-sale-advanced>summary{padding:8px 0;color:#a5e4f5;font:700 11px/1.3 'Trebuchet MS',sans-serif;cursor:pointer}
+body.idle-native-mode #stage #idle-shop .is-sale-filter-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:9px;padding:3px 0 10px;align-items:end}
+body.idle-native-mode #stage #idle-shop .is-sale-filter-grid label{display:flex;flex-direction:column;gap:4px;color:#b8d0de;font-size:10px;min-width:0}
+body.idle-native-mode #stage #idle-shop .is-sale-filter-grid :is(input,select){width:100%;min-width:0;box-sizing:border-box}
+body.idle-native-mode #stage #idle-shop .is-sale-bulk-tools{display:flex;flex-wrap:wrap;align-items:center;gap:6px;flex:none}
+body.idle-native-mode #stage #idle-shop .is-sale-bulk-tools>span{margin-right:auto;font-size:11px;color:#bad7e5}
+body.idle-native-mode #stage #idle-shop .is-sale-bulk-tools>small{flex:1 1 100%;font-size:9px;line-height:1.4;color:#98b4c6}
+@media(max-width:1150px){body.idle-native-mode #stage #idle-shop .is-sale-filter-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+
+/* Sales prioritize the collection; feedback never occupies a catalogue row. */
+body.idle-native-mode #stage #idle-shop>.is-shop-notice{position:absolute!important;z-index:12;top:16px;left:50%;transform:translateX(-50%);width:max-content;max-width:calc(100% - 190px);min-height:0!important;display:flex;align-items:center;gap:10px;padding:7px 10px!important;margin:0!important;border:1px solid #4cbda4;border-radius:10px;background:#123c35f5;color:#d4fff1;box-shadow:0 5px 18px #0006;font-size:11px;line-height:1.35}
+body.idle-native-mode #stage #idle-shop>.is-shop-notice>button{position:static!important;width:22px!important;height:22px!important;min-height:0!important;padding:0!important;flex:none}
+body.idle-native-mode #stage #idle-shop .is-shop-section-title{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.is-sale-result-count{font-size:10px;color:#9cbdcd}
+body.idle-native-mode #stage #idle-shop .is-sale-bar{min-height:44px;padding:6px 9px;position:relative;gap:6px}
+body.idle-native-mode #stage #idle-shop .is-sale-bar>div:first-child{margin-right:auto;min-width:0}
+body.idle-native-mode #stage #idle-shop .is-sale-bar small{font-size:9px}
+.is-sale-selection-menu{position:relative;flex:none}
+body.idle-native-mode #stage #idle-shop .is-sale-selection-menu>summary{list-style:none;cursor:pointer;padding:7px 10px;border:1px solid #3d647b;border-radius:7px;background:linear-gradient(#234459,#142a3a);color:#def5ff;font-size:10px;font-weight:bold;white-space:nowrap}
+.is-sale-selection-menu>summary::after{content:' ▾'}.is-sale-selection-menu>summary::-webkit-details-marker{display:none}
+body.idle-native-mode #stage #idle-shop .is-sale-selection-menu>.is-sale-bulk-tools{position:absolute;z-index:8;top:calc(100% + 6px);right:0;min-width:205px;display:grid;gap:7px;padding:10px;background:#102535;border:1px solid #46758a;border-radius:9px;box-shadow:0 6px 15px #0008}
+body.idle-native-mode #stage #idle-shop .is-sale-selection-menu:not([open])>.is-sale-bulk-tools{display:none}
+body.idle-native-mode #stage #idle-shop .is-sale-bulk-tools>span{font-size:10px;margin:0}
+body.idle-native-mode #stage #idle-shop[data-render-tab=pokemon] .is-sale-grid .is-pokemon-sale{min-height:116px!important;padding:15px 9px 7px!important;gap:5px;grid-template-rows:auto auto}
+body.idle-native-mode #stage #idle-shop .is-sale-grid .is-pokemon-sale>div:not(.is-sale-card-actions){gap:3px}
+body.idle-native-mode #stage #idle-shop .is-sale-grid .is-sale-card-actions{min-height:25px}
+body.idle-native-mode #stage #idle-shop .is-sale-grid .is-sale-card-actions button{min-height:25px;font-size:9px!important}

@@ -1,0 +1,33 @@
+/* Hoenn data is append-only. Emerald gym order; levels are Idle balance choices. */
+(()=>{'use strict';const D=window.IDLE_WORLD_DATA,N=window.IDLE_HOENN_SPECIES;
+const name=id=>N[id]||({26:'Raichu',41:'Zubat',54:'Psyduck',66:'Machop',72:'Tentacool',74:'Geodude',75:'Graveler',81:'Magnemite',82:'Magneton',100:'Voltorb',128:'Tauros',129:'Magikarp',170:'Chinchou',177:'Natu',178:'Xatu',193:'Yanma',200:'Misdreavus',218:'Slugma',219:'Magcargo',222:'Corsola',223:'Remoraid',224:'Octillery',226:'Mantine',227:'Skarmory',230:'Kingdra',234:'Stantler',235:'Smeargle',241:'Miltank'})[id];
+const rows=[
+ ['Rustboro','Roxanne','Pedra',['roxanne'],'Pedra',190,195,[74,299],[['forest','Bosque de Petalburg',[261,263,265,285,287]],['cave','Túnel de Rusturf',[293,296,299,304,307]],['meadow','Clareira dos iniciantes de Hoenn',[252,255,258,280,290]]]],
+ ['Dewford','Brawly','Lutador',['brawly'],'Punho',202,207,[66,307,296],[['cave','Caverna de Granito',[302,303,74,41,325]],['beach','Praias de Dewford',[278,283,341,339,370]],['lake','Águas de Dewford',[318,320,170,72,54]]]],
+ ['Mauville','Wattson','Elétrico',['wattson'],'Dínamo',214,219,[100,309,82,310],[['garden','Rotas de Mauville',[270,273,300,315,311]],['quarry','Nova Mauville',[309,312,100,81,26]],['meadow','Pradarias da rota 117',[313,314,327,316,324]]]],
+ ['Lavaridge','Flannery','Fogo',['flannery'],'Calor',226,231,[322,218,323,324],[['volcano','Monte Chimney',[218,219,322,323,324]],['quarry','Deserto da rota 111',[328,331,343,335,336]],['cave','Passagens vulcânicas',[337,338,305,75,299]]]],
+ ['Petalburg','Norman','Normal',['norman'],'Equilíbrio',238,243,[327,288,264,289],[['forest','Reserva de Petalburg',[264,262,288,284,286]],['meadow','Parque de treinamento',[241,235,234,128,289]],['garden','Jardins de Petalburg',[271,274,301,332,276]]]],
+ ['Fortree','Winona','Voador',['winona'],'Pena',250,255,[333,357,279,227,334],[['forest','Mata de Fortree',[276,277,333,357,352]],['ghost','Trilhas do Monte Pyre',[353,355,358,359,200]],['lake','Instituto do Clima',[349,351,193,177,178]]]],
+ ['Mossdeep','Tate e Liza','Psíquico',['tate','liza'],'Mente',262,267,[344,178,337,338],[['beach','Recifes de Mossdeep',[339,340,341,342,366]],['frost','Caverna de Shoal',[361,362,363,364,365]],['lake','Mergulho de Mossdeep',[369,222,223,224,226]]]],
+ ['Sootopolis','Juan','Água',['juan'],'Chuva',274,280,[370,340,364,342,230],[['dragon','Estrada da Vitória',[371,372,373,334,230]],['ancient','Ruínas de Hoenn',[374,375,376,354,356]],['lake','Águas de Sootopolis',[367,368,319,321,350]]]]
+];
+const typeKeys={Pedra:'rock',Lutador:'fighting','Elétrico':'electric',Fogo:'fire',Normal:'normal',Voador:'flying','Psíquico':'psychic','Água':'water'};
+for(const [i,row]of rows.entries()){
+ const [city,leader,type,trainers,badge,level,gymLevel,foeIds,habitats]=row,foes=foeIds.map(name);
+ if(foes.some(n=>!n))throw Error('Missing Hoenn gym species');
+ const region={name:'Rotas de '+city,continent:'Hoenn',leader,badge,level:gymLevel,need:14+i*2,theme:[-1,0,2,6,-1,-1,5,1][i],gymTheme:[0,12,2,6,15,3,5,1][i],types:[typeKeys[type]],foes,mechanic:i===6?'Tate e Liza comandam uma equipe compartilhada. Distribua os parceiros para resistir aos ataques psíquicos.':i===4?'Slaking alterna ações e descanso. Aproveite o intervalo para sustentar sua equipe.':'Equipe de '+type+'. Confira os tipos e o posicionamento antes do desafio.',habitat:[]};
+ const pools={};for(const [j,[kind,title,ids]]of habitats.entries()){const species=ids.map(name);if(species.some(n=>!n))throw Error('Unknown habitat species');pools[kind]={name:title,min:level+j*2,loot:({forest:'fiber',cave:'ore',meadow:'fur',beach:'shell',lake:'shell',garden:'seed',quarry:'ore',volcano:'fireEssence',ghost:'essence',frost:'snow',dragon:'scale',ancient:'essence'})[kind],species};species.forEach((n,k)=>region.habitat.push([n,k<3?'common':k===3?'uncommon':'rare']))}
+ D.regions.push(region);D.gyms.push({city,type,trainer:trainers[0],trainers,color:['#b5a58d','#ce9a76','#e1cb70','#df8b70','#c3b6a5','#a5c6c5','#b6a2d4','#84bbd8'][i],continent:'Hoenn'});window.IDLE_REGION_HUNTS.push({level,habitats:pools,boss:foes});
+}
+Object.assign(window.IDLE_EVOLUTIONS,{253:{level:16},254:{level:36},256:{level:16},257:{level:36},259:{level:16},260:{level:36},266:{level:7},268:{level:7},183:{friendship:90},202:{friendship:90},292:{bonus:true},301:{item:'moon'},367:{trade:true,item:'tooth'},368:{trade:true,item:'scale'}});
+D.quests.push(
+{id:'hoenn-arrival',title:'Pesquisa de Hoenn',detail:'Conquiste a primeira insígnia de Hoenn.',metric:'hoennBadges',need:1,reward:{gold:800,materials:20},npc:'Prof. Birch'},
+ {id:'hoenn-ruins',title:'O segredo das ruínas',detail:'Após Norman, tenha Relicanth e Wailord na equipe ou no PC. Os parceiros não são consumidos.',metric:'hoennRuinsReady',need:1,reward:{unlock:'hoennRegis',gold:500},npc:'Pesquisador das ruínas'},
+ {id:'hoenn-wish',title:'Um desejo entre as estrelas',detail:'Conquiste as oito insígnias de Hoenn para investigar Jirachi.',metric:'hoennBadges',need:8,reward:{unlock:'hoennJirachi',gold:1000},npc:'Observatório de Mossdeep'},
+ {id:'hoenn-birth',title:'O mistério da ilha distante',detail:'Conquiste as oito insígnias de Hoenn para investigar Deoxys.',metric:'hoennBadges',need:8,reward:{unlock:'hoennDeoxys',gold:1000},npc:'Centro Espacial'},
+ {id:'hoenn-league',title:'Conquista de Hoenn',detail:'Conquiste as oito insígnias de Hoenn.',metric:'hoennBadges',need:8,reward:{gold:3000,materials:55},npc:'Liga de Hoenn'}
+);
+window.IDLE_HOENN_EVENTS=[{names:['Regirock','Regice','Registeel'],unlock:'hoennRegis',requirement:'Concluir O segredo das ruínas'},{names:['Latias','Latios'],badge:21,requirement:'Conquistar a insígnia de Winona'},{names:['Groudon','Kyogre'],badge:23,requirement:'Conquistar a insígnia de Juan'},{names:['Rayquaza'],badge:23,requirement:'Vencer Groudon e Kyogre nos eventos',afterWeather:true},{names:['Jirachi'],unlock:'hoennJirachi',requirement:'Concluir Um desejo entre as estrelas'},{names:['Deoxys'],unlock:'hoennDeoxys',requirement:'Concluir O mistério da ilha distante'}];
+window.IDLE_HOENN_EVENT_LEVELS={Regirock:40,Regice:40,Registeel:40,Latias:50,Latios:40,Groudon:70,Kyogre:70,Rayquaza:70,Jirachi:5,Deoxys:30};
+window.IDLE_HOENN_EVENT_GROUPS={hoennRegis:{interval:42*60000,names:['Regirock','Regice','Registeel'],themes:[0,11,2],unlock:'hoennRegis'},hoennEon:{interval:52*60000,names:['Latias','Latios'],themes:[5,5],badge:21},hoennWeather:{interval:62*60000,names:['Groudon','Kyogre'],themes:[6,1],badge:23},hoennSky:{interval:72*60000,names:['Rayquaza'],themes:[14],badge:23,afterWeather:true},hoennWish:{interval:82*60000,names:['Jirachi'],themes:[5],unlock:'hoennJirachi'},hoennSpace:{interval:92*60000,names:['Deoxys'],themes:[5],unlock:'hoennDeoxys'}};
+})();

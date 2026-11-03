@@ -1,0 +1,44 @@
+/* Shared store-style finish. Only the four requested services are targeted. */
+body.idle-native-mode #stage :is(#idle-mega,#idle-events,#idle-automation,#idle-field-notes[data-view=offline]){border:1px solid #538491!important;background:linear-gradient(130deg,#10202b,#151520 65%,#201823)!important;box-shadow:0 0 0 2px #07121ccc,inset 0 1px #acf1ff33,0 15px 45px #0008!important;color:#dceef9}
+body.idle-native-mode #stage :is(#idle-mega,#idle-events,#idle-automation,#idle-field-notes[data-view=offline])>header{position:relative;background:linear-gradient(90deg,#102d3c,#171b29 70%,#302031)!important;border-bottom:1px solid #408298!important}
+body.idle-native-mode #stage :is(#idle-mega,#idle-events,#idle-automation,#idle-field-notes[data-view=offline])>header::before{content:'';position:absolute;left:18px;right:18px;top:3px;height:2px;background:linear-gradient(90deg,#49e6ff,transparent 45%,transparent 75%,#ff426b);pointer-events:none}
+body.idle-native-mode #stage :is(#idle-mega,#idle-events,#idle-automation,#idle-field-notes[data-view=offline])>header small{color:#79d8ec!important}
+body.idle-native-mode #stage :is(#idle-mega,#idle-events,#idle-automation,#idle-field-notes[data-view=offline]) :is(h2,h3){color:#effcff}
+body.idle-native-mode #stage :is(#idle-mega,#idle-events,#idle-automation,#idle-field-notes[data-view=offline]) button{border:1px solid #456479!important;border-bottom-color:#223b4c!important;border-radius:7px!important;background:linear-gradient(#2b4253,#1a2c3b)!important;color:#e1edf6!important;box-shadow:inset 0 1px #c4edff1c,0 2px 3px #0005!important;cursor:pointer}
+body.idle-native-mode #stage :is(#idle-mega,#idle-events,#idle-automation,#idle-field-notes[data-view=offline]) button:hover:not(:disabled){border-color:#81c4dc!important;background:linear-gradient(#37586b,#243d50)!important;color:#fff!important}
+body.idle-native-mode #stage :is(#idle-mega,#idle-events,#idle-automation,#idle-field-notes[data-view=offline]) button[aria-pressed=true]{border-color:#4bbed9!important;background:linear-gradient(100deg,#16445b,#172b3b)!important;box-shadow:inset 3px 0 #64e7ff,0 0 8px #1cbbdf15!important;color:#e9fbff!important}
+body.idle-native-mode #stage :is(#idle-mega,#idle-events,#idle-automation,#idle-field-notes[data-view=offline]) button:disabled{opacity:.45;cursor:not-allowed}
+body.idle-native-mode #stage :is(#idle-mega,#idle-events,#idle-automation,#idle-field-notes[data-view=offline]) :is(input:not([type=checkbox]):not([type=range]),select){background:#0c1b28!important;border:1px solid #466071!important;border-radius:7px!important;color:#e3f4ff!important}
+body.idle-native-mode #stage :is(#idle-mega,#idle-events,#idle-automation,#idle-field-notes[data-view=offline]) :is(button,input,select,summary):focus-visible{outline:2px solid #72e8ff;outline-offset:2px}
+body.idle-native-mode #stage :is(#idle-mega,#idle-events,#idle-automation,#idle-field-notes[data-view=offline]) :is(.im-body,.im-bosses,.im-detail,.ie-main,.ie-grid,.ie-detail,.ia-dashboard,.ifn-content){scrollbar-width:thin;scrollbar-color:#437086 transparent}
+/* Mega catalogue retains its species-specific accent, with a quieter hero. */
+body.idle-native-mode #stage #idle-mega :is(.im-intro,.im-detail,.im-rewards>div){border-color:#3a596c!important;background:linear-gradient(140deg,#1d3342,#151e2c)!important;color:#c8e1ee}
+body.idle-native-mode #stage #idle-mega .im-bosses>button{background:linear-gradient(#243d4e,#182c3a)!important;border-color:#426275!important}
+body.idle-native-mode #stage #idle-mega .im-bosses>button[aria-pressed=true]{background:linear-gradient(100deg,#16445b,#172b3b)!important;border-color:#6de4ff!important}
+body.idle-native-mode #stage #idle-mega .im-hero{background:radial-gradient(ellipse at left,color-mix(in srgb,var(--mega) 24%,transparent),transparent 75%),#0c1e2c!important;border:1px solid #34596e}
+body.idle-native-mode #stage #idle-mega :is(.im-mechanic,.im-partner p,.im-help,.im-bosses small,.im-hero p){color:#b6d0e0}
+body.idle-native-mode #stage #idle-mega :is(.im-stone,.im-partner){border-color:#35566b}
+body.idle-native-mode #stage #idle-mega h4{color:#91e4f7}
+/* Events: visible navigation buttons and neutral catalogue surfaces. */
+body.idle-native-mode #stage #idle-events .ie-sidebar{background:#101b25;border-color:#365369}
+body.idle-native-mode #stage #idle-events :is(.ie-card,.ie-detail,.ie-attempts){background:linear-gradient(140deg,#1d3342,#151e2c)!important;border-color:#3a596c!important}
+body.idle-native-mode #stage #idle-events .ie-card[aria-pressed=true]{background:linear-gradient(100deg,#16445b,#172b3b)!important;border-color:#6de4ff!important}
+body.idle-native-mode #stage #idle-events :is(.ie-card small,.ie-sidebar p,.ie-detail p,.ie-card-clock){color:#b5cedd}
+body.idle-native-mode #stage #idle-events .ie-status[data-status=locked]{color:#ffcf86}
+body.idle-native-mode #stage #idle-events .ie-status[data-status=active]{color:#85e7b8}
+body.idle-native-mode #stage #idle-events .ie-detail :is(section,dl){border-color:#35566b}
+/* Automation preserves native switch and range mechanics. */
+body.idle-native-mode #stage #idle-automation .ia-card{border-color:#3a596c!important;background:linear-gradient(140deg,#1d3342,#151e2c)!important}
+body.idle-native-mode #stage #idle-automation :is(.ia-field,.ia-protection-rule){border-color:#35566b!important;background:#102331!important;color:#d3e9f5}
+body.idle-native-mode #stage #idle-automation :is(.ia-details,.ia-capture-toggles){border-color:#35566b}
+body.idle-native-mode #stage #idle-automation .ia-details summary{color:#94dceb}
+body.idle-native-mode #stage #idle-automation :is(.ia-note,.ia-card>header p){color:#b0cadb}
+body.idle-native-mode #stage #idle-automation .ia-field input[type=checkbox]{border-color:#527385!important;background:#0c1b28!important}
+body.idle-native-mode #stage #idle-automation .ia-field input[type=checkbox]:checked{background:#148caa!important;border-color:#75e6ff!important}
+body.idle-native-mode #stage #idle-automation input[type=range]{accent-color:#56dcf5}
+/* Offline: the claim stays distinct from secondary actions. */
+body.idle-native-mode #stage #idle-field-notes[data-view=offline] .ifn-offline-summary{border-color:#9b8150;background:linear-gradient(110deg,#413621,#182d38)!important}
+body.idle-native-mode #stage #idle-field-notes[data-view=offline] .ifn-offline-section{border-color:#3a596c;background:linear-gradient(140deg,#1d3342,#151e2c)!important}
+body.idle-native-mode #stage #idle-field-notes[data-view=offline] :is(.ifn-offline-line,.ifn-offline-member){border-color:#35566b}
+body.idle-native-mode #stage #idle-field-notes[data-view=offline] :is(p,small){color:#aecada}
+body.idle-native-mode #stage #idle-field-notes[data-view=offline] .ifn-offline-summary button{background:linear-gradient(#753147,#522538)!important;border-color:#b55a7b!important;color:#fff0f6!important}

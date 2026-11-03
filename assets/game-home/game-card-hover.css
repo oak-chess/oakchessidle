@@ -1,0 +1,12 @@
+
+/* Compact library covers; visual expansion does not reflow adjacent cards. */
+.stream-games{grid-template-columns:repeat(2,minmax(0,285px));gap:23px;align-items:start;padding:5px 0 7px;overflow:visible}
+.stream-library{overflow:visible;position:relative;z-index:3}.stream-library-heading{max-width:593px;margin-bottom:11px}
+.stream-home .stream-game{transform-origin:center bottom;transition:transform .3s cubic-bezier(.22,1,.36,1),box-shadow .3s ease,border-color .2s ease;will-change:transform;z-index:1}
+.stream-home .stream-game:hover,.stream-home .stream-game:focus-visible{transform:translateY(-4px) scale(1.055);z-index:3;box-shadow:0 12px 28px #020d1b88,0 0 0 1px #b9d4e333;border-color:#a7c7d9!important}
+.stream-home .stream-game[aria-pressed=true]:hover,.stream-home .stream-game[aria-pressed=true]:focus-visible{border-color:#ead099!important;box-shadow:0 12px 28px #020d1b88,0 0 0 1px #e0c38444}
+.stream-home .stream-game .stream-cover{height:125px;transition:filter .25s ease}.stream-home .stream-game:hover .stream-cover{filter:brightness(1.06)}
+@media(max-height:720px){.stream-home .stream-game .stream-cover{height:105px}}
+@media(max-width:800px){.stream-games{grid-template-columns:repeat(2,minmax(0,260px));gap:19px}.stream-home .stream-game .stream-cover{height:110px}.stream-library-heading{max-width:539px}}
+@media(max-width:540px){.stream-games{grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}.stream-home .stream-game .stream-cover{height:93px}.stream-home .stream-game:hover,.stream-home .stream-game:focus-visible{transform:translateY(-3px) scale(1.035)}}
+@media(prefers-reduced-motion:reduce){.stream-home .stream-game,.stream-home .stream-game .stream-cover{transition:none;will-change:auto}.stream-home .stream-game:hover,.stream-home .stream-game:focus-visible{transform:none}}

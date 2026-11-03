@@ -1,0 +1,16 @@
+Trainer sprites downloaded from Pokémon Showdown:
+https://play.pokemonshowdown.com/sprites/trainers/
+
+Sprite credits listed on the Showdown trainer sprite index:
+- kyledove: archer, blue-gen1, blue-gen3, blue-gen7, blue-masters, blue-masters2, green, lorelei-gen3, rocketgrunt, rocketgruntf
+- Beliot419: agatha-gen3, blue-lgpe, proton
+- Brumirage: ariana
+- Grapo: petrel
+
+The Showdown index notes that many trainer sprites are community artwork and
+require credit to the appropriate artist when used elsewhere. Do not edit the
+sprites without permission from their artists.
+
+Johto gym leaders (original game trainer sprites, listed without individual artist on the source index): falkner, bugsy, whitney, morty, chuck, jasmine, pryce, clair. Source: https://play.pokemonshowdown.com/sprites/trainers/ (downloaded 2026-10-25).
+
+Hoenn gym leaders: roxanne, brawly, wattson, flannery, norman, winona, tate, liza, juan. Download source: https://play.pokemonshowdown.com/sprites/trainers/ (2026-10-25). Preserve the source index credits and the original Pokémon game artwork attribution.

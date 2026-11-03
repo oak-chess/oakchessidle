@@ -1,0 +1,282 @@
+[
+  {
+    "key": "hoenn-forest",
+    "file": "RSE 123 Petalburg Woods.ogg",
+    "url": "https://enls.eu/prelooped/downloads/RSE/RSE%20123%20Petalburg%20Woods.ogg",
+    "use": "Bosques de Hoenn",
+    "bytes": 2113515,
+    "sampleRate": 44100,
+    "loopStart": 880285,
+    "loopEnd": 2595046,
+    "normalizedLoop": [
+      880285,
+      2595046
+    ]
+  },
+  {
+    "key": "hoenn-meadow",
+    "file": "RSE 122 Route 104.ogg",
+    "url": "https://enls.eu/prelooped/downloads/RSE/RSE%20122%20Route%20104.ogg",
+    "use": "Pradarias e rotas",
+    "bytes": 3454383,
+    "sampleRate": 44100,
+    "loopStart": 1579673,
+    "loopEnd": 3245777,
+    "normalizedLoop": [
+      1579673,
+      3245777
+    ]
+  },
+  {
+    "key": "hoenn-garden",
+    "file": "RSE 203 Route 120.ogg",
+    "url": "https://enls.eu/prelooped/downloads/RSE/RSE%20203%20Route%20120.ogg",
+    "use": "Jardins e reservas",
+    "bytes": 3922677,
+    "sampleRate": 44100,
+    "loopStart": 1857854,
+    "loopEnd": 4393103,
+    "normalizedLoop": [
+      1857854,
+      4393103
+    ]
+  },
+  {
+    "key": "hoenn-cave",
+    "file": "RSE 228 Cave of Origin & Meteor Falls.ogg",
+    "url": "https://enls.eu/prelooped/downloads/RSE/RSE%20228%20Cave%20of%20Origin%20%26%20Meteor%20Falls.ogg",
+    "use": "Cavernas e gelo",
+    "bytes": 2350927,
+    "sampleRate": 44100,
+    "loopStart": 541103,
+    "loopEnd": 2451910,
+    "normalizedLoop": [
+      541103,
+      2451910
+    ]
+  },
+  {
+    "key": "hoenn-water",
+    "file": "RSE 154 Surf.ogg",
+    "url": "https://enls.eu/prelooped/downloads/RSE/RSE%20154%20Surf.ogg",
+    "use": "Águas e praias",
+    "bytes": 4275729,
+    "sampleRate": 44100,
+    "loopStart": 1605164,
+    "loopEnd": 4711785,
+    "normalizedLoop": [
+      1605164.0000000002,
+      4711785
+    ]
+  },
+  {
+    "key": "hoenn-ghost",
+    "file": "RSE 215 Mt. Pyre.ogg",
+    "url": "https://enls.eu/prelooped/downloads/RSE/RSE%20215%20Mt.%20Pyre.ogg",
+    "use": "Regiões de espíritos",
+    "bytes": 4716718,
+    "sampleRate": 44100,
+    "loopStart": 2332603,
+    "loopEnd": 4691691,
+    "normalizedLoop": [
+      2332603,
+      4691691
+    ]
+  },
+  {
+    "key": "hoenn-dragon",
+    "file": "RSE 242 Victory Road.ogg",
+    "url": "https://enls.eu/prelooped/downloads/RSE/RSE%20242%20Victory%20Road.ogg",
+    "use": "Regiões de dragões",
+    "bytes": 2886492,
+    "sampleRate": 44100,
+    "loopStart": 715768,
+    "loopEnd": 2695894,
+    "normalizedLoop": [
+      715768,
+      2695894
+    ]
+  },
+  {
+    "key": "hoenn-volcano",
+    "file": "RSE 146 Mt. Chimney.ogg",
+    "url": "https://enls.eu/prelooped/downloads/RSE/RSE%20146%20Mt.%20Chimney.ogg",
+    "use": "Regiões vulcânicas",
+    "bytes": 6223203,
+    "sampleRate": 44100,
+    "loopStart": 1630643,
+    "loopEnd": 5611550,
+    "normalizedLoop": [
+      1630643,
+      5611550
+    ]
+  },
+  {
+    "key": "hoenn-center",
+    "file": "RSE 113 Pokemon Center.ogg",
+    "url": "https://enls.eu/prelooped/downloads/RSE/RSE%20113%20Pokemon%20Center.ogg",
+    "use": "Centro Pokémon",
+    "bytes": 2019666,
+    "sampleRate": 44100,
+    "loopStart": 399084,
+    "loopEnd": 2032033,
+    "normalizedLoop": [
+      399083.99999999994,
+      2032033
+    ]
+  },
+  {
+    "key": "hoenn-shop",
+    "file": "RSE 214 Poke Mart.ogg",
+    "url": "https://enls.eu/prelooped/downloads/RSE/RSE%20214%20Poke%20Mart.ogg",
+    "use": "Loja",
+    "bytes": 3186067,
+    "sampleRate": 44100,
+    "loopStart": 1484295,
+    "loopEnd": 3212326,
+    "normalizedLoop": [
+      1484295,
+      3212326
+    ]
+  },
+  {
+    "key": "hoenn-gym-lobby",
+    "file": "RSE 149 Pokemon Gym.ogg",
+    "url": "https://enls.eu/prelooped/downloads/RSE/RSE%20149%20Pokemon%20Gym.ogg",
+    "use": "Preparação de ginásio",
+    "bytes": 2730144,
+    "sampleRate": 44100,
+    "loopStart": 1164528,
+    "loopEnd": 2657388,
+    "normalizedLoop": [
+      1164528,
+      2657388
+    ]
+  },
+  {
+    "key": "hoenn-gym",
+    "file": "RSE 150 Battle! (Gym Leader).ogg",
+    "url": "https://enls.eu/prelooped/downloads/RSE/RSE%20150%20Battle!%20(Gym%20Leader).ogg",
+    "use": "Batalhas de ginásio",
+    "bytes": 4525665,
+    "sampleRate": 44100,
+    "loopStart": 2190663,
+    "loopEnd": 5006823,
+    "normalizedLoop": [
+      2190663,
+      5006823
+    ]
+  },
+  {
+    "key": "hoenn-trainer",
+    "file": "RSE 117 Battle! (Trainer Battle).ogg",
+    "url": "https://enls.eu/prelooped/downloads/RSE/RSE%20117%20Battle!%20(Trainer%20Battle).ogg",
+    "use": "Desafios de treinadores",
+    "bytes": 5253737,
+    "sampleRate": 44100,
+    "loopStart": 2809969,
+    "loopEnd": 6240159,
+    "normalizedLoop": [
+      2809969,
+      6240159
+    ]
+  },
+  {
+    "key": "hoenn-wild",
+    "file": "RSE 109 Battle! (Wild Pokemon).ogg",
+    "url": "https://enls.eu/prelooped/downloads/RSE/RSE%20109%20Battle!%20(Wild%20Pokemon).ogg",
+    "use": "Latias, Latios, Jirachi e Deoxys — tema de batalha compartilhado",
+    "bytes": 2713723,
+    "sampleRate": 44100,
+    "loopStart": 1303639,
+    "loopEnd": 3036830,
+    "normalizedLoop": [
+      1303639,
+      3036830
+    ]
+  },
+  {
+    "key": "hoenn-regis",
+    "file": "RSE 238 Battle! (Regirock, Regice, Registeel).ogg",
+    "url": "https://enls.eu/prelooped/downloads/RSE/RSE%20238%20Battle!%20(Regirock%2C%20Regice%2C%20Registeel).ogg",
+    "use": "Regirock, Regice e Registeel",
+    "bytes": 3272905,
+    "sampleRate": 44100,
+    "loopStart": 2093335,
+    "loopEnd": 3420322,
+    "normalizedLoop": [
+      2093335.0000000002,
+      3420322
+    ]
+  },
+  {
+    "key": "hoenn-ancient",
+    "file": "RSE 229 Battle! (Super-Ancient Pokemon).ogg",
+    "url": "https://enls.eu/prelooped/downloads/RSE/RSE%20229%20Battle!%20(Super-Ancient%20Pokemon).ogg",
+    "use": "Groudon, Kyogre e Rayquaza",
+    "bytes": 3393999,
+    "sampleRate": 44100,
+    "loopStart": 1792215,
+    "loopEnd": 3525405,
+    "normalizedLoop": [
+      1792215,
+      3525404.9999999995
+    ]
+  },
+  {
+    "key": "hoenn-mew",
+    "file": "RSE 316 Battle! Mew.ogg",
+    "url": "https://enls.eu/prelooped/downloads/RSE/RSE%20316%20Battle!%20Mew.ogg",
+    "use": "Mew — versão de Emerald",
+    "bytes": 2954400,
+    "sampleRate": 44100,
+    "loopStart": 1776477,
+    "loopEnd": 3176445,
+    "normalizedLoop": [
+      1776477,
+      3176445
+    ]
+  },
+  {
+    "key": "hoenn-tower",
+    "file": "RSE 304 Battle Tower.ogg",
+    "url": "https://enls.eu/prelooped/downloads/RSE/RSE%20304%20Battle%20Tower.ogg",
+    "use": "Preparação da torre",
+    "bytes": 3940123,
+    "sampleRate": 44100,
+    "loopStart": 873753,
+    "loopEnd": 2976334,
+    "normalizedLoop": [
+      873752.9999999999,
+      2976334
+    ]
+  },
+  {
+    "key": "hoenn-frontier",
+    "file": "RSE 314 Battle! Frontier Brain.ogg",
+    "url": "https://enls.eu/prelooped/downloads/RSE/RSE%20314%20Battle!%20Frontier%20Brain.ogg",
+    "use": "Batalhas da torre e ligas especiais",
+    "bytes": 6666326,
+    "sampleRate": 44100,
+    "loopStart": 2322994,
+    "loopEnd": 6289949,
+    "normalizedLoop": [
+      2322994,
+      6289948.999999999
+    ]
+  },
+  {
+    "key": "hoenn-ruins",
+    "file": "RSE 237 Sealed Chamber.ogg",
+    "url": "https://enls.eu/prelooped/downloads/RSE/RSE%20237%20Sealed%20Chamber.ogg",
+    "use": "Preparação dos Regis",
+    "bytes": 2402678,
+    "sampleRate": 44100,
+    "loopStart": 851578,
+    "loopEnd": 2443973,
+    "normalizedLoop": [
+      851578,
+      2443973
+    ]
+  }
+]

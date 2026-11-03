@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" shape-rendering="crispEdges" role="img" aria-label="Fragmento Mega universal">
+ <path fill="#172331" d="M10 1h5v3h3v4h2v8h-3v3h-4v3H7v-3H4V9h3V5h3zM1 17h4v3h2v3H1z"/>
+ <path fill="#704bba" d="M11 3h3v3h3v3h1v6h-3v3h-3v2H8v-3H6v-7h3V6h2z"/>
+ <path fill="#ba8aff" d="M11 3h2v6h-3v6H7v-5h2V6h2z"/>
+ <path fill="#64d7e9" d="M13 7h3v3h1v4h-3v3h-3v2H8v-3h3v-5h2z"/>
+ <path fill="#e8cbff" d="M11 4h2v3h-2zM8 10h2v3H8z"/>
+ <path fill="#f373be" d="M12 10h3v2h-2v3h-3v-2h2zM2 18h2v3H2z"/>
+ <path fill="#b9f5ff" d="M14 8h2v2h-2zM14 14h2v2h-2zM3 20h2v2H3z"/>
+ <path fill="#f9e9ff" d="M20 2h1v2h2v1h-2v2h-1V5h-2V4h2z"/>
+</svg>

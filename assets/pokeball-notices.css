@@ -1,0 +1,45 @@
+:is(#toast,.pn-tablet-preview) .game-notice.pokeball-notice{position:relative;display:block;width:540px;max-width:100%;min-height:44px;margin:0;padding:10px 20px 10px 48px;border:0;border-radius:0;background:none!important;box-shadow:none!important;animation:none!important;overflow:visible;isolation:isolate;font:700 14px/19px "Trebuchet MS","Segoe UI",sans-serif;text-align:center;color:#edf4fb}
+:is(#toast,.pn-tablet-preview) .pokeball-notice div{display:block;margin:0;padding:0;border:0;border-radius:0;background:none;box-shadow:none;animation:none;font:inherit}
+:is(#toast,.pn-tablet-preview) .pokeball-notice .pn-copy{position:relative;color:inherit;text-shadow:0 1px 3px #060e1f;transform-origin:left center}
+:is(#toast,.pn-tablet-preview) .pokeball-notice[data-level="2"] .pn-copy{color:#ffedc0}
+:is(#toast,.pn-tablet-preview) .pokeball-notice .pn-aura{position:absolute;inset:-8px -16px;z-index:-1;background:radial-gradient(ellipse,#192f48f2 0%,#203d59de 38%,#304e6977 63%,transparent 78%);pointer-events:none;transform-origin:center}
+:is(#toast,.pn-tablet-preview) .pokeball-notice .pn-ball{position:absolute;width:44px;height:44px;margin:-22px 0 0 -22px;z-index:4;pointer-events:none}
+:is(#toast,.pn-tablet-preview) .game-notice.pokeball-notice .pn-ball img{position:absolute;inset:0;display:block;width:100%;height:100%!important;max-width:none;margin:0;object-fit:contain;image-rendering:pixelated}
+:is(#toast,.pn-tablet-preview) .pokeball-notice .pn-lid{clip-path:inset(0 0 50%);transform-origin:30% 48%}
+:is(#toast,.pn-tablet-preview) .pokeball-notice .pn-base{clip-path:inset(50% 0 0)}
+:is(#toast,.pn-tablet-preview) .pokeball-notice .pn-glow{position:absolute;width:160px;height:90px;margin:-45px 0 0 -80px;background:radial-gradient(ellipse,#fffef4 0%,#eafaffbb 18%,#c9eaff66 40%,transparent 73%);opacity:0;z-index:5;pointer-events:none;mix-blend-mode:screen}
+:is(#toast,.pn-tablet-preview) .pokeball-notice .pn-beam{position:absolute;left:50%;width:100%;height:64px;transform:translate(-50%,-50%);background:radial-gradient(ellipse,#fffef4ee 0%,#edfaffaa 22%,#bee7ff66 46%,#a3d5ff22 65%,transparent 79%);opacity:0;z-index:5;pointer-events:none;mix-blend-mode:screen}
+:is(#toast,.pn-tablet-preview) .pokeball-notice .pn-particle{position:absolute;width:3px;height:3px;background:#ffe8a4;opacity:0;z-index:5;pointer-events:none}
+
+/* Interactive achievement/report notices retain their own actions and timers. */
+#achievementNotice.pokeball-side,#battleReportNotice.pokeball-side{display:block;padding:0;border:0;border-radius:0;background:none;box-shadow:none;overflow:visible;transform:none;transition:opacity .12s ease,visibility .12s;isolation:isolate}
+#achievementNotice.pokeball-side.show,#battleReportNotice.pokeball-side.show{display:block;transform:none;animation:none}
+.pokeball-side .pn-side-content{position:relative;z-index:2;opacity:0;color:inherit;min-height:58px}
+#achievementNotice.pokeball-side .pn-side-content{padding:11px 14px 11px 48px;text-shadow:0 1px 3px #060e1f}
+#achievementNotice.pokeball-side .ach-toast-seal,#battleReportNotice.pokeball-side .br-notice-icon{display:none}
+#battleReportNotice.pokeball-side [data-details]{padding:10px 24px 10px 47px;background:none;border:0;border-radius:0}
+#battleReportNotice.pokeball-side .br-notice-time{left:45px;right:18px}
+.pokeball-side .pn-side-decoration{position:absolute;inset:0;z-index:1;pointer-events:none}
+.pokeball-side .pn-side-aura{position:absolute;inset:-8px -16px;z-index:-1;background:radial-gradient(ellipse,#192f48f2 0%,#203d59de 38%,#304e6977 63%,transparent 78%);opacity:0}
+.pokeball-side .pn-side-ball{position:absolute;width:40px;height:40px;margin:-20px 0 0 -20px;z-index:3;pointer-events:none}
+.pokeball-side .pn-side-ball img{position:absolute;inset:0;display:block;width:100%;height:100%;max-width:none;margin:0;object-fit:contain;image-rendering:pixelated}
+.pokeball-side .pn-side-lid{clip-path:inset(0 0 50%);transform-origin:30% 48%}
+.pokeball-side .pn-side-base{clip-path:inset(50% 0 0)}
+.pokeball-side .pn-side-glow{position:absolute;width:140px;height:85px;margin:-42px 0 0 -70px;background:radial-gradient(ellipse,#fffef4 0%,#eafaffbb 18%,#c9eaff66 40%,transparent 73%);opacity:0;z-index:5;mix-blend-mode:screen}
+.pokeball-side .pn-side-beam{position:absolute;left:50%;width:100%;height:64px;background:radial-gradient(ellipse,#fffef4ee 0%,#edfaffaa 22%,#bee7ff66 46%,#a3d5ff22 65%,transparent 79%);opacity:0;z-index:5;mix-blend-mode:screen}
+
+/* Achievement trail colors personalize light, never the notification text. */
+:is(#toast,.pn-tablet-preview) .pokeball-notice[data-pn-trail] .pn-glow,.pokeball-side[data-pn-trail] .pn-side-glow{background:radial-gradient(ellipse,#fffef5 0%,rgba(var(--pn-trail-rgb),.9) 22%,rgba(var(--pn-trail-rgb),.38) 48%,transparent 74%)}
+:is(#toast,.pn-tablet-preview) .pokeball-notice[data-pn-trail] .pn-beam,.pokeball-side[data-pn-trail] .pn-side-beam{background:radial-gradient(ellipse,#fffef5e8 0%,rgba(var(--pn-trail-rgb),.8) 25%,rgba(var(--pn-trail-rgb),.32) 50%,rgba(var(--pn-trail-rgb),.1) 67%,transparent 80%)}
+:is(#toast,.pn-tablet-preview) .pokeball-notice[data-pn-trail] .pn-aura,.pokeball-side[data-pn-trail] .pn-side-aura{background:radial-gradient(ellipse,#122338fa 0%,#172c43ed 38%,rgba(var(--pn-trail-rgb),.32) 62%,transparent 79%)}
+:is(#toast,.pn-tablet-preview) .pokeball-notice[data-pn-trail] .pn-particle{background:var(--pn-trail);box-shadow:0 0 5px var(--pn-trail)}
+:is(#toast,.pn-tablet-preview) .pokeball-notice[data-pn-trail] .pn-ball,.pokeball-side[data-pn-trail] .pn-side-ball{filter:drop-shadow(0 0 5px rgba(var(--pn-trail-rgb),.65))}
+:is(#toast,.pn-tablet-preview) .pokeball-notice[data-pn-trail] .pn-copy:after,.pokeball-side[data-pn-trail] .pn-side-content:after{content:'';position:absolute;left:48px;right:16px;bottom:0;height:1px;background:linear-gradient(90deg,transparent,var(--pn-trail),transparent);box-shadow:0 1px 5px rgba(var(--pn-trail-rgb),.5);pointer-events:none}
+/* Tablet uses the same notice rules, dimensions and font as the game. */
+
+/* The tablet mounts the actual side-notification component, with its split ball. */
+.pn-tablet-side-preview .pokeball-side .pn-side-decoration{position:absolute;inset:0;pointer-events:none}
+.pn-tablet-side-preview .pokeball-side .pn-side-ball{width:40px;height:40px;min-width:40px;min-height:40px}
+.pn-tablet-side-preview .pokeball-side .pn-side-ball img{width:40px!important;height:40px!important;max-width:none!important;max-height:none!important;position:absolute;inset:0;object-fit:contain}
+.pn-tablet-side-preview .pokeball-side .pn-side-lid{clip-path:inset(0 0 50%);transform-origin:30% 48%}
+.pn-tablet-side-preview .pokeball-side .pn-side-base{clip-path:inset(50% 0 0)}

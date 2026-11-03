@@ -1,0 +1,180 @@
+
+#vs.oak-cutscene{font-family:Inter,Arial,sans-serif;color:#f6ead0;--gold:#edce83;--ink:#090f1b;--blue:#66d6ea;--enemy:#cb85ee}
+#vs.oak-cutscene *{box-sizing:border-box}
+#vs.oak-cutscene .screen{position:relative;background:#090f1b;overflow:hidden;isolation:isolate;aspect-ratio:16/10;min-height:390px;border:1px solid #76633c}
+#vs.oak-cutscene .world{position:absolute;inset:0;width:100%;height:100%;image-rendering:pixelated;opacity:.8}
+#vs.oak-cutscene .shade{position:absolute;inset:0;background:linear-gradient(180deg,#07111a55,transparent 35%,#050813cc)}
+#vs.oak-cutscene .rays{position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent 0 22px,#bbdfff13 23px 24px);transform:skewY(-9deg) scale(1.2);opacity:.3}
+#vs.oak-cutscene .cinema{position:absolute;left:0;right:0;height:12%;background:#070b12;z-index:12;transition:height .2s}
+#vs.oak-cutscene .cinema.top{top:0;border-bottom:1px solid #dac08144}
+#vs.oak-cutscene .cinema.bottom{bottom:0;border-top:1px solid #dac08144}
+#vs.oak-cutscene .chapter{position:absolute;top:4.2%;left:5%;z-index:14;letter-spacing:3px;text-transform:uppercase;font:10px monospace;color:#e3d0a1}
+#vs.oak-cutscene .chapter strong{color:#a0b5c4;font-weight:400;letter-spacing:1px;margin-left:10px}
+#vs.oak-cutscene .edition{position:absolute;bottom:4.3%;left:5%;z-index:14;font:10px monospace;letter-spacing:2px;color:#8e9fae}
+#vs.oak-cutscene .edition b{color:#d6c28c;font-weight:400}
+#vs.oak-cutscene .cut{position:absolute;top:15%;bottom:20%;width:60%;overflow:hidden;z-index:2;opacity:0}
+#vs.oak-cutscene .cut.left{left:-5%;clip-path:polygon(0 0,100% 0,72% 100%,0 100%);background:linear-gradient(115deg,#17404ecf,#18384a99,transparent);border-top:2px solid #8dd3d277}
+#vs.oak-cutscene .cut.right{right:-5%;clip-path:polygon(28% 0,100% 0,100% 100%,0 100%);background:linear-gradient(290deg,#6a3454d9,#311d4299,transparent);border-bottom:2px solid #edb9c366}
+#vs.oak-cutscene .diagonal{position:absolute;left:50%;top:18%;height:60%;width:2px;background:linear-gradient(transparent,#fae1a4,transparent);transform:rotate(19deg);box-shadow:0 0 18px #efbc6688;z-index:3;opacity:0}
+#vs.oak-cutscene .fighter{position:absolute;z-index:4;top:20%;width:42%;height:58%;opacity:0}
+#vs.oak-cutscene .fighter.player{left:1%}
+#vs.oak-cutscene .fighter.foe{right:1%}
+#vs.oak-cutscene .trainer{position:absolute;height:76%;max-width:70%;object-fit:contain;bottom:4%;left:19%;image-rendering:pixelated;filter:drop-shadow(6px 7px 0 #050b16aa)}
+#vs.oak-cutscene .foe .trainer{left:auto;right:18%;transform:scaleX(-1)}
+#vs.oak-cutscene .partner{position:absolute;bottom:16%;left:53%;width:57%;height:67%;object-fit:contain;image-rendering:pixelated;filter:drop-shadow(0 8px 0 #030b1655);z-index:-1}
+#vs.oak-cutscene .foe .partner{left:auto;right:53%;transform:scaleX(-1)}
+#vs.oak-cutscene .nameplate{position:absolute;bottom:-5%;left:7%;width:85%;padding:9px 14px;background:linear-gradient(90deg,#0a172deb,#0a172d88);border-left:3px solid #71d8e3;transform:skewY(-4deg)}
+#vs.oak-cutscene .foe .nameplate{border-left:0;border-right:3px solid #e5a1bf;text-align:right;background:linear-gradient(270deg,#261425ed,#26142588);transform:skewY(-4deg)}
+#vs.oak-cutscene .nameplate small{font:9px monospace;letter-spacing:2px;text-transform:uppercase;color:#9abecb;display:block;margin-bottom:5px}
+#vs.oak-cutscene .nameplate b{font-size:clamp(18px,3.5vw,30px);font-weight:800;letter-spacing:2px}
+#vs.oak-cutscene .nameplate span{display:block;font:10px monospace;color:#e1d7b8;margin-top:4px}
+#vs.oak-cutscene .vs{position:absolute;top:39%;left:50%;z-index:8;transform:translate(-50%,-50%);font:900 italic clamp(46px,11vw,90px) Georgia,serif;color:#ffe7a4;text-shadow:3px 3px 0 #765228,6px 7px 0 #080d18,0 0 35px #f9bc5f66;opacity:0;line-height:1}
+#vs.oak-cutscene .vs:after{content:"";position:absolute;left:-30%;right:-30%;height:1px;background:#fff0b6;top:110%;box-shadow:0 0 16px #eec46a}
+#vs.oak-cutscene .quote{position:absolute;bottom:16%;left:14%;right:14%;text-align:center;z-index:9;opacity:0;color:#fff0cb;text-shadow:0 2px 0 #090c13;font:italic clamp(12px,2vw,17px) Georgia,serif}
+#vs.oak-cutscene .flash{position:absolute;inset:0;background:#f4e7bc;z-index:11;opacity:0;pointer-events:none}
+#vs.oak-cutscene .spark{position:absolute;left:50%;top:40%;width:3px;height:3px;background:#fbdc8a;z-index:9;opacity:0;box-shadow:0 0 7px #ffe2a8}
+#vs.oak-cutscene .battle{position:absolute;inset:13% 0 12%;z-index:10;background:radial-gradient(ellipse at 50% 65%,#263b3a,#0e1a29 75%);opacity:0;pointer-events:none}
+#vs.oak-cutscene .grid{position:absolute;left:12%;right:12%;bottom:9%;height:65%;transform:perspective(320px) rotateX(32deg);background-image:linear-gradient(#dfbe7033 1px,transparent 1px),linear-gradient(90deg,#dfbe7033 1px,transparent 1px);background-size:12.5% 25%;border:1px solid #dfbe7055}
+#vs.oak-cutscene .battle img{position:absolute;width:24%;height:40%;object-fit:contain;image-rendering:pixelated;bottom:5%;left:25%;filter:drop-shadow(0 8px 0 #050b1655)}
+#vs.oak-cutscene .battle img:last-of-type{left:auto;right:25%;bottom:32%;transform:scaleX(-1)}
+#vs.oak-cutscene .battle-label{position:absolute;top:12%;left:0;right:0;text-align:center;font:12px monospace;letter-spacing:4px;color:#f7dd95}
+#vs.oak-cutscene .controls{background:#111c2c;padding:16px 18px;border:1px solid #3b4655;border-top:0;display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+#vs.oak-cutscene button{font:11px monospace;letter-spacing:.3px;background:#23354a;color:#e9e8df;border:1px solid #5c718a;padding:10px 13px;min-height:40px}
+#vs.oak-cutscene button.primary{background:#e6cb83;color:#171f2c;border-color:#fbe8b7;font-weight:700}
+#vs.oak-cutscene button:disabled{opacity:.45}
+#vs.oak-cutscene .step{margin-left:auto;font:10px monospace;color:#c5d1dd;letter-spacing:.5px;min-width:125px;text-align:right}
+#vs.oak-cutscene .timeline{height:3px;background:#2c3b4c;flex:0 0 100%}
+#vs.oak-cutscene .timeline i{display:block;height:100%;background:#e6cb83;width:0}
+#vs.oak-cutscene .legend .cut{display:none}
+#vs.oak-cutscene .legend .diagonal{left:50%;transform:none;height:49%;top:19%;width:160px;margin-left:-80px;background:radial-gradient(ellipse,#dd97ee33,transparent 68%);border:1px solid #e1baf233;border-radius:50%;box-shadow:0 0 60px #b96bdb33}
+#vs.oak-cutscene .legend .fighter.foe{right:15%;width:50%;top:14%;height:62%}
+#vs.oak-cutscene .legend .foe .trainer{display:none}
+#vs.oak-cutscene .legend .foe .partner{right:0;width:88%;height:88%;bottom:3%;filter:drop-shadow(0 0 18px #c586ef77)}
+#vs.oak-cutscene .legend .fighter.player{left:1%;width:35%;top:40%;height:38%;z-index:6}
+#vs.oak-cutscene .legend .player .partner{display:none}
+#vs.oak-cutscene .legend .player .trainer{height:90%;left:17%}
+#vs.oak-cutscene .legend .player .nameplate{bottom:0}
+#vs.oak-cutscene .legend .foe .nameplate{bottom:-4%;right:0;left:auto;width:65%}
+#vs.oak-cutscene .legend .vs{top:26%;left:25%;font-size:clamp(32px,7vw,54px)}
+#vs.oak-cutscene .legend .quote{bottom:15%;left:33%;right:6%}
+@media(max-width:480px){#vs.oak-cutscene .screen{min-height:335px;aspect-ratio:1/1}#vs.oak-cutscene .trainer{left:10%;max-width:80%}#vs.oak-cutscene .foe .trainer{right:8%}#vs.oak-cutscene .nameplate{left:1%;width:98%;padding:8px}#vs.oak-cutscene .nameplate b{font-size:19px}#vs.oak-cutscene .nameplate span{font-size:9px}#vs.oak-cutscene .chapter{font-size:8px;letter-spacing:1px}#vs.oak-cutscene .chapter strong{display:none}#vs.oak-cutscene .controls{padding:12px;gap:8px}#vs.oak-cutscene button{padding:9px;min-height:44px}#vs.oak-cutscene .step{flex:1 1 100%;text-align:left}#vs.oak-cutscene .quote{left:7%;right:7%}#vs.oak-cutscene .legend .quote{left:30%;right:4%}#vs.oak-cutscene .edition{font-size:8px}}
+
+
+#vs.oak-cutscene .screen{aspect-ratio:16/10;min-height:410px}
+#vs.oak-cutscene .world{transform-origin:50% 58%}
+#vs.oak-cutscene .fighter{top:16%;height:61%;width:44%}
+#vs.oak-cutscene .fighter.player{left:-2%}
+#vs.oak-cutscene .fighter.foe{right:-2%}
+#vs.oak-cutscene .trainer{height:96%;max-width:90%;left:3%;bottom:2%;filter:drop-shadow(5px 5px 0 #060c16aa)}
+#vs.oak-cutscene .foe .trainer{right:2%;max-width:90%}
+#vs.oak-cutscene .partner{height:92%;width:83%;left:36%;bottom:7%;transform-origin:50% 82%;filter:drop-shadow(0 0 15px #f0a7544d) drop-shadow(0 7px 0 #070c1d66)}
+#vs.oak-cutscene .foe .partner{right:36%;filter:drop-shadow(0 0 15px #b398ee55) drop-shadow(0 7px 0 #070c1d66)}
+#vs.oak-cutscene .nameplate{bottom:-6%;left:11%;width:81%;z-index:3;border-bottom:1px solid #81c5d333;box-shadow:0 4px 0 #040c1666;padding:11px 15px}
+#vs.oak-cutscene .foe .nameplate{left:8%}
+#vs.oak-cutscene .nameplate b{font-size:clamp(21px,4.5vw,36px);letter-spacing:4px}
+#vs.oak-cutscene .vs{top:38%;font-size:clamp(60px,13vw,105px)}
+#vs.oak-cutscene .cut{top:12%;bottom:16%;width:62%}
+#vs.oak-cutscene .cut.left{background:repeating-linear-gradient(-12deg,transparent 0 17px,#7bd8f011 18px 19px),linear-gradient(115deg,#133d50ee,#13394bbd,transparent)}
+#vs.oak-cutscene .cut.right{background:repeating-linear-gradient(-12deg,transparent 0 17px,#d8a7f011 18px 19px),linear-gradient(290deg,#59304de8,#412943c9,transparent)}
+#vs.oak-cutscene .quote{bottom:15%;left:10%;right:10%;padding:10px 12px;background:linear-gradient(90deg,transparent,#0b111fe8 20%,#0b111fe8 80%,transparent);font-size:clamp(12px,2vw,16px)}
+#vs.oak-cutscene .summon{position:absolute;bottom:10%;left:46%;width:60%;height:13%;border:2px solid #f9ca79;border-radius:50%;box-shadow:0 0 18px #fd9e5055,inset 0 0 18px #fd9e5055;z-index:-2;opacity:0}
+#vs.oak-cutscene .foe .summon{left:auto;right:46%;border-color:#cfb2ed;box-shadow:0 0 18px #b68ade66,inset 0 0 18px #b68ade55}
+#vs.oak-cutscene .ring{position:absolute;width:90px;height:90px;left:50%;top:38%;border:2px solid #ffe4a3;transform:translate(-50%,-50%);border-radius:50%;opacity:0;z-index:7}
+#vs.oak-cutscene .speedline{position:absolute;left:0;right:0;top:0;height:1px;background:linear-gradient(90deg,transparent,#efdeb9aa,transparent);opacity:0;z-index:7}
+#vs.oak-cutscene .battle{inset:0;z-index:1;background:radial-gradient(ellipse at 50% 65%,#32494d,#111f31 75%)}
+#vs.oak-cutscene .battle .grid{display:none}
+#vs.oak-cutscene .hexfield{position:absolute;left:7%;right:7%;width:86%;height:66%;bottom:11%;transform:perspective(500px) rotateX(28deg)}
+#vs.oak-cutscene .battle img{width:23%;height:35%;bottom:16%;left:25%}
+#vs.oak-cutscene .battle img:last-of-type{right:25%;bottom:37%}
+#vs.oak-cutscene .battle-label{top:21%;font-size:14px;letter-spacing:6px}
+#vs.oak-cutscene .cinema{transition:none}
+#vs.oak-cutscene .chapter{font-size:11px}
+#vs.oak-cutscene .edition{font-size:10px}
+#vs.oak-cutscene .controls .step{font-size:11px}
+#vs.oak-cutscene .world{opacity:1}
+#vs.oak-cutscene .shade{background:linear-gradient(180deg,#13091b66,transparent 35%,#0b071a88)}
+#vs.oak-cutscene .cut.left{background:repeating-linear-gradient(-12deg,transparent 0 17px,#ffc17d11 18px 19px),linear-gradient(115deg,#7a220c77,#d6501233,transparent);border-top-color:#ffbd78aa}
+#vs.oak-cutscene .cut.right{background:repeating-linear-gradient(-12deg,transparent 0 17px,#f3aaff11 18px 19px),linear-gradient(290deg,#4d146c88,#922ab233,transparent);border-bottom-color:#eea5f5aa}
+#vs.oak-cutscene .nameplate{border-left-color:#ffb46c;background:linear-gradient(90deg,#33150ff5,#39170dd4);border-bottom-color:#ffb56d66}
+#vs.oak-cutscene .player .nameplate small{color:#ffc49c}
+#vs.oak-cutscene .foe .nameplate{border-right-color:#e7a2ff;background:linear-gradient(270deg,#291038f5,#31143fd4);border-bottom-color:#d397f566}
+#vs.oak-cutscene .foe .nameplate small{color:#e4b6f1}
+#vs.oak-cutscene .elemental{position:absolute;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+#vs.oak-cutscene .ember{position:absolute;left:0;bottom:0;width:4px;height:7px;background:#ffd17e;box-shadow:0 0 10px #ff6b2c;opacity:0}
+#vs.oak-cutscene .psy-mote{position:absolute;right:0;top:0;width:5px;height:5px;background:#f2b6ff;transform:rotate(45deg);box-shadow:0 0 10px #be66f3;opacity:0}
+#vs.oak-cutscene .psy-orbit{position:absolute;left:57%;top:18%;width:36%;height:55%;border:2px solid #e6a3fa55;border-radius:50%;box-shadow:0 0 20px #bf68e722,inset 0 0 18px #a65bd522;opacity:.6}
+#vs.oak-cutscene .psy-orbit.second{left:62%;top:24%;width:27%;height:43%;border-color:#d481f044}
+#vs.oak-cutscene .element-seam{position:absolute;left:50%;top:11%;bottom:12%;width:3px;background:linear-gradient(transparent,#ffdb9c88,#e8b1ff88,transparent);box-shadow:-6px 0 35px #ff7e3b66,6px 0 35px #c575ee66;transform:rotate(15deg)}
+#vs.oak-cutscene .diagonal{background:linear-gradient(transparent,#ffc179,#ecb2ff,transparent);box-shadow:-5px 0 22px #ff8d3f55,5px 0 22px #c781ee55}
+#vs.oak-cutscene .battle{background:radial-gradient(ellipse at 25% 60%,#793a214d,transparent 60%),radial-gradient(ellipse at 75% 40%,#783b9c55,transparent 60%),linear-gradient(110deg,#2e1c20,#251a37)}
+#vs.oak-cutscene .audio-controls{display:flex;align-items:center;gap:9px;flex-wrap:wrap;flex:0 0 100%;padding-top:7px;border-top:1px solid #324255}
+#vs.oak-cutscene .audio-controls label{display:flex;align-items:center;gap:10px;font:11px monospace;color:#c9d6e1}
+#vs.oak-cutscene .audio-controls input{width:110px;accent-color:#e6cb83}
+#vs.oak-cutscene .audio-controls output{min-width:32px;font:11px monospace;color:#e6cb83}
+@media(max-width:480px){#vs.oak-cutscene .screen{aspect-ratio:1/1;min-height:355px}#vs.oak-cutscene .fighter{top:22%;height:53%}#vs.oak-cutscene .trainer{height:86%;left:0}#vs.oak-cutscene .foe .trainer{right:0}#vs.oak-cutscene .partner{width:93%;left:25%;height:86%;bottom:24%}#vs.oak-cutscene .foe .partner{right:25%}#vs.oak-cutscene .nameplate{left:8%;padding:8px;width:87%}#vs.oak-cutscene .nameplate b{font-size:24px}#vs.oak-cutscene .nameplate small{letter-spacing:1px}#vs.oak-cutscene .quote{font-size:12px;bottom:14%;left:4%;right:4%}#vs.oak-cutscene .vs{top:38%;font-size:60px}#vs.oak-cutscene .chapter{font-size:9px}#vs.oak-cutscene .edition{font-size:9px}}
+
+#vs.oak-cutscene{padding:0;display:none!important;background:#090f1b;transition:none!important;overflow:hidden;z-index:870}
+#vs.oak-cutscene.show{display:block!important}
+#vs.oak-cutscene .screen{width:100%;height:100%;min-height:0!important;aspect-ratio:auto;border:0}
+#vs.oak-cutscene .cutscene-skip{position:absolute;top:3%;right:3%;z-index:30;background:#152033df;color:#f3dfab;border:1px solid #9e8855;padding:10px 18px;font:18px monospace;min-height:44px}
+#vs.oak-cutscene .nameplate b{font-size:42px;letter-spacing:3px}
+#vs.oak-cutscene .nameplate small{font-size:16px}
+#vs.oak-cutscene .nameplate span{font-size:17px}
+#vs.oak-cutscene .quote{font-size:25px}
+#vs.oak-cutscene .chapter{font-size:16px;max-width:72%}
+#vs.oak-cutscene .edition{font-size:14px}
+#vs.oak-cutscene .cut.left{background:linear-gradient(110deg,color-mix(in srgb,var(--ally) 55%,#0a1020),transparent);border-top-color:var(--ally)}
+#vs.oak-cutscene .cut.right{background:linear-gradient(290deg,color-mix(in srgb,var(--foe) 55%,#0a1020),transparent);border-bottom-color:var(--foe)}
+#vs.oak-cutscene .nameplate{border-left-color:var(--ally);background:linear-gradient(90deg,#111c2bef,#111c2bad)}
+#vs.oak-cutscene .foe .nameplate{border-right-color:var(--foe);background:linear-gradient(270deg,#21152bef,#21152bad)}
+#vs.oak-cutscene .nameplate small{color:#ebdbc4}
+#vs.oak-cutscene .partner{filter:drop-shadow(0 0 16px var(--ally))}
+#vs.oak-cutscene .foe .partner{filter:drop-shadow(0 0 16px var(--foe))}
+#vs.oak-cutscene .summon{border-color:var(--ally)}
+#vs.oak-cutscene .foe .summon{border-color:var(--foe)}
+#vs.oak-cutscene [data-wild] .foe .partner{right:12%;width:105%;height:105%}
+#vs.oak-cutscene .foe .nameplate b{font-size:34px}
+#vs.oak-cutscene [hidden]{display:none!important}
+
+/* Horizontal versus card; the live arena remains visible around it. */
+#vs.oak-cutscene{background:transparent;backdrop-filter:none}
+#vs.oak-cutscene.show{display:flex!important;align-items:center;justify-content:center}
+#vs.oak-cutscene .screen{position:absolute;top:50%;left:0;transform:translateY(-50%);flex:none;width:100%;height:36%;border:0;border-top:2px solid #c6a969;border-bottom:2px solid #c6a969;box-shadow:0 14px 40px #03071066,0 -14px 40px #03071044;overflow:hidden}
+#vs.oak-cutscene .fighter{top:16%;height:59%;width:44%}
+#vs.oak-cutscene .nameplate{padding:8px 13px;bottom:-8%}
+#vs.oak-cutscene .nameplate b{font-size:23px;letter-spacing:1px}
+#vs.oak-cutscene .foe .nameplate b{font-size:22px}
+#vs.oak-cutscene .nameplate small{font-size:11px;margin-bottom:2px}
+#vs.oak-cutscene .nameplate span{font-size:12px;margin-top:2px}
+#vs.oak-cutscene .vs{font-size:56px;top:39%}
+#vs.oak-cutscene .quote{font-size:16px;bottom:12%;padding:4px 12px}
+#vs.oak-cutscene .chapter{font-size:11px;top:4%}
+#vs.oak-cutscene .edition{font-size:10px;bottom:3%}
+#vs.oak-cutscene .cutscene-skip{top:2%;right:2%;font-size:12px;padding:4px 12px;min-height:28px}
+#vs.oak-cutscene .trainer{height:94%}
+#vs.oak-cutscene .partner{height:95%;width:79%;bottom:6%}
+#vs.oak-cutscene .foe .partner{width:79%}
+#vs.oak-cutscene .cinema{display:none!important}
+#vs.oak-cutscene .chapter{background:#0a1021b3;padding:4px 8px;top:2%;left:2%}
+#vs.oak-cutscene .edition{background:#0a102199;padding:3px 8px;left:2%;bottom:2%}
+
+/* Symmetric information panels and quieter motion in the narrow strip. */
+#vs.oak-cutscene .fighter.player{left:2%}
+#vs.oak-cutscene .fighter.foe{right:2%}
+#vs.oak-cutscene .nameplate,#vs.oak-cutscene .foe .nameplate{left:10%;right:auto;width:80%;bottom:-2%;text-align:center;transform:none;border-left:0;border-right:0;border-top:1px solid #e7d09b55;border-bottom:1px solid #e7d09b55;padding:6px 12px;background:linear-gradient(90deg,#10182755,#101827e8 20%,#101827e8 80%,#10182755);box-shadow:none}
+#vs.oak-cutscene .nameplate b,#vs.oak-cutscene .foe .nameplate b{display:block;font-size:23px;line-height:1.15;overflow-wrap:anywhere}
+#vs.oak-cutscene .nameplate small,#vs.oak-cutscene .nameplate span{text-align:center}
+#vs.oak-cutscene .quote{left:18%;right:18%;bottom:2%;min-height:24px;padding:3px 12px;text-align:center;font-size:15px}
+#vs.oak-cutscene .vs{top:42%;transform-origin:center}
+#vs.oak-cutscene .fighter,#vs.oak-cutscene .partner,#vs.oak-cutscene .vs{will-change:transform,opacity}
+
+/* Boss prelude and leader identity, within the same full-width strip. */
+#vs.oak-boss-cutscene .boss-warning{position:absolute;left:0;right:0;top:50%;transform:translateY(-50%);height:140px;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:9px;background:linear-gradient(90deg,#080d16f5,#111929fa,#080d16f5);border-top:2px solid #dbbb71;border-bottom:2px solid #dbbb71;text-align:center;z-index:9;opacity:0;pointer-events:none}
+#vs.oak-boss-cutscene .boss-warning small{font:16px monospace;letter-spacing:5px;color:#edce83}
+#vs.oak-boss-cutscene .boss-warning b{font:700 32px monospace;color:#fff0c9;letter-spacing:2px}
+#vs.oak-boss-cutscene .boss-warning span{font:16px monospace;color:#b9c7d5}
+#vs.oak-boss-cutscene .nameplate,#vs.oak-boss-cutscene .foe .nameplate{border-top-color:#dbbb7188;border-bottom-color:#dbbb7188}
+#vs.oak-boss-cutscene .foe .trainer{height:105%;bottom:0}
+#vs.oak-boss-cutscene .foe .partner{height:104%;bottom:4%}
+#vs.oak-boss-cutscene .boss-badge{position:absolute;top:0;right:9%;width:45px;height:45px;object-fit:contain;image-rendering:pixelated;z-index:3;filter:drop-shadow(0 0 8px #edd18b66)}
+#vs.oak-boss-cutscene .chapter{color:#edce83}

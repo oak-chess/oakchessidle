@@ -1,0 +1,134 @@
+/* Shop surfaces and Wiki actions; fishing keeps its illustrated water. */
+body.village-widget{--edge:#805064;--accent:#d72e56;background:#1e1b25;color:#f6e6ef;font-family:'Trebuchet MS',Arial,sans-serif}
+body.village-widget :is(button,select,input){font-family:inherit;font-size:11px!important;border:1px solid #805064!important;border-radius:6px!important;background:#302630!important;color:#f6e6ef!important;padding:6px 10px!important;box-shadow:none!important;min-height:28px}
+body.village-widget button:hover:not(:disabled){background:#513044!important;border-color:#ff83a4!important}
+body.village-widget button:focus-visible,body.village-widget :is(input,select):focus-visible{outline:2px solid #ffd364;outline-offset:2px}
+body.village-widget :is(.location.active,.technique-options button.active,.rod-options button.active,.action-row .primary,.bucket-launch){background:#d72e56!important;border-color:#ff83a4!important;color:#fff0f5!important}
+body.village-widget button:disabled{opacity:.48}
+body.village-widget :is(.water-card,.equipment,dialog){background:#302630!important;border-color:#805064!important}
+body.village-widget :is(.controls,.water-card>.species-preview){background:#241e2b!important;border-color:#805064!important}
+body.village-widget :is(.equipment section,.fisherman,.journal,.playstyle-tools){border-color:#805064!important}
+body.village-widget :is(.status h3,dialog h2,.journal h2,.fishing-skill strong){color:#ffd364!important}
+body.village-widget :is(.eyebrow,.fishing-skill span,.equipment label,.section-heading>span,.controls>p,.subtle,.behavior-note,.scene-note,#shoal-info){font-size:11px!important;line-height:1.5!important;color:#dfc4d3!important}
+body.village-widget .landscape header span{font-size:10px!important;color:#fff!important}
+body.village-widget .landscape h2{font-size:21px;text-shadow:0 2px 4px #10272c}
+body.village-widget .status h3{font-size:15px;line-height:1.4}
+body.village-widget .fishing-skill span{font-size:10px!important}.village-widget .fishing-skill progress::-webkit-progress-value{background:#ff658b}
+body.village-widget .equipment{grid-template-columns:190px minmax(0,1fr)130px!important}
+body.village-widget .equipment>section:not(.playstyle-tools){grid-template-columns:145px minmax(0,1fr)}
+body.village-widget .equipment :is(.subtle,#technique-note){font-size:10px!important}
+body.village-widget .water-card>.species-preview{padding:5px 10px}
+body.village-widget .water-card>.species-preview #pool img{width:30px;height:30px}
+body.village-widget .water-points button{background:transparent!important;border:0!important;min-height:0;padding:3px!important}
+body.village-widget .water-points span{background:#211a2de6;border-color:#d88ba7;color:#fff0f6;font-size:10px}
+body.village-widget .catch-grid{display:flex;align-items:center;gap:12px;margin:0}
+body.village-widget .journal{display:flex;align-items:center;justify-content:space-between;gap:10px;padding-top:8px}
+body.village-widget .journal .eyebrow{display:none}.village-widget .journal .section-heading{display:block}.village-widget .journal h2{margin:0;text-transform:none;font-size:13px;letter-spacing:0}
+body.village-widget .bucket-note{font-size:11px;color:#c9abbc}
+body.village-widget dialog{color:#f6e6ef;border-radius:10px;max-width:calc(100% - 20px);max-height:calc(100% - 16px);padding:0}
+body.village-widget dialog>header{padding:12px 15px;background:#181720;border-bottom:1px solid #c33a60}
+body.village-widget #dialog-content{padding:12px 15px}
+body.village-widget dialog.bucket-dialog{width:790px}
+.bucket-tools{display:flex;gap:8px;margin-bottom:10px}.bucket-tools input{flex:1;min-width:0}.bucket-tools select{width:auto!important}
+.bucket-shell{display:grid;grid-template-columns:minmax(0,1fr)235px;gap:12px}.bucket-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}
+body.village-widget .bucket-card{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:6px!important;gap:3px;min-width:0;min-height:105px;background:#211b29!important}
+body.village-widget .bucket-card.selected{border-color:#ff83a4!important;background:#4b293e!important}
+.bucket-card img{width:48px;height:48px;object-fit:contain;image-rendering:pixelated}.bucket-card b{font-size:12px}.bucket-card small{color:var(--quality);font-size:10px;line-height:1.5;text-align:center}
+.bucket-detail{background:#211b29;border:1px solid #805064;border-radius:7px;padding:10px;text-align:center}.bucket-detail>img{width:65px;height:65px;object-fit:contain;image-rendering:pixelated}.bucket-detail h3{font-size:18px;color:#fff0f6;margin:0 0 4px}.bucket-detail p{font-size:11px;margin:0 0 7px;color:#c9abbc}.bucket-total{color:var(--quality);font-size:13px}.bucket-detail .iv-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px;text-align:left}.bucket-detail .iv-grid label{font-size:10px;color:#f6e6ef}.bucket-detail progress{width:100%;height:5px;display:block;margin-top:4px}.bucket-detail progress::-webkit-progress-value{background:var(--iv-color)}
+.bucket-pager{display:flex;gap:10px;justify-content:center;align-items:center;margin-top:8px;font-size:11px;color:#c9abbc}.bucket-empty{grid-column:1/-1;padding:25px 10px;color:#c9abbc;font-size:13px}
+@media(max-width:650px){.bucket-shell{grid-template-columns:1fr}.bucket-grid{grid-template-columns:repeat(4,1fr)}body.village-widget .journal{align-items:start}.bucket-note{display:none}body.village-widget .equipment{grid-template-columns:1fr!important}.bucket-detail .iv-grid{grid-template-columns:repeat(3,1fr)}}
+
+@media(min-width:701px){body.village-widget .water-card{grid-template-columns:minmax(0,1fr)245px!important}body.village-widget .controls{padding:9px 10px}body.village-widget .controls .action-row{gap:5px}body.village-widget .controls>p{font-size:11px!important;margin:6px 0 0}body.village-widget .playstyle-tools #technique-note{display:none!important}body.village-widget .equipment{min-height:62px}body.village-widget .journal .bucket-note{max-width:200px}body.village-widget .journal{margin-top:6px}}
+body.village-widget>.app{padding-bottom:5px}body.village-widget .bucket-note{display:none}
+@media(min-width:701px){body.village-widget .equipment>section:not(.playstyle-tools){grid-template-columns:175px minmax(0,1fr)}body.village-widget .rod-options{flex-wrap:nowrap}body.village-widget .rod-options button{padding:5px 7px!important}}
+/* One tackle row: technique, equipment, fisherman and the fishing bucket. */
+@media(min-width:701px){
+ body.village-widget .equipment{grid-template-columns:155px minmax(0,1fr)115px 62px!important;grid-template-areas:'technique tackle shop bucket'!important;gap:0 12px!important;align-items:center;padding:7px 9px!important}
+ body.village-widget .equipment .playstyle-tools{padding:0 10px 0 0!important}
+ body.village-widget .equipment>section:not(.playstyle-tools):not(.journal){grid-template-columns:175px minmax(0,1fr)!important;padding:0!important}
+ body.village-widget .equipment .fisherman{padding:0 8px!important;min-height:48px}
+ body.village-widget .equipment .fisherman em{font-size:11px!important;padding:0}
+ body.village-widget .equipment .journal{grid-area:bucket!important;display:block!important;margin:0!important;padding:0!important;border:0!important}
+ body.village-widget .equipment .journal>.section-heading{display:none!important}
+ body.village-widget .equipment .journal #catches{display:block!important}
+ body.village-widget .equipment .journal #open-bucket{position:relative;width:54px;height:54px;min-height:54px;display:flex;align-items:center;justify-content:center;background:#211b29!important;border:1px solid #805064!important;padding:3px!important}
+ body.village-widget #open-bucket img{width:34px;height:38px;image-rendering:pixelated;object-fit:contain}
+ body.village-widget .bucket-count{position:absolute;right:-3px;bottom:-3px;min-width:20px;padding:2px 4px;border:1px solid #ff83a4;border-radius:5px;background:#d72e56;color:#fff;font-size:11px;font-weight:bold;text-align:center}
+ body.village-widget .equipment .journal .bucket-note{display:none!important}
+ body.village-widget .water-card>.species-preview{grid-template-columns:88px minmax(0,1fr);padding:6px 10px}
+ body.village-widget .water-card>.species-preview .section-heading{max-width:none;white-space:nowrap}
+ body.village-widget .water-card>.species-preview #shoal-info{max-width:220px;font-size:11px!important}
+ body.village-widget .controls .status{margin-bottom:9px}
+ body.village-widget .controls .key-hint{display:none}
+ body.village-widget .controls #hint{line-height:1.5!important}
+}
+/* Match Wiki's shared Rocket button finish, including bevel and pressed state. */
+body.village-widget button{background:#6f2945!important;border-color:#b75878!important;color:#fff0f6!important;border-radius:4px!important;box-shadow:inset 0 1px #ffffff1f,inset 0 -2px #0004!important;transition:filter .12s}
+body.village-widget button:hover:not(:disabled){background:#6f2945!important;filter:brightness(1.13)}
+body.village-widget button:active:not(:disabled){box-shadow:inset 0 2px #0004!important}
+body.village-widget :is(.location,.technique-options button){background:#3c2536!important;border-color:#754358!important;color:#ecc7d8!important;box-shadow:none!important}
+body.village-widget :is(button[aria-pressed=true],.action-row .primary){background:#d72e56!important;border-color:#ff8aa6!important;color:#fff2f7!important}
+body.village-widget .action-row .primary{padding:9px 15px!important;border-color:#ff83a4!important;font-size:11px!important}
+body.village-widget .water-points button{background:transparent!important;border:0!important;box-shadow:none!important;filter:drop-shadow(0 2px 2px #102d29)}
+@media(min-width:701px){body.village-widget .water-card>.landscape,body.village-widget .water-card>.controls{min-height:310px}body.village-widget .water-card>.controls{padding:18px 14px}body.village-widget .controls .status h3{font-size:16px;line-height:1.45}body.village-widget .controls .action-row{margin-top:9px}body.village-widget .controls #hint{margin-top:12px}}
+body.village-widget .water-points button:is([aria-pressed=true],[aria-pressed=false]):is(:hover,:not(:hover)){background:transparent!important;border:0!important;box-shadow:none!important}
+body.village-widget .playstyle-tools{position:relative}body.village-widget .playstyle-tools #sound{display:inline-block!important;min-height:22px;padding:3px 6px!important;font-size:10px!important;margin-top:4px}body.village-widget .catalog-grid article{background:#302630;border:1px solid #805064;color:#f6e6ef}body.village-widget .catalog-grid small{color:#dfc4d3;font-size:11px}
+body.village-widget .locations{grid-template-columns:minmax(0,1fr)300px;align-items:center}
+body.village-widget .fishing-skill{display:grid;grid-template-columns:1fr auto;gap:5px 12px;padding:9px 11px;background:#261e2c;border:1px solid #805064;border-radius:6px;position:static}
+body.village-widget .fishing-skill .section-heading{grid-column:1/-1;grid-row:1;margin:0;align-items:center}
+body.village-widget .fishing-skill .section-heading>span{font-size:12px!important;letter-spacing:0;color:#f6e6ef!important}
+body.village-widget .fishing-skill strong{font-size:20px;line-height:1.2}
+body.village-widget .fishing-skill progress{grid-column:1/-1;grid-row:2;width:100%;height:7px;margin:0;display:block;border-radius:3px;overflow:hidden}
+body.village-widget .fishing-skill #xp-label{grid-column:1;grid-row:3;font-size:11px;color:#dfc4d3;align-self:center}
+body.village-widget .fishing-skill #milestones{grid-column:2;grid-row:3;position:static;min-height:24px;font-size:10px!important;padding:3px 7px!important;white-space:nowrap}
+body.village-widget .fishing-skill #next-unlock{display:block;grid-column:1/-1;grid-row:4;font-size:11px;line-height:1.4;color:#ffd364;margin:0}
+@media(max-width:600px){body.village-widget .locations{grid-template-columns:1fr}body.village-widget .fishing-skill{width:100%}}
+/* Digital fishing storage: collection on the left, specimen reader on the right. */
+body.village-widget dialog.bucket-dialog{width:840px;background:#1c1926!important;border:1px solid #a65780;box-shadow:0 20px 70px #0009,inset 0 0 0 3px #ffffff04}
+body.village-widget .bucket-dialog>header{border-bottom:1px solid #e45987;background:linear-gradient(110deg,#171421,#332037);margin:0}
+.bucket-dialog>header .eyebrow{font-size:9px!important;color:#eaa4c4!important;letter-spacing:1.5px}
+.bucket-summary{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #5c3a55;padding:0 0 10px;margin-bottom:10px}
+.bucket-summary small{display:block;color:#ba96b2;font-size:9px;letter-spacing:1px}.bucket-summary strong{display:block;font-size:22px;color:#fff0f6;margin-top:4px;font-variant-numeric:tabular-nums}.bucket-summary strong span{font-size:12px;font-weight:normal;color:#d5bad0}.bucket-summary p{font-size:11px;color:#baa7bd;margin:0}
+.bucket-tools{gap:7px}.bucket-tools input{background:#13121c!important}.bucket-tools select{max-width:160px}
+.bucket-shell{grid-template-columns:minmax(0,1fr)245px;gap:12px}.bucket-shell.is-empty{grid-template-columns:1fr}
+.bucket-shell.is-empty .bucket-grid{display:block}
+body.village-widget .bucket-card{position:relative;min-height:115px;background:linear-gradient(145deg,#302638,#211c2b)!important;border-color:#67425d!important;box-shadow:inset 0 1px #ffffff08!important;overflow:hidden}
+body.village-widget .bucket-card.selected{background:linear-gradient(145deg,#523045,#292236)!important;border-color:#f078ad!important;box-shadow:inset 0 0 0 1px #e26e9f55!important}
+.bucket-card img{width:58px;height:58px;filter:drop-shadow(0 4px 6px #0005)}.bucket-card b{font-size:12px}.bucket-card small{color:#d3c2d9;line-height:1.6;font-size:10px}
+.bucket-quality{position:absolute;right:5px;top:5px;padding:1px 4px;color:var(--quality);border:1px solid var(--quality);border-radius:3px;font-size:9px;background:#15131ed9;z-index:1}
+.bucket-detail{position:relative;background:radial-gradient(ellipse at 50% 20%,#4b305b55,transparent 55%),#181522;border-color:#835373;border-radius:8px;padding:13px 11px;overflow:hidden}
+.bucket-detail:before{content:'';position:absolute;pointer-events:none;left:12px;right:12px;top:18px;height:76px;border:1px solid #dd82b722;background:repeating-linear-gradient(0deg,transparent 0 7px,#ce84b50c 7px 8px);border-radius:7px}
+.bucket-detail>img{position:relative;width:78px;height:78px;filter:drop-shadow(0 0 8px #dd7eba38)}.bucket-detail h3{margin:4px 0;font-size:19px}.bucket-detail p{color:#c8b1cb}.bucket-total{display:block;margin:10px 0 3px;font-size:16px;font-variant-numeric:tabular-nums}.bucket-percent{display:block;color:#bba3c5;font-size:10px}.bucket-detail .iv-grid{padding-top:11px;border-top:1px solid #53364e;gap:10px 8px}.bucket-detail .iv-grid label{font-size:11px;line-height:1.4}.bucket-detail progress{height:6px;border-radius:3px;overflow:hidden}
+.bucket-empty{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:170px;margin:0;border:1px dashed #79526d;border-radius:8px;background:radial-gradient(ellipse at center,#4d2d4b44,transparent 70%);gap:9px;text-align:center}
+.bucket-empty img{width:42px;height:46px;image-rendering:pixelated;opacity:.9}.bucket-empty strong{font-size:16px;color:#f9dfef}.bucket-empty span{font-size:12px;line-height:1.5;color:#c9abc4;max-width:340px}.bucket-pager[hidden]{display:none!important}
+@media(max-width:650px){.bucket-shell{grid-template-columns:1fr}.bucket-tools{flex-wrap:wrap}.bucket-tools input{flex-basis:100%}.bucket-summary p{display:none}.bucket-grid{grid-template-columns:repeat(3,1fr)}}
+body.village-widget dialog.bucket-dialog{width:890px;max-height:calc(100% - 10px)}
+.bucket-bulk{display:flex;gap:6px;align-items:center;flex-wrap:wrap;margin-bottom:8px}.bucket-bulk>span{flex:1;font-size:11px;color:#ffd364;text-align:right;margin-right:4px}
+body.village-widget .bucket-bulk button{font-size:10px!important;padding:5px 7px!important;min-height:25px}
+.bucket-notice{font-size:11px;line-height:1.5;color:#8ee2b6;background:#1d352d;border:1px solid #46725c;border-radius:4px;padding:6px 9px;margin-bottom:8px}
+.bucket-confirm{display:flex;align-items:center;gap:7px;background:#463126;border:1px solid #c29750;border-radius:5px;padding:7px 9px;margin-bottom:8px}.bucket-confirm p{flex:1;margin:0;font-size:12px;color:#ffe2a5}.bucket-confirm[hidden],.bucket-notice[hidden]{display:none!important}
+body.village-widget .bucket-card{border:1px solid #67425d;border-radius:5px;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:105px;gap:3px;padding:6px;position:relative}
+.bucket-check{position:absolute;left:6px;top:6px;accent-color:#e54e82;width:13px;height:13px;min-height:0!important;padding:0!important;z-index:2}.bucket-flags{position:absolute;left:5px;bottom:5px;font-size:11px;color:#ffd364}.bucket-card:focus-visible{outline:2px solid #ffd364;outline-offset:2px}.bucket-card .bucket-check:disabled{opacity:.35}
+.bucket-management{display:grid;grid-template-columns:1fr 1fr;gap:5px;margin-top:10px;border-top:1px solid #53364e;padding-top:9px}.bucket-management .bucket-price{grid-column:1/-1;color:#ffd364;font-size:13px;font-weight:bold;margin:0;text-align:center}.bucket-management>button:nth-last-child(-n+2){grid-column:1/-1}body.village-widget .bucket-management button{font-size:10px!important;padding:5px!important;min-height:26px}
+.bucket-dialog .bucket-detail{padding:8px 10px}.bucket-dialog .bucket-detail>img{width:54px;height:54px}.bucket-dialog .bucket-detail:before{top:8px;height:54px}.bucket-dialog .bucket-detail h3{font-size:17px}.bucket-dialog .bucket-total{margin-top:7px;font-size:14px}.bucket-dialog .bucket-detail .iv-grid{margin-top:8px;padding-top:8px;gap:7px}.bucket-dialog .bucket-detail .iv-grid label{font-size:10px}.bucket-dialog .bucket-detail progress{height:5px}
+.fishing-order{display:grid;grid-template-columns:50px 1fr auto;align-items:center;gap:3px 10px;background:#251e2c;border:1px solid #805064;border-radius:6px;padding:10px;margin:9px 0}.fishing-order img{width:48px;height:48px;image-rendering:pixelated;grid-row:1/3}.fishing-order strong{color:#ffd364;font-size:13px}.fishing-order p{margin:0;font-size:11px;color:#d8bdd0}.fishing-order button{grid-column:3;grid-row:1/3}
+.bucket-management{grid-template-columns:1fr 1fr 1fr;gap:5px;padding:9px;border:1px solid #69475f;border-radius:5px;background:#211b29}.bucket-management-title{grid-column:1/-1;font-size:11px;color:#d8bdd0;margin-bottom:3px}.bucket-management .bucket-price{grid-column:3;grid-row:2;align-self:center}.bucket-management>button:nth-last-child(2){grid-column:1/3;grid-row:3}.bucket-management>button:last-child{grid-column:3;grid-row:3}.bucket-management>button:first-of-type{grid-column:1;grid-row:2}.bucket-management>button:nth-of-type(2){grid-column:2;grid-row:2}
+.bucket-individual-sale{display:flex;flex-direction:column;gap:5px;border-top:1px solid #53364e;margin-top:9px;padding-top:8px}.bucket-individual-sale .bucket-price{font-size:14px;font-weight:bold;color:#ffd364;margin:0}.bucket-individual-sale button{padding:5px!important;font-size:10px!important;min-height:26px}.bucket-management>button:last-child{grid-column:3;grid-row:2}.bucket-management>button:nth-of-type(2){grid-column:2;grid-row:2}.bucket-management>button:first-of-type{grid-column:1;grid-row:2}
+body.village-widget .bucket-dialog>header{padding:9px 14px}body.village-widget .bucket-dialog>header h2{margin:3px 0 0;font-size:18px;line-height:1.25}body.village-widget .bucket-dialog>header .eyebrow{margin:0;line-height:1.3!important}.bucket-summary>div{display:flex;align-items:baseline;gap:12px}.bucket-summary strong{font-size:19px;margin-top:0}.bucket-summary{padding-bottom:8px;margin-bottom:8px}
+/* Storage opens as its own viewport-sized workspace, not a modal inside the fishing card. */
+body.village-widget.bucket-window #dialog{inset:0;margin:0;width:100%;height:100%;max-width:none;max-height:none;border:0;border-radius:0;display:flex;flex-direction:column}
+body.village-widget.bucket-window #dialog>header{flex:none;padding:13px 18px}
+body.village-widget.bucket-window #dialog-content{flex:1;min-height:0;overflow:auto;padding:12px 18px}
+body.village-widget.bucket-window .bucket-shell{grid-template-columns:minmax(0,1fr)290px;gap:15px;align-items:start}
+body.village-widget.bucket-window .bucket-detail{display:flex;flex-direction:column;padding:12px;min-height:0}
+body.village-widget.bucket-window .bucket-detail[hidden]{display:none}
+.bucket-detail>.bucket-management{order:2;grid-template-columns:1fr 1fr;padding:8px 0;margin:0 0 8px;background:transparent;border:0;border-bottom:1px solid #53364e}
+.bucket-detail>.bucket-management .bucket-management-title{display:none}
+.bucket-detail>.bucket-management>button:first-of-type{grid-column:1;grid-row:1}
+.bucket-detail>.bucket-management>button:nth-of-type(2){grid-column:2;grid-row:1}
+.bucket-detail>.bucket-management>button:last-child{grid-column:1/-1;grid-row:2}
+.bucket-detail>img{order:0;align-self:center}.bucket-detail>h3{order:1}.bucket-detail>p{order:1}.bucket-detail>.bucket-total,.bucket-detail>.bucket-percent{order:3}.bucket-detail>.iv-grid{order:4}.bucket-detail>.bucket-individual-sale{order:5}
+body.village-widget.bucket-window .bucket-card{min-height:130px}.bucket-window .bucket-card img{width:66px;height:66px}.bucket-window .bucket-card b{font-size:13px}.bucket-window .bucket-grid{gap:9px}
+@media(max-width:700px){body.village-widget.bucket-window .bucket-shell{grid-template-columns:minmax(0,1fr)230px}.bucket-window .bucket-grid{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:520px){body.village-widget.bucket-window .bucket-shell{grid-template-columns:1fr}.bucket-window .bucket-grid{grid-template-columns:repeat(3,1fr)}}
+.bucket-window .bucket-shell.is-empty{grid-template-columns:1fr!important}

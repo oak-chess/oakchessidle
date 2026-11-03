@@ -1,0 +1,121 @@
+/* Graphite and aged gold for gameplay information, retaining semantic type colors. */
+body #stage #tip,body #stage #tip.item-tip-open{background:#242329!important;color:#e9e0d1!important;box-shadow:0 -3px #9b8467,0 3px #9b8467,-3px 0 #9b8467,3px 0 #9b8467,0 -6px #17151b,0 6px #17151b,-6px 0 #17151b,6px 0 #17151b,0 9px #0c0b10,inset 2px 2px #ffffff0c,inset -2px -2px #17151b!important;scrollbar-color:#8e795f #1c1b21}
+body #stage #tip .uhc h4,body #stage #tip .abh b{color:#f5ecdf}
+body #stage #tip .tys .rl{color:#b6a38c}
+body #stage #tip .tys .ty{border-color:#1b191f;box-shadow:0 2px #151319}
+body #stage #tip .uc{border-color:#221c19;box-shadow:0 2px #141218}
+body #stage #tip .bar{background:#16151c;border-color:#222029;box-shadow:0 0 0 1px #7c6c58}
+body #stage #tip .sts div{background:#343038;border-color:#74645633}
+body #stage #tip .sts i{color:#b6a38e}
+body #stage #tip .sts b{color:#f4eadb}
+body #stage #tip .ab{background:#2e2b32;border-color:#77665733}
+body #stage #tip .ab.pas{background:linear-gradient(105deg,#51453288,#302c32);border-color:#b3975f66}
+body #stage #tip .ab p{color:#bfb2a1}
+body #stage #tip .ab em,body #stage #tip .itc em{color:#f3e6cf}
+body #stage #tip .abi{border-color:#aa9276;box-shadow:0 0 0 1px #18151b}
+body #stage #tip .tag{background:#48404a;color:#cbbb9f}
+body #stage #tip .ab.pas .tag{background:#d6b767;color:#302513}
+body #stage #tip .unl{border-color:#88725277;color:#9b8c7a;background:#1c1b21}
+body #stage #tip .unl b{color:#d9bc7c}
+body #stage #tip .syn-mem{border-color:#75614c}
+body #stage #tip .syn-lbl{color:#b8a58a}
+body #stage #tip .syn-lbl b{color:#e3c585}
+body #stage #tip .syn-p{background:#302d34;box-shadow:inset 1px 1px #ffffff09,inset -1px -1px #16151b}
+body #stage #tip .syn-p span{color:#8d8175}
+body #stage #tip .syn-p.on{background:#494038;box-shadow:inset 0 1px #cfb37c22}
+body #stage #tip .syn-p.on span{color:#f0e2ca}
+body #stage #tip .syn-tier{color:#b4a591!important}
+body #stage #tip .syn-tier.active{color:#e9c775!important}
+body #stage #tip .iti-head,body #stage #tip .iti-foot{border-color:#75614c}
+body #stage #tip .iti-head b{color:#f0e6d6}
+body #stage #tip.item-tip-open p{color:#cdbfae}
+body #stage #tip .iti-foot{color:#ad9b84}
+body #stage #tip .itc{background:#54462e44;border-color:#b4975855;color:#d8c8a6}
+body #stage #tip .skill-live-clock{color:#baa78c;border-color:#89714e55}
+body #stage .rpop{background:linear-gradient(135deg,#30292e,#1b1a21);border-color:#967c59;box-shadow:0 8px 26px #0009,inset 0 1px #cfb78a22;color:#f3e7d4}
+body #stage .rpop:before{background:#967c59}
+body #stage .rpop .rp-h{background:linear-gradient(110deg,#60423f88,#332a2d44);border-bottom:1px solid #9b805333}
+body #stage .rpop .rp-av{border-color:#bda27b;background:radial-gradient(circle at 50% 30%,#655044,#242129)}
+body #stage .rpop .rp-t b{text-shadow:0 1px #17131b;color:#f3e7d4}
+body #stage .rpop .rp-t small,body #stage .rpop .rp-f span{color:#bbac9b}
+body #stage .rpop .rp-st{background:#49404a;color:#d8c8b5}
+body #stage .rpop .rp-st.done{background:#304b3b;color:#b0d9ad}
+body #stage .rpop .rp-st.cur{background:linear-gradient(#dfc788,#b99a58);color:#332711}
+body #stage .rpop .rp-m span{background:#4c403f88;border-color:#a4895d44;color:#d9c9b3}
+body #stage .rpop .rp-tm img,body #stage .rpop .rp-tm i{background:#18161c;border-color:#79644a55;color:#aa987e}
+body #stage .rpop .rp-q{border-color:#aa8d5f;color:#c6b5a0}
+body #stage .rpop .rp-f{background:#16151b88;border-color:#85704f44}
+body #stage .rpop .rp-f img{background:#29232a;border-color:#c5a361}
+body #stage .rpop .rp-f small,body #stage .rpop .rp-f i b{color:#dfbf7b}
+body #stage .rpop .rp-f i{color:#c9b99f}
+
+/* Difficulty comes from the active run, independent of new-game settings. */
+#roundbox #campaignModeChip{display:inline-flex;align-items:center;justify-content:center;gap:5px;flex:none;padding:3px 8px;border:1px solid #887253;border-radius:12px;background:linear-gradient(#393039,#221f28);color:#e1cfad;box-shadow:0 2px #101018;white-space:nowrap;font:700 10px/15px Arial}
+#roundbox #campaignModeChip[hidden]{display:none!important}
+#campaignModeChip img{width:14px;height:14px;object-fit:contain;image-rendering:pixelated}
+#campaignModeChip b{font:inherit}
+#roundbox #campaignModeChip[data-diff=hard]{border-color:#ae7464;color:#efd1b1}
+#roundbox #campaignModeChip[data-diff=easy]{border-color:#778364;color:#ccd9b6}
+@media(max-width:640px){#roundbox #campaignModeChip{font-size:9px;padding:2px 6px;gap:4px}#campaignModeChip img{width:12px;height:12px}}
+
+/* Settings and pause use the inventory's deeper sand, brass and red enamel. */
+body #stage #menu{background:#b29d76!important;color:#3c3025!important;border:2px solid #756246!important;box-shadow:inset 0 0 0 2px #cfb580,0 0 0 2px #3c3025,5px 6px #0006!important;scrollbar-color:#80613e #a99169}
+body #stage #menu :is(.mhead,.mh){background:#87523b!important;border-color:#67452c!important;color:#fff0cc!important;box-shadow:inset 0 2px #b1855b55!important}
+body #stage #menu h3{color:#fff0cf!important}
+body #stage #menu h3 .mico{background:#ad9163;border-color:#5b412b;box-shadow:inset 1px 1px #dac18e}
+body #stage #menu #mclose{background:#876846!important;border-color:#d1b47c!important;color:#fff0cc!important;box-shadow:inset 1px 1px #c5a370!important}
+body #stage #menu .mtabs{background:none!important}
+body #stage #menu .mtab{background:#a18b63!important;border-color:#79603e!important;color:#40301d!important;box-shadow:inset 1px 1px #ceb684,0 2px #715735!important}
+body #stage #menu .mtab.on{background:#aa4134!important;color:#fff0c8!important;border-color:#743d2a!important;box-shadow:inset 1px 1px #da8c66,inset -1px -1px #792d26,0 2px #69442c!important}
+body #stage #menu .mtab:hover{filter:brightness(1.09)}
+body #stage #menu .mgroup{background:#bca780!important;border-color:#8a704c!important}
+body #stage #menu .mrow{background:transparent!important;color:#3b2d1d}
+body #stage #menu .mgroup .mrow+.mrow{border-color:#927a5355}
+body #stage #menu :is(.ml,.mt,.comfort-choice,.key-setting){color:#3b2d1d!important}
+body #stage #menu .ms{color:#6c563d!important}
+body #stage #menu .mv{color:#684224!important}
+body #stage #menu .mpanes{scrollbar-color:#80613e #a99169}
+body #stage #menu .sw span{background:#927c58!important;border-color:#715435!important;box-shadow:inset 2px 2px #5c432d44}
+body #stage #menu .sw span:after{background:#e1c58c!important;box-shadow:inset 1px 1px #f5dfa8,inset -1px -1px #a2824d,1px 1px #59422e}
+body #stage #menu .sw input:checked+span{background:#8b4e36!important;border-color:#70402c!important}
+body #stage #menu :is(.seg button,.mbtn,.mbtn.soft,select,[data-bind-key]){background:#a18b63!important;border-color:#7a5c3a!important;color:#3e2e1c!important;box-shadow:inset 1px 1px #d2b989,inset -1px -1px #806342,0 2px #655036!important}
+body #stage #menu .seg button.on{background:#8b513b!important;border-color:#663b2b!important;color:#fff0cc!important}
+body #stage #menu .mbtn:hover{background:#c9b084!important}
+body #stage #menu :is(.help,kbd){background:#c6b28b!important;border-color:#90734b!important;color:#4a3621!important}
+body #stage #menu :is(.credit,.video-setup p){color:#654e36!important}
+body #stage #menu .video-setup>b{color:#6b3d29!important}
+body #stage #menu .mfoot{border-color:#80613e77}
+body #stage #menu a{color:#7d3028!important}
+body #stage #quickVolumePanel{background:#b29d76!important;border:2px solid #79603e!important;color:#3b2b1a!important;box-shadow:inset 2px 2px #dcc18f,inset -2px -2px #806342,0 0 0 3px #3c3025,5px 6px #0006!important}
+body #stage #quickVolumePanel output{color:#63482e!important}
+body #stage #quickVolumePanel .quick-volume-mute{background:#a18b63!important;border-color:#755737!important;color:#3b2918!important;box-shadow:inset 1px 1px #d0b582,inset -1px -1px #806342,0 2px #5e472f!important}
+body #stage #pausedOverlay{background:#17110ed4}
+body #stage #pausedOverlay .pause-card{background:#b29d76;border-color:#756246;box-shadow:inset 0 0 0 2px #cfb580,0 0 0 3px #3c3025,7px 8px #0006;scrollbar-color:#80613e #a99169}
+body #stage #pausedOverlay .pause-icon{background:#9b4e38;border-color:#d0ae73;box-shadow:inset 1px 1px #d98a5f,0 3px #65442b}
+body #stage #pausedOverlay .pause-icon:before,body #stage #pausedOverlay .pause-icon:after{background:#f2d79b;box-shadow:1px 1px #733b28}
+body #stage #pausedOverlay h2{color:#49301b;text-shadow:1px 1px #d4bc8e}
+body #stage #pausedOverlay :is(p,small){color:#644e35}
+body #stage #pausedOverlay .pause-settings{border-color:#80613e77}
+body #stage #pausedOverlay .pause-settings h3{color:#62432a}
+body #stage #pausedOverlay .pause-toggles{background:#bca780;border-color:#8a704c}
+body #stage #pausedOverlay :is(.pause-volume,.pause-quality,.pause-toggles label){color:#3e2d1b}
+body #stage #pausedOverlay .pause-volume output{color:#71472a}
+body #stage #pausedOverlay .pause-toggles input{background:#967b54;border-color:#715435}
+body #stage #pausedOverlay .pause-toggles input:checked{background:#974d36;border-color:#6c432c;box-shadow:inset 0 0 0 3px #d2b780}
+body #stage #pausedOverlay :is(button,select){background:#a18b63;border-color:#7a5c3a;color:#3e2e1c;box-shadow:inset 1px 1px #d2b989,inset -1px -1px #806342,0 2px #655036}
+body #stage #pausedOverlay #resumeBtn{background:#a94334;border-color:#773a29;color:#fff0c8;box-shadow:inset 2px 2px #d78059,inset -2px -2px #782c25,0 3px #63452d}
+body #stage #pausedOverlay #resumeBtn:hover{filter:brightness(1.1)}
+body #stage #quickVolumePanel input{background:linear-gradient(90deg,#895338 var(--p),#8e7854 var(--p))!important;box-shadow:0 2px #6b5034}
+body #stage #menu input[type=range]::-webkit-slider-runnable-track,body #stage #pausedOverlay .pause-volume input::-webkit-slider-runnable-track{background:linear-gradient(90deg,#985137 var(--p),#8e7854 var(--p));box-shadow:0 2px #705234}
+body #stage #menu input[type=range]::-webkit-slider-thumb,body #stage #quickVolumePanel input::-webkit-slider-thumb,body #stage #pausedOverlay .pause-volume input::-webkit-slider-thumb{background:#efd499;border-color:#927044;box-shadow:inset 1px 1px #fff0bf,1px 2px #65492e}
+body #stage #menu input[type=range]::-moz-range-track,body #stage #pausedOverlay .pause-volume input::-moz-range-track{background:#8e7854}
+body #stage #menu input[type=range]::-moz-range-progress,body #stage #pausedOverlay .pause-volume input::-moz-range-progress{background:#985137}
+body #stage #menu input[type=range]::-moz-range-thumb,body #stage #quickVolumePanel input::-moz-range-thumb,body #stage #pausedOverlay .pause-volume input::-moz-range-thumb{background:#efd499;border-color:#927044;box-shadow:1px 2px #65492e}
+
+/* Item descriptions grow with their contents and remain scrollable if exceptionally long. */
+body #stage #tip.item-tip-open{width:320px!important;max-width:calc(100% - 28px)!important;height:auto!important;min-height:0;overflow-y:auto!important;overflow-x:hidden!important;pointer-events:auto!important;overscroll-behavior:contain;scrollbar-width:thin;scrollbar-color:#a28a64 #201e25;padding:14px 16px!important;line-height:18px!important}
+body #stage #tip.item-tip-open .iti-head{align-items:flex-start;padding-bottom:10px}
+body #stage #tip.item-tip-open .iti-head div{min-width:0}
+body #stage #tip.item-tip-open .iti-head b{white-space:normal;overflow-wrap:anywhere;font-size:14px;line-height:20px}
+body #stage #tip.item-tip-open p{margin:11px 0;white-space:normal;overflow:visible;max-height:none;line-height:18px}
+body #stage #tip.item-tip-open .iti-foot{padding:9px 0 2px;line-height:16px}

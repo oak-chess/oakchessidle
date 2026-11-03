@@ -1,0 +1,12 @@
+[
+  {
+    "id": "campaign",
+    "tool": "built-in image_gen",
+    "prompt": "Asset: decorative PIXEL ART UI card FRAME ONLY for a game mode selection panel, landscape aspect ratio 1.4:1. The frame must be a thin continuous ornate gold border with softly rounded stepped pixel corners, 32-bit RPG craftsmanship matching ornate golden shop control frames. Theme: adventure theme, antique gold and bronze, small emerald leaves, subtle blue water and ember-orange gemstone accents, a tiny compass-like gold crest centered at the bottom. Keep decorations tasteful and compact, each corner embellished with small carved gold scrollwork, realistic pixel highlights and shadows. Border thickness about 3% of canvas width. IMPORTANT: the entire large central rectangular window (from x=5% to95% and y=6% to94%) is genuinely alpha transparent, to show an existing game illustration and text underneath. Outside all ornaments is also alpha transparent. NO illustration inside, NO characters, NO text, NO scenery, NO filled backdrop, NO checkerboard, NO colored central panel, NO icons inside the central window. Just one complete edge-to-edge decorative frame, front-on, no perspective, all four sides complete, no cropped ornaments. Create a finished reusable game UI overlay PNG."
+  },
+  {
+    "id": "tower",
+    "tool": "built-in image_gen",
+    "prompt": "Asset: decorative PIXEL ART UI card FRAME ONLY for a game mode selection panel, landscape aspect ratio 1.4:1. The frame must be a thin continuous ornate gold border with softly rounded stepped pixel corners, 32-bit RPG craftsmanship matching ornate golden shop control frames. Theme: mystical tower theme, antique gold and dark bronze, amethyst gems, small sculpted stone curls and subtle violet crystal accents, a tiny pointed tower-shaped gold crest centered at the bottom. Keep decorations tasteful and compact, each corner embellished with small carved gold scrollwork, realistic pixel highlights and shadows. Border thickness about 3% of canvas width. IMPORTANT: the entire large central rectangular window (from x=5% to95% and y=6% to94%) is genuinely alpha transparent, to show an existing game illustration and text underneath. Outside all ornaments is also alpha transparent. NO illustration inside, NO characters, NO text, NO scenery, NO filled backdrop, NO checkerboard, NO colored central panel, NO icons inside the central window. Just one complete edge-to-edge decorative frame, front-on, no perspective, all four sides complete, no cropped ornaments. Create a finished reusable game UI overlay PNG."
+  }
+]

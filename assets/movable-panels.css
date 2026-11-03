@@ -1,0 +1,6 @@
+#towerHud .tower-hud-heading,#liveBattleStats>header{cursor:grab;touch-action:none;user-select:none}
+#towerHud.panel-dragging .tower-hud-heading,#liveBattleStats.panel-dragging>header{cursor:grabbing}
+.movable-game-panel.panel-dragging{transition:none!important}
+#towerHud .tower-hud-heading:focus-visible,#liveBattleStats>header:focus-visible{outline:2px solid #f3d59a;outline-offset:3px}
+#towerHud .tower-hud-heading:hover .tower-hud-emblem,#liveBattleStats>header:hover>div{filter:brightness(1.15)}
+#liveBattleStats>header button{cursor:pointer;touch-action:manipulation}

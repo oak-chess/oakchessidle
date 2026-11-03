@@ -1,0 +1,10 @@
+/* Procedural machine effects share the game's mute/SFX settings. Music uses SND. */
+window.IDLE_PORTAL_AUDIO=(()=>{'use strict';let context,duck=1,duckTimer;const nodes=new Set(),counts={};
+ function volume(){return typeof CFG==='undefined'||CFG.mute?0:Math.max(0,Math.min(1,CFG.sfx??.7))}
+ function tone(f,to,duration,level,delay=0,type='sine'){if(!volume()||document.hidden)return;try{context??=new(window.AudioContext||window.webkitAudioContext)();context.resume().catch(()=>{});const osc=context.createOscillator(),gain=context.createGain(),t=context.currentTime+delay;osc.type=type;osc.frequency.setValueAtTime(f,t);osc.frequency.exponentialRampToValueAtTime(to,t+duration);gain.gain.setValueAtTime(.0001,t);gain.gain.exponentialRampToValueAtTime(Math.max(.0002,level*volume()),t+.012);gain.gain.exponentialRampToValueAtTime(.0001,t+duration);osc.connect(gain);gain.connect(context.destination);nodes.add(osc);osc.onended=()=>{nodes.delete(osc);osc.disconnect();gain.disconnect()};osc.start(t);osc.stop(t+duration+.03)}catch{}}
+ function play(kind){if(!volume()||document.hidden)return;counts[kind]=(counts[kind]||0)+1;if(kind==='charge'){clearTimeout(duckTimer);duck=.4}if(kind==='reveal'){duck=.55;duckTimer=setTimeout(()=>duck=1,900)}if(kind==='tick'){tone(520,280,.065,.13,0,'triangle');tone(1450,1000,.035,.035)}else if(kind==='charge'){tone(90,300,.75,.09,0,'sawtooth');tone(330,990,.65,.06,0,'sine')}else if(kind==='reveal'){[523.25,659.25,783.99,1046.5].forEach((f,i)=>tone(f,f*1.003,.4,.11,i*.09,'triangle'));tone(130.8,261.6,.7,.08)}else tone(kind==='open'?440:660,880,.09,.06,0,'triangle')}
+ function stop(){clearTimeout(duckTimer);duck=1;for(const n of [...nodes])try{n.stop()}catch{}nodes.clear()}
+ // Updating volumes also silences already scheduled notes immediately.
+ setInterval(()=>{if(nodes.size&&!volume())stop()},100);document.addEventListener('visibilitychange',()=>{if(document.hidden)stop()});
+ return {play,stop,get duck(){return duck},get diagnostics(){return {counts:{...counts},active:nodes.size,enabled:!!volume(),contextState:context?.state||'not-started'}}};
+})();
