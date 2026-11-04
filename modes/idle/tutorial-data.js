@@ -46,8 +46,8 @@ window.IDLE_TUTORIAL_DATA=(()=>{
    step('Vencer eventos lendários e míticos concede Bronze Boss Token para as Fendas Mega. Esses combates não usam a captura automática das caçadas; o arquivo serve para consultar, sem escolher o adversário.','events',null)]),
   topic('rocket','Atenção à Equipe Rocket',[
    step('Em Modos → Equipe Rocket, Base Escondida e Ecos de Lavender são operações TFT com equipe, loja e saves próprios. Conclua Celadon para liberar Lavender. Salvar e voltar preserva sua tentativa e retorna à jornada.','rocket','.is-navigation [data-menu=modes]'),
-   step('Abra Modos na barra inferior e escolha Equipe Rocket. Ela tem relógio e painel próprios, separados do Hoopa. Jessie e James chegam a cada 45 minutos; você tem 1 minuto para aceitar.','rocket','.is-navigation [data-menu=modes]'),
-   step('Quando estiver disponível, prepare parceiros em campo e clique em Enfrentar Jessie e James. A entrada não gasta tentativas do portal. Vencer concede Coins, materiais e o resgate de Cubone.','rocket','#idle-rocket-event')]),
+   step('Abra Modos na barra inferior e escolha Equipe Rocket. Ela tem relógio e painel próprios, separados do Hoopa. Uma invasão chega a cada 45 minutos; você tem cinco minutos para aceitar. Executivos exigem oito insígnias e Giovanni, dezesseis.','rocket','.is-navigation [data-menu=modes]'),
+   step('Quando estiver disponível, prepare parceiros em campo e clique em Interceptar invasão. A entrada não gasta tentativas do portal. Vencer concede Coins, materiais e um Pokémon resgatado. Também pode render fragmentos de Escritura e Mega.','rocket','#idle-rocket-event')]),
   topic('mega','Desbloqueie Mega Evoluções',[
    step('Abra Fendas Mega e recolha Pesquisa Mega quando cumprir a missão inicial. Você recebe a Pedra-Chave e tokens. Escolha um boss e confirme o custo; treino permite experimentar sem recompensa.','mega','#idle-mega-portal'),
    step('Com 100 fragmentos, fabrique uma Mega Pedra no Professor Carvalho. Use os específicos da pedra e complete com universais. Equipe um parceiro compatível: a transformação vale durante a batalha.','craft','.is-navigation [data-menu=center]')]),
