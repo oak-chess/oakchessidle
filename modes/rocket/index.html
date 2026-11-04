@@ -3034,7 +3034,7 @@ function confirmUnitSale(u){
  const switchRow=(key,title,desc)=>'<div class="mrow"><div class="mtop"><span class="ml"><span class="mt">'+title+'<small class="ms">'+desc+'</small></span></span><label class="sw"><input type="checkbox" data-comfort-switch="'+key+'" aria-label="'+title+'"><span></span></label></div></div>';
  const selectRow=(key,title,options)=>'<div class="mrow"><label class="comfort-choice"><span>'+title+'</span><select data-comfort-select="'+key+'">'+options.map(x=>'<option value="'+x[0]+'">'+x[1]+'</option>').join('')+'</select></label></div>';
  pane('jogo').insertAdjacentHTML('afterbegin',switchRow('confirmSell','Confirmar venda','Pede confirmação para Pokémon com itens ou ★★/★★★')+switchRow('autoPause','Pausar ao sair da aba','Ao voltar, pressione Continuar para retomar'));
- pane('jogo').insertAdjacentHTML('beforeend',switchRow('recordReplays','Gravar replays','Guarda a batalha final; desativar economiza espaço. Não apaga replays antigos.'));
+
  pane('visual').insertAdjacentHTML('afterbegin',selectRow('uiSize','Tamanho dos menus',[['compact','Compacto'],['normal','Normal'],['large','Grande']])+selectRow('fxLevel','Intensidade dos efeitos',[['low','Baixa'],['normal','Normal'],['high','Alta']])+switchRow('teamMarkers','Identificar equipes','Aliados: azul e + · Inimigos: laranja e ×'));
  const damage=document.querySelector('#menu [data-key="dmgnum"]');damage.insertAdjacentHTML('beforeend','<button type="button" data-v="crit">Críticos</button>');damage.lastElementChild.onclick=()=>{CFG.dmgnum='crit';saveCfg();syncMenuUI()};
  pane('audio').insertAdjacentHTML('beforeend','<div class="mrow"><div class="mtop"><label class="ml" for="noticeVolume">Volume dos avisos</label><span id="noticePercent" class="mv"></span></div><input id="noticeVolume" type="range" min="0" max="1" step=".05" aria-label="Volume dos avisos"></div>');
@@ -3158,63 +3158,7 @@ body.game-paused:has(#menu.show) #pausedOverlay .pause-card{visibility:hidden;po
 #hist .rp-units .replay-mon .its img{image-rendering:pixelated}
 @media(prefers-reduced-motion:reduce){#hist .rp-units .replay-mon{transition:none}}
 </style>
-<script id="actual-battle-video">
-(function(){
- let stream=null,active=null,dbPromise=null,playerUrl=null,watchToken=0;
- const pending=new Map();
- function database(){if(!dbPromise)dbPromise=new Promise((resolve,reject)=>{const req=indexedDB.open('oakchess-battle-videos',1);req.onupgradeneeded=()=>{if(!req.result.objectStoreNames.contains('videos'))req.result.createObjectStore('videos',{keyPath:'id'})};req.onsuccess=()=>resolve(req.result);req.onerror=()=>reject(req.error)}).catch(e=>{dbPromise=null;throw e});return dbPromise}
- async function storeVideo(record){const db=await database();return new Promise((resolve,reject)=>{const tx=db.transaction('videos','readwrite');tx.objectStore('videos').put(record);tx.oncomplete=resolve;tx.onerror=()=>reject(tx.error);tx.onabort=()=>reject(tx.error)})}
- async function readVideo(id){if(pending.has(id))await pending.get(id);const db=await database();return new Promise((resolve,reject)=>{const req=db.transaction('videos').objectStore('videos').get(id);req.onsuccess=()=>resolve(req.result);req.onerror=()=>reject(req.error)})}
- async function prune(){try{const keep=new Set(pending.keys());for(const run of JSON.parse(localStorage.getItem('ptft_runs_v2')||'[]'))if(run.last&&run.last.videoId)keep.add(run.last.videoId);const current=JSON.parse(localStorage.getItem('ptft_current_run_v2')||'null');if(current&&current.last&&current.last.videoId)keep.add(current.last.videoId);const db=await database(),tx=db.transaction('videos','readwrite'),req=tx.objectStore('videos').openCursor();req.onsuccess=()=>{const c=req.result;if(c){if(!keep.has(c.key))c.delete();c.continue()}}}catch(e){}}
- const row=document.createElement('div');row.className='mrow video-setup';row.innerHTML='<b>Vídeo real da batalha</b><p>Grava a arena com golpes, efeitos e animações. O vídeo fica neste navegador; apenas a batalha final de cada run é mantida.</p><button type="button" id="enableBattleVideo">Ativar gravação de vídeo</button><small id="battleVideoStatus" role="status">Selecione a aba deste jogo quando o navegador pedir.</small>';
- document.querySelector('#menu [data-pane="jogo"] .mgroup').appendChild(row);
- const button=document.getElementById('enableBattleVideo'),status=document.getElementById('battleVideoStatus');
- function message(t){status.textContent=t}
- function sync(){button.textContent=stream?'Desativar gravação de vídeo':'Ativar gravação de vídeo';button.disabled=false;if(stream)message(active?'Gravando a batalha.':'Gravação pronta para a próxima batalha.')}
- function stop(){const session=active;if(!session)return null;active=null;if(session.rec.state!=='inactive')session.rec.stop();sync();return session.id}
- function disarm(){stop();if(stream){const old=stream;stream=null;old.getTracks().forEach(t=>t.stop())}sync();message('Gravação desligada. Os vídeos salvos foram mantidos.')}
- function start(){
-  if(!stream||active||CFG.recordReplays===false||DEMO.on)return;
-  try{
-   const type=['video/webm;codecs=vp9,opus','video/webm;codecs=vp8,opus','video/webm','video/mp4'].find(t=>MediaRecorder.isTypeSupported(t));
-   const rec=new MediaRecorder(stream,Object.assign({videoBitsPerSecond:3000000},type?{mimeType:type}:{}));
-   const id='battle-'+Date.now()+'-'+Math.random().toString(36).slice(2,9),chunks=[];let bytes=0,resolveDone;const done=new Promise(resolve=>resolveDone=resolve);pending.set(id,done);
-   const session={id,rec};active=session;
-   rec.ondataavailable=e=>{if(e.data.size){chunks.push(e.data);bytes+=e.data.size;if(bytes>100*1024*1024&&rec.state!=='inactive'){rec.stop();if(active===session)active=null;message('Limite de gravação atingido. Vídeo parcial salvo.')}}};
-   rec.onstop=async()=>{try{if(chunks.length){await storeVideo({id,blob:new Blob(chunks,{type:rec.mimeType||'video/webm'}),ts:Date.now()})}else message('O navegador não produziu vídeo nesta batalha.')}catch(e){message('Não foi possível salvar o vídeo. Confira o espaço disponível no navegador.');toast('O vídeo não pôde ser salvo neste navegador.')}finally{resolveDone();pending.delete(id);setTimeout(prune,1500)}};
-   rec.onerror=()=>{message('A gravação foi interrompida pelo navegador.');if(rec.state!=='inactive')rec.stop()};rec.start(1000);if(G.paused)rec.pause();sync();
-  }catch(e){message('Não foi possível iniciar a gravação neste navegador.')}
- }
- button.onclick=async()=>{
-  if(stream){disarm();return}
-  if(!navigator.mediaDevices||!navigator.mediaDevices.getDisplayMedia||!window.MediaRecorder||!window.CropTarget){message('A captura da arena não está disponível neste navegador. Abra o jogo no Chrome ou Edge para computador.');return}
-  let selected=null;button.disabled=true;
-  try{
-   selected=await navigator.mediaDevices.getDisplayMedia({video:{displaySurface:'browser',frameRate:{ideal:30,max:30}},audio:true,preferCurrentTab:true,selfBrowserSurface:'include',surfaceSwitching:'exclude',systemAudio:'exclude'});
-   const track=selected.getVideoTracks()[0];if(!track||typeof track.cropTo!=='function')throw new Error('crop');
-   const target=await CropTarget.fromElement(document.getElementById('arenaView'));await track.cropTo(target);
-   await database();stream=selected;CFG.recordReplays=true;saveCfg();syncExtraSettings();
-   track.addEventListener('ended',()=>{if(stream===selected)disarm()});sync();if(G.phase==='combat'&&!B.over)start();
-  }catch(e){if(selected)selected.getTracks().forEach(t=>t.stop());message(e.name==='NotAllowedError'?'Captura cancelada. Nenhum vídeo será gravado.':'Escolha a aba deste jogo. A gravação exige captura da própria aba e recorte da arena.');button.disabled=false}
- };
- new MutationObserver(()=>{if(!active)return;const r=active.rec;if(G.paused&&r.state==='recording')r.pause();else if(!G.paused&&r.state==='paused')r.resume()}).observe(document.body,{attributes:true,attributeFilter:['class']});
- document.getElementById('menu').addEventListener('change',e=>{if(e.target.dataset.comfortSwitch==='recordReplays'&&!e.target.checked)disarm()});
- const overlay=document.createElement('div');overlay.id='battleVideoViewer';overlay.setAttribute('role','dialog');overlay.setAttribute('aria-modal','true');overlay.setAttribute('aria-label','Vídeo da batalha final');overlay.innerHTML='<div class="battle-video-box"><header><b>VÍDEO DA BATALHA FINAL</b><button type="button" aria-label="Fechar vídeo">✕</button></header><p role="status"></p><video controls playsinline preload="metadata"></video></div>';stage.appendChild(overlay);
- const video=overlay.querySelector('video'),info=overlay.querySelector('p');
- const actions=document.createElement('div');actions.className='video-share-actions';actions.innerHTML='<button type="button" class="video-share-native">Compartilhar</button><a class="video-download">Baixar vídeo</a><small class="video-file-info"></small>';overlay.querySelector('.battle-video-box').appendChild(actions);
- const nativeShare=actions.querySelector('button'),download=actions.querySelector('a'),fileInfo=actions.querySelector('small');let shareFile=null;
- function close(){watchToken++;video.pause();video.removeAttribute('src');video.load();shareFile=null;download.removeAttribute('href');actions.hidden=true;if(playerUrl){URL.revokeObjectURL(playerUrl);playerUrl=null}overlay.classList.remove('show')}
- nativeShare.onclick=async()=>{if(!shareFile)return;nativeShare.disabled=true;try{await navigator.share({files:[shareFile],title:'Oakchess · Batalha final'});info.textContent='Vídeo compartilhado.'}catch(e){info.textContent=e.name==='AbortError'?'Compartilhamento cancelado.':'Não foi possível compartilhar diretamente. Use Baixar vídeo para enviar pelo aplicativo de sua escolha.'}finally{nativeShare.disabled=false}};
- async function watch(id,foe,sharing=false){close();const token=watchToken;overlay.classList.add('show');info.textContent='Carregando vídeo…';overlay.querySelector('button').focus();try{const record=await readVideo(id);if(token!==watchToken)return;if(!record||!record.blob)throw new Error('missing');playerUrl=URL.createObjectURL(record.blob);video.src=playerUrl;
- const ext=record.blob.type.includes('mp4')?'mp4':'webm',date=new Date(record.ts||Date.now()).toISOString().slice(0,10),opponent=(foe&&foe!=='???'?foe:'batalha-final').normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/gi,'-').replace(/^-|-$/g,'').slice(0,60)||'batalha-final';
- shareFile=new File([record.blob],'oakchess-'+opponent+'-'+date+'.'+ext,{type:record.blob.type.split(';')[0]||'video/webm'});download.href=playerUrl;download.download=shareFile.name;fileInfo.textContent=ext.toUpperCase()+' · '+(record.blob.size/1048576).toLocaleString('pt-BR',{maximumFractionDigits:1})+' MB';let supported=false;try{supported=!!(navigator.share&&navigator.canShare&&navigator.canShare({files:[shareFile]}))}catch(e){}nativeShare.hidden=!supported;actions.hidden=false;info.textContent=sharing?(supported?'Escolha Compartilhar ou Baixar vídeo.':'Compartilhamento direto indisponível neste navegador. Baixe o vídeo para enviá-lo.'):(foe&&foe!=='???'?'Batalha final · '+foe:'Batalha final');if(!sharing)video.play().catch(()=>{});
- }catch(e){if(token===watchToken)info.textContent='Vídeo indisponível. Ele pode ter sido removido dos dados deste navegador.'}}
- overlay.querySelector('button').onclick=close;overlay.addEventListener('click',e=>{if(e.target===overlay)close()});
- window.addEventListener('keydown',e=>{if(!overlay.classList.contains('show'))return;e.stopImmediatePropagation();if(e.key==='Escape'){e.preventDefault();close()}},true);
- window.addEventListener('pagehide',()=>{if(stream)stream.getTracks().forEach(t=>t.stop())});
- window.BATTLE_VIDEO={start,stop,watch,share:(id,foe)=>watch(id,foe,true),prune};prune();
-})();
-</script>
+
 <style id="actual-video-player-style">
 #menu .video-setup>b{font:700 13px/20px 'Trebuchet MS',sans-serif;color:#ffe298}
 #menu .video-setup p{font:11px/17px 'Trebuchet MS',sans-serif;color:#b9cbe4;margin:6px 0 10px}
@@ -3282,8 +3226,8 @@ body #tip .ut .unl{padding:3px 6px;font-size:9px;gap:2px 6px}
 body #tip .ut .itc{padding:3px 6px;font-size:10px}
 body #tip .ut .usec.its{padding-top:4px}
 </style>
-<link rel="stylesheet" href="assets/achievements.css">
-<script src="assets/achievements.js?v=notice-theme-2"></script>
+
+
 <link rel="stylesheet" href="assets/title-menu.css?v=hierarchy-3">
 
 <link rel="stylesheet" href="assets/pokedex.css">
@@ -3294,15 +3238,15 @@ body #tip .ut .usec.its{padding-top:4px}
 <script src="assets/pokedex.js?v=shop-shiny-8"></script>
 <link rel="stylesheet" href="assets/battle-report.css">
 
-<link rel="stylesheet" href="assets/regional-events.css">
-<script src="assets/regional-events.js"></script>
+
+
 <link rel="stylesheet" href="assets/game-menu.css">
 <script src="assets/game-menu.js"></script>
 <link rel="stylesheet" href="assets/run-challenges.css">
 
-<link rel="stylesheet" href="assets/alternative-routes.css">
-<script src="assets/alternative-routes.js"></script>
-<link rel="stylesheet" href="assets/mystery-events.css">
+
+
+
 <script src="assets/move-sprites.js"></script>
 <script src="assets/move-fx/emerald-catalog.js"></script>
 <script src="assets/move-fx/nine-catalog.js?v=1"></script>
@@ -3338,11 +3282,11 @@ body #tip .ut .usec.its{padding-top:4px}
 <script src="assets/dex-move-preview.js?v=warm-7"></script>
 <script src="assets/passive-roster.js"></script>
 <script src="assets/passive-moves.js?v=tactics-1-species-description-6"></script>
-<script src="assets/mystery-events.js"></script>
+
 <link rel="stylesheet" href="assets/ui-sprites.css">
-<link rel="stylesheet" href="assets/badge-case.css">
-<script src="assets/badge-case.js"></script>
-<script src="assets/legendary-encounter.js"></script>
+
+
+
 <script src="assets/arena-preview.js"></script>
 <link rel="stylesheet" href="assets/tower.css">
 
@@ -3446,4 +3390,4 @@ body #tip .ut .usec.its{padding-top:4px}
 
 
 
-<link rel="stylesheet" href="modes/rocket/host.css?v=2"><script src="modes/rocket/host.js?v=2"></script></body></html>
+<link rel="stylesheet" href="modes/rocket/host.css?v=5"><script src="modes/rocket/host.js?v=3"></script></body></html>

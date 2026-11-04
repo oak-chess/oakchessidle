@@ -463,3 +463,38 @@ body.idle-native-mode #idle-inventory .pf-appearance-editor .pf-wallpaper-picker
 body.idle-native-mode #idle-inventory .pf-appearance-editor .pf-wallpaper-picker button[aria-pressed=true]{outline:2px solid #ecc5ef!important;outline-offset:-2px}
 #idle-inventory .pf-editor-footer{position:sticky;bottom:0;background:#1e1d2af5;display:flex;justify-content:flex-end;gap:7px;border-top:1px solid #ffffff20;padding:10px 0;margin-top:15px;z-index:3}
 body.idle-native-mode #idle-inventory .pf-editor-footer button:last-child{background:#b23972!important}
+/* Equipment is a phone screen: bounded picker, vertical controls, compact stock. */
+body.idle-native-mode #idle-inventory .ip-recipient-picker{inset:48px 10px 20px!important;width:auto!important;min-width:0!important;max-width:none!important;transform:none!important;margin:0!important;box-sizing:border-box;background:#142332!important;border:1px solid #4a7188!important;border-radius:16px!important;box-shadow:0 0 0 12px #080e18d9!important;overflow:hidden!important}
+#idle-inventory .ip-recipient-picker *,#idle-inventory .ip-inventory-layout *{box-sizing:border-box;min-width:0}
+body.idle-native-mode #idle-inventory .ip-recipient-picker>header{position:static!important;display:flex!important;flex:none!important;width:100%!important;min-width:0!important;padding:12px!important;gap:8px!important;margin:0!important;background:#10202e!important}
+#idle-inventory .ip-recipient-picker header>div{flex:1;min-width:0}
+#idle-inventory .ip-recipient-picker header h3{font:700 16px/1.25 system-ui;margin:4px 0 0}
+#idle-inventory .ip-recipient-picker header small{font-size:8px;letter-spacing:.8px}
+#idle-inventory .ip-recipient-picker header button{flex:none;width:30px;height:30px}
+#idle-inventory .ip-recipient-tools{display:grid!important;grid-template-columns:minmax(0,1fr)!important;gap:8px!important;padding:10px 12px!important;flex:none}
+#idle-inventory .ip-recipient-tools nav{display:flex;width:100%;padding:0;background:transparent;gap:5px}
+#idle-inventory .ip-recipient-tools nav button{flex:1;padding:7px!important;font-size:11px!important}
+#idle-inventory .ip-recipient-tools input{width:100%!important;max-width:100%!important;height:34px!important}
+#idle-inventory .ip-recipient-available{padding:0 12px 10px;font-size:10px;line-height:1.4;flex:none}
+#idle-inventory .ip-recipient-available input{flex:none;width:14px;height:14px}
+#idle-inventory .ip-recipient-grid{width:100%;grid-template-columns:repeat(2,minmax(0,1fr))!important;padding:0 12px 12px!important;gap:7px!important;overflow-x:hidden!important;overflow-y:auto;align-content:start}
+body.idle-native-mode #idle-inventory .ip-recipient-grid .ip-recipient-option{display:flex!important;flex-direction:column;align-items:center;text-align:center;justify-content:flex-start;gap:5px;min-width:0!important;min-height:112px!important;padding:9px 5px!important;background:#1e3444!important;border:1px solid #426076!important;border-radius:10px!important;white-space:normal!important}
+#idle-inventory .ip-recipient-option>img{width:42px;height:42px}
+#idle-inventory .ip-recipient-option b{white-space:normal;overflow-wrap:anywhere;font:700 11px/1.3 system-ui}
+#idle-inventory .ip-recipient-option small{font:10px/1.35 system-ui;color:#b5cedd;margin-top:2px}
+body.idle-native-mode #idle-inventory .ip-recipient-option[aria-pressed=true]{border-color:#62def3!important;box-shadow:inset 0 0 0 1px #62def3!important}
+body.idle-native-mode #idle-inventory .ip-recipient-picker>footer{position:static!important;display:flex!important;flex:none;width:100%!important;min-width:0!important;align-items:center;justify-content:center;gap:8px;padding:10px!important;background:#10202e!important;margin:0!important}
+#idle-inventory .ip-recipient-picker>footer span{font-size:10px;flex:1;text-align:center}
+#idle-inventory .ip-recipient-picker>footer button{padding:6px 8px!important;min-width:30px}
+body.idle-native-mode #idle-inventory .ip-inventory-layout{grid-template-columns:minmax(0,1fr)!important;gap:10px;min-width:0}
+body.idle-native-mode #idle-inventory .ip-item-grid{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:6px!important}
+body.idle-native-mode #idle-inventory .ip-item-grid>.ip-button{display:grid!important;grid-template-columns:26px minmax(0,1fr);grid-template-rows:auto auto;align-items:center;text-align:left;justify-items:start;min-height:54px!important;padding:7px!important;gap:2px 6px!important;white-space:normal!important}
+#idle-inventory .ip-item-grid>.ip-button img{grid-row:1/3;width:26px!important;height:26px!important}
+#idle-inventory .ip-item-grid>.ip-button b{font-size:10px;overflow-wrap:anywhere}
+#idle-inventory .ip-item-grid>.ip-button small{font-size:10px}
+body.idle-native-mode #idle-inventory .ip-item-detail{position:static!important;min-width:0!important;padding:12px!important;gap:8px!important;background:#162b3b!important;border-color:#41647a!important}
+#idle-inventory .ip-item-detail .ip-item-large{width:36px;height:36px;align-self:center}
+#idle-inventory .ip-item-detail h3{font:700 14px/1.3 system-ui;text-align:center}
+#idle-inventory .ip-item-detail p{font:11px/1.5 system-ui;color:#c7dce8!important}
+#idle-inventory .ip-recipient-selected{min-width:0!important;white-space:normal!important}
+#idle-inventory .ip-recipient-selected>span{font-size:10px;flex:none}

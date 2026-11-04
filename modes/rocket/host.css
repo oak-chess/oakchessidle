@@ -2,3 +2,42 @@ html,body{background:#07111e!important}body{overflow:hidden}
 #starter,#ttl,.stream-home,#modePreview,#collectionShortcuts,#titleMenu,#hist,#again,#tutbtn,#restart,.dex-pause-button{display:none!important}
 #startupLoader .startup-note:after{content:' Operação Rocket · equipe e recursos próprios.'}
 #rocketOperationOverlay .rop-actions button{white-space:normal}
+/* Rocket controls share the Idle shop's navy surfaces and cyan accents. */
+html body :is(#menu#menu,#quickVolumePanel#quickVolumePanel,.bagp.bagp){background:linear-gradient(145deg,#152b39,#121923 72%)!important;color:#e5f3fa!important;border:1px solid #477287!important;border-radius:14px!important;box-shadow:inset 0 1px #a4ebff25,0 12px 32px #0009!important;font-family:'Trebuchet MS',Arial,sans-serif!important}
+html body #menu#menu :is(.mhead,.mtabs,.mfoot){background:#102330!important;border-color:#34596d!important}
+html body #menu#menu :is(h3,.mv,.msec),html body .bagp.bagp :is(h3,b){color:#ffe099!important}
+html body #menu#menu :is(.mgroup,.mrow,.help){background:#192e3d!important;border-color:#345466!important;color:#d9eaf4!important;border-radius:8px!important;box-shadow:none!important}
+html body #menu#menu :is(.ms,.credit),html body .bagp.bagp .baghint{color:#a9c4d4!important}
+html body :is(#menu#menu,#quickVolumePanel#quickVolumePanel,.bagp.bagp) button{background:linear-gradient(#2b485b,#182e3c)!important;color:#e5f4fc!important;border:1px solid #52788d!important;border-radius:7px!important;box-shadow:inset 0 1px #ffffff18,0 2px 3px #0005!important;text-shadow:none!important;font-family:'Trebuchet MS',Arial,sans-serif!important}
+html body :is(#menu#menu,.bagp.bagp) button:is(.on,[aria-selected=true]),html body #menu#menu .seg button.on{background:linear-gradient(#224e60,#123141)!important;border-color:#56dff6!important;box-shadow:inset 3px 0 #55e5fa,0 0 8px #35d8f522!important;color:#fff!important}
+html body :is(#menu#menu,#quickVolumePanel#quickVolumePanel,.bagp.bagp) button:hover{filter:brightness(1.16)}
+html body :is(#menu#menu,#quickVolumePanel#quickVolumePanel,.bagp.bagp) :is(button,input):focus-visible{outline:2px solid #6ae5fa!important;outline-offset:2px}
+html body #menu#menu .sw span{background:#142633!important;border:1px solid #52788d!important;border-radius:20px!important;box-shadow:none!important}
+html body #menu#menu .sw span:before{background:#b7cbd7!important;border:0!important;box-shadow:0 1px 3px #0008!important;border-radius:50%!important}
+html body #menu#menu .sw input:checked+span{background:#167d92!important;border-color:#64e2f4!important}
+html body #menu#menu .sw input:checked+span:before{background:#e2fbff!important}
+html body #menu#menu input[type=range]{background:transparent!important;accent-color:#55dff5}
+html body #menu#menu input[type=range]::-webkit-slider-runnable-track{height:6px;border:0!important;border-radius:5px;background:linear-gradient(90deg,#45d4ec var(--p),#314a5b var(--p))!important;box-shadow:none!important}
+html body :is(#menu#menu,#quickVolumePanel#quickVolumePanel) input[type=range]::-webkit-slider-thumb{background:#b9f6ff!important;border:1px solid #4dbbd0!important;border-radius:50%!important;box-shadow:0 0 5px #4ddcf655!important}
+html body :is(#menu#menu,#quickVolumePanel#quickVolumePanel) input[type=range]::-moz-range-thumb{background:#b9f6ff!important;border:1px solid #4dbbd0!important;border-radius:50%!important}
+html body #quickVolumePanel#quickVolumePanel label{color:#d8eaf5!important}
+html body #quickVolumePanel#quickVolumePanel output{color:#ffe099!important}
+html body #quickVolumePanel#quickVolumePanel input{background:linear-gradient(90deg,#45d4ec var(--volume),#314a5b var(--volume))!important;box-shadow:none!important;border-radius:5px!important}
+html body #menu#menu .mpanes,html body .bagp.bagp{scrollbar-width:thin;scrollbar-color:#4a9bb4 #142633}
+html body #bagov .bs{background:#112533!important;border:1px solid #426579!important;border-radius:8px!important;box-shadow:inset 0 1px #ffffff0b!important}
+html body #bagov .bs.empty{background:#10212d!important;border-style:dashed!important;opacity:.5}
+html body .bagp.bagp:before,html body .bagp.bagp:after{display:none!important}
+html body .bagp.bagp .baghint{background:transparent!important;border-color:#345466!important}
+/* Override the legacy pixel skin's highly specific controls and labels. */
+html body #menu#menu#menu :is(.ml,.mt,.mtop,.mrow label,.help,.credit){color:#d9eaf4!important}
+html body #menu#menu#menu :is(button,.mtab,.mbtn,.mx,.seg button),html body #bagov#bagov .bagp button,html body #quickVolumePanel#quickVolumePanel button{background:linear-gradient(#2b485b,#182e3c)!important;border:1px solid #52788d!important;color:#e5f4fc!important;border-radius:7px!important;box-shadow:inset 0 1px #ffffff18,0 2px 3px #0005!important;text-shadow:none!important}
+html body #menu#menu#menu :is(.mtab.on,.seg button.on),html body #bagov#bagov .bagtabs button.on{background:linear-gradient(#224e60,#123141)!important;border-color:#56dff6!important;box-shadow:inset 3px 0 #55e5fa!important}
+html body #menu#menu#menu .mico{background:#203e50!important;border-color:#52788d!important;box-shadow:none!important}
+html body #menu#menu#menu .sw span:after{background:#b9f6ff!important;border:0!important;border-radius:50%!important;box-shadow:0 1px 3px #0007!important}
+html body #quickVolumePanel#quickVolumePanel#quickVolumePanel button{background:linear-gradient(#2b485b,#182e3c)!important;border:1px solid #52788d!important;color:#e5f4fc!important;border-radius:7px!important;box-shadow:inset 0 1px #ffffff18,0 2px 3px #0005!important}
+html body #bagov#bagov#bagov .bagp :is(span,p,.bv){color:#d9eaf4!important}
+html body #bagov#bagov#bagov .bagp>div:last-child{color:#a9c4d4!important}
+/* Campaign preparation timers do not control Rocket's route preparation. */
+html body #menu [hidden]{display:none!important}
+html body #menu .keys,html body #menu .key-setting{color:#d9eaf4!important}
+html body #menu .key-setting button{min-width:36px}

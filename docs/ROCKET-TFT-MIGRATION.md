@@ -39,3 +39,11 @@ Os testes automatizados verificam mecanismos e transições com dados isolados. 
 - Regressões Prey/Safari/Modos, entradas independentes/compatibilidade, importação de backup e conteúdo do tutorial aprovadas.
 - Extração, derrota e fusão continuam no módulo nativo; nesta rodada não foram verificadas separadamente de ponta a ponta. Balanceamento das 50 etapas e áudio ouvido manualmente ainda precisam de avaliação jogando.
 - Correção de retorno: mensagens entre o host e o Idle aceitam a origem opaca de arquivos locais somente quando a página é file://, mantendo a verificação da janela remetente. Testes de retorno nativo aprovados em file:// e HTTP. Removida a barra superior redundante; aviso de recuperação aparece somente em falha real de carga.
+
+## Auditoria de módulos herdados
+
+O aviso “Primeiros registros / Observador de Kanto” vinha de assets/achievements.js, carregado indevidamente no host. Removidos desse host o script e o estilo de conquistas, incluindo seu temporizador de 350 ms. Também removidos regional-events, alternative-routes, mystery-events, badge-case e legendary-encounter: são interfaces/eventos da campanha, não das operações. A remoção ocorre na construção da página Rocket, preservando os recursos compartilhados necessários à loja, fusão, golpes e equipamentos.
+
+O host gerado não contém scripts externos nem endereço do repositório antigo. Os arquivos assets/ continuam sendo recursos locais do oakchessidle; o nome da pasta não representa dependência do outro projeto. As chaves Rocket permanecem isoladas em oakchessidle:rocket-tft:.
+
+Validação após a limpeza: ausência de ACH e dos seis módulos no host; compra real, combate, salvar/continuar, conclusões de Celadon e Lavender, recordes e isolamento do Idle aprovados. Entrada e retorno em file:// também aprovados.
