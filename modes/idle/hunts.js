@@ -56,10 +56,10 @@ function apply(u,m){normalize(m);u.hp=u.maxHp*m.condition;if(q.specialization!==
 function begin(){s.capture.lastSpent=0;s.capture.lastAttempts=0;s.capture.lastCaught=0;capturedBefore=s.team.length+s.collection.length;ballsBefore=window.IDLE_ITEMS.totalBalls(s);totals={xp:0,coins:0,defeated:0}}
 function onDefeat(u,units){if(u._idleRewarded)return;u._idleRewarded=true;const prey=ctx.prey?.()?.defeat(u)||{xp:1,loot:0};ctx.defeated?.(u);const st=session();
  const baseXp=Math.max(1,Math.round((10*u.L.c+4*(u._idleLevel||level()))*current().xp*ctx.objective().xp)),xp=Math.round(baseXp*prey.xp);st.preyXp=(st.preyXp||0)+(xp-baseXp);
- const coins=Math.round((2+u.L.c+s.area)*current().gold*ctx.objective().gold*window.IDLE_HUNT_PROGRESSION.coinFactor(u._idleLevel||level(),level()));
- ctx.trainerXp(xp);for(const ally of units.filter(x=>x.side===0&&x.alive)){const m=s.team.find(m=>m.id===ally._idleMember);if(m)ctx.gainXp(m,xp)}
- window.IDLE_ACTIVITY?.for(s)?.count('defeated');s.gold+=coins;st.xp+=xp;st.coins+=coins;st.defeated++;totals.xp+=xp;totals.coins+=coins;totals.defeated++;
- const drops=window.IDLE_DROPS.roll(u.L,u.star||1,prey.loot);for(const drop of drops){const value=drop.count*lootTypes[drop.key].price;if(q.autoSellLoot){s.gold+=value;totals.coins+=value;st.autoSoldLoot=(st.autoSoldLoot||0)+value}else q.loot[drop.key]=(q.loot[drop.key]||0)+drop.count;st.loot+=value}q.dropLog=q.dropLog||[];if(drops.length){q.dropLog.unshift({name:u.L.names[(u.star||1)-1],drops,autoSold:!!q.autoSellLoot,at:Date.now()});q.dropLog=q.dropLog.slice(0,20)}
+ const vip=window.IDLE_VIP,trainerAmount=Math.round(xp*(vip?.factor(s,'trainer')||1)),pokemonAmount=Math.round(xp*(vip?.factor(s,'pokemon')||1));st.vipTrainerXp=(st.vipTrainerXp||0)+(trainerAmount-xp);const coins=Math.round((vip?.factor(s,'coins')||1)*(2+u.L.c+s.area)*current().gold*ctx.objective().gold*window.IDLE_HUNT_PROGRESSION.coinFactor(u._idleLevel||level(),level()));
+ ctx.trainerXp(trainerAmount);for(const ally of units.filter(x=>x.side===0&&x.alive)){const m=s.team.find(m=>m.id===ally._idleMember);if(m)ctx.gainXp(m,pokemonAmount)}
+ window.IDLE_ACTIVITY?.for(s)?.count('defeated');s.gold+=coins;st.xp+=trainerAmount;st.coins+=coins;st.defeated++;totals.xp+=trainerAmount;totals.coins+=coins;totals.defeated++;
+ const drops=window.IDLE_DROPS.roll(u.L,u.star||1,prey.loot,(vip?.factor(s,'loot')||1)-1);for(const drop of drops){const value=drop.count*lootTypes[drop.key].price;if(q.autoSellLoot){s.gold+=value;totals.coins+=value;st.autoSoldLoot=(st.autoSoldLoot||0)+value}else q.loot[drop.key]=(q.loot[drop.key]||0)+drop.count;st.loot+=value}q.dropLog=q.dropLog||[];if(drops.length){q.dropLog.unshift({name:u.L.names[(u.star||1)-1],drops,autoSold:!!q.autoSellLoot,at:Date.now()});q.dropLog=q.dropLog.slice(0,20)}
  const stone=window.IDLE_DROPS.rollStone(u.L,u.star||1);if(stone){s.world.stones[stone.key]=(s.world.stones[stone.key]||0)+1;q.dropLog.unshift({name:u.L.names[(u.star||1)-1],stone:stone.key,at:Date.now()});q.dropLog=q.dropLog.slice(0,20);ctx.rareDrop?.(window.IDLE_WORLD_DATA.stones[stone.key]||stone.key)}
 
  q.lastKill={name:u.L.names[(u.star||1)-1]||u.L.names[0],xp,at:Date.now()};
@@ -67,7 +67,7 @@ function onDefeat(u,units){if(u._idleRewarded)return;u._idleRewarded=true;const 
 function result(units,win){window.IDLE_ACTIVITY?.battle(s,win);const st=session();const previousWave=q.wave;st.battles++;if(win)st.wins++;
  for(const u of units.filter(u=>u.side===1&&!u.alive))onDefeat(u,units);
  for(const u of units.filter(u=>u.side===0)){const m=s.team.find(m=>m.id===u._idleMember);if(m){normalize(m);m.condition=u.alive?Math.max(.01,u.hp/u.maxHp):0}}
- if(win){q.waves[key()+':'+q.wave]=(q.waves[key()+':'+q.wave]||0)+1;if(st.seconds>=10)q.lastSafe={area:s.area,rate:Math.min(120,Math.floor(Math.max(0,st.xp-(st.preyXp||0))/st.seconds*3600)),members:s.team.filter(m=>m.pos?.z==='b'&&m.condition>0).map(m=>m.id)}}
+ if(win){q.waves[key()+':'+q.wave]=(q.waves[key()+':'+q.wave]||0)+1;if(st.seconds>=10)q.lastSafe={area:s.area,rate:Math.min(120,Math.floor(Math.max(0,st.xp-(st.preyXp||0)-(st.vipTrainerXp||0))/st.seconds*3600)),members:s.team.filter(m=>m.pos?.z==='b'&&m.condition>0).map(m=>m.id)}}
  if(win&&q.autoAdvance&&q.wave<10&&(q.waves[key()+':'+q.wave]||0)>=3){q.wave++;s.encounter=null}q.waveByArea[key()]=q.wave;
  return {...totals,loot:current().loot,waveAdvanced:q.wave>previousWave,wave:q.wave}
 }
