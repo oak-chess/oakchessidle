@@ -28,3 +28,6 @@ frame.webp, boost-illustrations.webp e menu-button.webp são derivados dos conce
 ## Validação
 scripts/check-vip.cjs: transações, estoque, durações, porcentagens, pausa, expiração, reload e suprimentos.
 scripts/check-vip-browser.cjs: menu real, categorias e recursos, 48 variantes, confirmação de conversão, ativação, XP/Coins reais por nocaute, chance de captura, save e imagens.
+
+## Pacotes de compra única
+Iniciante: 10 créditos (1h de XP treinador, XP Pokémon e loot). Intermediário: 30 créditos (3h de cada XP e loot, 1h de Coins). Avançado: 96 créditos (6h dos seis boosts). Cada pacote só pode ser adquirido uma vez por jornada; o registro persiste no save. O tempo fica guardado para ativação manual.

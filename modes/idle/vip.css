@@ -62,3 +62,12 @@ body.idle-native-mode #stage .is-quick.is-device-quick>[data-quick-device=vip]>.
 
 /* Keep only the illustrated octagonal contour, without the rectangular backing. */
 body.idle-native-mode #stage #idle-vip-store{width:min(1000px,92%)!important;max-height:690px!important;background-color:transparent!important;border-radius:0!important;clip-path:polygon(4% 1%,96% 1%,99.5% 5%,99.5% 95%,96% 99%,4% 99%,.5% 95%,.5% 5%);box-shadow:none!important}
+
+.iv-bundle>img{width:76px!important;height:76px!important;image-rendering:auto!important}.iv-bundle[data-bundle=intermediate]>img{filter:hue-rotate(140deg)}.iv-bundle[data-bundle=advanced]>img{filter:hue-rotate(240deg) drop-shadow(0 0 8px #cf8dff80)}.iv-bundle ul{align-self:stretch;text-align:left;list-style:none;padding:0;margin:8px 0 14px;color:#c1e1ed;font:12px/1.8 system-ui}.iv-bundle li{border-bottom:1px solid #6ac5df25;padding:3px 0}.iv-bundles{align-items:stretch}.iv-bundle{padding:14px!important}
+
+body.idle-native-mode #stage #idle-vip-store .iv-bundles{align-items:start;gap:9px}
+body.idle-native-mode #stage #idle-vip-store .iv-bundle{padding:10px!important;gap:4px}
+body.idle-native-mode #stage #idle-vip-store .iv-bundle>img{width:56px!important;height:56px!important}
+body.idle-native-mode #stage #idle-vip-store .iv-bundle ul{margin:5px 0 6px;font-size:11px;line-height:1.4}
+body.idle-native-mode #stage #idle-vip-store .iv-bundle li{padding:4px 0}
+body.idle-native-mode #stage #idle-vip-store .iv-bundle .iv-buy{margin-top:6px!important}
