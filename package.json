@@ -15,7 +15,8 @@
     "build:rocket": "node scripts/build-rocket-host.cjs",
     "test:rocket": "node scripts/check-rocket-transfer-browser.cjs",
     "test:bosses": "node scripts/check-regional-boss-browser.cjs",
-    "test:equipment": "node scripts/check-equipment-phone-browser.cjs"
+    "test:equipment": "node scripts/check-equipment-phone-browser.cjs",
+    "test:healing": "node scripts/check-defense-healing-browser.cjs"
   },
   "devDependencies": {
     "playwright": "^1.56.0"

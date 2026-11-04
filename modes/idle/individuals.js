@@ -18,6 +18,8 @@ window.IDLE_INDIVIDUALS=(()=>{
  function modifiers(m){const n=nature(m),t=talent(m);return Object.fromEntries(keys.map(k=>{const iv=.94+.12*(m.ivs[k]/31),temper=n.up===k?1.1:n.down===k?.9:1,extra=t.key===k||t.key==='def'&&k==='spd'?t.factor:1;return [k,(1+power(m).bonus/100)*iv*temper*extra]}))}
  function apply(u,m){normalize(m,u.L);u.shiny=m.shiny===true;const f=modifiers(m),ratio=u.maxHp?u.hp/u.maxHp:1;u.maxHp*=f.hp;u.hp=u.maxHp*ratio;u.atk*=f.atk;u.armor*=f.def;u.spell*=f.spa;u.mr*=f.spd;u.as*=f.spe;u._idleTalent=m.talent}
  function stats(base,m,level){const f=modifiers(m),scale=1+(level-1)*.12;return {hp:base.shedinja?1:base.hp*scale*f.hp,atk:base.atk*scale*f.atk,spell:base.sp*scale*f.spa,armor:base.armor*f.def,mr:base.mr*f.spd,speed:base.as*f.spe}}
+ const reduction=value=>{const defense=Math.max(0,Number(value)||0);return 100*defense/(100+defense)};
+ const defenseText=value=>reduction(value).toLocaleString('pt-BR',{minimumFractionDigits:1,maximumFractionDigits:1})+'%';
  function quality(m){return 'P'+power(m).tier}
- return {powers,power,powerLabel,decorate,keys,labels,natures,talents,roll,normalize,nature,talent,total,modifiers,apply,stats,quality};
+ return {reduction,defenseText,powers,power,powerLabel,decorate,keys,labels,natures,talents,roll,normalize,nature,talent,total,modifiers,apply,stats,quality};
 })();
