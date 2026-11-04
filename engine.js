@@ -3084,7 +3084,7 @@ let HOV=null;
 let TIPU=null,TIPLAST='',TIPT=0;
 let idleTipWindows=null;
 new MutationObserver(()=>{idleTipWindows=null}).observe(stage,{childList:true});
-function idleMenuBlocksArenaTips(){if(document.body.classList.contains('idle-tutorial-open'))return true;if(!idleTipWindows)idleTipWindows=[...stage.querySelectorAll('.idle-window')];return idleTipWindows.some(e=>e.isConnected&&!e.hidden)||!!document.getElementById('idle-quick-supplies')||!!document.getElementById('idle-center-scene')&&!document.getElementById('idle-center-scene').hidden}
+function idleMenuBlocksArenaTips(){if(document.body.classList.contains('idle-tutorial-open'))return true;const rocketPanel=document.getElementById('idle-rocket-panel');if(rocketPanel&&!rocketPanel.hidden)return true;if(!idleTipWindows)idleTipWindows=[...stage.querySelectorAll('.idle-window')];return idleTipWindows.some(e=>e.isConnected&&!e.hidden)||!!document.getElementById('idle-quick-supplies')||!!document.getElementById('idle-center-scene')&&!document.getElementById('idle-center-scene').hidden}
 function hideTip(){tipEl.style.display='none';tipEl.classList.remove('item-tip-open','boon-tip-open');TIPU=null}
 /* atualiza o painel de status do Pokémon sob o mouse em tempo real (PS, mana, buffs, itens, evolução) */
 function tipTick(ts){if(!TIPU||tipEl.style.display==='none')return;if(idleMenuBlocksArenaTips()||G.eventModal||document.getElementById('eventov')){hideTip();return}if(!TIPU||tipEl.style.display==='none'||ts-TIPT<110)return;TIPT=ts;try{const h=unitTip(TIPU);if(h!==TIPLAST){TIPLAST=h;dockTip(h)}}catch(e){}}
