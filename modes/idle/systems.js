@@ -79,7 +79,7 @@ function challengeResult(win,survivors=[]){const c=w.challenge;if(!c)return null
  if(c.kind==='rematch'){s.gold+=60;album('Revanche vencida: '+c.label)}
  save();return 'Desafio vencido: '+c.label+'. Recompensas adicionadas.';
 }
-function enemySpecs(fallback){const c=w.challenge;if(!c)return fallback.map((name,i)=>({name,r:fallback.length>3?1+Math.floor(i/3):2,c:fallback.length>3?1+(i%3)*2:2+i,star:1,scale:.8+s.area*.3+Math.min(s.wins,15)*.025+(w.branch==='risk'?.25:0)}));return c.names.map((name,i)=>({name,r:c.kind==='rematch'?1+(i%2):2,c:1+i,star:c.star||1,scale:c.scale||1.5,level:c.level||1,form:c.form||0}))}
+function enemySpecs(fallback){const c=w.challenge;if(!c)return fallback.map((name,i)=>({name,r:fallback.length>3?1+Math.floor(i/3):2,c:fallback.length>3?1+(i%3)*2:2+i,star:1,scale:.8+s.area*.3+Math.min(s.wins,15)*.025+(w.branch==='risk'?.25:0)}));return c.names.map((name,i)=>({name,r:c.kind==='rocket'?1+Math.floor(i/3):c.kind==='rematch'?1+(i%2):2,c:c.kind==='rocket'?1+(i%3)*2:1+i,star:c.star||1,scale:c.scale||1.5,level:c.level||1,form:c.form||0}))}
 function applyUnit(u,m){normalize(m);u._idleLevel=m.level;u._idleMember=m.id;u._idleShiny=!!m.shiny;u._idleBehavior=m.behavior;u._idleSkill=m.skill;
  const hp=(m.aptitude==='battle'?1.05:1)*(1+Math.min(.05,m.friendship/2000))*(w.challenge?.kind==='long'?1-w.fatigue:1);
  window.IDLE_INDIVIDUALS.apply(u,m);u.maxHp*=hp;u.hp=u.maxHp;u.atk*=m.energy<40?.95:1;window.IDLE_HOENN_RULES?.form(u,m,weather());
