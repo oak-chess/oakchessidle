@@ -31,3 +31,6 @@ scripts/check-vip-browser.cjs: menu real, categorias e recursos, 48 variantes, c
 
 ## Pacotes de compra única
 Iniciante: 10 créditos (1h de XP treinador, XP Pokémon e loot). Intermediário: 30 créditos (3h de cada XP e loot, 1h de Coins). Avançado: 96 créditos (6h dos seis boosts). Cada pacote só pode ser adquirido uma vez por jornada; o registro persiste no save. O tempo fica guardado para ativação manual.
+
+## Assinatura VIP e histórico
+Planos de 30/60/90 dias custam 10/17/25 créditos. Começam na compra, acumulam dias corridos e expiram mesmo offline. +50% XP treinador/Pokémon, sem somar com boosts de XP: aplica-se o maior fator. Auto-captura existente continua respeitando configurações, estoque e foco. Sem outfit exclusivo. A aba Histórico reúne as últimas 100 movimentações com data e saldo após as novas compras. Indicadores compactos abaixo do título da caçada mostram só VIP vigente e boosts ativados e não pausados.
