@@ -26,6 +26,6 @@ window.createIdlePreyUI=function(ctx){
   const activate=decorate(btn(confirm?'Confirmar':'Ativar Prey',()=>{const r=ctx.model.activate(slot,confirm);confirm=!!r.confirm;result(r)},'pr-activate'),'target');activate.dataset.confirm=String(confirm);activate.title=confirm?'Confirmar substituição do Prey atual':'Preparar para o próximo encontro';activate.disabled=!selected;foot.append(slots,renew,hunt,activate);shell.append(foot);
   const feedback=el('p',notice||'Caçadas normais • loot comum • uma renovação gratuita por dia','pr-notice');feedback.setAttribute('role','status');shell.append(feedback);
  }
- function mount(stage){root=el('section',undefined,'idle-window pr-window');root.id='idle-prey';root.hidden=true;root.setAttribute('role','dialog');root.setAttribute('aria-label','Prey · bônus de caçada');stage.append(root);indicator=el('div',undefined,'pr-hud');indicator.setAttribute('role','status');indicator.id='idle-prey-indicator';indicator.hidden=true;indicator.setAttribute('aria-label','Prey ativo');stage.append(indicator);document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!root.hidden)close()})}
+ function mount(stage){root=el('section',undefined,'idle-window pr-window');root.id='idle-prey';root.hidden=true;root.setAttribute('role','dialog');root.setAttribute('aria-label','Prey · bônus de caçada');stage.append(root);document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!root.hidden)close()})}
  return {mount,open,close,refresh:render};
 };
