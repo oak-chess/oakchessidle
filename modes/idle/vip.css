@@ -97,3 +97,5 @@ body.idle-native-mode #stage #idle-quick-supplies .is-supply-current{margin:3px 
 
 @media(max-height:800px){body.idle-native-mode #stage #idle-manual-capture .imc-list{max-height:88px}}
 @media(max-height:720px){body.idle-native-mode #stage #idle-manual-capture .imc-list{max-height:48px}}
+
+#idle-manual-capture>header.icp-move{cursor:grab;touch-action:none;user-select:none}#idle-manual-capture>header.icp-move::after{content:'⠿';float:right;color:#7fcadd}.icp-move:active{cursor:grabbing!important}body.idle-native-mode #stage .is-supply-hud>.icp-drag-handle{position:absolute;top:-13px;left:calc(50% - 18px);width:36px;height:15px;min-height:0;padding:0!important;border:1px solid #4fb4ce!important;border-radius:5px 5px 0 0;background:#092334!important;color:#a4efff!important;font:14px/12px system-ui!important;cursor:grab;touch-action:none;user-select:none;z-index:2}.icp-move:focus-visible{outline:2px solid #ffe09b;outline-offset:2px}
