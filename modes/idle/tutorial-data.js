@@ -14,7 +14,7 @@ window.IDLE_TUTORIAL_DATA=(()=>{
    step('Abra Caçadas, selecione uma área e confira seus níveis e habitantes. Para procurar uma espécie em outras regiões, digite o nome dela na busca.','hunts','.is-navigation [data-menu=hunts]'),
    step('Cada caçada tem dez ondas; três vitórias liberam a seguinte. As ondas sobem 5 níveis, exceto na região inicial. Recuar permite treinar antes de avançar. Configure a continuidade na Automação. Quando terminar o guia, use EXPLORAR para começar; o mesmo botão pausa a caçada.','expedition','#combatbtn')]),
   topic('capture','Configure as capturas',[
-   step('Escolha as bolas na Automação. Sem VIP, clique no Pokémon derrotado no painel inferior direito em até 2 minutos. Com VIP ativo, você pode ligar a captura automática. Sem a bola escolhida, nenhuma outra é consumida.','capture','.is-quick [aria-label=Automação]'),
+   step('Escolha as bolas na Automação. Sem VIP, clique no Pokémon derrotado no painel inferior direito em até 15 segundos. Com VIP ativo, você pode ligar a captura automática. Sem a bola escolhida, nenhuma outra é consumida.','capture','.is-quick [aria-label=Automação]'),
    step('Em Focar captura, escolha um habitante da caçada atual para economizar bolas. A opção de capturar também shiny de outras espécies é separada.','capture','.is-quick [aria-label=Automação]'),
    step('Escolha o destino dos repetidos. Trancar banco envia novas capturas ao PC; as regras de conversão em doces continuam valendo. Ative a proteção automática para boas capturas.','capture','.is-supply-hud')]),
   topic('recovery','Prepare a recuperação',[
