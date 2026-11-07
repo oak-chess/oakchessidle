@@ -135,3 +135,20 @@ body.idle-native-mode #stage #idle-world.tc-card .tc-regions button[data-region=
 body.idle-native-mode #stage #idle-world.tc-card .tc-member .tc-life{width:90%!important;max-width:none!important;min-width:0!important;align-self:center!important;margin:0 auto!important;padding:0!important;box-sizing:border-box!important;display:grid!important;grid-template-columns:1.35cqw minmax(0,1fr)!important;gap:.3cqw!important;align-items:center!important;text-align:left!important;transform:none!important}
 body.idle-native-mode #stage #idle-world.tc-card .tc-member .tc-life>span{position:static!important;display:block!important;margin:0!important;padding:0!important;width:auto!important;text-align:left!important;line-height:1!important}
 body.idle-native-mode #stage #idle-world.tc-card .tc-member .tc-life>.tc-track{position:static!important;margin:0!important;width:100%!important;max-width:none!important;min-width:0!important;box-sizing:border-box!important;transform:none!important}
+#idle-world.tc-card .tc-trainer>.trainer-avatar{width:100%;height:100%;object-fit:cover;image-rendering:auto;display:block}
+#idle-world.tc-card .tc-trainer>.trainer-avatar-pixel{object-fit:contain;image-rendering:pixelated}
+#idle-world.tc-card .iw-profile-editor-columns{display:block!important}
+#idle-world.tc-card .trainer-avatar-picker{width:100%;min-width:0}
+#idle-world.tc-card .trainer-avatar-picker>p{font:12px/1.4 Arial;color:#bcd9e5;margin:5px 0 10px}
+#idle-world.tc-card .trainer-avatar-controls{display:grid;grid-template-columns:minmax(0,1fr) 150px;gap:8px;margin:8px 0}
+#idle-world.tc-card .trainer-avatar-controls input,#idle-world.tc-card .trainer-avatar-controls select{min-width:0;width:100%;padding:8px;background:#0b2637;color:#effaff;border:1px solid #478a9e;border-radius:6px}
+#idle-world.tc-card .trainer-avatar-grid{display:grid!important;grid-template-columns:repeat(6,minmax(0,1fr))!important;gap:8px!important;width:100%;margin:10px 0}
+body.idle-native-mode #stage #idle-world.tc-card .tc-overlay .trainer-avatar-choice{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;min-width:0;min-height:110px!important;padding:6px!important;background:#102e40!important;border:1px solid #38768b!important;border-radius:8px!important;overflow:hidden}
+body.idle-native-mode #stage #idle-world.tc-card .tc-overlay .trainer-avatar-choice[aria-pressed=true]{border-color:#8afff1!important;background:#155164!important;box-shadow:inset 0 0 0 1px #79f1e2!important}
+#idle-world.tc-card .trainer-avatar-choice .trainer-avatar{width:100%;height:72px;object-fit:cover;display:block;border-radius:5px}
+#idle-world.tc-card .trainer-avatar-choice .trainer-avatar-pixel{object-fit:contain;image-rendering:pixelated}
+#idle-world.tc-card .trainer-avatar-choice b{font:12px/1.2 Arial;text-align:center;white-space:nowrap;max-width:100%;overflow:hidden;text-overflow:ellipsis}
+#idle-world.tc-card .trainer-avatar-choice small{font:10px Arial;color:#91e5ec}
+#idle-world.tc-card .trainer-avatar-pages{display:flex;align-items:center;justify-content:center;gap:12px;margin:10px 0 18px}
+#idle-arena-preview .ap-row .trainer-avatar{object-fit:cover}
+@media(max-width:900px){#idle-world.tc-card .trainer-avatar-grid{grid-template-columns:repeat(4,minmax(0,1fr))!important}}

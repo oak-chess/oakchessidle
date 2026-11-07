@@ -27,4 +27,19 @@ body.idle-native-mode #stage #idle-modes .im-back[hidden]{display:none!important
 #idle-modes .im-card .im-status{top:83%;height:10%;z-index:2;font:1.05cqw/1.3 Arial!important;padding:0 5px;box-sizing:border-box;pointer-events:none;background:none}
 body.idle-native-mode #stage #idle-modes .im-card .im-enter{inset:0!important;top:0!important;width:100%!important;height:100%!important;z-index:3;background:transparent!important;border:0!important;box-shadow:none!important;border-radius:12px!important;font-size:0!important;text-shadow:none!important;color:transparent!important;transform:none!important}
 body.idle-native-mode #stage #idle-modes .im-card .im-enter:not(:disabled):hover{background:linear-gradient(#ffffff0a,#ffffff04)!important;box-shadow:inset 0 0 0 2px var(--mode-glow),0 0 14px var(--mode-glow)!important;filter:none}
-body.idle-native-mode #stage #idle-modes .im-card .im-enter:focus-visible{outline:3px solid #a5ffff!important;outline-offset:-4px}
+body.idle-native-mode #stage #idle-modes .im-card .im-enter:focus-visible{outline:3px solid #a5ffff!important;outline-offset:-4px}/* The fifth mode sits in the same horizontal, draggable card rail. */
+#idle-modes .im-carousel{position:absolute;left:3%;top:15%;width:94.4%;height:77%;display:flex;gap:.65cqw;overflow-x:auto;overflow-y:hidden;scrollbar-width:none;touch-action:pan-y;cursor:grab;user-select:none;background:#101b22;overscroll-behavior-x:contain;scroll-snap-type:x proximity}
+#idle-modes .im-carousel::-webkit-scrollbar{display:none}
+#idle-modes .im-carousel[hidden]{display:none!important}
+#idle-modes .im-carousel.im-dragging{cursor:grabbing;scroll-snap-type:none}
+#idle-modes[data-view=main] .im-carousel .im-card{position:relative!important;left:auto!important;top:auto!important;width:calc((100% - 1.95cqw)/4)!important;min-width:calc((100% - 1.95cqw)/4);height:100%;flex:none;pointer-events:auto;scroll-snap-align:start;background-image:url('assets/modes/panel-v1.png');background-size:427.35% 129.87%;background-position:var(--card-crop) 65.217%;background-repeat:no-repeat;border-radius:10px;overflow:hidden}
+#idle-modes .im-carousel .im-card .im-enter{cursor:inherit!important}
+#idle-modes .im-carousel .im-arena{--mode-glow:#ffe17a;background-image:url('arena-pvp/mode-card-v1.webp')!important;background-size:100% 100%!important;background-position:center!important}
+#idle-modes .im-carousel .im-arena:after{top:82%}
+#idle-modes .im-carousel .im-arena .im-status{top:84%;height:10%}
+/* Arena title and status share the Tower's exact vertical anchors. */
+#idle-modes[data-view=main] .im-carousel .im-arena:before{content:'';position:absolute;left:4%;right:4%;top:61%;bottom:4%;background:linear-gradient(#081b32,#091624);pointer-events:none}
+#idle-modes[data-view=main] .im-carousel .im-arena h3.im-sr{position:absolute;left:3%;top:69.5%;width:94%;height:9%;margin:0;clip-path:none;overflow:hidden;display:block;z-index:2;font-size:0;color:transparent;background:url('arena-pvp/mode-card-v1.webp') center 72.4%/100% 769.23% no-repeat;pointer-events:none}
+#idle-modes[data-view=main] .im-carousel .im-arena:after{top:80%;bottom:3.5%}
+#idle-modes[data-view=main] .im-carousel .im-arena .im-status{top:83%;height:10%}
+#idle-modes[data-view=main] .im-carousel .im-arena:before{left:4%;right:4%;top:1%;bottom:auto;height:68.5%;background:url('arena-pvp/mode-card-v1.webp') center top/108% 164% no-repeat}

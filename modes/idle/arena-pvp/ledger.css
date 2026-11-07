@@ -1,0 +1,64 @@
+/* Coordinates follow the approved 1536 × 1024 artwork; no scenery behind the frame. */
+body.idle-native-mode #stage #idle-arena-preview[data-ledger]{background:none!important;clip-path:none!important}
+#idle-arena-preview[data-ledger] > :not(.ap-art-ledger){visibility:hidden;pointer-events:none}
+body.idle-native-mode #stage #idle-arena-preview .ap-art-ledger{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;padding:0!important;margin:0!important;border:0!important;border-radius:0!important;box-shadow:none!important;display:block!important;overflow:visible;background:transparent center/100% 100% no-repeat!important;color:#f5f9ff;text-align:center;font-family:Arial,sans-serif;z-index:20;isolation:isolate}
+body.idle-native-mode #stage #idle-arena-preview .al-history{background-image:url('history-panel-v1.webp')!important}
+body.idle-native-mode #stage #idle-arena-preview .al-rewards{background-image:url('rewards-panel-v1.webp')!important}
+#idle-arena-preview .ap-art-ledger .al-close{position:absolute;left:89.2%;top:8.5%;width:6.2%;height:8%}
+#idle-arena-preview .ap-art-ledger button:focus-visible{outline:2px solid #f7d679!important;outline-offset:0}
+#idle-arena-preview .ap-art-ledger button:hover:not(:disabled){filter:brightness(1.18)}
+#idle-arena-preview .ap-art-ledger button:disabled{cursor:default;opacity:.55}
+#idle-arena-preview .al-summary{position:absolute;top:25.6%;height:6.2%;display:flex;align-items:center;justify-content:center;font-size:3cqw;font-weight:800;white-space:nowrap;text-shadow:0 2px 3px #000}
+#idle-arena-preview .al-wins{left:18.3%;width:16.6%}#idle-arena-preview .al-losses{left:45.5%;width:17%}#idle-arena-preview .al-points{left:72.7%;width:17.8%}
+#idle-arena-preview .al-history-tabs{position:absolute;left:26.4%;top:34.9%;width:47.8%;height:6.6%;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.3cqw;background:#0a1924}
+body.idle-native-mode #stage #idle-arena-preview .al-filter{background:linear-gradient(#526373,#233646 50%,#122332)!important;border:2px solid #a0b4c3!important;box-shadow:inset 0 0 0 2px #17222c,0 0 4px #000!important;clip-path:polygon(8% 0,92% 0,100% 27%,100% 73%,92% 100%,8% 100%,0 73%,0 27%);font-weight:800;font-size:2.1cqw;text-shadow:0 2px 2px #000}
+body.idle-native-mode #stage #idle-arena-preview .al-filter[aria-pressed=true]{background:linear-gradient(#14778f,#16bfd8 50%,#075369)!important;border-color:#74f3ff!important;box-shadow:inset 0 0 6px #9bffff!important}
+#idle-arena-preview .al-records{position:absolute;left:6.9%;top:48.3%;width:84.4%;height:33%;display:grid;grid-template-rows:repeat(4,minmax(0,1fr));overflow:hidden}
+#idle-arena-preview .al-record{display:grid;grid-template-columns:27.5% 18% 14.3% 19.4% 20.8%;align-items:center;min-height:0;min-width:0}
+#idle-arena-preview .al-record>*{min-width:0;max-width:100%;margin:0}
+#idle-arena-preview .al-record-who{display:flex;gap:1.2cqw;align-items:center;height:95%;padding-right:.5cqw;text-align:left}
+#idle-arena-preview .al-portrait{display:block;width:8.1cqw;height:5.1cqw;object-fit:contain;background:linear-gradient(130deg,#155172,#0b2235);border:1px solid #8de4fb;clip-path:polygon(12% 0,88% 0,100% 20%,100% 80%,88% 100%,12% 100%,0 80%,0 20%);flex:none}
+#idle-arena-preview .al-record-who b{font-size:1.9cqw;line-height:1.05;overflow-wrap:anywhere;text-shadow:0 2px 2px #000}
+#idle-arena-preview .al-result{display:flex;align-items:center;justify-content:center;width:90%;height:58%;font-size:1.8cqw;font-weight:800;text-shadow:0 2px 2px #000;clip-path:polygon(8% 0,92% 0,100% 22%,100% 78%,92% 100%,8% 100%,0 78%,0 22%)}
+#idle-arena-preview .al-result.is-win{background:linear-gradient(#4da91c,#067402 50%,#163d05);box-shadow:inset 0 0 0 2px #a6ec57}
+#idle-arena-preview .al-result.is-loss{background:linear-gradient(#d74250,#aa071c 50%,#4f0810);box-shadow:inset 0 0 0 2px #ff8998}
+#idle-arena-preview .al-delta{font-size:2.5cqw;text-shadow:0 2px 2px #000}#idle-arena-preview .al-delta.is-win{color:#60ff57}#idle-arena-preview .al-delta.is-loss{color:#ff6b7b}
+#idle-arena-preview .al-position,#idle-arena-preview .al-date{font-size:1.75cqw;font-weight:700;white-space:nowrap}
+#idle-arena-preview .al-empty{position:absolute;inset:0;display:grid;place-items:center;margin:0;color:#abc6d4;font-size:1.6cqw;background:#081c2be8}
+#idle-arena-preview .ap-art-ledger .al-pagination{position:absolute;display:flex;align-items:center;justify-content:center;font-size:2.2cqw;font-weight:800;text-shadow:0 2px 2px #000}
+#idle-arena-preview .al-history .al-prev{position:absolute;left:36.1%;top:87.6%;width:7.6%;height:6%}
+#idle-arena-preview .al-history .al-next{position:absolute;left:56.6%;top:87.6%;width:7.6%;height:6%}
+#idle-arena-preview .al-history .al-pagination{left:44.4%;top:87.8%;width:11.2%;height:5.4%}
+#idle-arena-preview .al-rewards .al-prev{position:absolute;left:65%;top:84.8%;width:5.8%;height:5.7%}
+#idle-arena-preview .al-rewards .al-next{position:absolute;left:83.4%;top:84.8%;width:5.8%;height:5.7%}
+#idle-arena-preview .al-rewards .al-pagination{left:71.3%;top:85%;width:11.4%;height:5.1%}
+#idle-arena-preview .al-reward-wins{position:absolute;left:20%;top:24.9%;width:16.5%;height:5.2%;display:grid;place-items:center;font-size:2.4cqw;font-weight:800;color:#fff1b0;white-space:nowrap}
+#idle-arena-preview .al-next-milestone{position:absolute;left:38%;top:23.3%;width:41%;height:3.4%;display:grid;place-items:center;font-size:1.9cqw;font-weight:700}
+#idle-arena-preview .al-missing{position:absolute;left:81.5%;top:24%;width:10.7%;height:6%;display:grid;place-items:center;font-size:1.8cqw;font-weight:700;line-height:1.2}
+#idle-arena-preview .al-progress{position:absolute;left:39.1%;top:27.8%;width:39.8%;height:2.6%;overflow:hidden;border-radius:30px}
+#idle-arena-preview .al-progress i{display:block;height:100%;border-radius:30px;background:linear-gradient(#fff7ad,#ffdb51 40%,#e9a913 70%,#fcda62);box-shadow:inset 0 0 0 1px #ffedb5}
+#idle-arena-preview .al-progress b{position:absolute;inset:0;display:grid;place-items:center;color:#fff4b7;text-shadow:0 1px 3px #000;font-size:1.6cqw;line-height:1}
+#idle-arena-preview .al-reward-row{position:absolute;left:6.9%;width:86.2%}
+#idle-arena-preview .al-reward-row.is-ready{outline:2px solid #ffe273;border-radius:1.2cqw;box-shadow:inset 0 0 8px #dfbe3455,0 0 5px #ffdd6a}
+#idle-arena-preview .al-milestone{position:absolute;left:7.8%;top:0;width:18.5%;height:100%;display:grid;place-items:center;font-size:2.35cqw;font-weight:800;white-space:nowrap;text-shadow:0 2px 2px #000}
+body.idle-native-mode #stage #idle-arena-preview .al-claim{position:absolute;left:72.8%;top:15%;width:23.5%;height:72%;background:transparent center/100% 100% no-repeat!important;white-space:nowrap;border:0!important}
+body.idle-native-mode #stage #idle-arena-preview .al-claim.is-ready{background-image:url('button-gold-v1.webp')!important}
+body.idle-native-mode #stage #idle-arena-preview .al-claim.is-claimed{background-image:url('button-claimed-v1.webp')!important;opacity:1}
+body.idle-native-mode #stage #idle-arena-preview .al-claim.is-locked{background-image:url('button-locked-v1.webp')!important;opacity:1}
+#idle-arena-preview .al-locked-label{position:absolute;left:30%;top:17%;width:58%;height:67%;display:grid;place-items:center;font-size:1.65cqw;font-weight:700;background:linear-gradient(#36617c,#2d5773 45%,#25475c);text-shadow:0 2px 1px #10222e;border-radius:2px}
+@media(prefers-reduced-motion:no-preference){#idle-arena-preview .al-claim{transition:filter .15s,transform .15s}#idle-arena-preview .al-claim:active:not(:disabled){transform:scale(.97)}}
+/* Use the approved button artwork itself, rather than an approximation. */
+#idle-arena-preview .al-summary{font-size:2.65cqw}
+#idle-arena-preview .al-reward-wins{font-size:2.15cqw}
+body.idle-native-mode #stage #idle-arena-preview .al-filter{background:transparent center/100% 100% no-repeat!important;border:0!important;box-shadow:none!important;clip-path:none;font-size:0}
+body.idle-native-mode #stage #idle-arena-preview .al-filter-all{background-image:url('filter-all-v1.webp')!important}
+body.idle-native-mode #stage #idle-arena-preview .al-filter-win{background-image:url('filter-win-v1.webp')!important}
+body.idle-native-mode #stage #idle-arena-preview .al-filter-loss{background-image:url('filter-loss-v1.webp')!important}
+#idle-arena-preview .al-filter-all[aria-pressed=false]{filter:grayscale(1) brightness(.8)}
+#idle-arena-preview .al-filter:not(.al-filter-all)[aria-pressed=true]{filter:drop-shadow(0 0 .35cqw #3aeaff) brightness(1.3)}
+#idle-arena-preview .al-result{background:transparent center/100% 100% no-repeat!important;box-shadow:none!important;clip-path:none;font-size:0}
+#idle-arena-preview .al-result.is-win{background-image:url('result-win-v1.webp')!important}
+#idle-arena-preview .al-result.is-loss{background-image:url('result-loss-v1.webp')!important}
+body.idle-native-mode #stage #idle-arena-preview .al-filter-all[aria-pressed]{background:transparent url('filter-all-v1.webp') center/100% 100% no-repeat!important}
+body.idle-native-mode #stage #idle-arena-preview .al-filter-win[aria-pressed]{background:transparent url('filter-win-v1.webp') center/100% 100% no-repeat!important}
+body.idle-native-mode #stage #idle-arena-preview .al-filter-loss[aria-pressed]{background:transparent url('filter-loss-v1.webp') center/100% 100% no-repeat!important}
