@@ -11,6 +11,17 @@ window.IDLE_VIP=(()=>{
  const number=n=>Number.isFinite(Number(n))?Math.max(0,Math.floor(Number(n))):0;
  function data(s){const v=s.vip||(s.vip={});if(ready.has(v))return v;v.version=1;v.credits=number(v.credits);for(const k of ['bank','remaining','paused','owned','selected'])v[k]||(v[k]={});v.history=Array.isArray(v.history)?v.history.slice(0,100):[];for(const k in catalog){v.bank[k]=Math.min(limit,number(v.bank[k]));v.remaining[k]=Math.min(limit,Math.max(0,Number(v.remaining[k])||0))}ready.add(v);return v}
  function record(s,text){data(s).history.unshift({text,at:Date.now(),credits:data(s).credits});s.vip.history.length=Math.min(100,s.vip.history.length)}
+ function welcome(s,isNewJourney){
+  if(isNewJourney!==true||s.welcomeGift?.version)return false;
+  const now=Date.now(),v=data(s);s.hunts||(s.hunts={});s.hunts.supplies||(s.hunts.supplies={});s.ballStock||(s.ballStock={});
+  s.hunts.supplies.revives=number(s.hunts.supplies.revives)+300;
+  s.hunts.supplies.potions=number(s.hunts.supplies.potions)+300;
+  s.ballStock.ultra=number(s.ballStock.ultra)+300;
+  if(!(v.vipUntil>now))v.vipSince=now;
+  v.vipUntil=Math.max(now,Number(v.vipUntil)||0)+3*86400000;
+  s.welcomeGift={version:1,at:now};
+  record(s,'Presente de boas-vindas: 3 dias de VIP, 300 Revives, 300 Ultra Balls e 300 Poções.');return true;
+ }
  function bind(s,running){data(s);runtimes.set(s,{running,last:Date.now()})}
  function sync(s){const v=data(s),rt=runtimes.get(s);if(!rt)return v;const now=Date.now(),dt=Math.max(0,(now-rt.last)/1000);rt.last=now;if(rt.running())for(const k in catalog)if(!v.paused[k])v.remaining[k]=Math.max(0,v.remaining[k]-dt);return v}
  function membership(s){return Math.max(0,(Number(data(s).vipUntil)||0)-Date.now())/1000} function factor(s,key){const v=sync(s),boost=v.remaining[key]>0&&!v.paused[key]?catalog[key]?.factor||1:1;return Math.max(boost,(key==='trainer'||key==='pokemon')&&membership(s)>0?1.5:1)}
@@ -27,5 +38,5 @@ window.IDLE_VIP=(()=>{
  function utility(s,key){const offers={balls:{price:2},revives:{price:2},potions:{price:2}},v=data(s);if(!offers[key]||v.credits<2)return {ok:false,reason:'Créditos VIP insuficientes.'};v.credits-=2;if(key==='balls')s.balls=(s.balls||0)+100;else {s.hunts.supplies[key]=(s.hunts.supplies[key]||0)+100}record(s,'Suprimentos: '+key+' ×100');return {ok:true}}
  function equip(s,key){const v=data(s);if(!v.owned[key])return false;if(outfits[key]){s.idleProfile||(s.idleProfile={});s.idleProfile.trainer=key;dispatchEvent(new CustomEvent('idle-profile-change'))}else v.selected[key]=!v.selected[key];appearance(s);return true}
  function appearance(s){const v=data(s);document.body.classList.toggle('vip-outfit',!!outfits[s.idleProfile?.trainer]&&!!v.owned[s.idleProfile?.trainer]);document.body.classList.toggle('vip-prisma',!!v.selected.prisma);document.body.classList.toggle('vip-frame',!!v.selected.frame);document.body.classList.toggle('vip-rocket',!!v.selected.rocket)}
- return {offlineInfo,plans,buyPlan,membership,catalog,duration,labels,cosmetics,outfits,rate,data,bind,sync,factor,convert,buy,activate,pause,purchase,bundles,bundle,utility,equip,appearance};
+ return {welcome,offlineInfo,plans,buyPlan,membership,catalog,duration,labels,cosmetics,outfits,rate,data,bind,sync,factor,convert,buy,activate,pause,purchase,bundles,bundle,utility,equip,appearance};
 })();

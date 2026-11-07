@@ -61,7 +61,7 @@ window.IDLE_TUTORIAL_DATA=(()=>{
    step('No Centro, escolha uma região liberada e a quantidade de ovos. Cada tentativa custa '+window.IDLE_GACHA_DATA.price.toLocaleString('pt-BR')+' Coins; 5x e 10x fazem sorteios independentes. Consulte as chances antes de comprar.','gacha','.is-navigation [data-menu=center]'),
    step('Ovos P1–P5 ficam numa reserva própria, sem limite e sem garantia por tentativas. Lendário P5 é qualidade, não espécie lendária. Ao chocar, todos os Pokémon do Gachapon nascem no nível 1.','gacha','.is-navigation [data-menu=center]')]),
   topic('safari','Explore o Safari',[
-   step('O Safari fica no menu Modos e é liberado pela insígnia Arco-íris de Erika. A expedição tem Safari Balls e passos próprios; não há batalha, e sua caçada pode continuar em paralelo.','safari','.is-navigation [data-menu=modes]'),
+   step('O Safari fica no menu Modos e é liberado pela insígnia Arco-íris de Erika. A entrada usa Safari Tickets: 60 minutos por ticket. Primeiro é sorteada a arena e depois os Pokémon. Derrote selvagens de nível 1 e capture com suas bolas; não ganha XP, Coins ou loot.','safari','.is-navigation [data-menu=modes]'),
    step('Escolha um setor e explore. Em cada encontro, decida entre bola, alimento, aproximação ou seguir adiante. A automação para ao fechar o painel ou ocultar a aba; as capturas vão ao PC.','safari','.is-navigation [data-menu=hunts]')]),
   topic('village','Visite a Vila',[
    step('Abra Vila na barra inferior. Seu Elias cuida da pesca e Dona Rosa das casas. Conheça os dois moradores para receber sua primeira propriedade.','village','#rv-village-launch'),
