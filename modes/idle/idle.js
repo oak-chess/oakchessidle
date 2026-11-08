@@ -22,7 +22,7 @@ const $id=id=>document.getElementById(id);
 function message(text){$id('eventStatus').textContent=text;screenUI?.setNotice(text)}
 window.IDLE_HOENN_FORM_CHANGE=u=>{if(u.el){u.el.dataset.idleForm=String(u.idleForm||0);pmdApply(u.el,u.line,u.star)}};window.IDLE_REFRESH_FORMS=()=>{for(const u of nativeUnits){const m=state.team.find(m=>m.id===u._idleId),id=LINES[u.line].ids[u.star-1];if(m&&u.el&&[351,386].includes(id)){u.el.dataset.idleForm=String(id===351?window.IDLE_HOENN_RULES.weatherForm(systems.weather()):m.form||0);pmdApply(u.el,u.line,u.star)}}};
 window.IDLE_ROCKET_ARENA=()=>systems?.challenge()?.kind==='rocket';
-window.IDLE_TOOLTIP={member:x=>state.team.find(m=>m.id===(x._idleMember||x._idleId)),preview:(u,m)=>systems?.applyUnit(u,m)};
+window.IDLE_TOOLTIP={member:x=>state.team.find(m=>m.id===(x._idleMember||x._idleId)),preview:(u,m)=>{systems?.applyUnit(u,m);megaSystem?.apply(u,megaSystem.selected(m))}};
 function capturePositions(){if(G.phase!=='plan')return;nativeUnits.forEach(u=>{const member=state.team.find(m=>m.id===u._idleId);if(member&&u.pos){member.pos={...u.pos};member.items=u.items.slice()}})}
 function captureCombatCarry(){if(!ready||!huntCombatCarry||G.phase!=='combat')return;for(const u of B.units){if(u.side!==0)continue;const m=state.team.find(m=>m.id===u._idleMember);if(m)window.IDLE_COMBAT_CONTINUITY.capture(m,u,manaCapacity(u),B.t)}}
 function save(options={}){safariRuntime?.checkpoint();activityLog?.checkpoint();captureCombatCarry();if(ready){state.huntRunning=running&&!systems?.challenge();if(options.capture!==false)capturePositions();state.items=G.items.slice()}window.IDLE_HUNT_LOCATION?.remember(state);state.last=Date.now();localStorage.setItem(KEY,JSON.stringify(state))}

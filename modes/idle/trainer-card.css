@@ -28,7 +28,7 @@ body.idle-native-mode #stage #idle-world[data-family=profile].tc-card button:hov
 #idle-world[data-family=profile].tc-card .tc-vip span{font-size:1.2cqw}
 #idle-world[data-family=profile].tc-card .tc-vip[data-active=false] img{filter:grayscale(.9);opacity:.6}
 #idle-world[data-family=profile].tc-card .tc-partner{left:74.5%;top:12.6%;width:21%;height:14%;display:flex;align-items:center;flex-direction:column;justify-content:center;background:radial-gradient(ellipse,#7047a244,transparent 75%)}
-#idle-world[data-family=profile].tc-card .tc-partner canvas{height:76%;width:75%;object-fit:contain}
+#idle-world[data-family=profile].tc-card .tc-partner .tc-sprite{height:76%;width:75%;object-fit:contain}
 #idle-world[data-family=profile].tc-card .tc-partner b{font-size:1.25cqw;color:#fff0a4;max-width:100%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 #idle-world[data-family=profile].tc-card .tc-sprite{image-rendering:pixelated;object-fit:contain;filter:drop-shadow(0 3px 1px #0008)}
 #idle-world[data-family=profile].tc-card .tc-nav{position:absolute;left:4%;right:3.5%;top:28.2%;height:4.4%;display:grid;grid-template-columns:repeat(5,1fr);gap:1.2%;z-index:3}
@@ -37,7 +37,7 @@ body.idle-native-mode #stage #idle-world[data-family=profile].tc-card .tc-nav bu
 #idle-world[data-family=profile].tc-card .tc-power{left:81%;top:34.4%;width:14%;height:3%;text-align:right;font:bold 2.2cqw/1 Arial;color:#ffe271;white-space:nowrap}
 #idle-world[data-family=profile].tc-card .tc-team{left:4%;right:3.7%;top:39%;height:19.8%;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:.8%}
 body.idle-native-mode #stage #idle-world[data-family=profile].tc-card .tc-member{min-width:0;display:flex;flex-direction:column;align-items:center;gap:3px;text-align:center;padding:3px 5px!important;overflow:hidden;font-size:1cqw}
-#idle-world[data-family=profile].tc-card .tc-member canvas{width:80%;height:48%;flex:none}
+#idle-world[data-family=profile].tc-card .tc-member .tc-sprite{width:80%;height:48%;flex:none}
 #idle-world[data-family=profile].tc-card .tc-member b{font-size:1.25cqw;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 #idle-world[data-family=profile].tc-card .tc-member strong{font-size:1.15cqw;color:#ffe675}
 #idle-world[data-family=profile].tc-card .tc-member small{font-size:.91cqw;color:#ffe99c;white-space:nowrap}
@@ -67,7 +67,7 @@ body.idle-native-mode #stage #idle-world[data-family=profile].tc-card .tc-achiev
 #idle-world[data-family=profile].tc-card .tc-overlay{position:absolute;left:3.8%;right:3.5%;top:34%;bottom:6.2%;padding:12px;overflow:auto;background:#061d2bf7;border:1px solid #61e4f4;z-index:2;font:13px Arial;scrollbar-width:thin;scrollbar-color:#4fbbd1 #102231}
 #idle-world[data-family=profile].tc-card .tc-overlay[hidden]{display:none!important}
 #idle-world[data-family=profile].tc-card .tc-team-detail,#idle-world[data-family=profile].tc-card .tc-goal{border:1px solid #4d9bb1;background:#112e3c;padding:9px;margin:8px 0;border-radius:5px}
-#idle-world[data-family=profile].tc-card .tc-team-detail canvas{width:65px;height:65px;float:left;margin-right:10px}
+#idle-world[data-family=profile].tc-card .tc-team-detail .tc-sprite{width:65px;height:65px;float:left;margin-right:10px}
 #idle-world[data-family=profile].tc-card .tc-team-detail{min-height:70px}
 #idle-world[data-family=profile].tc-card .tc-team-detail p{margin-top:7px}
 #idle-world[data-family=profile].tc-card .tc-goal{display:flex;justify-content:space-between;gap:10px}

@@ -1,0 +1,5 @@
+/* The same PMD portraits fit existing image slots without changing panel geometry. */
+#tip .um canvas[data-pmd-portrait]{width:100%;height:100%;object-fit:contain;image-rendering:pixelated}
+#idle-world .iw-profile-partner-selected canvas[data-pmd-portrait],#idle-world .iw-profile-partner-options canvas[data-pmd-portrait]{width:48px;height:48px;object-fit:contain;flex:none;image-rendering:pixelated}
+#idle-world .iw-profile-partner canvas[data-pmd-portrait]{width:64px;height:64px;object-fit:contain;image-rendering:pixelated}
+#idle-world .iw-task-partners canvas[data-pmd-portrait],#idle-world .iw-task-worker canvas[data-pmd-portrait],#idle-world .iw-formation-member canvas[data-pmd-portrait]{width:42px;height:42px;object-fit:contain;flex:none;image-rendering:pixelated}
