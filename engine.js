@@ -3359,8 +3359,8 @@ function applyStatus(e,st,d,src,v){
    case'stun':e.stun=Math.max(e.stun,d||1);e.frozen=false;break;
    case'freeze':e.stun=Math.max(e.stun,d||1.2);e.frozen=true;break;
    case'slow':e.slow=Math.max(e.slow,d||3);break;
-   case'burn':e.burn={t:d||4,v:v||.03};break;
-   case'poison':e.pois={t:d||4,v:.02};e.shred=Math.max(e.shred,.25);e.shredT=d||4;break}}
+   case'burn':e.burn={t:d||4,v:v||.03,bossPressure:window.OAK_IDLE_MODE&&window.IDLE_BOSS_PRESSURE?IDLE_BOSS_PRESSURE.multiplier(src,e):1};break;
+   case'poison':e.pois={t:d||4,v:.02,bossPressure:window.OAK_IDLE_MODE&&window.IDLE_BOSS_PRESSURE?IDLE_BOSS_PRESSURE.multiplier(src,e):1};e.shred=Math.max(e.shred,.25);e.shredT=d||4;break}}
 const FIELD_REACTIONS={
   'electric+water':{kind:'charged',visual:'electric',fx:'whirl'},
   'fire+water':{kind:'steam',visual:'water',fx:'fog'},
@@ -3422,6 +3422,7 @@ function hurt(src,t,raw,kind,o){
   if(window.OAK_IDLE_MODE){if(src?.side===0&&t.side===1&&t._idlePreyBonus?.kind==='damage')d*=1+t._idlePreyBonus.percent/100;else if(src?.side===1&&t.side===0&&src._idlePreyBonus?.kind==='defense')d*=1-src._idlePreyBonus.percent/100;}
   if(src&&src.bossCap&&!o.dot)d=Math.min(d,t.maxHp*src.bossCap); /* boss nunca tira mais que X% do PS máx num golpe só */
   if(tactical&&!o.basic&&!o.dot&&kind!=='true'&&o.type)idleEffectivenessNotice(t,tactical.effectiveness(o.type,t.types));
+  if(window.OAK_IDLE_MODE&&window.IDLE_BOSS_PRESSURE)d*=IDLE_BOSS_PRESSURE.multiplier(src,t);
   const full=d;let absorbed=0;if(t.shield>0){const a=Math.min(t.shield,d);t.shield-=a;d-=a;absorbed=a;t._shieldAbsorbed=(t._shieldAbsorbed||0)+a}
   const effective=Math.min(Math.max(0,t.hp),d)+absorbed;t._reportTaken=(t._reportTaken||0)+effective;if(src&&src!==t)src._reportDamage=(src._reportDamage||0)+effective;
   t.hp-=d;t._taken=(t._taken||0)+full;if(src&&src!==t)src._dealt=(src._dealt||0)+full;
@@ -3764,7 +3765,7 @@ function tickUnit(u,dt){
   if(u.regen)healUnit(u,u.maxHp*u.regen*dt,true);if(u.L.passive.id==='overgrow'&&u.hp/u.maxHp<.5)healUnit(u,u.maxHp*.012*dt,true);if(u.L.passive.id==='deeprest'&&u.stun>0)healUnit(u,u.maxHp*.015*dt,true);
   if(u.manaRegen)u.mana=Math.min(manaCapacity(u),u.mana+u.manaRegen*dt);
   if(u.burn||u.pois){u.dotAcc+=dt;
-    if(u.dotAcc>=.5){u.dotAcc-=.5;let d=0;if(u.burn){d+=u.maxHp*u.burn.v*.5;u.burn.t-=.5;if(u.burn.t<=0)u.burn=null}if(u.pois){d+=u.maxHp*u.pois.v*.5;u.pois.t-=.5;if(u.pois.t<=0)u.pois=null}
+    if(u.dotAcc>=.5){u.dotAcc-=.5;let d=0;if(u.burn){d+=u.maxHp*u.burn.v*.5*(u.burn.bossPressure||1);u.burn.t-=.5;if(u.burn.t<=0)u.burn=null}if(u.pois){d+=u.maxHp*u.pois.v*.5*(u.pois.bossPressure||1);u.pois.t-=.5;if(u.pois.t<=0)u.pois=null}
       if(d>0)hurt(null,u,d,'true',{dot:true})}}
   u.fxAcc-=dt;if(u.fxAcc<=0){u.fxAcc=.14;if(u.stun>0)FX.statusTick(u,u.frozen?'frozen':'stun');if(u.burn)FX.statusTick(u,'burn');if(u.buffT>0)FX.statusTick(u,'buff');if(u.pois)FX.statusTick(u,'pois')}
    if(!u.alive||u.stun>0)return;
