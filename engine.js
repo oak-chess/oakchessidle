@@ -2882,7 +2882,7 @@ addEventListener('pointerup',e=>{
   if(!was)return;
   u.el.classList.remove('drag');unitsL.appendChild(u.el);document.body.classList.remove('dragging');dragOn=false;hlHex=null;setSwapTarget(null);{const sb=$('#sellbar');if(sb)sb.classList.remove('hot')}
   const p=toWorld(e);
-  if(p.y>672||e.target.closest?.('.is-navigation,.is-quick,.is-supply-hud,.idle-window')||document.elementFromPoint(e.clientX,e.clientY)?.closest('.is-navigation,.is-quick,.is-supply-hud,.idle-window')){layoutAll();drawGrid();return}
+  if(p.y>672||e.target.closest?.('.is-navigation,.is-quick,.is-supply-hud,.idle-window,.idle-forge')||document.elementFromPoint(e.clientX,e.clientY)?.closest('.is-navigation,.is-quick,.is-supply-hud,.idle-window,.idle-forge')){layoutAll();drawGrid();return}
   else{const bi=benchAt(p.x,p.y);
     if(bi>=0){moveToBench(u,bi);SND.click()}
     else{const h=hexAt(p.x,p.y);if(h&&h.r>=4&&G.phase!=='combat'){if(moveToBoard(u,h.r,h.c)){const hp=hexXY(h.r,h.c);FX.ring(hp.x,hp.y+14,'#ffffff',8,40,.35,2);FX.burst(hp.x,hp.y+14,7,{sp:[30,90],ang:[-3.14,0],life:[.3,.5],s:[3,6],c:'#e8ffd0',ay:90});SND.place()}}}}
@@ -3084,7 +3084,7 @@ let HOV=null;
 let TIPU=null,TIPLAST='',TIPT=0;
 let idleTipWindows=null;
 new MutationObserver(()=>{idleTipWindows=null}).observe(stage,{childList:true});
-function idleMenuBlocksArenaTips(){if(document.body.classList.contains('idle-tutorial-open'))return true;const rocketPanel=document.getElementById('idle-rocket-panel');if(rocketPanel&&!rocketPanel.hidden)return true;if(!idleTipWindows)idleTipWindows=[...stage.querySelectorAll('.idle-window')];return idleTipWindows.some(e=>e.isConnected&&!e.hidden)||!!document.getElementById('idle-quick-supplies')||!!document.getElementById('idle-center-scene')&&!document.getElementById('idle-center-scene').hidden}
+function idleMenuBlocksArenaTips(){const forge=document.getElementById('idle-forge');if(forge&&!forge.hidden)return true;if(document.body.classList.contains('idle-tutorial-open'))return true;const rocketPanel=document.getElementById('idle-rocket-panel');if(rocketPanel&&!rocketPanel.hidden)return true;if(!idleTipWindows)idleTipWindows=[...stage.querySelectorAll('.idle-window')];return idleTipWindows.some(e=>e.isConnected&&!e.hidden)||!!document.getElementById('idle-quick-supplies')||!!document.getElementById('idle-center-scene')&&!document.getElementById('idle-center-scene').hidden}
 function hideTip(){tipEl.style.display='none';tipEl.classList.remove('item-tip-open','boon-tip-open');TIPU=null}
 /* atualiza o painel de status do Pokémon sob o mouse em tempo real (PS, mana, buffs, itens, evolução) */
 function tipTick(ts){if(!TIPU||tipEl.style.display==='none')return;if(idleMenuBlocksArenaTips()||G.eventModal||document.getElementById('eventov')){hideTip();return}if(!TIPU||tipEl.style.display==='none'||ts-TIPT<110)return;TIPT=ts;try{const h=unitTip(TIPU);if(h!==TIPLAST){TIPLAST=h;dockTip(h)}}catch(e){}}

@@ -20,7 +20,7 @@ window.createIdleVillageService=function(ctx){
     case 'rename':{const h=v().houses.find(h=>h.id===data.id),name=String(data.name||'').trim().slice(0,40);if(!h||!name)fail('Informe um nome para a casa.');h.name=name;break}
     case 'assign':{const m=s.collection.find(m=>m.id===data.key);if(!m||ctx.busy?.(m)||!P.assign(v(),data.key,data.id))fail('Parceiro indisponível ou casa cheia.');break}
     case 'return':{const p=v().roster.find(p=>p.key===data.key&&p.place==='farm');if(!p)fail('Parceiro não encontrado nesta casa.');p.place='pc';delete p.houseId;break}
-    case 'buyDeeds':if(!v().questClaimed||!P.buy(v(),data.count,Math.random,data.currency||'gold'))fail('Recurso insuficiente ou sorteio já em andamento.');break;
+    case 'buyDeeds':if(!v().questClaimed||!P.buy(v(),data.count,Math.random,data.currency||'fragments'))fail('Recurso insuficiente ou sorteio já em andamento.');break;
     case 'weeklyHouse':if(!v().questClaimed||!P.claimWeekly(v()))fail('Complete 100 vitórias nesta semana ou confira se já recolheu.');break;
     case 'fuseDeeds':{const deed=P.fuse(v(),data.ids);if(!deed)fail('Selecione cinco escrituras guardadas, livres e da mesma qualidade: Comum ou Incomum.');result.deed=deed;break}
     case 'settleDeeds':{const results=P.settle(v());if(results.length){v().lastRoll=results;for(const d of results)v().history.unshift({...d,action:'Escritura guardada',time:new Date().toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'})});v().history=v().history.slice(0,30)}result.results=results;break}

@@ -9,3 +9,5 @@
 .ir-groups button[aria-pressed=true]{box-shadow:inset 0 0 0 1px #d8ecff88;background:transparent}.ir-groups button[data-signal=true]{box-shadow:inset 0 0 0 2px #71f4ff,0 0 1cqw #13e4ff99;background:#15eaff12}.ir-groups button[data-signal=true]:before{content:attr(data-signal-label);position:absolute;right:5%;top:5%;padding:.18cqw .5cqw;color:#baffff;background:#052332ee;border:1px solid #46cadd;border-radius:.3cqw;font-size:.7cqw;font-weight:bold;letter-spacing:.08em}
 .ir-team img{width:4.1cqw;height:4.7cqw}.ir-team b{font-size:.85cqw}.ir-team small{font-size:.65cqw}
 .ir-control-room .ir-region{left:48%;width:23%;font-size:.85cqw}
+
+.ir-mega::before{content:'';position:absolute;right:calc(100% + .7cqw);width:6.1cqw;height:6.3cqw;background:#072230 url('forge/assets/mystic-ball-fragment.webp') center/contain no-repeat;pointer-events:none}

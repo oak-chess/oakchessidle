@@ -1,5 +1,5 @@
 /* Timed Safari: save-owned clock and deterministic species sequence. */
-window.IDLE_SAFARI_DATA={minutes:60,maxTickets:24,freeEntry:true};
+window.IDLE_SAFARI_DATA={minutes:60,maxTickets:24,freeEntry:false};
 window.createIdleSafari=function(ctx){
  const s=ctx.state,now=ctx.now||Date.now,random=ctx.random||Math.random,old=s.safari;
  if(old&&old.version!==2)s.safari={version:2,tickets:old.session?1:0,legacyReport:old.session||old.lastReport,session:null};
@@ -19,6 +19,6 @@ window.createIdleSafari=function(ctx){
  function start(count=1){if(freeEntry())count=1;tick();if(data.session)return {ok:false,reason:'Você já tem uma expedição.'};if(!Number.isInteger(count)||count<1||count>24)return {ok:false,reason:'Escolha de 1 a 24 tickets.'};const reason=blocked();if(reason)return {ok:false,reason};if(!freeEntry()&&data.tickets<count)return {ok:false,reason:'Tickets insuficientes. Derrote bosses para encontrar Safari Tickets.'};if(!catalog.length)return {ok:false,reason:'Catálogo indisponível.'};const arena=chooseArena();if(!freeEntry())data.tickets-=count;data.serial++;data.lastReport=null;data.session={id:'safari-'+data.serial+'-'+now(),previousEncounter:s.encounter,previousGenes:s.encounterGenes,arena,seed:Math.floor(random()*4294967296),started:now(),endsAt:now()+duration(count),tickets:freeEntry()?0:count,freeTest:freeEntry(),index:0,caught:[],encounter:null,snapshot:null};delete data.nextArena;nextEncounter();ctx.enter?.();persist();return {ok:true}}
  function advance(win){if(!data.session)return false;if(!win){finish('Sua equipe foi derrotada.');return false}if(tick())return false;data.session.index++;data.session.encounter=null;nextEncounter();return true}
  function captured(event){const a=data.session;if(!a||a.caught.some(e=>e.key===event.key))return;a.caught.push({...event,at:now()});persist()}
- function drop(level,training=false){if(training)return false;const chance=level>=9750?.01:level>=3100?.0075:level>=650?.005:.0025;if(random()>=chance)return false;data.tickets++;persist();return true}
+ function drop(level,training=false){if(training)return false;const chance=.0025;if(random()>=chance)return false;data.tickets++;persist();return true}
  return {freeEntry,chooseArena,data,catalog,captureLevel,duration,remaining,unlocked,blocked,start,finish,tick,nextEncounter,advance,captured,drop};
 };
