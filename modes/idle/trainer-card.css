@@ -152,3 +152,6 @@ body.idle-native-mode #stage #idle-world.tc-card .tc-overlay .trainer-avatar-cho
 #idle-world.tc-card .trainer-avatar-pages{display:flex;align-items:center;justify-content:center;gap:12px;margin:10px 0 18px}
 #idle-arena-preview .ap-row .trainer-avatar{object-fit:cover}
 @media(max-width:900px){#idle-world.tc-card .trainer-avatar-grid{grid-template-columns:repeat(4,minmax(0,1fr))!important}}
+/* Keep illustrated portraits inside the frame, regardless of canvas intrinsic size. */
+#idle-world[data-family=profile].tc-card .tc-trainer{overflow:hidden;min-width:0;min-height:0;clip-path:polygon(6% 0,94% 0,100% 6%,100% 94%,94% 100%,6% 100%,0 94%,0 6%)}
+#idle-world[data-family=profile].tc-card .tc-trainer>.trainer-avatar{position:absolute;inset:2%;width:96%;height:96%;min-width:0;min-height:0;max-width:96%;max-height:96%;object-fit:cover;object-position:center;display:block}

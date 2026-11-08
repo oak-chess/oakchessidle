@@ -5,7 +5,7 @@ window.createIdleMusic=function(ctx){
  const inHoenn=challenge=>(window.IDLE_WORLD_DATA?.regions?.[challenge?.area??ctx.state.area]?.continent)==='Hoenn';
  const hoenn=track=>'idle-hoenn-'+track;
  let lastKey=null;
- function key(){if(!ctx.combat()&&document.querySelector('#idle-events.is-mystery-home:not([hidden])'))return 'idle-hoenn-ruins';const challenge=ctx.challenge();if(challenge){
+ function key(){if(window.IDLE_ARENA_INTRO?.isOpen())return 'idle-hoenn-frontier';if(!ctx.combat()&&document.querySelector('#idle-events.is-mystery-home:not([hidden])'))return 'idle-hoenn-ruins';const challenge=ctx.challenge();if(challenge){
   if(challenge.kind==='rocket')return ctx.combat()?'rocket-battle':'rocket-hideout';
   if(challenge.kind==='legendary'){
    const name=challenge.label||challenge.names?.[0],track=hoennLegends[name];

@@ -1,0 +1,4 @@
+/* Keep the native arena-angled camera, sprites, input projection and battlefield geometry. */
+body.idle-native-mode.idle-arena-stadium #idle-mega-portal,
+body.idle-native-mode.idle-arena-stadium #idle-legendary-event,
+body.idle-native-mode.idle-arena-stadium #idle-rocket-shortcut{display:none!important}
