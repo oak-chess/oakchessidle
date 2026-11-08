@@ -2686,7 +2686,7 @@ function buildEl(key,side){
   root.innerHTML='<div class="sh"></div><div class="in"><div class="its"></div><div class="brow"><div class="stars"></div><div class="bars"><div class="hpb"><i></i><b></b></div><div class="mnb"><i></i></div></div></div><div class="hitw"><div class="bob"><div class="spr"><img draggable="false" alt=""></div></div></div></div>';
   return root}
 function setSprite(root,line,star,side,view){const v=view||(side===0?'b':'f');
-  const baseId=LINES[line].ids[star-1],form=Number(root.dataset.idleForm)||0,id=(form?window.IDLE_MEGA_DEFS?.find(d=>d.id===baseId&&d.form===form)?.sprite:null)||({9:[9,10036],260:[260,10064],448:[448,10059],6:[6,10034],65:[65,10037],94:[94,10038],229:[229,10048],282:[282,10051],303:[303,10052],351:[351,10013,10014,10015],386:[386,10001,10002,10003]})[baseId]?.[form]||baseId,img=root.querySelector('img'),urls=v==='b'?[sprBack(id),sprFront(id),sprBackBW(id),sprFrontBW(id),sprStatic(id)]:[sprFront(id),sprFrontBW(id),sprStatic(id)];const sh=root.classList.contains('shiny');root.classList.remove('shfb');if(sh)urls.splice(0,urls.length,...urls.map(shinyUrl),...urls);let k=0;const nS=sh?urls.length/2:0;
+  const baseId=LINES[line].ids[star-1],form=Number(root.dataset.idleForm)||0,id=(form?window.IDLE_MEGA_DEFS?.find(d=>d.id===baseId&&d.form===form)?.sprite:null)||({9:[9,10036],260:[260,10064],448:[448,10059],6:[6,10034],65:[65,10037],94:[94,10038],229:[229,10048],282:[282,10051],303:[303,10052],351:[351,10013,10014,10015],386:[386,10001,10002,10003]})[baseId]?.[form]||baseId,img=root.querySelector('.spr img'),urls=v==='b'?[sprBack(id),sprFront(id),sprBackBW(id),sprFrontBW(id),sprStatic(id)]:[sprFront(id),sprFrontBW(id),sprStatic(id)];const sh=root.classList.contains('shiny');root.classList.remove('shfb');if(sh)urls.splice(0,urls.length,...urls.map(shinyUrl),...urls);let k=0;const nS=sh?urls.length/2:0;
   img.onerror=()=>{if(++k<urls.length){if(sh&&k>=nS)root.classList.add('shfb');img.src=urls[k]}};
   img.onload=()=>{if(root.classList.contains('final')){const h=BIRDLINES.includes(line)?250:290;img.style.height=h+'px';img.style.width='auto';anchorStaticSprite(img,h,line,star,id);return}const h=img.naturalHeight||60,f=1.26*(star===3?1.15:star===2?1.06:1),bm=1,H=clamp(h*f*bm,40,bm>1?138:108)*UNIT_K;img.style.height=H+'px';img.style.width='auto';anchorStaticSprite(img,H,line,star,id)};
   img.src=urls[0];pmdApply(root,line,star)}
@@ -2705,7 +2705,7 @@ function place(u,pos){u.pos=pos;if(pos.z==='n')G.bench[pos.i]=u;else G.board.set
 const countLine=(line,star)=>allPlus().filter(u=>u.line===line&&u.star===star).length;
 
 function playEvolve(u,oldStar,oldLine){
-  const L=LINES[u.line],el=u.el,img=el.querySelector('img'),spr=el.querySelector('.spr'),oL=oldLine!=null?LINES[oldLine]:L,oldId=oL.ids[oldStar-1],newId=L.ids[u.star-1],p=unitXY(u),cx=p.x,cy=p.y-34;
+  const L=LINES[u.line],el=u.el,img=el.querySelector('.spr img'),spr=el.querySelector('.spr'),oL=oldLine!=null?LINES[oldLine]:L,oldId=oL.ids[oldStar-1],newId=L.ids[u.star-1],p=unitXY(u),cx=p.x,cy=p.y-34;
   const pmdOn=!!(CFG.pmd&&el._pmd&&el.querySelector('canvas.pmdc')),vis=pmdOn?el.querySelector('canvas.pmdc'):img,shw=(id,st)=>{if(pmdOn)PMD.mount(el,id,st,!!u.shiny);else img.src=SB(id,u.shiny)};
   u.evolving=true;el.classList.add('evolving');el.style.zIndex=9000;if(!pmdOn)el.classList.remove('pmd');
   toast(`O quê? ${oL.names[oldStar-1]} está evoluindo!`);SND.evolve();
@@ -3186,7 +3186,7 @@ function mkCU(sp,side){
 function addCUEl(u){
   u.el=buildEl(u.key,u.side);if(window.OAK_IDLE_MODE){u.el.dataset.idleForm=String(u.idleForm||0);window.IDLE_HOENN_RULES?.clamp(u)}u.el.classList.add('spawn');if(u.shiny){u.el.classList.add('shiny');u.el.style.setProperty('--shh',(30+(u.line*83)%300)+'deg')}if(u.side===1&&G.round&&isBoss(G.round.kind)&&!BIRDLINES.includes(u.line)&&LINES[u.line].names[0]!=='Mewtwo')u.el.classList.add('bossmon');if(u.side===1&&(LINES[u.line].names[0]==='Mewtwo'||BIRDLINES.includes(u.line))){u.el.classList.add('final');const bi=BIRDLINES.indexOf(u.line);u.el.style.setProperty('--aura',bi>=0?BIRDS[bi].col:'#c070ff')}setSprite(u.el,u.line,u.star,u.side);
   const shownStar=window.OAK_IDLE_MODE?(window.IDLE_MOVE_SLOTS?.stage(u.L,u.star)||u.star):u.star;u.el.querySelector('.stars').textContent='★'.repeat(shownStar);u.el.dataset.star=shownStar;u.el.classList.toggle('s3',shownStar===3);setItems(u.el,u.items);if(u.side===1)PMD.play(u.el,'enter');
-  unitsL.appendChild(u.el);UB[u.key]=u;B.occ.set(u.r*10+u.c,u);u.spr=u.el.querySelector('.spr');u.img=u.el.querySelector('img');u.hitw=u.el.querySelector('.hitw');u.face=0;u.view=u.side===0?'b':'f';u._fv=u.view;u._ff='';preload([sprBack(u.id),sprFront(u.id)]);
+  unitsL.appendChild(u.el);UB[u.key]=u;B.occ.set(u.r*10+u.c,u);u.spr=u.el.querySelector('.spr');u.img=u.el.querySelector('.spr img');u.hitw=u.el.querySelector('.hitw');u.face=0;u.view=u.side===0?'b':'f';u._fv=u.view;u._ff='';preload([sprBack(u.id),sprFront(u.id)]);
   setTimeout(()=>u.el&&u.el.classList.remove('spawn'),500);updateCUEl(u)}
 function updateCUEl(u){
   if(u.el){if(u.el.classList.contains('team-marked')!==!!CFG.teamMarkers)u.el.classList.toggle('team-marked',!!CFG.teamMarkers);const side=u.side===0?'ally':'foe';if(u.el.dataset.team!==side)u.el.dataset.team=side}
