@@ -8,7 +8,7 @@ window.createIdleCenterScene=function(ctx){
   const fx=el('section',undefined,'ic-evolution-effect');evolutionEffect=fx;fx.setAttribute('role','status');fx.setAttribute('aria-live','polite');fx.dataset.memberId=event.member.id;
   const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;fx.dataset.reduced=String(reduced);fx.dataset.gentle=String(!!CFG.reduceFx);
   const copy=el('div',undefined,'ic-evolution-copy'),caption=el('small','EVOLUÇÃO NO CENTRO POKÉMON'),title=el('h2',event.fromName+' está evoluindo!'),sprites=el('div',undefined,'ic-evolution-sprites');
-  const sprite=(id,label,cls)=>{const img=el('img',undefined,cls);img.src=window.IDLE_SHINY.sprite(ctx.sprite(id),event.member.shiny===true);img.alt=label;return img};
+  const sprite=(id,label,cls)=>{const img=el('img',undefined,cls);img.src=IDLE_PMD_THUMBNAIL.fromLegacy(window.IDLE_SHINY.sprite(ctx.sprite(id),event.member.shiny===true));img.alt=label;return img};
   sprites.append(sprite(event.fromId,event.fromName,'ic-evolution-before'),sprite(event.toId,event.toName,'ic-evolution-after'));
   const particles=el('div',undefined,'ic-evolution-particles');particles.setAttribute('aria-hidden','true');for(let i=0;i<16;i++){const spark=el('i');spark.style.setProperty('--angle',i*22.5+'deg');particles.append(spark)}sprites.append(particles);
   copy.append(caption,title,sprites,el('p','Nível, IVs, potência e identidade preservados.'));fx.append(copy);stage.append(fx);SND.evolve();
@@ -27,7 +27,7 @@ window.createIdleCenterScene=function(ctx){
  }
  function staffSprite(id,label,shiny=false){
   const cv=document.createElement('canvas');cv.width=80;cv.height=88;cv.className='ic-staff-pokemon';cv.setAttribute('role','img');cv.setAttribute('aria-label',label);const item={cv,data:null};staff.push(item);
-  const fallback=()=>cv.replaceWith(Object.assign(new Image(),{src:'assets/pokeapi/sprites/pokemon/'+(shiny?'shiny/':'')+id+'.png',alt:label,className:'ic-staff-fallback'}));TRAINER_PARTNER_SPRITES.load(id,shiny).then(data=>{if(!data?.Idle){fallback();return}item.data=data}).catch(fallback);return cv;
+  const fallback=()=>cv.replaceWith(Object.assign(new Image(),{src:IDLE_PMD_THUMBNAIL.source(id,shiny,0,'assets/pokeapi/sprites/pokemon/'+(shiny?'shiny/':'')+id+'.png'),alt:label,className:'ic-staff-fallback'}));TRAINER_PARTNER_SPRITES.load(id,shiny).then(data=>{if(!data?.Idle){fallback();return}item.data=data}).catch(fallback);return cv;
  }
  function animateStaff(now){if(!root||root.hidden){staffFrame=0;return}staffFrame=requestAnimationFrame(animateStaff);if(now-lastStaffTick<100)return;lastStaffTick=now;
   for(let i=staff.length-1;i>=0;i--)if(!staff[i].cv.isConnected)staff.splice(i,1);
