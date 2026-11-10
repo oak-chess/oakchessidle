@@ -8,7 +8,9 @@ Sprites de arena: PMDCollab/SpriteCollab, revisão fixada em SOURCE.json. CC BY-
 - assets/pmd/sprite/0229/0001/credits.txt e 0229/0001/0001/credits.txt — Mega Houndoom.
 - assets/pmd/sprite/0282/0001/credits.txt e 0282/0001/0001/credits.txt — Mega Gardevoir.
 
-Relação de nomes dos autores: credit_names.txt nesta pasta. XMLs e folhas originais mantidos; pmd-data.js e bounds-data.js adicionam somente essas doze variantes aos dados existentes, sem substituir os sprites de outras espécies.
+Atualização SpriteCollab: Mega Lucario, Aerodactyl, Steelix, Absol, Manectric, Banette, Sableye, Altaria, Gallade e Slowbro, normais e shiny. A revisão e os caminhos de origem estão em `SOURCE.json` em `additionalVariants`. Cada variante preserva seus créditos upstream. Mega Slowbro usa a pasta upstream `0080/0002` e o identificador local `0080/0001` para manter a compatibilidade do Idle.
+
+Relação de nomes dos autores: credit_names.txt nesta pasta. XMLs e folhas originais mantidos; pmd-data.js e bounds-data.js registram as variantes acima nos dados existentes, sem substituir os sprites de outras espécies.
 
 Retratos e fallback de arena: https://github.com/PokeAPI/sprites/tree/master/sprites/pokemon/other/showdown — IDs 10034, 10038, 10052, 10037, 10048 e 10051, normais/shiny, frente/costas. PNGs de https://github.com/PokeAPI/sprites/tree/master/sprites/pokemon . Mesmas atribuições dos sprites PokeAPI/Showdown existentes no projeto.
 

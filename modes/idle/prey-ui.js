@@ -5,7 +5,7 @@ window.createIdlePreyUI=function(ctx){
  const icons={damage:'<path d="m6 4 13 15m-3-1 3-3M4 6l15 13M4 4l4 1-3 3Zm16 0-4 1 3 3ZM5 16l3 3m8-3 3 3"/>',defense:'<path d="M12 2 3 6v6c0 5 9 9 9 9s9-4 9-9V6Z"/><path d="M12 5v12"/>',xp:'<path d="m3 10 7-7 7 7m-7-7v12m5 1 3 5 3-5"/>',loot:'<path d="M3 10h18v11H3Zm0 0V7c0-6 18-6 18 0v3M2 13h20M10 11h4v5h-4Z"/>',renew:'<path d="M20 8a9 9 0 0 0-15-4L2 7m0-5v5h5M4 16a9 9 0 0 0 15 4l3-3m0 5v-5h-5"/>',hunt:'<path d="M8 4H4v18h16V4h-4M8 2h8v5H8Zm0 9h8m-8 4h8m-8 4h5"/>',target:'<circle cx="12" cy="12" r="8"/><path d="M12 0v6m0 12v6M0 12h6m12 0h6"/>',lock:'<rect x="5" y="10" width="14" height="12" rx="2"/><path d="M8 10V6a4 4 0 0 1 8 0v4m-4 5v3"/>',ball:'<circle cx="12" cy="12" r="10"/><path d="M2 12h6m8 0h6"/><circle cx="12" cy="12" r="4"/>'};
  function icon(key){const n=el('span',undefined,'pr-icon');n.setAttribute('aria-hidden','true');n.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">'+(icons[key]||icons.ball)+'</svg>';return n}
  function decorate(b,key){b.prepend(icon(key));return b}
- const image=name=>{const info=ctx.model.snapshot().catalog.find(x=>x.name===name),img=el('img');img.alt=name;img.src=ctx.sprite(info?.id||1);return img};
+ const image=name=>{const info=ctx.model.snapshot().catalog.find(x=>x.name===name),img=el('img');img.alt=name;img.src=IDLE_PMD_THUMBNAIL.fromLegacy(ctx.sprite(info?.id||1));return img};
  function close(){if(root)root.hidden=true;confirm=false;focus?.focus()}
  function open(){focus=document.activeElement;ctx.closePanels();notice='';confirm=false;lastRender='';root.hidden=false;render()}
  function result(r){notice=r.message||'';render()}

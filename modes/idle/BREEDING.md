@@ -5,8 +5,8 @@
 - Dois pais compatíveis, livres do banco ou PC, são consumidos após confirmação explícita. Favoritos, protegidos, equipados, em campo ou em atividade não são elegíveis.
 - Custo: 50 ouro e 5 materiais. Criação: 30 minutos. Incubação: 24 passos. O bebê nasce no nível 1, na forma inicial da família.
 - Normal + normal nunca resulta em shiny. Ao menos um pai shiny garante um bebê shiny.
-- Para cada IV, o piso é a média dos pais arredondada para cima, acrescida de 1; o teto é a mesma média acrescida de 3. Ambos são limitados a 31. Para shiny, o piso também é no mínimo 26.
-- A potência é a maior dos pais; shiny tem mínimo P4. Não há promoção aleatória de potência.
+- Para cada IV, o piso é a média dos pais arredondada para cima, acrescida de 1; o teto é a mesma média acrescida de 3. Ambos são limitados a 31.
+- A potência é a maior dos pais. Não há promoção aleatória de potência.
 - Nature: 50% de cada pai. Talento: sorteio normal da espécie.
 - A prévia exibe os seis intervalos, o total possível, o ganho sobre a média dos pais, potência e variante garantidas.
 

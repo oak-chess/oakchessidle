@@ -19,7 +19,7 @@
  function rpc(action,data={}){requesting=true;return new Promise(resolve=>{const request=crypto.randomUUID();requests.set(request,resolve);parent.postMessage({type:'rural-live-action',request,action,data},'*')})}
  window.addEventListener('message',event=>{if(event.source!==parent)return;const d=event.data;if(d?.type==='rural-live-state')hydrate(d.state);if(d?.type==='rural-live-result'){hydrate(d.state);const resolve=requests.get(d.request);if(resolve){requests.delete(d.request);requesting=requests.size>0;if(!d.ok){bucketNotice=d.reason||'Não foi possível concluir.';$('hint').textContent=bucketNotice;bucketRefresh?.()}resolve(d)}}});
  const canvas=$('water'),g=canvas.getContext('2d');let W=600,H=322;
- function sprite(id,shiny=false){const img=document.createElement('img');img.src=asset+(shiny?'shiny/':'')+id+'.png';img.alt=pokemon[id][0];img.title=pokemon[id][0];return img}
+ function sprite(id,shiny=false){const img=document.createElement('img');img.src=IDLE_PMD_THUMBNAIL.source(id,shiny,0,asset+(shiny?'shiny/':'')+id+'.png');img.alt=pokemon[id][0];img.title=pokemon[id][0];return img}
  function pool(){return effectivePool()}
  const depths=[{id:'bank',name:'Margem',level:1,rank:1,x:.28,y:.44,description:'Água rasa · encontros tranquilos'},{id:'channel',name:'Corrente',level:10,rank:2,x:.52,y:.35,description:'Água em movimento · encontros variados'},{id:'deep',name:'Profundo',level:30,rank:3,x:.76,y:.27,description:'Água profunda · espécies avançadas'}];
  const canDepth=d=>d.id==='bank'||state.fishingLevel>=d.level&&state.ownedRods.includes(state.rod)&&rods[state.rod].rank>=d.rank;

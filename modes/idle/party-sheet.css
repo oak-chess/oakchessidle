@@ -116,3 +116,17 @@ body.idle-native-mode #idle-party[data-view=detail]>.ip-footer{padding:8px 20px;
 @media(max-width:700px){body.idle-native-mode #idle-party[data-view=detail]{max-width:calc(100% - 16px)!important;max-height:calc(100% - 20px)!important}#idle-party .ip-analysis-overview,#idle-party .ip-analysis-lower,#idle-party .ip-analysis-profile{grid-template-columns:1fr}#idle-party .ip-analysis-traits{grid-template-columns:1fr}#idle-party[data-view=detail] .ip-sheet-identity{flex-wrap:wrap;gap:8px}body.idle-native-mode #idle-party[data-view=detail] .ip-tabs>.ip-button{min-width:0;flex:1;padding:7px 8px!important;font-size:10px}#idle-party .ip-analysis-modifiers>div:last-child{grid-template-columns:repeat(3,minmax(0,1fr))}}
 
 .ip-xp-pace{margin:6px 0;color:#81d8ff;font-size:12px;font-variant-numeric:tabular-nums}
+
+#idle-party .ip-potential-rating{margin-bottom:8px}
+#idle-party .ip-potential-score{display:flex;align-items:center;gap:6px;margin:5px 0 10px}
+#idle-party .ip-potential-score strong{font-size:26px;color:#9deaff;font-variant-numeric:tabular-nums}
+#idle-party .ip-potential-score meter{width:min(50%,240px);margin-left:8px}
+#idle-party .ip-potential-score meter::-webkit-meter-optimum-value{background:#65d7ec}
+#idle-party .ip-potential-tiers{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px}
+#idle-party .ip-potential-tier{display:grid;justify-items:center;gap:5px;text-align:center;padding:8px 4px;border:1px solid #7793a44a;border-radius:7px;background:#111d29;font-size:11px}
+#idle-party .ip-potential-tier.is-current{border-color:#68e6ff;background:#18394b}
+#idle-party .ip-potential-tier small{font-size:10px;color:#c0d6e3}
+#idle-party .ip-potential-tier.is-current small:first-of-type{color:#9deaff;font-weight:700}
+#idle-party .ip-potential-tier .ip-power-badge{padding:2px 7px}
+#idle-party .ip-potential-tier .ip-potential-strength{color:#ffe2a1;font-weight:700;font-variant-numeric:tabular-nums}
+#idle-party .ip-potential-tiers{grid-template-columns:repeat(auto-fit,minmax(min(100%,96px),1fr))}
