@@ -130,3 +130,324 @@ body.idle-native-mode #idle-party[data-view=detail]>.ip-footer{padding:8px 20px;
 #idle-party .ip-potential-tier .ip-power-badge{padding:2px 7px}
 #idle-party .ip-potential-tier .ip-potential-strength{color:#ffe2a1;font-weight:700;font-variant-numeric:tabular-nums}
 #idle-party .ip-potential-tiers{grid-template-columns:repeat(auto-fit,minmax(min(100%,96px),1fr))}
+
+
+/* The approved case art wraps a live screen and live footer. */
+body.idle-native-mode #stage #idle-party.idle-window.ip-window[data-view=detail] {
+  width:min(1128px,calc(100% - 20px)); height:min(752px,calc(100% - 20px));
+  top:50%!important; transform:translate(-50%,-50%);
+  display:flex; flex-direction:column; box-sizing:border-box;
+  padding:0;
+  border:0!important; border-radius:0; box-shadow:none!important;
+  background:transparent!important;
+  color:#f6ead4; font-family:Georgia,'Times New Roman',serif;
+  isolation:isolate;
+}
+#idle-party[data-view=detail]::before {
+  content:''; position:absolute; inset:0; z-index:-1; pointer-events:none;
+  background:url("assets/pokemon-sheet-case.png") center/100% 100% no-repeat;
+  clip-path:polygon(2.1% 12%,2.6% 7%,4.1% 3.9%,6.6% 1.3%,9% 1%,47.5% 1%,48.2% .5%,52% .5%,53% 1%,91% 1%,94% 1.7%,96% 4.3%,97.5% 8%,97.8% 13%,97.8% 87%,97.2% 92.8%,95.8% 96.3%,93.6% 98.3%,90.5% 99.1%,9% 99.1%,6.2% 98.6%,4.1% 96.1%,2.7% 92.4%,2.1% 87%);
+}
+body.idle-native-mode #stage #idle-party.idle-window.ip-window[data-view=detail]>header {
+  position:absolute; inset:8.8% 6% auto; height:5.8%; min-height:0!important;
+  display:grid; grid-template-columns:1fr auto 1fr; align-items:center; gap:8px;
+  padding:0 2.7%!important; border-radius:18px 18px 0 0;
+  background:linear-gradient(115deg,#202326,#303436 67%,#1e2225)!important;
+  border:0!important; border-bottom:1px solid #ab9e87!important; box-shadow:none!important;
+}
+#idle-party[data-view=detail]>header>div {grid-column:2;text-align:center;min-width:0}
+#idle-party[data-view=detail]>header>div>small {display:none}
+body.idle-native-mode #stage #idle-party[data-view=detail]>header h2 {margin:0;color:#f7ebd4;font:bold clamp(16px,2.1vw,26px)/1.05 Georgia,serif}
+body.idle-native-mode #stage #idle-party.idle-window.ip-window[data-view=detail]>header::before {content:none!important}
+body.idle-native-mode #stage #idle-party.idle-window.ip-window[data-view=detail] #ip-party-detail {
+  position:absolute; inset:14.55% 6% 11.6%; width:auto; height:auto!important;
+  display:flex; flex-direction:column; min-height:0; overflow:hidden;
+  padding:0!important; background:#171e23; border-radius:0 0 17px 17px;
+}
+body.idle-native-mode #stage #idle-party.idle-window.ip-window[data-view=detail] .ip-sheet-identity {
+  margin:0 15px 0 9px; padding:4px 12px; min-height:76px;
+  display:flex; flex-wrap:wrap; align-items:center; gap:5px 10px;
+  background:linear-gradient(120deg,#262e30,#202729); border:1px solid #56636b; border-radius:8px;
+}
+#idle-party[data-view=detail] .ip-sheet-identity .ip-hero {flex:1 1 330px;min-width:0;gap:12px;align-items:center}
+body.idle-native-mode #stage #idle-party[data-view=detail] .ip-sheet-identity .ip-portrait {
+  width:clamp(76px,11vw,151px); height:68px; object-fit:contain; padding:4px; box-sizing:border-box;
+  border-radius:4px; background:radial-gradient(ellipse,color-mix(in srgb,var(--portrait-glow),transparent 32%),transparent 72%);
+}
+#idle-party .ip-sheet-name {border-inline-start:1px solid #a9aba6;padding-inline:12px;min-width:0}
+#idle-party[data-view=detail] .ip-sheet-name h3 {color:#f7ebd4;font:700 25px/1.1 Georgia,serif;overflow-wrap:anywhere}
+#idle-party .ip-sheet-meta,#idle-party .ip-sheet-types {display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+#idle-party .ip-sheet-meta span {padding:2px 6px;border:1px solid #809950;border-radius:6px;font:inherit}
+#idle-party .ip-sheet-types {margin-inline:auto}
+#idle-party .ip-sheet-types img {width:auto;height:23px}
+body.idle-native-mode #stage #idle-party.idle-window.ip-window[data-view=detail] .ip-detail-body {
+  flex:1; min-height:0; padding:8px 10px 9px; display:grid; align-content:start; gap:7px;
+  overflow:hidden auto; overscroll-behavior:contain; scrollbar-width:thin; scrollbar-color:#c5b9a9 #30363e;
+}
+#idle-party .ip-sheet-section {display:grid;gap:7px;min-width:0}
+body.idle-native-mode #stage #idle-party.idle-window.ip-window[data-view=detail] :is(.ip-analysis-card,.ip-sheet-management,.ip-analysis-comparison,.ip-analysis-traits>div) {
+  margin:0; min-width:0; padding:7px 10px; border:1px solid #697c8c!important; border-radius:8px;
+  background:linear-gradient(145deg,#2a3948,#1b2732)!important;
+}
+#idle-party[data-view=detail] :is(.ip-analysis-heading h4,.ip-sheet-management>summary,.ip-analysis-comparison>summary) {
+  color:#f6ead4!important; font:bold 17px/1.15 Georgia,serif;
+}
+#idle-party[data-view=detail] .ip-analysis-heading {margin-bottom:7px;gap:4px}
+#idle-party[data-view=detail] .ip-analysis-overview {grid-template-columns:1.12fr 1fr;gap:7px}
+#idle-party[data-view=detail] .ip-analysis-gauges {grid-template-columns:1fr;gap:6px;margin:0}
+#idle-party[data-view=detail] .ip-analysis-gauges>div {display:grid;grid-template-columns:auto minmax(32px,1fr) auto;gap:7px;align-items:center}
+#idle-party[data-view=detail] .ip-analysis-gauges>div>div:first-child {display:contents}
+#idle-party[data-view=detail] .ip-analysis-gauges>div>div:first-child>b {grid-column:3;grid-row:1}
+#idle-party[data-view=detail] .ip-analysis-gauges .ip-analysis-gauge {grid-column:2;grid-row:1;height:11px}
+#idle-party[data-view=detail] .ip-analysis-stat-grid {gap:2px}
+#idle-party[data-view=detail] .ip-analysis-stat-grid>div {text-align:center;padding:6px 3px}
+#idle-party[data-view=detail] .ip-analysis-stat-grid strong {color:#f6ead4;font-size:19px}
+#idle-party[data-view=detail] .ip-potential-score {display:grid;grid-template-columns:1fr 1fr;text-align:center;background:#19242d;border:1px solid #627482;border-radius:7px;padding:5px;margin:0 0 4px}
+#idle-party[data-view=detail] .ip-potential-score strong {font-size:18px;color:#f6ead4}
+#idle-party[data-view=detail] .ip-potential-score strong+strong {border-inline-start:1px solid #637680}
+#idle-party[data-view=detail] .ip-analysis-bars.is-compact .ip-analysis-iv-row {min-height:23px;border-bottom:1px solid #879bab38}
+#idle-party[data-view=detail] .ip-analysis-iv-track {height:10px;background:#354857}
+#idle-party[data-view=detail] .ip-analysis-iv-track i {background:linear-gradient(#aed688,#83ad64)}
+#idle-party[data-view=detail] .ip-analysis-traits {grid-template-columns:repeat(2,minmax(0,1fr));margin:0;gap:7px}
+#idle-party .ip-sheet-combat,#idle-party[data-view=detail] .ip-analysis-lower {display:grid;grid-template-columns:minmax(0,1.14fr) minmax(0,1fr);gap:7px}
+#idle-party .ip-sheet-moves {border:1px solid #6d8193;border-radius:7px;overflow:hidden}
+#idle-party .ip-sheet-move {display:grid;grid-template-columns:minmax(0,1.06fr) minmax(0,.75fr) minmax(0,.68fr) minmax(0,1.5fr);align-items:center;min-height:26px;background:#19252f;border-bottom:1px solid #728a9f59}
+#idle-party .ip-sheet-move:last-child {border-bottom:0}
+#idle-party .ip-sheet-move>* {min-width:0;padding:4px 5px;margin:0;font-size:11px;overflow-wrap:anywhere}
+#idle-party .ip-sheet-move-heading {background:#364758;text-align:center}
+#idle-party .ip-sheet-type img {display:block;max-width:100%;height:15px;object-fit:contain}
+#idle-party .ip-sheet-slots {display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:5px;margin:6px 0 9px}
+#idle-party .ip-sheet-slots .ip-equipment-slot {flex-direction:column;justify-content:center;min-width:0;min-height:90px;margin:0;padding:5px;text-align:center;background:#19252f;border:1px solid #687d8f;border-radius:8px;overflow-wrap:anywhere}
+#idle-party .ip-sheet-slots .ip-equipment-slot>.ip-button {margin:0}
+#idle-party .ip-sheet-projection {display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:3px;margin:6px 0}
+#idle-party .ip-sheet-projection>div {padding:3px;text-align:center;background:#182732;border:1px solid #637381;border-radius:5px}
+#idle-party .ip-sheet-projection small {display:block;color:#d9d9ce}
+#idle-party .ip-sheet-training progress {display:block;width:100%;height:12px;accent-color:#48adf6}
+#idle-party .ip-sheet-evolution-line {display:flex;align-items:center;justify-content:center;gap:6px;flex-wrap:wrap;margin:5px 0}
+#idle-party .ip-sheet-evolution-line canvas,#idle-party .ip-sheet-evolution-line img {width:38px;height:38px;object-fit:contain;image-rendering:pixelated}
+#idle-party .ip-potential-tier[data-potency="1"] {--tier:#c4cbd3}
+#idle-party .ip-potential-tier[data-potency="2"] {--tier:#92d76c}
+#idle-party .ip-potential-tier[data-potency="3"] {--tier:#65baff}
+#idle-party .ip-potential-tier[data-potency="4"] {--tier:#d980eb}
+#idle-party .ip-potential-tier[data-potency="5"] {--tier:#ffcf55}
+#idle-party .ip-potential-tier[data-potency] {border:2px solid var(--tier);background:linear-gradient(color-mix(in srgb,var(--tier) 23%,#141d26),color-mix(in srgb,var(--tier) 11%,#141d26));padding:5px 4px}
+#idle-party .ip-potential-tier.is-current[data-potency] {border-color:#fff7eb;box-shadow:inset 0 0 9px #d4e1ff50}
+#idle-party .ip-potential-tier .ip-power-badge {color:var(--tier)}
+#idle-party .ip-potential-tier .ip-potential-strength {font:700 20px/1 Georgia,serif;color:#f6ead4}
+body.idle-native-mode #stage #idle-party.idle-window.ip-window[data-view=detail] .ip-button {
+  font:700 12px/1.1 Georgia,serif;
+  background:linear-gradient(#3b4c59,#263540)!important;border-color:#788d9c!important;
+  color:#fff2db!important; transition:filter .16s,transform .16s;
+}
+body.idle-native-mode #stage #idle-party.idle-window.ip-window[data-view=detail] .ip-button:not(:disabled):hover {filter:brightness(1.24)}
+#idle-party[data-view=detail] .ip-button:not(:disabled):active {transform:translateY(1px)}
+body.idle-native-mode #stage #idle-party.idle-window.ip-window[data-view=detail]>header button {
+  justify-self:start;min-width:0;margin:0; background:none!important;border-color:transparent!important;box-shadow:none!important;
+}
+body.idle-native-mode #stage #idle-party.idle-window.ip-window[data-view=detail]>header .ip-close {justify-self:end;width:auto;position:static}
+body.idle-native-mode #stage #idle-party.idle-window.ip-window[data-view=detail]>.ip-footer {
+  position:absolute; inset:90.1% 13.45% 4.3%; min-height:0; display:grid; grid-template-columns:repeat(3,minmax(0,1fr));
+  padding:3px 8px!important; gap:0; background:linear-gradient(#a62c34,#8a222b)!important;
+  border:0!important;border-radius:14px 14px 3px 3px;
+}
+body.idle-native-mode #stage #idle-party.idle-window.ip-window[data-view=detail]>.ip-footer>.ip-button {
+  width:100%; min-width:0; margin:0; padding:3px!important; background:none!important;
+  box-shadow:none!important;border:0!important;border-radius:0!important;font-size:16px;
+}
+body.idle-native-mode #stage #idle-party.idle-window.ip-window[data-view=detail]>.ip-footer>.ip-button+.ip-button {border-inline-start:1px solid #ffddd0!important}
+@media(prefers-reduced-motion:no-preference){
+  #idle-party[data-view=detail] .ip-sheet-identity .ip-portrait {animation:ip-dex-sprite .22s ease-out}
+  @keyframes ip-dex-sprite {from{opacity:.55;transform:translateY(3px)}to{opacity:1;transform:none}}
+}
+@media(prefers-reduced-motion:reduce){#idle-party[data-view=detail] .ip-button {transition:none!important}}
+
+body.idle-native-mode #stage #idle-party.idle-window.ip-window[data-view=detail]>header>.ip-button {
+  width:auto; min-height:0; align-self:center; padding:4px 8px!important;
+  white-space:nowrap; font-size:16px!important; border:0!important; box-shadow:none!important;
+}
+body.idle-native-mode #stage #idle-party.idle-window.ip-window[data-view=detail] .ip-sheet-identity {
+  background:linear-gradient(115deg,#293436,#202729)!important;
+  border-color:#56636b!important;
+}
+#idle-party[data-view=detail] .ip-analysis-heading h4 {color:#f6ead4!important}
+#idle-party[data-view=detail] .ip-analysis-stat-grid>div {display:block}
+#idle-party[data-view=detail] .ip-analysis-stat-grid small {display:block}
+#idle-party[data-view=detail] .ip-analysis-stat-grid span {margin-inline-start:2px}
+#idle-party[data-view=detail] .ip-sheet-type {
+  display:inline-flex; align-items:center; justify-content:center; gap:4px;
+  width:max-content; max-width:100%; padding:2px 5px; box-sizing:border-box;
+  border:1px solid var(--type-accent,#687d8f); border-radius:6px;
+  background:color-mix(in srgb,var(--type-accent,#687d8f) 37%,#19252f); color:#fff6e5;
+}
+#idle-party[data-view=detail] .ip-sheet-type img {height:13px;width:13px;object-fit:contain}
+#idle-party[data-view=detail] .ip-sheet-move .ip-sheet-type {justify-self:center}
+#idle-party[data-view=detail] .ip-sheet-move>small {text-align:center}
+#idle-party[data-view=detail] .ip-analysis-passive {
+  display:grid; grid-template-columns:auto 1fr; align-items:center; gap:3px 8px;
+  padding:5px 7px; border:1px solid #697c8c; border-radius:7px; background:#19252f;
+}
+#idle-party[data-view=detail] .ip-analysis-passive>small {color:#f6ead4}
+#idle-party[data-view=detail] .ip-analysis-passive>p {grid-column:2;margin:0}
+#idle-party[data-view=detail] .ip-sheet-combat .idle-element-caption {display:none}
+#idle-party[data-view=detail] .ip-sheet-combat .idle-element-groups {display:grid;grid-template-columns:1fr;gap:4px}
+#idle-party[data-view=detail] .ip-sheet-gear {text-align:center}
+#idle-party[data-view=detail] .ip-sheet-projection {grid-template-columns:repeat(6,minmax(0,1fr))}
+#idle-party[data-view=detail] .ip-sheet-management .ip-actions {display:flex;flex-wrap:wrap;gap:5px}
+#idle-party[data-view=detail] .ip-sheet-management .ip-actions button {flex:1 1 128px}
+
+body.idle-native-mode #stage #idle-party.idle-window.ip-window[data-view=detail] .ip-analysis-heading h4 {
+  color:#f6ead4!important;font-size:20px;text-shadow:0 1px #0009;
+}
+body.idle-native-mode #stage #idle-party.idle-window.ip-window[data-view=detail]>header>.ip-button {
+  background:transparent!important;text-shadow:0 1px #000;
+}
+body.idle-native-mode #stage #idle-party.idle-window.ip-window[data-view=detail]>header>.ip-button:hover {
+  background:#f8ecd01a!important;
+}
+#idle-party[data-view=detail] .ip-analysis-stat-grid small,
+#idle-party[data-view=detail] .ip-analysis-iv-row>span,
+#idle-party[data-view=detail] .ip-analysis-iv-row>b {font:600 13px/1.2 Georgia,serif;color:#f6ead4}
+#idle-party[data-view=detail] .ip-analysis-stat-grid strong {font:700 22px/1.1 Georgia,serif}
+#idle-party[data-view=detail] .ip-analysis-gauges>div>div:first-child>* {font:700 13px/1.2 Georgia,serif;color:#f6ead4}
+#idle-party[data-view=detail] .ip-potential-tier>small {font:600 12px/1.2 Georgia,serif;color:#f6ead4}
+#idle-party[data-view=detail] .ip-potential-tier>.ip-power-badge {
+  border:1px solid var(--tier);border-radius:6px;padding:2px 8px;font-size:13px;
+}
+#idle-party[data-view=detail] .ip-analysis-traits>div {
+  display:grid;grid-template-columns:auto 1fr;align-items:center;gap:6px;min-height:43px;
+}
+#idle-party[data-view=detail] .ip-analysis-traits>div>span {grid-column:1/-1}
+#idle-party[data-view=detail] .ip-sheet-training {text-align:center}
+#idle-party[data-view=detail] .ip-sheet-training .ip-analysis-heading,
+#idle-party[data-view=detail] .ip-sheet-gear .ip-analysis-heading {text-align:start}
+
+/* Match the reference's inset screen, textured plates and centered controls. */
+body.idle-native-mode #stage #idle-party.idle-window.ip-window[data-view=detail] .ip-sheet-identity {
+  min-height:91px; padding:4px 15px; margin:0 21px 0 9px;
+}
+#idle-party[data-view=detail] .ip-sheet-display {
+  flex:0 0 17%; min-width:84px; display:grid; place-items:center; min-height:76px;
+  isolation:isolate; position:relative; overflow:hidden;
+}
+#idle-party[data-view=detail] .ip-sheet-display::before {
+  content:''; position:absolute; inset:0; z-index:-1; pointer-events:none;
+  background:
+    repeating-linear-gradient(0deg,transparent 0 10px,#e1fff225 10px 11px),
+    repeating-linear-gradient(90deg,transparent 0 10px,#e1fff225 10px 11px),
+    radial-gradient(ellipse,var(--portrait-glow),transparent 70%);
+  mask-image:radial-gradient(ellipse,#000 10%,transparent 72%);
+  opacity:.65;
+}
+body.idle-native-mode #stage #idle-party[data-view=detail] .ip-sheet-display .ip-portrait {
+  width:79px;height:72px;background:none;filter:drop-shadow(0 2px 2px #000a);
+}
+#idle-party[data-view=detail] .ip-sheet-meta {gap:10px}
+#idle-party[data-view=detail] .ip-sheet-meta span {font-size:14px}
+#idle-party[data-view=detail] .ip-sheet-identity .idle-protection-tools {
+  border-inline-start:1px solid #a6a9a7;padding-inline-start:10px;
+}
+body.idle-native-mode #stage #idle-party.idle-window.ip-window[data-view=detail] .ip-sheet-identity .idle-protection-tools>button {
+  background:transparent!important;box-shadow:none!important;border:0!important;border-radius:0!important;
+  font-size:15px;padding:6px 8px!important;
+}
+body.idle-native-mode #stage #idle-party.idle-window.ip-window[data-view=detail] .ip-sheet-identity .idle-protection-tools>button+button {
+  border-inline-start:1px solid #a6a9a7!important;
+}
+#idle-party[data-view=detail] .ip-analysis-gauges {
+  padding:9px 11px 4px;background:#1a252e;border:1px solid #677b89;border-bottom:0;border-radius:8px 8px 0 0;
+}
+#idle-party[data-view=detail] .ip-analysis-gauges>div {grid-template-columns:28px minmax(32px,1fr) minmax(55px,auto);gap:8px}
+#idle-party[data-view=detail] .ip-analysis-gauges .ip-analysis-gauge {height:14px;border:1px solid #697e90;border-radius:5px}
+#idle-party[data-view=detail] .ip-analysis-gauges [data-gauge=hp] i {background:linear-gradient(#88df79,#56bb60)}
+#idle-party[data-view=detail] .ip-analysis-gauges [data-gauge=xp] i {background:linear-gradient(#51bdff,#2989d5)}
+#idle-party[data-view=detail] .ip-xp-pace {
+  margin:0 0 6px;padding:4px 11px 8px;color:#f6ead4;font:600 14px/1.2 Georgia,serif;
+  background:#1a252e;border:1px solid #677b89;border-top:0;border-radius:0 0 8px 8px;
+}
+#idle-party[data-view=detail] .ip-analysis-stat-grid {gap:0}
+#idle-party[data-view=detail] .ip-analysis-stat-grid>div {padding:9px 3px;border-color:#728392!important}
+#idle-party[data-view=detail] .ip-analysis-bars.is-compact {padding:3px 9px;border:1px solid #687989;border-radius:8px;background:#1a252e}
+#idle-party[data-view=detail] .ip-analysis-bars.is-compact .ip-analysis-iv-row {min-height:26px}
+#idle-party[data-view=detail] .ip-analysis-bars.is-compact .ip-analysis-iv-row:last-child {border-bottom:0}
+#idle-party[data-view=detail] .ip-sheet-move>* {font:600 13px/1.15 Georgia,serif;color:#f6ead4}
+#idle-party[data-view=detail] .ip-sheet-combat .idle-element-group {padding:4px 7px}
+#idle-party[data-view=detail] .ip-sheet-combat .idle-element-heading b {font:700 14px Georgia,serif}
+#idle-party[data-view=detail] .ip-sheet-xp-row {display:grid;grid-template-columns:auto minmax(28px,1fr) auto;align-items:center;gap:8px}
+#idle-party[data-view=detail] .ip-sheet-training progress {height:14px}
+#idle-party[data-view=detail] .ip-sheet-training>p {margin:5px 0 8px}
+#idle-party[data-view=detail] .ip-sheet-evolution-line {gap:14px;padding-top:5px;border-top:1px solid #738a9a80}
+#idle-party[data-view=detail] .ip-sheet-evolution-line canvas {width:50px;height:48px}
+#idle-party[data-view=detail] .ip-sheet-requirements {display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap}
+#idle-party[data-view=detail] .ip-sheet-slots .ip-equipment-slot {min-height:125px;border-color:#788c9b!important}
+#idle-party[data-view=detail] .ip-sheet-slots .ip-equipment-slot>b {font:700 17px Georgia,serif}
+#idle-party[data-view=detail] .ip-sheet-gear>.ip-button {width:73%;margin-top:6px;font-size:16px!important}
+#idle-party[data-view=detail] .ip-sheet-management>summary>.ip-secondary-info {
+  margin-inline-start:13px;padding-inline-start:13px;border-inline-start:1px solid #81919d;color:#f6ead4;
+}
+#idle-party[data-view=detail] .ip-sheet-certificate {display:flex;align-items:center;gap:6px 12px;flex-wrap:wrap}
+#idle-party[data-view=detail] .ip-sheet-certificate>b {font:700 16px Georgia,serif}
+#idle-party[data-view=detail] .ip-sheet-certificate>button {margin-inline-start:auto}
+#idle-party[data-view=detail] :is(button,summary):focus-visible {outline:2px solid #ffd99d;outline-offset:2px}
+@media(prefers-reduced-motion:no-preference) {
+  #idle-party[data-view=detail] .ip-sheet-display::before {animation:ip-sheet-display-glow 3.8s ease-in-out infinite alternate}
+  @keyframes ip-sheet-display-glow {to{opacity:.93}}
+}
+
+#idle-party[data-view=detail] .ip-sheet-comparison-layout {
+  display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);align-items:center;gap:10px;
+}
+#idle-party[data-view=detail] .ip-sheet-comparison-layout label {
+  display:grid;gap:4px;padding:6px;text-align:center;color:#f6ead4;font:700 14px Georgia,serif;
+}
+#idle-party[data-view=detail] .ip-sheet-comparison-layout select {
+  min-width:0;width:100%;padding:5px;border:1px solid #a3d77f;border-radius:6px;background:#263e2d;color:#f6ead4;
+}
+#idle-party[data-view=detail] .ip-sheet-comparison-layout table {margin:0}
+#idle-party[data-view=detail] .ip-detail-body {scrollbar-gutter:stable}
+
+#idle-party .ip-sheet-dex-number {
+  display:block;margin:0 0 3px;color:#e0cc9f!important;font:700 11px/1 Georgia,serif;letter-spacing:.05em;
+}
+body.idle-native-mode #stage #idle-party.idle-window.ip-window[data-view=detail] .ip-sheet-protection {
+  display:flex;flex-wrap:wrap;align-items:center;gap:6px;
+}
+body.idle-native-mode #stage #idle-party.idle-window.ip-window[data-view=detail] .ip-sheet-protection>button {
+  display:inline-flex;align-items:center;justify-content:center;gap:5px;min-height:31px;
+  padding:5px 8px!important;border:1px solid #80909a!important;border-radius:7px!important;
+  background:linear-gradient(#33434d,#23303a)!important;color:#eee5d3!important;font-size:13px;
+}
+#idle-party .ip-sheet-protection svg {width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+body.idle-native-mode #stage #idle-party.idle-window.ip-window[data-view=detail] .ip-sheet-protection>[data-kind=favorite][aria-pressed=true] {
+  color:#fff1b4!important;border-color:#e8b95f!important;background:linear-gradient(#644918,#382a17)!important;box-shadow:inset 0 0 10px #ffd57026!important;
+}
+#idle-party .ip-sheet-protection>[data-kind=favorite][aria-pressed=true] svg {fill:currentColor}
+body.idle-native-mode #stage #idle-party.idle-window.ip-window[data-view=detail] .ip-sheet-protection>[data-kind=locked][aria-pressed=true] {
+  color:#c9f9ff!important;border-color:#75d5e4!important;background:linear-gradient(#245864,#153840)!important;box-shadow:inset 0 0 10px #79e6ff24!important;
+}
+#idle-party[data-view=detail] .ip-sheet-origin {margin:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:5px}
+#idle-party[data-view=detail] .ip-sheet-origin>div {padding:7px;border:1px solid #566d7e;border-radius:6px;background:#18252e}
+#idle-party[data-view=detail] .ip-sheet-origin dt {color:#b2c8d1;font-size:11px}
+#idle-party[data-view=detail] .ip-sheet-origin dd {margin:3px 0 0;color:#f6ead4;font:700 14px/1.2 Georgia,serif;overflow-wrap:anywhere}
+#idle-party[data-view=detail] .ip-sheet-calculator>summary {font:700 19px Georgia,serif;color:#f6ead4;cursor:pointer}
+#idle-party[data-view=detail] .ip-sheet-calc-tools {display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:8px 0}
+#idle-party[data-view=detail] .ip-sheet-calc-tools label {color:#f6ead4}
+#idle-party[data-view=detail] .ip-sheet-calc-tools :is(input,select) {
+  max-width:100%;padding:5px 8px;color:#fff1d9;border:1px solid #748d9d;border-radius:6px;background:#172631;
+}
+#idle-party[data-view=detail] .ip-sheet-calc-tools input {width:8ch}
+#idle-party[data-view=detail] .ip-sheet-calc-photos {display:grid;grid-template-columns:1fr 1fr;gap:6px}
+#idle-party[data-view=detail] .ip-sheet-calc-photos figure {
+  margin:0;padding:6px;text-align:center;background:radial-gradient(ellipse at center,#375666,#162630 75%);
+  border:1px solid #657f8b;border-radius:7px;color:#f6ead4;
+}
+#idle-party[data-view=detail] .ip-sheet-calc-photos figure:nth-child(2) {border-color:#c8a263;background:radial-gradient(ellipse,#594d37,#1b2731 75%)}
+#idle-party[data-view=detail] .ip-sheet-calc-photos canvas {display:block;width:64px;height:62px;object-fit:contain;margin:0 auto 4px}
+#idle-party[data-view=detail] .ip-sheet-calc-table {min-width:0;overflow-x:auto}
+#idle-party[data-view=detail] .ip-sheet-calc-table table {width:100%;min-width:385px;margin:6px 0 0}
+
+#idle-party[data-view=detail] .ip-sheet-birth-options {margin:6px 0;color:#f6ead4}
+#idle-party[data-view=detail] .ip-sheet-birth-fields {display:flex;flex-wrap:wrap;gap:5px;margin:6px 0}
+#idle-party[data-view=detail] .ip-sheet-birth-fields label {display:grid;gap:3px}
+#idle-party[data-view=detail] .ip-sheet-birth-fields :is(input,select) {
+  width:7ch;padding:4px 6px;background:#172631;color:#f6ead4;border:1px solid #748d9d;border-radius:6px;
+}

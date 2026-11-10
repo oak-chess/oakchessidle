@@ -1,4 +1,4 @@
-/* Local VIP economy. Durations accumulate; benefit values never stack. */
+/* Local VIP economy. Repeated purchases extend the duration of each boost. */
 window.IDLE_VIP=(()=>{
  const duration=[3600,7200,10800,21600,43200,86400,604800,2592000],labels=['1 hora','2 horas','3 horas','6 horas','12 horas','24 horas','7 dias','30 dias'],xpPrices=[3,6,8,12,20,29,175,645],otherPrices=[6,12,15,24,40,58,350,1290],catalog={
  trainer:{name:'XP do treinador',benefit:'+50% XP do treinador',factor:1.5,icon:'exp-share',color:'#ffc758',prices:xpPrices},
@@ -24,7 +24,7 @@ window.IDLE_VIP=(()=>{
  }
  function bind(s,running){data(s);runtimes.set(s,{running,last:Date.now()})}
  function sync(s){const v=data(s),rt=runtimes.get(s);if(!rt)return v;const now=Date.now(),dt=Math.max(0,(now-rt.last)/1000);rt.last=now;if(rt.running())for(const k in catalog)if(!v.paused[k])v.remaining[k]=Math.max(0,v.remaining[k]-dt);return v}
- function membership(s){return Math.max(0,(Number(data(s).vipUntil)||0)-Date.now())/1000} function factor(s,key){const v=sync(s),boost=v.remaining[key]>0&&!v.paused[key]?catalog[key]?.factor||1:1;return Math.max(boost,(key==='trainer'||key==='pokemon')&&membership(s)>0?1.5:1)}
+ function membership(s){return Math.max(0,(Number(data(s).vipUntil)||0)-Date.now())/1000} function factor(s,key){const v=sync(s),boost=v.remaining[key]>0&&!v.paused[key]?catalog[key]?.factor||1:1;const vipXP=(key==='trainer'||key==='pokemon')&&membership(s)>0?1.5:1;return boost*vipXP}
  function offlineInfo(s,hours){const elapsed=Math.max(0,Number(hours)||0),now=Date.now(),start=now-elapsed*3600000,v=data(s),end=Math.min(now,start+12*3600000),vipStart=Math.max(start,Number(v.vipSince)||0),vipEnd=Math.min(end,Number(v.vipUntil)||0),eligible=Math.max(0,(vipEnd-vipStart)/3600000),considered=Math.min(elapsed,8+Math.min(4,eligible)),vipHours=Math.max(0,(Math.min(start+considered*3600000,Number(v.vipUntil)||0)-vipStart)/3600000);return {hours:considered,vipHours:Math.min(considered,vipHours),limit:8+Math.min(4,eligible)}}
  function convert(s,qty){qty=Number(qty);const cost=qty*rate;if(!Number.isSafeInteger(qty)||qty<1||!Number.isSafeInteger(cost)||!Number.isSafeInteger(data(s).credits+qty))return {ok:false,reason:'Quantidade inválida.'};if(!Number.isFinite(s.gold)||s.gold<cost)return {ok:false,reason:'Coins insuficientes.'};s.gold-=cost;s.vip.credits+=qty;record(s,'Conversão: '+cost+' Coins → '+qty+' créditos VIP');return {ok:true}}
  function addTime(s,key,seconds,cost){const v=sync(s);if(!catalog[key]||v.credits<cost)return {ok:false,reason:'Créditos VIP insuficientes.'};if(v.bank[key]+v.remaining[key]+seconds>limit)return {ok:false,reason:'Limite de duração atingido.'};v.credits-=cost;v.bank[key]+=seconds;record(s,catalog[key].name+' · '+Math.round(seconds/3600)+' h compradas');return {ok:true}}

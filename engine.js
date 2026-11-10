@@ -767,18 +767,19 @@ function fuseOn(u,hold,idx){const k=G.items[idx],nk=fuseKey(hold,k),i=u.items.in
 ITEMBY.strip={k:'strip',n:'Ímã',s:'magnet',d:'Arraste para um Pokémon: retira todos os itens equipados e os devolve à mochila. Não ocupa um espaço de equipamento.',f:()=>{}};
 
 /* ---------- Texto do golpe ---------- */
-function moveText(L,star,mv){
-  mv=mv||movesFor(L,star)[0];const bs=baseStats(L,star),dm=Math.round(bs.sp*mv.p);
-  const T={splash:'Não causa dano nem aplica condição.',teleport:'Teleporta para uma casa livre na arena.',transform:'Copia os golpes do alvo até o fim desta batalha.',debuff:'Reduz a velocidade do alvo por '+mv.d+'s.',bolt:`Projétil: ${dm} de dano.`,
-   blast:`Explosão em área: ${dm} de dano.`,burst:`Onda ao redor: ${dm} de dano.`,
-   beam:`Raio em linha: ${dm} de dano.`,drain:`${dm} de dano e cura 60% dele.`,
-   rush:`Investe no alvo: ${dm} de dano.`,multi:`Até 3 alvos: ${dm} de dano cada.`,
-   chain:`Salta entre 4 alvos: ${dm} (−25% por salto).`,storm:`5 golpes aleatórios: ${dm} cada.`,
+function moveText(L,star,mv,spell){
+  mv=mv||movesFor(L,star)[0];const bs=baseStats(L,star),dm=Math.round((spell??bs.sp)*mv.p);
+  const estimate=spell!=null,amount=(value)=>estimate?value.toLocaleString('pt-BR'):value;
+  const T={splash:'Não causa dano nem aplica condição.',teleport:'Teleporta para uma casa livre na arena.',transform:'Copia os golpes do alvo até o fim desta batalha.',debuff:'Reduz a velocidade do alvo por '+mv.d+'s.',bolt:`Projétil: ${amount(dm)} de dano.`,
+   blast:`Explosão em área: ${amount(dm)} de dano.`,burst:`Onda ao redor: ${amount(dm)} de dano.`,
+   beam:`Raio em linha: ${amount(dm)} de dano.`,drain:`${amount(dm)} de dano e cura 60% dele.`,
+   rush:`Investe no alvo: ${amount(dm)} de dano.`,multi:`Até 3 alvos: ${amount(dm)} de dano cada.`,
+   chain:`Salta entre 4 alvos: ${amount(dm)} (−25% por salto).`,storm:`5 golpes aleatórios: ${amount(dm)} cada.`,
    heal:`Cura o aliado mais ferido: ${Math.round(dm*1.4)}.`,barrier:`Escudo de ${Math.round(dm*1.1)} para si e aliados (5s).`,
-   field:`Zona de 3s: ${dm} de dano a cada 0,5s.`,barrage:`5 projéteis: ${dm} de dano cada.`,
-   meteor:`Meteoro em área: ${dm} de dano.`,buff:'Aliados: +35% vel. de ataque e +20% de dano (5s).'}[mv.k];
+   field:`Zona de 3s: ${amount(estimate?Math.round(spell*mv.p*.8):dm)} de dano a cada 0,5s.`,barrage:`${estimate?(recipe(mv).n||5):5} projéteis: ${amount(dm)} de dano cada.`,
+   meteor:`Meteoro em área: ${amount(dm)} de dano.`,buff:'Aliados: +35% vel. de ataque e +20% de dano (5s).'}[mv.k];
   const ST={stun:`Atordoa ${mv.d}s.`,freeze:`Congela ${mv.d}s.`,burn:'Queima.',poison:'Envenena.',slow:'Reduz a vel.'};
-  if(mv.targetId===7&&mv.k==='heal')return 'Recupera '+Math.round(dm*1.4)+' PS do próprio Pokémon.';if(mv.targetId===7&&mv.k==='barrier')return 'Ganha escudo de '+Math.round(dm*1.1)+' por 5s.';if(mv.targetId===7&&mv.k==='buff')return 'Ganha +35% de velocidade de ataque e +20% de dano por 5s.';return T+(mv.st?' '+(mv.statusChance?Math.round(mv.statusChance*100)+'% de chance: ':'')+ST[mv.st]:'');
+  if(mv.targetId===7&&mv.k==='heal')return 'Recupera '+Math.round(dm*1.4)+' PS do próprio Pokémon.';if(mv.targetId===7&&mv.k==='barrier')return 'Ganha escudo de '+Math.round(dm*1.1)+' por 5s.';if(mv.targetId===7&&mv.k==='buff')return 'Ganha +35% de velocidade de ataque e +20% de dano por 5s.';return (T||'Efeito aplicado durante o combate.')+(mv.st?' '+(mv.statusChance?Math.round(mv.statusChance*100)+'% de chance: ':'')+ST[mv.st]:'');
 }
 
 /* =====================================================================
@@ -3101,7 +3102,7 @@ function unitTip(x){
   const member=window.IDLE_TOOLTIP?.member(x);
   const L=x.L||LINES[x.line],star=x.star,live=x.maxHp!=null,bs=baseStats(L,star),tys=(x._idleMega||member?.megaKey)?(window.IDLE_MEGA_DEFS?.find(d=>d.key===(x._idleMega||member?.megaKey))?.types||typesOf(L,star)):typesOf(L,star),moveCount=(live?x.moves:movesFor(L,star)).length;
   /* fora do combate, simula a unidade com itens e bênçãos (cartas) para mostrar os status já com os bônus */
-  let E=live?x:null;if(!live){const sq=B.seq;try{E=mkCU({line:LINES.indexOf(L),star,items:x.items||[],r:0,c:0,scale:member?1+(member.level-1)*.12:1,idleLevel:member?.level,shiny:!!x.shiny,hpx:x.shiny?SHB:1,dx:x.shiny?SHB:1},0);if(member)window.IDLE_TOOLTIP.preview(E,member);applyBoons([E]);if(G.tower&&window.TOWER)TOWER.previewStats(E,x)}catch(e){E=null}B.seq=sq}
+  let E=live?x:null;if(!live){const sq=B.seq;try{E=mkCU({line:LINES.indexOf(L),star,items:x.items||[],r:0,c:0,scale:member?1+(member.level-1)*.12:1,idleLevel:member?.level,shiny:!!x.shiny,hpx:!window.OAK_IDLE_MODE&&x.shiny?SHB:1,dx:!window.OAK_IDLE_MODE&&x.shiny?SHB:1},0);if(member)window.IDLE_TOOLTIP.preview(E,member);applyBoons([E]);if(G.tower&&window.TOWER)TOWER.previewStats(E,x)}catch(e){E=null}B.seq=sq}
   const hpNow=live?Math.max(0,Math.round(x.hp)):Math.round(E?E.maxHp:bs.hp),hpMax=Math.round(E?E.maxHp:bs.hp),hpPct=Math.max(0,Math.min(100,hpNow/hpMax*100));
   const mNow=live?Math.round(x.mana):Math.round(E?E.mana:bs.mana0),mMax=E?manaCapacity(E):bs.maxMana*2,mPct=Math.max(0,Math.min(100,mNow/mMax*100));
   const lv=live?1:0,sh_=lv&&E.shred?1-E.shred:1,atk=Math.round(E?E.atk*(1+E.dmgAmp)*(lv?1+(E.buffAtk||0):1):bs.atk),sp=Math.round(E?E.spell*(1+E.ap)*(1+E.dmgAmp):bs.sp),as=(E?E.as*(lv?(1+(E.buffAS||0))*(E.slow>0?.7:1):1):bs.as).toFixed(2),ar=Math.round(E?E.armor*sh_:bs.armor),mr=Math.round(E?E.mr*sh_:bs.mr);
@@ -3128,7 +3129,7 @@ function unitTip(x){
    <div class="uhc"><h4>${L.names[star-1]}<span class="ustars st${star}">${'★'.repeat(star)}</span>${x.shiny?'<span class="ushiny">✨</span>':''}</h4><div class="tys">${role?`<span class="rl">${role}</span>`:''}${tys.map(t=>`<span class="ty" style="--c:${TYPES[t].c}">${tyIcon(t)} ${TYPES[t].n}</span>`).join('')}</div></div></div>
   ${profile}<div class="idle-tip-section">Condição e atributos</div><div class="bars"><div class="bar hp ${hpPct<30?'lo':hpPct<60?'mid':''}"><i style="width:${hpPct}%"></i><span>PS</span><b>${live?hpNow+'/'+hpMax:hpMax}</b></div><div class="bar mp"><i style="width:${mPct}%"></i><span>Mana</span><b>${mNow}/${mMax}</b></div></div>
   <div class="sts"><div><i>Atq</i><b>${atk}</b></div><div><i>Poder</i><b>${sp}</b></div><div><i>Alcance</i><b>${bs.range}</b></div><div><i>Def</i><b>${ar}</b></div><div><i>Def. esp.</i><b>${mr}</b></div><div><i>Atq./s</i><b>${as}</b></div></div>
-  ${x.shiny?`<div class="shnote">✨ Shiny: +${Math.round((SHB-1)*100)}% PS, Atq e Poder</div>`:''}<div class="idle-tip-section">Passiva e golpes</div><div class="usec">${abil}</div>
+  ${x.shiny?`<div class="shnote">✨ Shiny: +${Math.round(((window.OAK_IDLE_MODE?window.IDLE_INDIVIDUALS.shinyMultiplier:SHB)-1)*100)}% ${window.OAK_IDLE_MODE?'nos atributos':'PS, Atq e Poder'}</div>`:''}<div class="idle-tip-section">Passiva e golpes</div><div class="usec">${abil}</div>
   </div>`}
 function traitTip(t,n){const T=TRAITS[t],cur=tierOf(t,n);
   /* Pokémon desta sinergia: acesos = em campo e contando; apagados = ainda faltam */
