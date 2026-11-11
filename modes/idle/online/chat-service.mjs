@@ -1,5 +1,5 @@
 const channels = new Set(['geral', 'comercio', 'duvidas']);
-const cooldownMs = 3000;
+const cooldownMs = 40000;
 
 export function registerChat(io, authenticate) {
   const history = new Map([...channels].map(channel => [channel, []]));
@@ -54,10 +54,10 @@ export function registerChat(io, authenticate) {
       if (!message || [...message].length > 140) return ack({ error: 'Use de 1 a 140 caracteres.' });
       const timestamp = Date.now();
       if (timestamp - (lastMessage.get(player.id) ?? 0) < cooldownMs) {
-        return ack({ error: 'Aguarde 3 segundos entre mensagens.' });
+        return ack({ error: 'Aguarde 40 segundos entre mensagens.' });
       }
       lastMessage.set(player.id, timestamp);
-      const entry = { username: player.username, text: message, timestamp };
+      const entry = { userId: player.id, username: player.username, text: message, timestamp };
       const messages = history.get(channel);
       messages.push(entry);
       if (messages.length > 30) messages.shift();
