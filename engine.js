@@ -4786,7 +4786,7 @@ let idleSettingsViewLoading=false;
 function requestIdleSettingsView(){
   if(idleSettingsViewLoading)return;
   idleSettingsViewLoading=true;
-  const helper=document.createElement('script');helper.src=new URL('modes/idle/settings-view.js?v=1',document.baseURI).href;
+  const helper=document.createElement('script');helper.src=new URL('modes/idle/settings-view.js?v=optional-controls-2',document.baseURI).href;
   helper.onload=()=>{idleSettingsViewLoading=false;if(typeof window.syncIdleSettingsView==='function')syncMenuUI();else console.warn('Interface de configurações indisponível.')};
   helper.onerror=()=>{idleSettingsViewLoading=false;helper.remove();console.warn('Interface de configurações indisponível; tente novamente ao alterar uma opção.')};
   document.head.append(helper);
