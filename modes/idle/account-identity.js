@@ -32,7 +32,7 @@
       const client=lib.createClient(config.SUPABASE_URL,config.SUPABASE_ANON_KEY);
       async function load(session){
         const request=++generation;owner=null;
-        if(!session){name='Entre na sua conta';notify();return}
+        if(!session){name='Entre na sua conta';notify();location.replace('/');return}
         name='Conectando…';notify();
         const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),10000);
         let response;
