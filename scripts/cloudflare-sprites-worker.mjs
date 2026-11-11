@@ -9,7 +9,7 @@ export default {
       return new Response(null, { status: 405, headers: { Allow: 'GET, HEAD' } });
     }
     try {
-      return await fetch(upstream + pathname, { method: request.method, redirect: 'error' });
+      return await fetch(upstream + pathname, { method: request.method, redirect: 'follow' });
     } catch {
       return new Response('Sprite indisponível', { status: 502 });
     }
