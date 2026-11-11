@@ -11,7 +11,9 @@ export default {
     try {
       return await fetch(upstream + pathname, { method: request.method, redirect: 'follow' });
     } catch {
-      return new Response('Sprite indisponível', { status: 502 });
+      return fetch('https://raw.githubusercontent.com/oak-chess/oakchessidle/main' + pathname, {
+        method: request.method
+      });
     }
   }
 };
