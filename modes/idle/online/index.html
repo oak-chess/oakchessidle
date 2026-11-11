@@ -3,15 +3,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>OakChess Idle Online</title>
-<style>
-  .chat-embed { color-scheme: dark; background: #101c25; color: #eaf5fb; font: 14px system-ui, sans-serif; }
-  .chat-embed main { display: grid; gap: 10px; }
-  .chat-embed h1, .chat-embed #profile { display: none; }
-  .chat-embed h2, .chat-embed p { margin: 0; }
-  .chat-embed #chat-messages { max-height: 14rem; overflow: auto; padding-left: 1.25rem; overflow-wrap: anywhere; }
-  .chat-embed form { margin-block: 8px; }
-  .chat-embed input { max-width: 100%; box-sizing: border-box; }
-</style>
+<link rel="stylesheet" href="./chat.css">
 <main>
   <h1>OakChess Idle Online</h1>
   <p id="status" role="status">Carregando…</p>
@@ -74,7 +66,7 @@
     status.replaceChildren('Abra pelo servidor local para entrar na sua conta. ', link);
   } else {
     const sdk = document.createElement('script');
-    sdk.src = 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2';
+    sdk.src = '../../../assets/vendor/supabase.js';
     const showError = () => {
       document.getElementById('status').textContent = 'Não foi possível carregar a tela de login. Atualize a página para tentar novamente.';
     };

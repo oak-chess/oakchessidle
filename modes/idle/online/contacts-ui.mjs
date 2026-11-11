@@ -1,76 +1,24 @@
+import { openNewConversation } from './new-conversation.mjs';
+import { appendVerification } from './verification.mjs';
+import { openPrivateChat } from './private-chat.mjs';
 export function mountContacts(client, container) {
-  const section = document.createElement('section');
-  const title = document.createElement('h3');
-  title.textContent = 'Contatos';
-  const form = document.createElement('form');
-  const input = document.createElement('input');
-  input.placeholder = 'Nome exato do treinador';
-  input.setAttribute('aria-label', 'Nome do treinador para adicionar');
-  input.pattern = '[A-Za-z0-9_]{3,24}';
-  input.maxLength = 24;
-  input.required = true;
-  const button = document.createElement('button');
-  button.textContent = 'Adicionar';
-  const status = document.createElement('p');
-  status.setAttribute('role', 'status');
-  const list = document.createElement('ul');
-  form.append(input, button);
-  section.append(title, form, status, list);
-  container.append(section);
-  let generation = 0;
-  let owner;
-  let busy = false;
-
-  async function refresh() {
-    const request = ++generation;
-    const { data, error } = await client.rpc('get_player_contacts');
-    if (request !== generation || !owner) return;
-    list.replaceChildren();
-    if (error) {
-      status.textContent = 'Os contatos ainda estão sendo preparados.';
-      return;
-    }
-    for (const contact of data) {
-      const row = document.createElement('li');
-      const remove = document.createElement('button');
-      remove.type = 'button';
-      remove.textContent = 'Remover';
-      remove.onclick = async () => {
-        if (busy) return;
-        busy = true;
-        remove.disabled = true;
-        try {
-          const { error } = await client.rpc('remove_player_contact', { target_id: contact.id });
-          if (request !== generation) return;
-          if (error) status.textContent = 'Não foi possível remover o contato.';
-          else await refresh();
-        } finally { busy = false; remove.disabled = false; }
-      };
-      row.append('@' + contact.username + ' ', remove);
-      list.append(row);
-    }
-    if (!data.length) list.textContent = 'Adicione um treinador pelo nome para salvar seu contato.';
-  }
-  form.onsubmit = async event => {
-    event.preventDefault();
-    if (busy) return;
-    busy = true;
-    button.disabled = true;
-    const player = owner;
-    try {
-      const { error } = await client.rpc('add_player_contact', { requested_username: input.value.trim() });
-      if (owner !== player) return;
-      status.textContent = error ? 'Treinador indisponível. Confira o nome.' : 'Contato adicionado.';
-      if (!error) { input.value = ''; await refresh(); }
-    } finally { busy = false; button.disabled = false; }
-  };
-  return session => {
-    owner = session?.user.id;
-    generation++;
-    section.hidden = !owner;
-    input.value = '';
-    list.replaceChildren();
-    status.textContent = '';
-    if (owner) void refresh();
-  };
+ const make=(tag,text,cls)=>{const el=document.createElement(tag);if(text!==undefined)el.textContent=text;if(cls)el.className=cls;return el;};
+ const section=make('section',undefined,'online-conversations');
+ const search=make('input');search.type='search';search.placeholder='Pesquisar conversas';search.setAttribute('aria-label','Pesquisar conversas online');
+ const tools=make('div',undefined,'online-list-tools'),add=make('button','+');add.setAttribute('aria-label','Nova conversa');add.title='Nova conversa';add.type='button';tools.append(add);
+ const form=make('form');form.hidden=true;const input=make('input');input.placeholder='Nome exato do treinador';input.pattern='[A-Za-z0-9_]{3,24}';input.maxLength=24;input.required=true;input.setAttribute('aria-label','Nome do treinador para adicionar');const submit=make('button','Adicionar');form.append(input,submit);
+ const status=make('p',undefined,'online-contact-status');status.setAttribute('role','status');
+ const list=make('div',undefined,'online-conversation-list');section.append(search,tools,form,status,list);container.append(section);
+ const header=make('header',undefined,'online-thread-header'),back=make('button','‹'),avatar=make('span',undefined,'online-avatar'),words=make('div'),title=make('strong'),subtitle=make('small','Canal da comunidade');back.type='button';back.setAttribute('aria-label','Voltar às conversas');words.append(title,subtitle);header.append(back,avatar,words);container.prepend(header);
+ const channelSelect=container.querySelector('#chat-channel');const publicParts=[...container.children].filter(el=>el!==section&&el!==header);let contacts=[],groups=[],owner,disposePrivate,disposeNew,generation=0,busy=false;
+ const notify=thread=>window.parent.postMessage({type:'oak-pokechat-view',thread},location.origin);
+ function showList(){disposeNew?.();disposeNew=undefined;disposePrivate?.();disposePrivate=undefined;header.hidden=true;for(const part of publicParts)part.hidden=true;section.hidden=false;container.dataset.view='contacts';notify(false);}
+ function row(name,preview,symbol,action,verification){const b=make('button',undefined,'online-conversation-row');b.type='button';const a=make('span',symbol,'online-avatar'),copy=make('span',undefined,'online-row-copy');const label=make('strong',name);appendVerification(label,verification);copy.append(label,make('small',preview));b.append(a,copy);b.onclick=action;return b;}
+ function draw(){list.replaceChildren();const query=search.value.toLocaleLowerCase();for(const group of groups)if(group.name.toLocaleLowerCase().includes(query))list.append(row(group.name,group.member_count+' participantes','G',()=>openContact({...group,username:group.name,isGroup:true})));for(const [key,name,preview,symbol]of [['geral','Geral','Converse com outros treinadores','G'],['comercio','Comércio','Trocas e anúncios da comunidade','C'],['duvidas','Dúvidas','Ajuda entre treinadores','?']])if(name.toLocaleLowerCase().includes(query))list.append(row(name,preview,symbol,()=>{section.hidden=true;for(const part of publicParts)part.hidden=false;container.querySelector('h2').hidden=true;channelSelect.parentElement.hidden=true;header.hidden=false;title.textContent=name;appendVerification(title,'official');subtitle.textContent='Canal oficial · OakChess Idle';avatar.textContent=symbol;channelSelect.value=key;container.dataset.view='thread';notify(true);channelSelect.dispatchEvent(new Event('change'));},'official'));for(const contact of contacts)if(contact.username.toLocaleLowerCase().includes(query))list.append(row('@'+contact.username,'Toque para conversar',contact.username.charAt(0).toUpperCase(),()=>{section.hidden=true;disposePrivate=openPrivateChat(client,container,contact,owner,showList);notify(true);},contact.verified===true?'verified':undefined));}
+ function openContact(contact){section.hidden=true;disposePrivate=openPrivateChat(client,container,contact,owner,showList);notify(true);}
+ function newConversation(){showList();section.hidden=true;notify(true);disposeNew=openNewConversation(client,container,contacts,{back:showList,open:openContact,created:async group=>{showList();await refresh();if(group)openContact({...group,username:group.name,isGroup:true});}});}
+ back.onclick=showList;search.oninput=draw;add.onclick=newConversation;
+ async function refresh(){const request=++generation;let {data,error}=await client.rpc('get_verified_player_contacts');if(error?.code==='PGRST202')({data,error}=await client.rpc('get_player_contacts'));if(request!==generation||!owner)return;contacts=error?[]:data||[];const groupResult=await client.rpc('get_chat_groups');if(request!==generation||!owner)return;groups=groupResult.error?[]:groupResult.data||[];status.textContent=error?'Contatos indisponíveis no momento. Os canais continuam disponíveis.':'';draw();}
+ form.onsubmit=async event=>{event.preventDefault();if(busy)return;busy=true;submit.disabled=true;const player=owner;try{const {error}=await client.rpc('add_player_contact',{requested_username:input.value.trim()});if(owner!==player)return;status.textContent=error?'Confira o nome do treinador e tente novamente.':'Contato adicionado.';if(!error){input.value='';form.hidden=true;await refresh();}}finally{busy=false;submit.disabled=false;}};
+ return session=>{owner=session?.user.id;generation++;contacts=[];groups=[];showList();draw();if(owner)void refresh();};
 }

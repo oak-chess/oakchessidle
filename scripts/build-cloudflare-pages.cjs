@@ -6,7 +6,7 @@ const root = path.resolve(__dirname, '..');
 const output = path.join(root, '_cloudflare');
 const spritePrefix = 'assets/pmd/sprite/';
 const onlineFiles = new Set(['index.html', 'config.js', 'online.js', 'chat-client.mjs', 'hunt-client.mjs',
-  'home.html', 'home.css', 'home.js', 'contacts-ui.mjs']);
+  'home.html', 'home.css', 'home.js', 'contacts-ui.mjs', 'chat.css', 'private-chat.mjs', 'verification.mjs', 'new-conversation.mjs']);
 const entryFiles = new Set(['index.html', 'engine.js', 'asset-inventory.js', 'layout.css', 'transfer.html', 'CREDITS.md']);
 const tracked = execFileSync('git', ['ls-files', '-z'], { cwd: root, encoding: 'utf8', maxBuffer: 16 * 1024 * 1024 })
   .split('\0').filter(Boolean);

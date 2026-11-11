@@ -1,30 +1,46 @@
 <!doctype html>
 <html lang="pt-BR">
+<head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>OakChess Idle · Sua jornada começa aqui</title>
+<title>Pokémon OakChess Idle · Sua equipe. Sua evolução.</title>
+<link rel="preload" as="image" href="assets/home/landscape-v2-fast.webp" fetchpriority="high">
+<link rel="preload" as="image" href="assets/home/account-frame-v2-fast.webp" fetchpriority="high">
 <link rel="stylesheet" href="modes/idle/online/home.css">
-<main>
-  <section class="intro">
-    <img class="brand" src="assets/pokeapi/sprites/items/poke-ball.png" alt="">
-    <p class="eyebrow">OAKCHESS IDLE</p>
-    <h1>Sua equipe.<br>Sua próxima conquista.</h1>
-    <p>Monte sua equipe Pokémon, explore regiões e converse com outros treinadores pelo PokéChat.</p>
+</head>
+<body>
+<main class="homepage">
+<nav class="home-links" aria-label="Ajuda"><button type="button" data-help="wiki">Wiki</button><button type="button" data-help="support">Suporte</button></nav>
+  <section class="intro" aria-label="Pokémon OakChess Idle">
+    <div class="brand-mark"><img class="brand-logo" src="assets/home/logo-v2-fast.webp" alt="Pokémon OakChess Idle" fetchpriority="high"></div><h1>Sua equipe. Sua evolução.</h1><p class="tagline">Batalhas automáticas, capturas e treinamento em um mundo Pokémon.</p>
+    <p class="sr-only">Batalhas automáticas, capturas e treinamento em um mundo Pokémon. Conheça Invasões Rocket, Safari, Caçadas e Torre de Batalha.</p>
   </section>
-  <section class="account" aria-label="Conta de treinador">
-    <nav><button id="login-tab" aria-pressed="true">Entrar</button><button id="register-tab" aria-pressed="false">Criar conta</button></nav>
-    <h2 id="form-title">Bem-vindo de volta</h2>
-    <p id="status" role="status">Carregando sua conta…</p>
-    <form id="account-form" hidden>
-      <label id="name-label" hidden>Nome de treinador<input name="username" minlength="3" maxlength="24" pattern="[A-Za-z0-9_]{3,24}" autocomplete="nickname"><small>Único no jogo. Use este nome para adicionar contatos.</small></label>
-      <label>E-mail<input name="email" type="email" autocomplete="email" required></label>
-      <label>Senha<input name="password" type="password" minlength="8" autocomplete="current-password" required></label>
-      <button class="primary" id="submit">Entrar</button>
+  <section class="account" aria-label="Conta de treinador"><span class="frame-light" aria-hidden="true"></span>
+    <h2 id="form-title">Comece sua jornada</h2>
+    <p id="status" role="status" aria-live="polite">Carregando sua conta…</p>
+    <form id="account-form">
+      <label id="name-label"> <span class="sr-only">Nome de treinador</span><input name="username" placeholder="Nome de treinador" minlength="3" maxlength="24" pattern="[A-Za-z0-9_]{3,24}" autocomplete="nickname"><small>Seu nome identifica você no PokéChat.</small></label>
+      <label><span class="sr-only">E-mail</span><input name="email" placeholder="E-mail" type="email" autocomplete="email" required></label>
+      <label><span class="sr-only">Senha</span><input name="password" placeholder="Senha" type="password" minlength="8" autocomplete="new-password" required></label>
+      <label id="confirm-label"><span class="sr-only">Confirmar senha</span><input name="confirmation" placeholder="Confirmar senha" type="password" minlength="8" autocomplete="new-password" required></label>
+      <button class="primary" id="submit" disabled>CRIAR CONTA</button>
     </form>
+    <nav class="account-switch" aria-label="Acesso à conta"><button id="login-tab" aria-pressed="false">Já tenho uma conta · Entrar</button><button id="register-tab" aria-pressed="true" hidden>Criar uma conta</button></nav>
     <form id="trainer-form" hidden><label>Escolha seu nome de treinador<input name="username" pattern="[A-Za-z0-9_]{3,24}" minlength="3" maxlength="24" required><small>3 a 24 letras sem acento, números ou sublinhado.</small></label><button class="primary">Salvar nome</button></form>
-    <div id="ready" hidden><strong id="trainer-name"></strong><p>Compartilhe seu nome de treinador para ser encontrado no PokéChat.</p><a class="primary" href="game.html">Entrar no jogo</a><button id="signout">Sair da conta</button></div>
+    <div id="ready" hidden><strong id="trainer-name"></strong><p>Seu treinador está pronto para entrar na jornada.</p><a class="primary" href="game.html">Entrar no jogo</a><button id="signout">Sair da conta</button></div>
   </section>
-</main>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<nav class="mode-showcase" aria-label="Conheça os modos">
+<button type="button" data-help="rocket"><img src="assets/home/rocket-v2-fast.webp" alt="" width="440" height="250"><span>Invasões Rocket</span></button>
+<button type="button" data-help="safari"><img src="assets/home/safari-v2-fast.webp" alt="" width="440" height="250"><span>Safari</span></button>
+<button type="button" data-help="hunts"><img src="assets/home/hunts-v2-fast.webp" alt="" width="440" height="250"><span>Caçadas</span></button>
+<button type="button" data-help="tower"><img src="assets/home/tower-v2-fast.webp" alt="" width="440" height="250"><span>Torre de Batalha</span></button>
+</nav></main>
+<dialog id="home-help" aria-labelledby="help-title">
+<header class="pixel-dialog-header"><img id="help-icon" src="assets/pokeapi/sprites/items/town-map.png" alt="" width="48" height="48"><div><p class="pixel-kicker" id="help-kicker">GUIA DO TREINADOR</p><h2 id="help-title"></h2></div><button type="button" id="close-help" aria-label="Fechar painel">×</button></header>
+<div id="help-content" tabindex="0" aria-label="Conteúdo do painel"></div>
+<footer class="pixel-dialog-footer"><span>ESC · Voltar à home</span><button type="button" id="dismiss-help">Entendi <span aria-hidden="true">▸</span></button></footer>
+</dialog>
+<script defer src="assets/vendor/supabase.js"></script>
 <script type="module" src="modes/idle/online/home.js"></script>
+</body>
 </html>

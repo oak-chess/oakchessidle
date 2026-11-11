@@ -59,10 +59,14 @@ body.idle-native-mode #idle-inventory #ip-bag-content .pc-chat-message-search>.p
 .pc-chat-online-frame {
   display: block;
   width: 100%;
-  min-height: 20rem;
+  min-height: 0;
+  height: 100%;
   flex: 1 1 auto;
   border: 1px solid #375467;
   border-radius: 12px;
   background: #101c25;
   color-scheme: dark;
 }
+
+#idle-inventory .pc-chat-online-frame{border:0;border-radius:0;background:#111b21;order:3;min-height:0;height:0;flex:1 1 0;width:100%;display:block}
+#idle-inventory .pc-chat.pc-online-thread>.pc-chat-top,#idle-inventory .pc-chat.pc-online-thread>.pc-chat-filters{display:none!important}

@@ -14,7 +14,10 @@ window.OAK_IDLE_MODE=true;
   // Never clear a saved journey, including imports and recovery after quota errors.
   set.call(localStorage,prefix+'official-start-v1','1');
  }catch(error){console.warn('[OakChess Idle] Não foi possível copiar o progresso antigo. Use a transferência por backup.',error)}
- Storage.prototype.getItem=function(k){return get.call(this,prefix+k)};
- Storage.prototype.setItem=function(k,v){return set.call(this,prefix+k,v)};
- Storage.prototype.removeItem=function(k){return del.call(this,prefix+k)};
+ // Auth belongs to the origin and must be shared with the home and chat iframe.
+ // Only game data is namespaced; never import a legacy test session as identity.
+ const storageKey=k=>/^sb-.+-auth-token(?:.*)$/.test(String(k))?String(k):prefix+k;
+ Storage.prototype.getItem=function(k){return get.call(this,storageKey(k))};
+ Storage.prototype.setItem=function(k,v){return set.call(this,storageKey(k),v)};
+ Storage.prototype.removeItem=function(k){return del.call(this,storageKey(k))};
 })();

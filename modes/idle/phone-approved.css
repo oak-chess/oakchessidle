@@ -135,3 +135,7 @@ body.idle-native-mode #idle-inventory .pf-system-panel.pf-lock-screen .pf-lock-p
 /* The chat icon contains no baked-in notification count. */
 body.idle-native-mode #idle-inventory[data-theme] .pf-app-icon[data-app=chat]{background:url("assets/phone/chat-clean.svg") center/cover!important}
 #idle-inventory [data-phone-app=chat]>.pf-badge{right:calc((100% - var(--pf-icon-size))/2 - 7px)!important;top:-5px!important;z-index:3;pointer-events:none}
+
+/* Render the chat asset directly: atlas skins must not hide its image. */
+body.idle-native-mode #idle-inventory[data-theme] .pf-app-icon[data-app=chat]{background:#119a35!important;overflow:hidden!important}
+body.idle-native-mode #idle-inventory[data-theme] .pf-app-icon[data-app=chat]>img{display:block!important;width:100%!important;height:100%!important;object-fit:contain!important;max-width:none!important;margin:0!important}
