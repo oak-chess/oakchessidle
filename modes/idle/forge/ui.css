@@ -3,3 +3,6 @@
 .if-requirement>small{width:20%;text-align:center;color:#92e5ee}.if-requirement>b{flex:1;text-align:center}.if-requirement>span{flex:1;text-align:center}.if-access:empty{display:none}.if-notice:empty{display:none}
 
 .if-recipes .if-art-button:first-child[aria-pressed=false]{background:#061a2955!important;border-radius:8px}
+
+/* O popover do navegador aplica uma borda própria ao painel. */
+.idle-forge[popover] {border:0;padding:0;}

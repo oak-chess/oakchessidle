@@ -2,6 +2,62 @@
 window.IDLE_WIKI_DATA=()=>{
  const shiny=window.IDLE_SHINY,safari=window.IDLE_SAFARI_DATA,percent=n=>(n*100).toLocaleString('pt-BR',{maximumFractionDigits:4})+'%',topic=(id,group,title,summary,sections,action)=>({id,group,title,summary,sections,action});
  return [
+ topic('xp-calculation','Caçadas','XP por abate, níveis e XP/h','Da derrota de um selvagem até a barra de nível do treinador e da equipe.',[
+ ['XP base de cada abate',[
+ 'Some 10 × custo da família do adversário e 4 × nível do adversário. Multiplique pelo fator de XP da caçada e pelo fator do objetivo. Arredonde para o inteiro mais próximo, com mínimo de 1 XP.',
+ 'A porcentagem mostrada na seleção da caçada faz parte da fórmula: 156% significa ×1,56. Exemplo: adversário de nível 290, família de custo 3, caçada de 156% e objetivo de 100%. A conta é (30 + 1.160) × 1,56 × 1 = 1.856,4, arredondado para 1.856 XP base.',
+ 'Se houver Prey de XP para a espécie derrotada, multiplique a base pelo fator do Prey e arredonde novamente. Com +25% no exemplo, 1.856 × 1,25 = 2.320 XP antes do VIP e dos boosts.'
+ ]],
+ ['Treinador e Pokémon',[
+ 'O treinador e cada Pokémon vivo em campo recebem XP separadamente. Cada Pokémon elegível recebe o valor integral calculado para Pokémon. O boost de treinador vale apenas para o treinador, e o boost de Pokémon vale apenas para os parceiros.',
+ 'O VIP aplica ×1,5 nos dois cálculos. Um boost ativo de +50% aplica outro ×1,5 ao destinatário correspondente. Juntos dão ×2,25, ou +125%. Com os 2.320 XP do exemplo, VIP e boost do treinador dão 5.220 XP ao treinador. Com apenas o VIP para os Pokémon, cada parceiro vivo recebe 3.480 XP.',
+ 'Esses exemplos são de abates durante a caçada normal. O retorno offline estima os ganhos a partir do rendimento salvo e tem suas próprias regras.'
+ ]],
+ ['Curva de nível e tempo restante',[
+ 'Do nível N para N + 1, o custo é 50 × (N² − 3N + 4) XP. Do nível 10 para o 11 são 3.700 XP. Do nível 290 para o 291 são 4.161.700 XP.',
+ 'Ao subir, o custo é descontado e o excedente passa ao nível seguinte. Um ganho pode atravessar vários níveis. Quando um Pokémon sobe de nível, sua condição é restaurada.',
+ 'XP por abate mede uma recompensa individual. XP/h projeta o ritmo observado: XP acumulado na janela ÷ segundos decorridos × 3.600. O tempo estimado para subir é XP restante ÷ XP/h. A ficha começa a mostrar a estimativa após pelo menos 10 segundos de medição desde o primeiro ganho.'
+ ]]
+ ],'hunts'),
+ topic('hunt-economy','Recursos','Coins, loot e saldo da caçada','Como o abate gera Coins e como o registro estima o saldo da sessão.',[
+ ['Coins do nocaute',[
+ 'O valor parte de 2 + custo da família adversária + índice da área (começando em zero). Multiplique pelo fator de Coins da caçada, pelo fator do objetivo e pelo maior valor entre 1 e a raiz quadrada de (nível do adversário ÷ nível de referência da caçada). Um boost ativo de Coins acrescenta ×1,20. Arredonde somente o resultado final.'
+ ]],
+ ['Materiais e pedras',[
+ 'Cada entrada da tabela de loot comum tem chance e faixa de quantidade próprias. A chance é multiplicada pelo Prey de loot da espécie e pelo boost de loot ativos, com teto de 100%. Por exemplo, 10% × 1,20 × 1,40 = 16,8%. O bônus aumenta a chance, e a quantidade continua sendo sorteada dentro da faixa do item.',
+ 'Pedras de evolução são sorteadas numa tabela separada. Os multiplicadores de loot comum ficam fora desse cálculo.'
+ ]],
+ ['Saldo estimado',[
+ 'Saldo da sessão = Coins dos abates + valor de venda do loot obtido − custo estimado de reposição das bolas, poções e revives usados. O valor do loot representa o preço de venda, inclusive quando os materiais ainda estão no inventário.',
+ 'Saldo por hora = saldo estimado ÷ segundos ativos da sessão × 3.600. Um saldo de 6.000 Coins em 30 minutos equivale a 12.000 Coins/h.'
+ ]]
+ ],'records'),
+ topic('stat-calculation','Equipe','Atributos, defesa e nota de potencial','Leia a ficha do Pokémon e compare indivíduos da mesma espécie.',[
+ ['Multiplicadores individuais',[
+ 'Para cada atributo, o multiplicador de IV é 0,94 + 0,12 × (IV ÷ 31). Um IV zero dá ×0,94; um IV 31 dá ×1,06. O IV é avaliado no atributo em que foi sorteado, por isso o mesmo total pode produzir distribuições diferentes.',
+ 'Multiplique esse resultado pela potência (1 + bônus ÷ 100), pela Nature (×1,10 no atributo favorecido, ×0,90 no desfavorecido, ×1 nos demais), pelo talento aplicável e pelo multiplicador shiny de ×3 quando o Pokémon for shiny.'
+ ]],
+ ['Como o nível entra na ficha',[
+ 'PS máximo, Ataque e Poder usam o atributo base × [1 + (nível − 1) × 0,12] × multiplicador individual. Shedinja conserva 1 PS na projeção da ficha. Velocidade de ataque usa o valor base × multiplicador individual.',
+ 'Defesa e Resistência têm curvas próprias. Para cada uma, o fator de nível é 1 + mínimo(1,5; defesa-base da espécie ÷ 100) × (nível − 1) ÷ (nível + 49). Na Resistência, use a defesa especial-base da espécie. Multiplique a defesa ou resistência inicial por esse fator e pelo multiplicador individual correspondente.'
+ ]],
+ ['Mitigação e nota',[
+ 'A redução padrão é defesa efetiva ÷ (100 + defesa efetiva). Para dano físico, use Defesa; para dano especial, use Resistência. Com 50 de defesa efetiva, um golpe físico de 300 passa a 200 nessa etapa, antes dos demais efeitos. Dano verdadeiro e golpes com regras especiais seguem suas próprias condições.',
+ 'A nota de potencial compara o índice PS + Ataque + Poder + Defesa + Resistência no nível 100, sem equipamentos. Dentro da forma, os extremos de comparação usam P1 normal com todos os IVs zerados e P5 shiny com todos os IVs em 31. A nota é 10 × (índice individual − mínimo) ÷ (máximo − mínimo), limitada de 0 a 10.',
+ 'O cálculo percorre as formas anteriores e aplica um piso de +0,1 a cada nova forma. A Mega válida acrescenta +0,1, respeitando o teto 10. Subir de nível, por si só, não altera essa nota.'
+ ]]
+ ],'party'),
+ topic('capture-calculation','Captura','Cálculo da chance de captura','Taxa da espécie, bola escolhida e multiplicadores de shiny e boost.',[
+ ['Taxa base com o selvagem derrotado',[
+ 'A espécie e a forma fornecem a taxa R. A bola fornece o multiplicador B. O cálculo simula o alvo com 1 PS. Use M = máximo(1; piso dos PS máximos) e calcule A = piso[piso(R × B) × (3M − 2) ÷ (3M)].',
+ 'Se A for maior que 254, a chance base é 100%. Se A for menor que 1, é 0%. Para os demais casos, comece por piso(16.711.680 ÷ A), tire a raiz quadrada e descarte a fração. Repita a raiz e descarte a fração novamente para obter D. Calcule K = piso(1.048.560 ÷ D). A chance base é o menor valor entre 100% e (K ÷ 65.536)⁴.',
+ 'A Net Ball usa ×3 contra Água ou Inseto. A Repeat Ball usa ×3 se a forma já foi capturada ou consta na equipe ou coleção. Se a taxa da espécie estiver ausente, o jogo pula a tentativa e preserva a bola.'
+ ]],
+ ['Shiny e boost de captura',[
+ 'Em shiny, multiplique a chance base por 0,25 e aplique o teto de 25%. Em seguida, se o boost de captura estiver ativo e a tentativa for online, multiplique por 2 e aplique o teto final de 100%. Uma base de 40% vira 10% para shiny e chega a 20% com boost. Para um Pokémon normal, os mesmos 40% viram 80% com boost.',
+ 'A chance de o selvagem aparecer shiny é um sorteio separado. O Shiny Secret Lure atua no sorteio de aparecimento. A Mystic Ball tem regra própria para o encontro místico.'
+ ]]
+ ],'capture'),
  topic('vip','Atividades','Loja VIP · boosts e créditos','Use o menu lateral Loja VIP para converter Coins, comprar tempo e ativar seus boosts.',[['Créditos VIP',['1 crédito custa 50.000 Coins. Confira o custo total e confirme a conversão. Não há reversão para Coins nem pagamentos com dinheiro real.']],['Comprar e ativar',['Cada boost tem oito durações: 1h, 2h, 3h, 6h, 12h, 24h, 7 dias e 30 dias. As compras ficam guardadas em Meus itens; ativar soma esse tempo ao saldo ativo. Comprar duas vezes não soma porcentagens.','O relógio só avança nas caçadas comuns com o jogo aberto, inclusive em outra aba. Pode pausar individualmente. O tempo fica preservado com o jogo fechado; boosts avulsos não afetam o offline. A assinatura VIP permite até 12h de farm e +50% XP somente no período de validade; sem VIP, até 8h. Auto Catch e captura offline são exclusivos da assinatura VIP.']],['Bônus separados',['Treinador: +50% de XP; Pokémon vivos em campo: +50% de XP; Coins dos nocautes: +20%; chance de loot comum: +40%. Loot VIP não altera pedras, fragmentos, equipamentos ou drops de boss.','Captura: chance relativa dobrada, com teto de 100%, usando a mesma bola e estoque. Shiny Secret Lure: dobra somente o sorteio aleatório dos novos encontros; não altera a garantia de 4.000 nem ovos.']],['Exclusivos',['Pacotes guardam tempo de cada tipo separadamente. Utilitários entregam suprimentos à jornada. Cosméticos são efeitos visuais; outfits usam visuais Rocket e acabamento VIP. Itens permanentes não precisam ser recomprados.']]],'vip'),
  topic('prey','Caçadas','Prey · bônus por espécie','Prepare uma especialização temporária contra uma espécie das caçadas desbloqueadas.',[['Desbloqueio e acesso',['A primeira insígnia libera uma vaga. Com 8 insígnias são duas; com 16, três. Abra Modos na barra inferior e escolha Prey.']],['Preparar um Prey',['Escolha uma das três espécies sorteadas, confira o bônus e ative numa vaga. A mudança começa no próximo encontro normal; substituir um Prey exige confirmação e perde o progresso anterior.','Cada Prey dura 100 derrotas da espécie. Não gasta usos por tempo, contra outras espécies, em desafios, bosses, Safari ou pesca. O progresso fica salvo ao atualizar a página.']],['Bônus',['Dano: +10%, +15% ou +20% contra a espécie. Defesa: −10%, −15% ou −20% do dano causado por ela. Experiência: +10%, +15%, +20% ou +25% no XP de sua derrota.','Loot: +10%, +15% ou +20% relativos na chance dos materiais comuns. Uma chance de 10% passa a 12% com +20%; pedras, fragmentos, shiny e captura não são alterados.']],['Renovar opções',['Uma renovação gratuita por dia, no horário de São Paulo. As outras custam 100 Coins por nível do treinador, limitadas a 50.000 Coins. Renovar não substitui os Preys ativos. O preço aparece antes do clique.']]],'prey'),
  topic('elemental-ai','Combate','Tipos e escolha dos golpes','Sua equipe e os adversários usam as mesmas regras para escolher seus ataques.',[

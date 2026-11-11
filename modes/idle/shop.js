@@ -50,5 +50,8 @@ const auto=el('label',undefined,'is-shop-auto-loot'),check=el('input');check.typ
  const footer=el('div',undefined,'is-pokemon-sale-tools');footer.append(button('← Anterior',()=>{pokemonPage--;salePending=null;render()},pokemonPage===0),el('span',(pokemonPage+1)+' / '+pages+' · '+list.length+' encontrados'),button('Próxima →',()=>{pokemonPage++;salePending=null;render()},pokemonPage>=pages-1));body.append(footer,el('p','Vende apenas capturas do PC. Os equipamentos retornam à Pokéfone. O filtro de repetidos considera a família na equipe e no PC; revise antes de vender.','ip-help'));
  }
  function mount(stage){root=el('section',undefined,'idle-window is-shop');root.id='idle-shop';root.hidden=true;stage.append(root);document.addEventListener('keydown',e=>{if(e.key==='Escape')close()})}
- return {mount,open,close,refresh:render};
+ const canMoveDepot=m=>!ctx.busy(m);
+ function depotPrice(m){const line=ctx.lines.find(l=>l.names[0]===m.name);return line&&canMoveDepot(m)&&!m.locked&&!m.favorite&&m.captureSource!=='mystic'&&!window.ARENA_SPECIAL_CRYSTALS?.category(line.ids[(m.star||1)-1])?pokemonValue(m,line):null}
+ function sellDepot(ids){const members=(s.captureDepot||[]).filter(m=>ids.includes(m.id)&&depotPrice(m)!==null);if(!members.length)return;const sold=new Set(members);const total=members.reduce((sum,m)=>sum+depotPrice(m),0);for(const m of members)s.items.push(...(m.items||[]));s.captureDepot=s.captureDepot.filter(m=>!sold.has(m));s.gold+=total;record('Vendeu '+members.length+' Pokémon do Depósito por '+total+' ouro.',{type:'sell',amount:total});}
+ return {mount,open,close,refresh:render,canMoveDepot,depotPrice,sellDepot};
 };

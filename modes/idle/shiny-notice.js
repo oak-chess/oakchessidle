@@ -17,7 +17,7 @@
   const event=current=queue.shift(),caught=event.kind==='caught';box=el('aside','idle-shiny-notice');box.setAttribute('role','status');box.setAttribute('aria-live','polite');box.dataset.kind=event.kind;
   const portrait=el('div','isn-portrait'),img=el('img');img.src=event.sprite;img.alt=event.name+' shiny';portrait.append(img);for(let i=0;i<6;i++){const spark=el('i','isn-spark','✦');spark.style.setProperty('--i',i);spark.setAttribute('aria-hidden','true');portrait.append(spark)}
   const copy=el('div','isn-copy');copy.append(el('small','isn-heading',caught?'SHINY CAPTURADO!':'SHINY ENCONTRADO!'),el('b','isn-name',event.name));
-  if(caught){const tags=el('div','isn-tags');if(event.potency)tags.append(el('span','','P'+event.potency));if(Number.isFinite(event.ivTotal))tags.append(el('span','','IV '+event.ivTotal+'/186'));copy.append(tags);copy.append(el('small','isn-detail',event.destination==='bench'?'Guardado no banco':'Guardado no PC'))}
+  if(caught){const tags=el('div','isn-tags');if(event.potency)tags.append(el('span','','P'+event.potency));if(Number.isFinite(event.ivTotal))tags.append(el('span','','IV '+event.ivTotal+'/186'));copy.append(tags);copy.append(el('small','isn-detail',event.destination==='depot'?'Guardado no Depósito':event.destination==='bench'?'Guardado no banco':'Guardado no PC'))}
   else copy.append(el('small','isn-detail','Variante rara na caçada'));
   const close=el('button','isn-close','×');close.type='button';close.setAttribute('aria-label','Fechar aviso shiny');close.onclick=dismiss;box.append(portrait,copy,close);stage.append(box);
   timer=setTimeout(dismiss,caught?8500:6500);

@@ -3,14 +3,15 @@ window.createIdleParty=function(ctx){
 const {state:s,lines,sprite,itemInfo,itemSprite}=ctx;
 let phone,party,bag,current,bagTab='gear',filter='all',query='',dose='1',selectedItem=null,notice='',compareId=null,releaseId=null,comparisonOpen=false,sort='level',partyView='overview',partyGroup='field',recipientPanel=null;
 const all=()=>[...s.team,...s.collection];
+const inDepot=m=>s.captureDepot?.includes(m);
 const line=m=>lines.find(l=>l.names[0]===m.name);
 const passive=m=>window.IDLE_HOENN_RULES?.passive(line(m).ids[m.star-1],line(m).passive)||line(m).passive;
 const name=m=>(m.shiny?'✦ ':'')+(ctx.mega?.()?.selected(m)?.label||line(m).names[m.star-1]);
 const el=(tag,text,cls)=>{const e=document.createElement(tag);if(text!==undefined)e.textContent=text;if(cls)e.className=cls;return e};
 const button=(label,action,disabled=false,cls='')=>{const e=el('button',label,'ip-button '+cls);if(label==='←'){e.classList.add('idle-back-button');e.textContent='Anterior';e.setAttribute('aria-label','Página anterior de Pokémon')}e.type='button';e.disabled=disabled;e.onclick=action;return e};
 function image(src,alt,cls){const img=el('img',undefined,cls);img.src=src;img.alt=alt;img.onerror=()=>{img.onerror=null;img.src='assets/pokeapi/sprites/items/rare-candy.png'};return img}
-function where(m){return ctx.busy(m)?'Em atividade':!s.team.includes(m)?'No PC':m.pos?.z==='b'?'Em campo':'Na reserva'}
-function chosen(){return all().find(m=>m.id===current)||s.team[0]||s.collection[0]}
+function where(m){return inDepot(m)?'No Depósito':ctx.busy(m)?'Em atividade':!s.team.includes(m)?'No PC':m.pos?.z==='b'?'Em campo':'Na reserva'}
+function chosen(){return all().find(m=>m.id===current)||s.captureDepot?.find(m=>m.id===current)||s.team[0]||s.collection[0]}
 function commit(rebuild=true){if(rebuild)ctx.pause();ctx.setItems(s.items);ctx.save();ctx.refresh(rebuild);render();renderBag()}
 function protectionTools(m,compact=false,sheet=false){
  const tools=el('div',undefined,'idle-protection-tools'+(compact?' is-compact':'')+(sheet?' ip-sheet-protection':''));
@@ -149,7 +150,7 @@ function movePartner(m,destination){if(ctx.busy(m))return;ctx.pause();const owne
  ctx.resetSelection();notice=name(m)+' · '+where(m);commit();
 }
 function flash(text){notice=text;render();renderBag();ctx.notify(text)}
-function render(){if(!party||party.hidden)return;all().forEach(ctx.normalize);const m=chosen();if(!m)return;current=m.id;party.dataset.view=partyView;if(partyView==='overview'){party.querySelector('header .ip-detail-back')?.remove();party.querySelector('header .ip-close').textContent='✕';renderOverview();return}const main=party.querySelector('#ip-party-detail');const previousBody=main.querySelector('.ip-detail-body'),scrollKey=String(m.id),sameMember=main.dataset.scrollKey===scrollKey,managementOpen=!sameMember||previousBody?.querySelector('.ip-sheet-management')?.open,previousScroll=sameMember?(previousBody?.scrollTop||0):0;main.dataset.scrollKey=scrollKey;main.replaceChildren();party.querySelector('header h2').textContent='Ficha do Pokémon';party.querySelector('header p').textContent='';if(!sameMember&&!matchMedia('(prefers-reduced-motion: reduce)').matches)party.animate([{opacity:.6,scale:'.985'},{opacity:1,scale:'1'}],{duration:210,easing:'ease-out'});const back=button('‹ Equipe',()=>{partyView='overview';render()},false,'ip-detail-back');
+function render(){if(!party||party.hidden)return;all().forEach(ctx.normalize);const m=chosen();if(!m)return;if(inDepot(m))ctx.normalize(m);current=m.id;party.dataset.view=partyView;if(partyView==='overview'){party.querySelector('header .ip-detail-back')?.remove();party.querySelector('header .ip-close').textContent='✕';renderOverview();return}const main=party.querySelector('#ip-party-detail');const previousBody=main.querySelector('.ip-detail-body'),scrollKey=String(m.id),sameMember=main.dataset.scrollKey===scrollKey,managementOpen=!sameMember||previousBody?.querySelector('.ip-sheet-management')?.open,previousScroll=sameMember?(previousBody?.scrollTop||0):0;main.dataset.scrollKey=scrollKey;main.replaceChildren();party.querySelector('header h2').textContent='Ficha do Pokémon';party.querySelector('header p').textContent='';if(!sameMember&&!matchMedia('(prefers-reduced-motion: reduce)').matches)party.animate([{opacity:.6,scale:'.985'},{opacity:1,scale:'1'}],{duration:210,easing:'ease-out'});const back=button('‹ Equipe',()=>{partyView='overview';render()},false,'ip-detail-back');
  const header=party.querySelector(':scope > header');header.querySelector('.ip-detail-back')?.remove();header.prepend(back);header.querySelector('.ip-close').textContent='Fechar';
  const identity=el('div',undefined,'ip-sheet-identity'),hero=el('div',undefined,'ip-hero'),words=el('div',undefined,'ip-sheet-name'),meta=el('div',undefined,'ip-sheet-meta');
  const portrait=IDLE_PMD_PORTRAITS.member(m,lines);portrait.className='ip-portrait';
@@ -159,7 +160,7 @@ function render(){if(!party||party.hidden)return;all().forEach(ctx.normalize);co
  for(const type of badges){const badge=el('span',undefined,'ip-sheet-type');badge.style.setProperty('--type-accent',type.color);badge.append(image(type.icon,'',''),el('span',type.name));types.append(badge)}
  hero.style.setProperty('--portrait-glow',badges[0]?.color||'#5ba5a6');
  const display=el('div',undefined,'ip-sheet-display');display.append(portrait);hero.append(display,words,types);identity.append(hero,protectionTools(m,false,true));
- if(ctx.mega?.().defs.some(d=>d.id===ctx.mega().species(m)))identity.append(button(ctx.mega().selected(m)?'Mega permanente':'Mega Evolução',()=>ctx.openMega(m.id)));
+ if(!inDepot(m)&&ctx.mega?.().defs.some(d=>d.id===ctx.mega().species(m)))identity.append(button(ctx.mega().selected(m)?'Mega permanente':'Mega Evolução',()=>ctx.openMega(m.id)));
  main.append(identity);
  const body=el('div',undefined,'ip-detail-body');body.id='ip-sheet-panel';body.setAttribute('role','region');body.setAttribute('aria-label','Dados do Pokémon');body.tabIndex=0;main.append(body);
  if(notice){const status=el('p',notice,'ip-notice');status.setAttribute('role','status');body.append(status)}
@@ -167,10 +168,12 @@ function render(){if(!party||party.hidden)return;all().forEach(ctx.normalize);co
  const potential=el('section',undefined,'ip-sheet-section');potential.dataset.sheetSection='profile';renderSheetPotential(potential,m);body.append(potential);
  {
   const cert=m.birthCertificate,card=el(cert?'details':'section',undefined,'ip-analysis-card ip-sheet-certificate');if(cert){card.append(el('summary','Certificado de nascimento'+(cert.lineage?' · '+cert.lineage:'')),el('p','Berçário · nasceu no nível 1 em '+new Date(cert.hatched).toLocaleString('pt-BR')));for(const parent of cert.parents||[])card.append(el('p',parent.name+(parent.shiny?' ✦':'')+' · P'+parent.potency+' · IV '+window.IDLE_INDIVIDUALS.total(parent)+'/186'));}else card.append(el('b','Certificado de nascimento'),el('small','Disponível para Pokémon nascidos no Berçário.'));
+  if(!inDepot(m)){
   const management=el('details',undefined,'ip-sheet-management');management.open=managementOpen||releaseId===m.id;const managementHeading=el('summary','Organizar parceiro');managementHeading.append(el('small','Amizade '+(m.friendship||0)+'/100','ip-secondary-info'));management.append(managementHeading);
   const actions=el('div',undefined,'ip-actions');actions.append(button('Colocar em campo',()=>movePartner(m,'field'),ctx.busy(m)||m.pos?.z==='b'),button('Mover para reserva',()=>movePartner(m,'reserve'),ctx.busy(m)||m.pos?.z==='n'),button('Depositar no PC',()=>ctx.pcDeposit(m),ctx.busy(m)||!s.team.includes(m)));const others=all().filter(x=>x.id!==m.id&&(x.origin||x.name)===(m.origin||m.name));if(others.length)management.append(button('Comparar '+others.length+' repetido(s)',()=>{comparisonOpen=true;render();goToSheetSection('profile','.ip-analysis-comparison')}));
   const family=m.origin||m.name,recipient=all().find(x=>x.id!==m.id&&(x.origin||x.name)===family);if(recipient&&!s.team.includes(m))card.append(button(releaseId===m.id?'Confirmar conversão em 2 doces':'Converter repetido em 2 doces',()=>{if(m.favorite||m.locked||ctx.busy(m))return flash('Remova o favorito ou cadeado e conclua a atividade antes de converter.');if(releaseId!==m.id){releaseId=m.id;notice='Esta captura será removida. Equipamentos voltam à mochila e '+name(recipient)+' recebe dois doces. Confirme para continuar.';render();return}s.items.push(...(m.items||[]));recipient.candy=(recipient.candy||0)+2;s.collection=s.collection.filter(x=>x.id!==m.id);current=recipient.id;releaseId=null;notice='Conversão concluída. Dois doces adicionados ao parceiro.';commit()},m.favorite||m.locked||ctx.busy(m)));
   actions.append(button('Mais detalhes e ordens',()=>ctx.worldOpen('partners',m.id)));management.append(actions);body.append(management,card);
+  }
  }
  {
  const I=window.IDLE_INDIVIDUALS;
@@ -204,7 +207,7 @@ function render(){if(!party||party.hidden)return;all().forEach(ctx.normalize);co
   const portrait=IDLE_PMD_PORTRAITS.create(id,m.shiny,0);
   portrait.setAttribute('aria-label',species.names[index]);family.append(portrait);
  }
- const requirements=el('div',undefined,'ip-sheet-requirements');requirements.append(el('b',rule.text||'Forma final'));if(!rule.final)requirements.append(button('Ver requisitos',()=>ctx.evolutionOpen(m.id)));training.append(family,requirements);
+ const requirements=el('div',undefined,'ip-sheet-requirements');requirements.append(el('b',rule.text||'Forma final'));if(!inDepot(m)&&!rule.final)requirements.append(button('Ver requisitos',()=>ctx.evolutionOpen(m.id)));training.append(family,requirements);
  const gear=sheetCard('Equipamentos',(m.items?.length||0)+'/3 espaços','ip-sheet-gear');gear.dataset.sheetSection='gear';
  const slots=el('div',undefined,'ip-sheet-slots');
  for(let i=0;i<3;i++){
@@ -215,7 +218,7 @@ function render(){if(!party||party.hidden)return;all().forEach(ctx.normalize);co
   }else slot.append(el('b','Vaga '+(i+1)));
   slots.append(slot)
  }
- gear.append(slots,button('Escolher equipamento',()=>openBag('gear'),ctx.busy(m)));
+ gear.append(slots);if(!inDepot(m))gear.append(button('Escolher equipamento',()=>openBag('gear'),ctx.busy(m)));
  lower.append(training,gear);body.insertBefore(lower,body.querySelector('.ip-sheet-management'));
  body.append(renderSheetOrigin(m),renderEvolutionCalculator(m,sameMember?previousBody?.querySelector('.ip-sheet-calculator'):null));
  body.scrollTop=previousScroll;

@@ -1,7 +1,7 @@
 /* Illustrated trainer card: presentation only; native saves and editors remain authoritative. */
 (()=>{
  function fitCard(root){
-  if(!root?.classList.contains('tc-card'))return;
+  if(!root?.classList.contains('tc-card')||root.hasAttribute('popover'))return;
   const parent=root.offsetParent||root.parentElement,r=parent.getBoundingClientRect(),scale=r.width/parent.offsetWidth||1;
   const width=Math.min(1200,innerWidth-36,(innerHeight-36)*1.5);
   for(const [key,value]of Object.entries({position:'absolute',inset:'auto',left:((innerWidth/2-r.left)/scale)+'px',top:((innerHeight/2-r.top)/scale)+'px',transform:'translate(-50%,-50%)',width:(width/scale)+'px',height:(width/scale/1.5)+'px'}))root.style.setProperty(key,value,'important');

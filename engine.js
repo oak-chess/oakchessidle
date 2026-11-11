@@ -2212,6 +2212,7 @@ function weatherEngine(root,type){
   let last=performance.now(),t=0;
   function tick(now){
     if(!root.isConnected)return;
+    if(window.IDLE_ARENA_ECONOMY){last=now;root._rainFrame=requestAnimationFrame(tick);return}
     const dt=Math.min(.05,(now-last)/1000);last=now;t+=dt;
     c.clearRect(0,0,W,H);c.globalCompositeOperation='source-over';
     if(wet){
@@ -2302,6 +2303,7 @@ function climateEngine(root,type){
   let last=performance.now(),t=0;
   function tick(now){
     if(!root.isConnected)return;
+    if(window.IDLE_ARENA_ECONOMY){last=now;root._rainFrame=requestAnimationFrame(tick);return}
     const dt=Math.min(.05,(now-last)/1000);last=now;t+=dt;
     c.clearRect(0,0,W,H);c.globalCompositeOperation='source-over';c.globalAlpha=1;
     const fs=(type==='blizzard'?30:type==='sand'?26:type==='dust'?12:type==='ember'?9:6);
@@ -2647,6 +2649,7 @@ const PMD={base:'assets/pmd/sprite/',cache:new Map(),live:new Set(),raf:0,
   if(document.body.classList.contains('tower-entry-open')){if(this.live.size)this.raf=requestAnimationFrame(t=>this.tick(t));return}
   const K={Hurt:'_pmdHurt',Attack:'_pmdAtk',Special:'_pmdSp'},dsum=q=>q.dur.reduce((x,y)=>x+y,0),combatRate=B.on&&!G.paused?CFG.speed:1;
   for(const root of this.live){if(!root.isConnected){this.live.delete(root);continue}
+   if(window.IDLE_ARENA_ECONOMY&&root.closest('#world'))continue;
    const st=root._pmd;if(!st)continue;const u=root._pmdPreviewUnit||UB[root.dataset.k],d=st.d;root.classList.toggle('pmd-walk-fallback',!!(u&&u.moving&&u.alive!==false&&!d.hasWalk));
    let name=u&&u.moving&&u.alive!==false?'Walk':'Idle',a=null,stamp=0;
    if(u&&!u.moving)for(const n of['Hurt','Attack','Special']){const k=K[n];if(u[k]){if((now-u[k])*combatRate<dsum(d[n])/60*1000){name=n;stamp=u[k]}else u[k]=0}}
@@ -4713,7 +4716,7 @@ document.addEventListener('visibilitychange',()=>{if(document.hidden)saveNow()})
 /* ---------- loop principal ---------- */
 let lastT=performance.now(),lastTick=-1;
 // Old cached HTML can retain an older presentation module; keep combat functional.
-function paintBattleFx(ts){if(window.IDLE_RENDER_FX)window.IDLE_RENDER_FX(ts,FX.draw);else FX.draw()}
+function paintBattleFx(ts){if(window.IDLE_ARENA_ECONOMY)return;if(window.IDLE_RENDER_FX)window.IDLE_RENDER_FX(ts,FX.draw);else FX.draw()}
 function frame(ts){try{frame_(ts)}catch(e){reportErr(e)}requestAnimationFrame(frame)}
 function frame_(ts){
   const dt=Math.max(0,Math.min(.05,(ts-lastT)/1000));lastT=ts;if(window.OAK_IDLE_MODE&&(document.hidden||window.IDLE_BACKGROUND_BUSY||window.IDLE_ROCKET_OPERATION_ACTIVE))return;
@@ -4733,7 +4736,7 @@ function frame_(ts){
   if(G.tower&&window.TOWER)TOWER.tick(sdt);
   if(window.AUTO_BATTLE)AUTO_BATTLE.update(sdt);
   FX.update(sdt);
-  for(const u of B.units)updateCUEl(u);
+  if(!window.IDLE_ARENA_ECONOMY)for(const u of B.units)updateCUEl(u);
   window.ARENA_INTERACTIONS?.tick();
   window.GHOST_SHADOW?.tick();
   window.PSYCHIC_FOLD?.tick();
@@ -4824,6 +4827,7 @@ stage.addEventListener('mouseover',e=>{const t=e.target.closest&&e.target.closes
 /* ---------- efeitos de clique nos botões ---------- */
 const BTNCOL={buyxp:'#6fe27a',reroll:'#ffd45a',lock:'#8fb4ff',combatbtn:'#ff6a6a'};
 function btnFx(el,colOv){
+  if(el.checkVisibility&&!el.checkVisibility({checkOpacity:true,checkVisibilityCSS:true}))return;
   if(el.classList.contains('dis')){el.classList.remove('pk-no');void el.offsetWidth;el.classList.add('pk-no');setTimeout(()=>el.classList.remove('pk-no'),380);return}
   const col=colOv||BTNCOL[el.id]||(el.classList.contains('on')?'#ffd45a':'#bcd6ff'),ic=el.querySelector('img'),tgt=ic||el;
   const cls=ic?'pk-pop':'pk-self';tgt.classList.remove(cls);void tgt.offsetWidth;tgt.classList.add(cls);setTimeout(()=>tgt.classList.remove(cls),650);
