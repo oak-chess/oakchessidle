@@ -2,11 +2,11 @@
 (()=>{
  'use strict';
  let villageMode=false,nativeNodes=[],villageNodes=[];let liveService;let center,layer,ctxRef,tools,frame,ready=false,servicesStarted=false,request=null,talk,talkText,talkActions,typeTimer=0,fullText='',queued=[],farmMeta={tier:null,name:null,slots:0,metFisher:false,metFarmer:false,questClaimed:false},roster=[],anim=0,lastPaint=0,time=0,visible=false;
- const artwork=new Image();const ambience=window.createVillageAmbience({image:artwork,width:2560,height:H,night:true});artwork.onload=()=>{if(visible)repaintArena()};artwork.onerror=()=>artwork.removeAttribute('src');
+ const artwork=new Image();const snow=document.createElement("canvas"); const snowContext=snow.getContext("2d");artwork.onload=()=>{if(visible)repaintArena()};artwork.onerror=()=>artwork.removeAttribute('src');
  function finishVillageLoad(){if(ready)return;tools.classList.remove('rv-services-loading');tools.querySelector('.rv-service-retry')?.remove();tools.classList.remove('rv-services-failed');ready=true;pushState();send('init');for(const event of pendingHuntXP.splice(0))liveService.reward(event.amount);pushState();for(const action of queued.splice(0))send(action);if(request)send(request)}
- function loadVillage(){if(!artwork.getAttribute('src'))artwork.src='modes/idle/village/assets/village-halloween-night-v1.webp';if(servicesStarted)return;servicesStarted=true;tools.querySelector('.rv-service-retry')?.remove();tools.classList.remove('rv-services-failed');tools.classList.add('rv-services-loading');frame.src='modes/idle/village/index.html?native=1&v=pmd-thumbnails-1'}
+ function loadVillage(){if(!artwork.getAttribute('src'))artwork.src='modes/idle/village/assets/village-christmas-night-v1.png';if(servicesStarted)return;servicesStarted=true;tools.querySelector('.rv-service-retry')?.remove();tools.classList.remove('rv-services-failed');tools.classList.add('rv-services-loading');frame.src='modes/idle/village/index.html?native=1&v=pmd-thumbnails-1'}
  const musicFactory=window.createIdleMusic;
- if(musicFactory)window.createIdleMusic=function(ctx){const music=musicFactory(ctx),mount=music.mount;music.mount=function(){mount();const key=window.IDLE_MUSIC.key;window.IDLE_MUSIC.key=()=>villageMode&&center?.isOpen()?'idle-garden':key()};return music};
+ if(musicFactory)window.createIdleMusic=function(ctx){const music=musicFactory(ctx),mount=music.mount;music.mount=function(){mount();const key=window.IDLE_MUSIC.key;window.IDLE_MUSIC.key=()=>villageMode&&center?.isOpen()?'idle-ice':key()};return music};
  const pendingHuntXP=[];window.IDLE_VILLAGE_REWARD=function(amount){if(!Number.isFinite(amount)||amount<=0)return;if(liveService){liveService.reward(amount);if(ready)pushState()}else pendingHuntXP.push({amount})};
  window.IDLE_VILLAGE_VICTORY=()=>{const count=liveService?.victory()||0;if(ready)pushState();return count};window.IDLE_VILLAGE_BOSS=key=>{const count=liveService?.boss(key)||0;if(ready)pushState();return count};
  const originalFactory=window.createIdleCenterScene;
@@ -14,13 +14,13 @@
   const api=originalFactory(ctx);center=api;ctxRef=ctx;liveService=window.createIdleVillageService(ctx);const nativePaint=paintArena;
   paintArena=function(g,part='all'){
    if(!api.isOpen()||!villageMode)return nativePaint(g,part);g.save();
-   if(part!=='arena'){g.fillStyle='#11152d';g.fillRect(-640,-300,2560,1500);if(artwork.complete&&artwork.naturalWidth){g.imageSmoothingEnabled=true;g.drawImage(artwork,-640,0,2560,H)}}
+   if(part!=='arena'){g.fillStyle='#11152d';g.fillRect(-640,-300,2560,1500);if(artwork.complete&&artwork.naturalWidth){g.imageSmoothingEnabled=true;const width=H*artwork.naturalWidth/artwork.naturalHeight;g.drawImage(artwork,(W-width)/2,0,width,H)}}
    // The village is one continuous panoramic scene, without a board or mirrored borders.
    g.restore();
   };
   const originalMount=api.mount;
   api.mount=function(stage){originalMount(stage);layer=document.getElementById('idle-center-scene');nativeNodes=Array.from(layer.childNodes);layer.replaceChildren();layer.classList.add('rv-native-layer');
-   for(const [id,label,job,sprite,x,y,action]of [['fisher','Seu Elias','Pesca e missões','fisherman',235,423,'fisher'],['farmer','Dona Rosa','Casa e fazenda','cowgirl',1000,343,'farmer']]){
+   for(const [id,label,job,sprite,x,y,action]of [['fisher','Seu Elias','Pesca e missões','fisherman',245,450,'fisher'],['farmer','Dona Rosa','Casa e fazenda','cowgirl',953,365,'farmer']]){
     const b=document.createElement('button');b.className='rv-native-npc rv-native-'+id;b.type='button';b.style.left=x+'px';b.style.top=y+'px';b.setAttribute('aria-label','Conversar com '+label);const img=document.createElement('i');img.className='rv-native-overworld';img.setAttribute('aria-hidden','true');img.style.backgroundImage='url("'+(id==='fisher'?'assets/trainer-profile/sprites/fisherman_normal.png':'modes/idle/assets/center/daycare-lady-emerald.png')+'")';const text=document.createElement('span');text.innerHTML='<b>'+label+'</b><small>'+job+'</small>';b.append(img,text);b.onclick=()=>action==='fisher'?talkToFisher():talkToFarmer();layer.append(b);
    }
    const paddock=document.createElement('button');paddock.id='rv-native-paddock';paddock.setAttribute('aria-label','Administrar fazenda de treinamento');paddock.onclick=()=>farmMeta.tier===null?talkToFarmer():openTools('farm');layer.append(paddock);
@@ -29,7 +29,10 @@
 
    const back=document.createElement('button');back.id='rv-native-back';back.textContent='← Voltar à caçada';back.onclick=()=>api.close();layer.append(back);
    tools=document.createElement('section');tools.id='rv-native-tools';tools.hidden=true;const close=document.createElement('button');close.className='rv-native-tools-close';close.textContent='Voltar à vila ×';close.onclick=()=>{tools.hidden=true;request=null;if(ready)frame.contentWindow.postMessage({type:'rural-native',action:'close'},'*')};frame=document.createElement('iframe');frame.title='Serviços da vila · fazenda e pesca';frame.onload=()=>{if(!servicesStarted||ready)return;let loaded=false;try{if(frame.contentDocument?.URL==='about:blank')return;loaded=!!frame.contentWindow.IDLE_VILLAGE_UI}catch{}if(loaded){finishVillageLoad();return}setTimeout(()=>{if(ready)return;servicesStarted=false;tools.classList.remove('rv-services-loading');tools.classList.add('rv-services-failed');let retry=tools.querySelector('.rv-service-retry');if(!retry){retry=document.createElement('button');retry.className='rv-service-retry';retry.textContent='Serviços indisponíveis · Tentar novamente';retry.onclick=loadVillage;tools.prepend(retry)}},8000)};tools.append(close,frame);stage.append(tools);
-   ambience.mount(layer);mountTalk(stage);villageNodes=Array.from(layer.childNodes);
+   snow.width=1280;snow.height=Math.ceil(H/2);
+   snow.setAttribute('aria-hidden','true');
+   Object.assign(snow.style,{position:'absolute',left:'-640px',top:'0',width:'2560px',height:H+'px',pointerEvents:'none',zIndex:'1'});
+   layer.prepend(snow);mountTalk(stage);villageNodes=Array.from(layer.childNodes);
    function mountVillageAccess(){const nav=document.querySelector('.is-navigation');if(!nav){setTimeout(mountVillageAccess,100);return}if(document.getElementById('rv-village-launch'))return;const village=document.createElement('button');village.id='rv-village-launch';village.type='button';village.innerHTML='<span aria-hidden="true">🏡</span><b>Vila</b>';village.title='Vila · pesca e fazenda';village.onclick=()=>openVillage();nav.insertBefore(village,nav.lastElementChild)}mountVillageAccess();
    const audio=window.createRuralActivityAudio();document.addEventListener('click',e=>{if(villageMode&&api.isOpen()&&e.target.closest('button:not(:disabled)')){window.IDLE_ACTIVITY_VOLUME=typeof CFG!=='undefined'?(CFG.mute?0:CFG.sfx):1;audio.play('click')}},true);
 
@@ -40,7 +43,7 @@
   function openVillage(){loadVillage();if(ready)pushState();if(api.isOpen()){originalClose();}selectScene(true);originalOpen();visible=true;renderActors();renderPropertyDecor();repaintArena();if(!anim)loop(0);typeof SND!=='undefined'&&SND.music('plan');}
   window.openRuralVillage=openVillage;
   api.open=function(){if(api.isOpen()&&villageMode){originalClose();selectScene(false);originalOpen()}else{selectScene(false);originalOpen()}visible=false;repaintArena();typeof SND!=='undefined'&&SND.music('plan')};
-  api.close=function(){closeTalk();tools&&(tools.hidden=true);frame?.contentWindow?.postMessage({type:'rural-native',action:'pause'},'*');originalClose();visible=false;document.body.classList.remove('rv-native-open')};
+  api.close=function(){closeTalk();tools&&(tools.hidden=true);frame?.contentWindow?.postMessage({type:'rural-native',action:'pause'},'*');const wasVillage=villageMode;originalClose();visible=false;document.body.classList.remove('rv-native-open');if(wasVillage&&typeof SND!=='undefined')SND.music('plan')};
   api.refresh=function(){originalRefresh();if(!api.isOpen()||!villageMode)return;const hunt=document.querySelector('.is-hunt');if(hunt){const title=hunt.querySelector('h2,h3,strong');if(title)title.textContent='Vila das Margens'}};
   return api;
  };
@@ -77,7 +80,28 @@
  const homes=[[.73,.63],[.82,.73],[.90,.69],[.70,.55],[.80,.54],[.89,.78],[.76,.82],[.86,.60]];
  const reducedMovement=matchMedia('(prefers-reduced-motion: reduce)');
  function moveActors(dt=0){const nodes=[...document.querySelectorAll('.rv-native-mon')],others=nodes.map(n=>n._wander.state);for(const node of nodes){const i=Number(node.dataset.index),p=roster[i],motion=node._wander.step(dt,others,reducedMovement.matches),img=node.querySelector('.rv-mon-sprite');node.style.left=motion.x*W+'px';node.style.top=motion.y*H+'px';node.style.zIndex=String(Math.round(motion.y*100));node.dataset.motion=motion.moving?'walk':'idle';node.dataset.direction=motion.row;if(img?.tagName==='CANVAS'&&node._pmdData){const context=img.getContext('2d');context.clearRect(0,0,80,88);const data=node._pmdData,walk=motion.moving&&!reducedMovement.matches;TRAINER_PARTNER_SPRITES.draw(context,data,time*1000+motion.phase,{x:40,y:78,height:53,row:motion.row,animation:walk?(data.Walk||data.Idle):data.Idle})}else if(img)img.style.transform='scaleX('+(motion.row>=5&&motion.row<=7?-1:1)+')';const label=node.querySelector('span'),text=p.name+' · Nv. '+p.level;if(label.textContent!==text)label.textContent=text}}
- function loop(now){anim=requestAnimationFrame(loop);if(!visible||document.hidden){lastPaint=0;return}const dt=lastPaint?Math.max(0,Math.min(.05,(now-lastPaint)/1000)):0;time+=dt;lastPaint=now;moveActors(dt);ambience.draw(time,reducedMovement.matches)}
+ const flakes=Array.from({length:150},(_,i)=>({
+  x:(i*137.5)%1280,y:((i*83.7)%389)/389,speed:9+i%17,radius:.85+(i%4)*.32
+ }));
+ let lastSnow=-1;
+ function drawSnow(t){
+  const frame=Math.floor(t*30);
+  if(frame===lastSnow)return;
+  lastSnow=frame;
+  snowContext.clearRect(0,0,snow.width,snow.height);
+  if(reducedMovement.matches)return;
+  snowContext.fillStyle='rgba(242,250,255,.88)';
+  snowContext.beginPath();
+  for(const [i,flake] of flakes.entries()){
+   if(CFG.reduceFx&&i%2!==0)continue;
+   const x=(flake.x+t*4+Math.sin(t*.6+i)*7+snow.width)%snow.width;
+   const y=(flake.y*snow.height+t*flake.speed)%snow.height;
+   snowContext.moveTo(x+flake.radius,y);
+   snowContext.arc(x,y,flake.radius,0,Math.PI*2);
+  }
+  snowContext.fill();
+ }
+ function loop(now){if(!visible){anim=0;lastPaint=0;return}anim=requestAnimationFrame(loop);if(document.hidden){lastPaint=0;return}const dt=lastPaint?Math.max(0,Math.min(.05,(now-lastPaint)/1000)):0;time+=dt;lastPaint=now;moveActors(dt);drawSnow(time)}
  setInterval(()=>{if(ready&&visible&&!document.hidden)pushState()},3000);
  window.IDLE_VILLAGE={isOpen:()=>!!center?.isOpen(),open:()=>window.openRuralVillage(),deeds:()=>openTools('gacha'),fishing:()=>openTools('fishing'),close:()=>center?.close(),state:()=>({nativeCollection:ctxRef?.state.collection.length,nativeTeam:ctxRef?.state.team.length,roster:roster.map(p=>({...p})),toolsOpen:!!tools&&!tools.hidden})};
 })();
