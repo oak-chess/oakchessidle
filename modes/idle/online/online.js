@@ -25,6 +25,7 @@ function start(client) {
   let chatSession;
   let chatMount;
   let marketMount;
+  let contactsMount;
   const huntClient = HUNT_API_URL
     ? import('./hunt-client.mjs').then(({ createHuntClient }) => createHuntClient(client.auth, HUNT_API_URL))
     : null;
@@ -52,8 +53,13 @@ function start(client) {
     try {
       chatMount ??= Promise.all([
         import('./chat-client.mjs'),
-        import('https://cdn.jsdelivr.net/npm/socket.io-client@4.8.1/+esm')
-      ]).then(([{ mountChat }, { io }]) => mountChat(client, CHAT_SERVER_URL, io));
+        import('https://cdn.jsdelivr.net/npm/socket.io-client@4.8.1/+esm'),
+        import('./contacts-ui.mjs')
+      ]).then(([{ mountChat }, { io }, { mountContacts }]) => {
+        const chat = mountChat(client, CHAT_SERVER_URL, io);
+        contactsMount = mountContacts(client, document.querySelector('#chat'));
+        return session => { chat(session); contactsMount(session); };
+      });
       const updateChat = await chatMount;
       if (chatSession === token) updateChat(session);
     } catch {
@@ -111,6 +117,9 @@ function start(client) {
     setup.hidden = Boolean(journey);
     status.textContent = journey ? 'Jornada carregada.' : 'Escolha seu nome de treinador.';
     if (journey) {
+      if (new URLSearchParams(location.search).get('chat') === '1') {
+        status.textContent = '@' + account.username;
+      }
       hunt.hidden = !huntClient;
       if (huntClient && !busy && !encounterId) {
         try {

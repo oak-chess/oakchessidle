@@ -5,7 +5,8 @@ const path = require('node:path');
 const root = path.resolve(__dirname, '..');
 const output = path.join(root, '_cloudflare');
 const spritePrefix = 'assets/pmd/sprite/';
-const onlineFiles = new Set(['index.html', 'config.js', 'online.js', 'chat-client.mjs', 'hunt-client.mjs']);
+const onlineFiles = new Set(['index.html', 'config.js', 'online.js', 'chat-client.mjs', 'hunt-client.mjs',
+  'home.html', 'home.css', 'home.js', 'contacts-ui.mjs']);
 const entryFiles = new Set(['index.html', 'engine.js', 'asset-inventory.js', 'layout.css', 'transfer.html', 'CREDITS.md']);
 const tracked = execFileSync('git', ['ls-files', '-z'], { cwd: root, encoding: 'utf8', maxBuffer: 16 * 1024 * 1024 })
   .split('\0').filter(Boolean);
@@ -17,7 +18,7 @@ const files = tracked.filter(file =>
   (!file.startsWith('modes/idle/online/') || onlineFiles.has(file.slice('modes/idle/online/'.length))) &&
   (entryFiles.has(file) || /^(assets|wallpapers|modes)\//.test(file))
 );
-if (files.length + 2 > 20000) throw new Error('Cloudflare Pages file limit exceeded');
+if (files.length + 3 > 20000) throw new Error('Cloudflare Pages file limit exceeded');
 for (const file of files) {
   if (fs.statSync(path.join(root, file)).size > 25 * 1024 * 1024) {
     throw new Error('Cloudflare Pages asset size limit exceeded: ' + file);
@@ -35,6 +36,8 @@ for (const file of files) {
     fs.copyFileSync(path.join(root, file), target);
   }
 }
+fs.copyFileSync(path.join(output, 'index.html'), path.join(output, 'game.html'));
+fs.copyFileSync(path.join(output, 'modes/idle/online/home.html'), path.join(output, 'index.html'));
 fs.copyFileSync(path.join(__dirname, 'cloudflare-sprites-worker.mjs'), path.join(output, '_worker.js'));
 fs.writeFileSync(path.join(output, '_routes.json'), JSON.stringify({
   version: 1, include: ['/' + spritePrefix + '*'], exclude: []

@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="pt-BR">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>OakChess Idle · Sua jornada começa aqui</title>
+<link rel="stylesheet" href="modes/idle/online/home.css">
+<main>
+  <section class="intro">
+    <img class="brand" src="assets/pokeapi/sprites/items/poke-ball.png" alt="">
+    <p class="eyebrow">OAKCHESS IDLE</p>
+    <h1>Sua equipe.<br>Sua próxima conquista.</h1>
+    <p>Monte sua equipe Pokémon, explore regiões e converse com outros treinadores pelo PokéChat.</p>
+  </section>
+  <section class="account" aria-label="Conta de treinador">
+    <nav><button id="login-tab" aria-pressed="true">Entrar</button><button id="register-tab" aria-pressed="false">Criar conta</button></nav>
+    <h2 id="form-title">Bem-vindo de volta</h2>
+    <p id="status" role="status">Carregando sua conta…</p>
+    <form id="account-form" hidden>
+      <label id="name-label" hidden>Nome de treinador<input name="username" minlength="3" maxlength="24" pattern="[A-Za-z0-9_]{3,24}" autocomplete="nickname"><small>Único no jogo. Use este nome para adicionar contatos.</small></label>
+      <label>E-mail<input name="email" type="email" autocomplete="email" required></label>
+      <label>Senha<input name="password" type="password" minlength="8" autocomplete="current-password" required></label>
+      <button class="primary" id="submit">Entrar</button>
+    </form>
+    <form id="trainer-form" hidden><label>Escolha seu nome de treinador<input name="username" pattern="[A-Za-z0-9_]{3,24}" minlength="3" maxlength="24" required><small>3 a 24 letras sem acento, números ou sublinhado.</small></label><button class="primary">Salvar nome</button></form>
+    <div id="ready" hidden><strong id="trainer-name"></strong><p>Compartilhe seu nome de treinador para ser encontrado no PokéChat.</p><a class="primary" href="game.html">Entrar no jogo</a><button id="signout">Sair da conta</button></div>
+  </section>
+</main>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script type="module" src="modes/idle/online/home.js"></script>
+</html>
