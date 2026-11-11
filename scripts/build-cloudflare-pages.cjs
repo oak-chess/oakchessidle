@@ -5,6 +5,7 @@ const path = require('node:path');
 const root = path.resolve(__dirname, '..');
 const output = path.join(root, '_cloudflare');
 const spritePrefix = 'assets/pmd/sprite/';
+const onlineFiles = new Set(['index.html', 'config.js', 'online.js', 'chat-client.mjs', 'hunt-client.mjs']);
 const entryFiles = new Set(['index.html', 'engine.js', 'asset-inventory.js', 'layout.css', 'transfer.html', 'CREDITS.md']);
 const tracked = execFileSync('git', ['ls-files', '-z'], { cwd: root, encoding: 'utf8', maxBuffer: 16 * 1024 * 1024 })
   .split('\0').filter(Boolean);
@@ -12,7 +13,8 @@ const modified = new Set(execFileSync('git', ['diff', 'HEAD', '--name-only', '-z
   cwd: root, encoding: 'utf8', maxBuffer: 16 * 1024 * 1024
 }).split('\0').filter(Boolean));
 const files = tracked.filter(file =>
-  !file.startsWith(spritePrefix) && !file.startsWith('modes/idle/online/') &&
+  !file.startsWith(spritePrefix) &&
+  (!file.startsWith('modes/idle/online/') || onlineFiles.has(file.slice('modes/idle/online/'.length))) &&
   (entryFiles.has(file) || /^(assets|wallpapers|modes)\//.test(file))
 );
 if (files.length + 2 > 20000) throw new Error('Cloudflare Pages file limit exceeded');

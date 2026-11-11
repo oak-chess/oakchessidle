@@ -56,3 +56,13 @@ body.idle-native-mode #idle-inventory #ip-bag-content .pc-chat-message-search>.p
 #idle-inventory .pc-chat[data-view=list]>.pc-chat-offline{order:3;flex:1;min-height:0;overflow:auto;margin:10px 12px!important;background:#17252d!important;border:1px solid #2c414a!important;color:#b3c5cf}
 #idle-inventory .pc-chat :is(button,input):focus-visible{outline:2px solid #00a884!important;outline-offset:2px}
 @media(max-height:650px){body.idle-native-mode #idle-inventory.idle-window:has(.pc-chat){grid-template-rows:30px 0 minmax(0,1fr) 0 14px!important}body.idle-native-mode #idle-inventory #ip-bag-content .pc-chat-thread-header{min-height:49px;padding:5px 7px!important}body.idle-native-mode #idle-inventory #ip-bag-content .pc-chat-quick{padding:4px 7px}body.idle-native-mode #idle-inventory #ip-bag-content .pc-chat-bubble p{font-size:11px!important}}
+.pc-chat-online-frame {
+  display: block;
+  width: 100%;
+  min-height: 20rem;
+  flex: 1 1 auto;
+  border: 1px solid #375467;
+  border-radius: 12px;
+  background: #101c25;
+  color-scheme: dark;
+}

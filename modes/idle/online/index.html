@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="pt-BR">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OakChess Idle Online</title>
+<style>
+  .chat-embed { color-scheme: dark; background: #101c25; color: #eaf5fb; font: 14px system-ui, sans-serif; }
+  .chat-embed main { display: grid; gap: 10px; }
+  .chat-embed h1, .chat-embed #profile { display: none; }
+  .chat-embed h2, .chat-embed p { margin: 0; }
+  .chat-embed #chat-messages { max-height: 14rem; overflow: auto; padding-left: 1.25rem; overflow-wrap: anywhere; }
+  .chat-embed form { margin-block: 8px; }
+  .chat-embed input { max-width: 100%; box-sizing: border-box; }
+</style>
+<main>
+  <h1>OakChess Idle Online</h1>
+  <p id="status" role="status">Carregando…</p>
+  <form id="auth" hidden>
+    <label>E-mail <input name="email" type="email" autocomplete="email" required></label>
+    <label>Senha <input name="password" type="password" required></label>
+    <button value="login">Entrar</button>
+    <button value="register">Criar conta</button>
+  </form>
+  <form id="setup" hidden>
+    <label>Nome de treinador <input name="username" pattern="[A-Za-z0-9_]{3,24}" required></label>
+    <small>3 a 24 letras sem acento, números ou sublinhados.</small>
+    <button>Criar jornada</button>
+  </form>
+  <p id="profile"></p>
+  <section id="hunt" hidden aria-label="Caçada online">
+    <button id="hunt-start" type="button">Explorar Trilhas de Viridian</button>
+    <button id="hunt-finish" type="button" hidden>Resolver encontro</button>
+    <p id="hunt-status" role="status"></p>
+  </section>
+  <section id="market" hidden aria-label="Mercado da Comunidade">
+    <h2>Mercado da Comunidade</h2>
+    <p id="market-status" role="status"></p>
+    <form id="market-form">
+      <label>Pokémon <select name="partner" required></select></label>
+      <label>Preço em Coins <input name="price" type="number" min="1" max="2147483647" required></label>
+      <button>Anunciar</button>
+    </form>
+    <ul id="market-list"></ul>
+    <button id="market-prev" type="button">Anterior</button>
+    <button id="market-next" type="button">Próxima</button>
+  </section>
+  <section id="chat" hidden aria-label="Chat online">
+    <h2>Chat</h2>
+    <label>Canal
+      <select id="chat-channel">
+        <option value="geral">Geral</option>
+        <option value="comercio">Comércio</option>
+        <option value="duvidas">Dúvidas</option>
+      </select>
+    </label>
+    <p id="chat-status" role="status"></p>
+    <ul id="chat-messages"></ul>
+    <form id="chat-form">
+      <label>Mensagem <input name="message" maxlength="140" required></label>
+      <button disabled>Enviar</button>
+    </form>
+  </section>
+  <button id="logout" type="button" hidden>Sair</button>
+</main>
+<script>
+  if (new URLSearchParams(location.search).get('chat') === '1') {
+    document.body.classList.add('chat-embed');
+  }
+  if (location.protocol === 'file:') {
+    const status = document.getElementById('status');
+    const link = document.createElement('a');
+    link.href = 'http://127.0.0.1:8797/';
+    link.textContent = 'Abrir ambiente de teste';
+    status.replaceChildren('Abra pelo servidor local para entrar na sua conta. ', link);
+  } else {
+    const sdk = document.createElement('script');
+    sdk.src = 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2';
+    const showError = () => {
+      document.getElementById('status').textContent = 'Não foi possível carregar a tela de login. Atualize a página para tentar novamente.';
+    };
+    sdk.onerror = showError;
+    sdk.onload = () => {
+      const app = document.createElement('script');
+      app.type = 'module';
+      app.src = './online.js';
+      app.onerror = showError;
+      document.head.append(app);
+    };
+    document.head.append(sdk);
+  }
+</script>
+</html>
