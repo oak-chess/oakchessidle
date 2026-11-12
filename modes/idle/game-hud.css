@@ -504,3 +504,42 @@ body.idle-rocket-runtime-open .layout-arena > :not(#vp) {visibility:hidden;point
 .layout-gain-coins {color:#ffdb83}
 .layout-gain-level {color:#ceffad}
 .layout-wallet.layout-level-gain {box-shadow:inset 0 0 0 1px #d3f3a5}
+
+.layout-trainer .layout-wallet {grid-template-columns:minmax(0,1fr) minmax(0,auto)}
+.layout-trainer .layout-wallet>b {padding:2px 5px}
+.layout-trainer .layout-diamonds {border-left:1px solid #35535c}
+.layout-trainer .layout-vip-tag {display:flex;align-items:center;gap:5px;width:100%;margin-top:5px;text-align:left;padding:4px 6px;font-size:.82em}
+.layout-trainer .layout-vip-tag img {width:15px;height:15px}
+.layout-trainer .layout-vip-time {margin-left:auto;font-variant-numeric:tabular-nums}
+.layout-trainer .layout-vip-tag.is-inactive {color:#a7bdc4;border-color:#35535c;background:#101e25}
+.layout-trainer .layout-trainer-xp .layout-meter span {font-size:clamp(8px,.65vw,11px);white-space:nowrap}
+
+.layout-trainer-online {
+  display:flex;
+  align-items:center;
+  gap:6px;
+  margin-top:5px;
+  padding:4px 6px;
+  border-radius:5px;
+  background:#09171e;
+  color:#a7bdc4;
+  font-size:.78em;
+  font-variant-numeric:tabular-nums;
+}
+.layout-trainer-online.is-live {color:#d6f6ec}
+.layout-trainer-online-dot {
+  flex:0 0 6px;
+  height:6px;
+  border-radius:50%;
+  background:#607680;
+}
+.layout-trainer-online.is-live .layout-trainer-online-dot {background:#51db9d}
+
+.layout-trainer-beta {
+  margin-inline-start:auto;
+  padding:1px 5px;
+  border:1px solid #467483;
+  border-radius:4px;
+  color:#bdebf6;
+  white-space:nowrap;
+}

@@ -3,6 +3,7 @@
 (()=>{
   'use strict';
   let name='Conectando…',owner=null,generation=0,started=false;
+  let onlineCount=null;
   const bindings=new Set();
   function notify(){
     for(const {refresh} of bindings)refresh?.();
@@ -30,9 +31,26 @@
     try{
       const [config,lib]=await Promise.all([import(new URL('modes/idle/online/config.js',document.baseURI).href),sdk()]);
       const client=lib.createClient(config.SUPABASE_URL,config.SUPABASE_ANON_KEY);
+      let presencePending=false,presenceOwner=null;
+      async function refreshPresence(){
+        if(!owner||presencePending)return;
+        const player=owner;
+        presencePending=true;
+        const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),10000);
+        let count=null;
+        try{
+          const {data,error}=await client.rpc('refresh_player_presence').abortSignal(controller.signal);
+          if(!error&&data!==null&&Number.isSafeInteger(Number(data))&&Number(data)>=0)count=Number(data);
+        }catch{}finally{clearTimeout(timer);presencePending=false}
+        if(owner===player)onlineCount=count;
+      }
+      setInterval(()=>void refreshPresence(),60000);
+      document.addEventListener('visibilitychange',()=>{
+        if(!document.hidden)void refreshPresence();
+      });
       async function load(session){
         const request=++generation;owner=null;
-        if(!session){name='Entre na sua conta';notify();location.replace('/');return}
+        if(!session){onlineCount=null;name='Entre na sua conta';notify();location.replace('/');return}
         name='Conectando…';notify();
         const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),10000);
         let response;
@@ -43,7 +61,9 @@
         if(response.error){name='Conta indisponível';notify();return}
         const profile=response.data;
         if(!profile||!profile.username){name='Conclua seu cadastro';notify();return}
-        owner=profile.id;name=profile.username;notify();
+        if(profile.id!==presenceOwner)onlineCount=null;
+        presenceOwner=owner=profile.id;name=profile.username;notify();
+        void refreshPresence();
       }
       // Run profile queries outside the auth callback lock.
       let token;
@@ -54,6 +74,6 @@
       });
     }catch{owner=null;name='Conta indisponível';notify()}
   }
-  Object.defineProperty(window,'IDLE_ACCOUNT_IDENTITY',{value:Object.freeze({bind,start,get name(){return name},get authenticated(){return !!owner}})});
+  Object.defineProperty(window,'IDLE_ACCOUNT_IDENTITY',{value:Object.freeze({bind,start,get name(){return name},get authenticated(){return !!owner},get onlineCount(){return owner?onlineCount:null}})});
   if(location.protocol==='http:'||location.protocol==='https:')void start();
 })();

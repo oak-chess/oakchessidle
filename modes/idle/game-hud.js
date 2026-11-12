@@ -995,12 +995,13 @@
         if(native)identity.append(native.cloneNode());
         const copy=make('div'),progress=meter('XP',(state.trainerXp||0)/IDLE_XP.need(state.trainerLevel));
         const xpLabel=progress.querySelector('span'),xpLine=make('div','layout-trainer-xp');
-        xpLine.append(progress,xpLabel);
+        xpLabel.textContent=fmt(state.trainerXp||0)+' / '+fmt(IDLE_XP.need(state.trainerLevel))+' XP';
+        xpLine.append(progress);
         copy.append(make('strong','',state.idleProfile?.name||'Treinador'),make('small','','Nível '+state.trainerLevel),xpLine);identity.append(copy);
         const wallet=make('div','layout-wallet');
         const vip=make('button','layout-vip-tag'+(vipSeconds>0?'':' is-inactive'));
         const badgeIcon=(name)=>{const img=make('img');img.src='modes/idle/assets/menu-icons/'+name+'.svg';img.alt='';return img};
-        vip.append(badgeIcon('vip'));
+        vip.append(badgeIcon('vip'),make('span','layout-vip-bonus',vipSeconds>0?'VIP · +50% XP':'VIP inativo'),make('span','layout-vip-time'));
         vip.setAttribute('aria-label',vipSeconds>0?'VIP ativo':'VIP inativo');
         vip.type='button';vip.onclick=()=>vipDetails.hidden=!vipDetails.hidden;
         const vipDetails=make('div','layout-vip-details');vipDetails.hidden=trainerCard.content.querySelector('.layout-vip-details')?.hidden??true;
@@ -1010,8 +1011,11 @@
         const gems=make('b','layout-diamonds');
         gems.append(badgeIcon('diamond'),make('span','',fmt(diamonds)));
         gems.title=fmt(diamonds)+' Diamantes';
-        wallet.append(coins,gems,vip);
-        trainerCard.content.replaceChildren(identity,wallet,vipDetails);lastTrainer=trainer;
+        wallet.append(coins,gems);
+        const presence=make('div','layout-trainer-online');
+        presence.append(make('span','layout-trainer-online-dot'),make('span','layout-trainer-online-label'));
+        presence.append(make('span','layout-trainer-beta','Beta 0.1.0'));
+        trainerCard.content.replaceChildren(identity,wallet,vip,vipDetails,presence);lastTrainer=trainer;
       }
       const remaining=Math.max(0,IDLE_XP.need(state.trainerLevel)-(state.trainerXp||0)),session=state.hunts?.session;
       const rate=session?.seconds>=60?session.xp*3600/session.seconds:0;
@@ -1019,8 +1023,17 @@
       one('.layout-trainer-xp',trainerCard.content).title=xpInfo;
       const vipInfo=vipSeconds>0?'Restam '+Math.ceil(vipSeconds/3600)+' h · +50% XP, captura automática e até 12 h de farm offline.':'VIP inativo.';
       one('.layout-vip-tag',trainerCard.content).title=vipInfo;
+      const vipTime=one('.layout-vip-time',trainerCard.content);
+      const timeLabel=vipSeconds>=86400?Math.ceil(vipSeconds/86400)+' d':vipSeconds>0?Math.ceil(vipSeconds/3600)+' h':'';
+      if(vipTime.textContent!==timeLabel)vipTime.textContent=timeLabel;
       const vipDetails=one('.layout-vip-details',trainerCard.content);
       if(vipDetails.textContent!==vipInfo)vipDetails.textContent=vipInfo;
+      const onlineCount=window.IDLE_ACCOUNT_IDENTITY?.onlineCount;
+      const presence=one('.layout-trainer-online',trainerCard.content);
+      const onlineLabel=onlineCount==null?'Presença indisponível':fmt(onlineCount)+' '+(onlineCount===1?'jogador online':'jogadores online');
+      presence.classList.toggle('is-live',onlineCount!=null);
+      const presenceLabel=one('.layout-trainer-online-label',presence);
+      if(presenceLabel.textContent!==onlineLabel)presenceLabel.textContent=onlineLabel;
       paintGain(one('.layout-wallet',trainerCard.content),'trainer');
       const hunt=one('.is-hunt'),liveTitle=hunt?.querySelector('h2,h3,strong')?.textContent||'Trilhas de Viridian',wave=state.hunts?.wave||1;
       if(banner.dataset.label!==liveTitle+wave){banner.replaceChildren(make('b','',liveTitle),make('span','','Onda '+wave+'/10'));banner.dataset.label=liveTitle+wave}
