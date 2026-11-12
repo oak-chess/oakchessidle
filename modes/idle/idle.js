@@ -2,7 +2,7 @@
 (()=>{
 const KEY='journey-native-v2';let restored;try{const raw=localStorage.getItem(KEY);restored=JSON.parse(raw);if(raw)for(const suffix of ['before-life-systems','before-legendary-choice','before-unova','before-sinnoh','before-hoenn','before-johto','before-shiny','before-potency','before-world-expansion','before-hunts-expansion','before-individuals','before-consolidation','before-progression-rework']){try{if(!localStorage.getItem(KEY+'-'+suffix))localStorage.setItem(KEY+'-'+suffix,raw)}catch(error){console.warn('[Jornada Idle] Backup indisponível; progresso atual preservado.',error);break}}}catch{}
 
-const state=Object.assign({gold:20,wins:0,area:0,last:Date.now(),team:[{name:'Bulbasaur',level:1,star:1},{name:'Charmander',level:1,star:1},{name:'Squirtle',level:1,star:1}],formation:0,pending:0},restored||{});
+const state=Object.assign({gold:20,wins:0,area:0,last:Date.now(),team:['Bulbasaur','Charmander','Squirtle'].map(name=>({name,level:1,star:1,originSource:'starter'})),formation:0,pending:0},restored||{});
 const resumeSavedHunt=state.huntRunning===true;
 let launchStep='Preparação';
 let captureTransition=0,captureDrainWaiting=false;

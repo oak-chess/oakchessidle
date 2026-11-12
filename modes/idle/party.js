@@ -225,15 +225,22 @@ function render(){if(!party||party.hidden)return;all().forEach(ctx.normalize);co
 }
 function renderSheetOrigin(m){
  const L=line(m),logged=m.captureToken?s.captureLog?.find(e=>e.memberToken===m.captureToken):s.captureLog?.find(e=>m.caughtAt&&e.memberCaughtAt===m.caughtAt&&L.names.includes(e.name));
- const d={...logged,...m.captureDetails},source=m.originSource||m.captureSource||logged?.source||(String(m.id).startsWith('fishing-')?'fishing':null);
+ const d={...logged,...m.captureDetails};
+ const legacyStarter=({Bulbasaur:'idle-1',Charmander:'idle-2',Squirtle:'idle-3'})[m.name]===m.id
+   && typeof m.id==='string' && !m.caughtAt && !m.captureToken && !m.captureDetails && !m.hatchedAt && !m.birthCertificate;
+ const source=m.originSource||m.captureSource||logged?.source||(legacyStarter?'starter':String(m.id).startsWith('fishing-')?'fishing':null);
  const hatch=m.birthCertificate?.hatched||m.hatchedAt,area=window.IDLE_WORLD_DATA?.regions?.[d.area],hunt=window.IDLE_REGION_HUNTS?.[d.area]?.habitats?.[d.hunt],ball=d.ball==='mystic'?'Mystic Ball':d.ball==='safari'?'Safari Ball':window.IDLE_ITEMS.balls[d.ball]?.name;
  const card=sheetCard('Registro de origem'),grid=el('dl',undefined,'ip-sheet-origin');
  const acquired=m.caughtAt||hatch,stamp=acquired?new Date(acquired):null;
- const sourceName={hunt:d.offline?'Caçada offline':'Caçada',safari:'Safari',fishing:'Pesca da Vila',egg:'Incubadora',gacha:'Gachapon',mystic:'Captura mística'}[source];
+ const sourceName={hunt:d.offline?'Caçada offline':'Caçada',safari:'Safari',fishing:'Pesca da Vila',egg:'Incubadora',gacha:'Gachapon',mystic:'Captura mística',starter:'Parceiro inicial · criação da conta'}[source];
  const row=(label,value)=>{const cell=el('div');cell.append(el('dt',label),el('dd',value??'Não registrado'));grid.append(cell)};
- row('Origem',sourceName);row(hatch?'Data e hora da eclosão':d.localTime&&!stamp?'Hora da captura':'Data e hora da captura',stamp&&!Number.isNaN(+stamp)?stamp.toLocaleString('pt-BR'):d.localTime);
- if(d.speciesId){const index=L.ids.indexOf(d.speciesId);row('Espécie na captura',(index<0?'':L.names[index]+' · ')+'#'+String(d.speciesId).padStart(3,'0'))}
- row('Nível de origem',d.level||(source==='egg'||source==='gacha'?1:null));
+ const identity=window.IDLE_ACCOUNT_IDENTITY;
+ row('Treinador',identity?(identity.authenticated?identity.name:null):s.idleProfile?.name);
+ row('Origem',sourceName);
+ if(source!=='starter')row(hatch?'Data e hora da eclosão':d.localTime&&!stamp?'Hora da captura':'Data e hora da captura',stamp&&!Number.isNaN(+stamp)?stamp.toLocaleString('pt-BR'):d.localTime);
+ if(source==='starter')row('Espécie inicial',L.names[0]+' · #'+String(L.ids[0]).padStart(3,'0'));
+ else if(d.speciesId){const index=L.ids.indexOf(d.speciesId);row('Espécie na captura',(index<0?'':L.names[index]+' · ')+'#'+String(d.speciesId).padStart(3,'0'))}
+ row('Nível de origem',d.level||(source==='egg'||source==='gacha'||source==='starter'?1:null));
  const place=[hunt?.name||area?.name,area?.continent].filter(Boolean).join(' · ');
  if(source==='hunt'||place&&source!=='safari')row('Local',place||null);
  if(source==='hunt'&&d.wave)row('Onda',d.wave);
