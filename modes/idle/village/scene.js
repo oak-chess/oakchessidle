@@ -40,7 +40,7 @@
   };
   const originalOpen=api.open,originalClose=api.close,originalRefresh=api.refresh;
   function selectScene(village){villageMode=village;layer.replaceChildren(...(village?villageNodes:nativeNodes));layer.classList.toggle('rv-native-layer',village);document.body.classList.toggle('rv-native-open',village);closeTalk();if(tools)tools.hidden=true;frame?.contentWindow?.postMessage({type:'rural-native',action:village?'resume':'pause'},'*');}
-  function openVillage(){loadVillage();if(ready)pushState();if(api.isOpen()){originalClose();}selectScene(true);originalOpen();visible=true;renderActors();renderPropertyDecor();repaintArena();if(!anim)loop(0);typeof SND!=='undefined'&&SND.music('plan');}
+  function openVillage(){if(window.IDLE_BETA_POLICY)return window.IDLE_BETA_POLICY.notify();loadVillage();if(ready)pushState();if(api.isOpen()){originalClose();}selectScene(true);originalOpen();visible=true;renderActors();renderPropertyDecor();repaintArena();if(!anim)loop(0);typeof SND!=='undefined'&&SND.music('plan');}
   window.openRuralVillage=openVillage;
   api.open=function(){if(api.isOpen()&&villageMode){originalClose();selectScene(false);originalOpen()}else{selectScene(false);originalOpen()}visible=false;repaintArena();typeof SND!=='undefined'&&SND.music('plan')};
   api.close=function(){closeTalk();tools&&(tools.hidden=true);frame?.contentWindow?.postMessage({type:'rural-native',action:'pause'},'*');const wasVillage=villageMode;originalClose();visible=false;document.body.classList.remove('rv-native-open');if(wasVillage&&typeof SND!=='undefined')SND.music('plan')};

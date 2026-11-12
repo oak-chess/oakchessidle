@@ -543,3 +543,10 @@ body.idle-rocket-runtime-open .layout-arena > :not(#vp) {visibility:hidden;point
   color:#bdebf6;
   white-space:nowrap;
 }
+
+.layout-trainer-buffs {display:grid;gap:4px;margin-top:4px}
+.layout-trainer-buffs[hidden] {display:none}
+.layout-trainer-buff {display:flex;align-items:center;gap:5px;min-width:0;padding:4px 5px;border:1px solid #305e6b;border-radius:4px;background:#0a2029;font-size:.75em;color:#bdebf6}
+.layout-trainer-buff>span {flex:1;min-width:0;line-height:1.3}
+.layout-trainer-buff>small {flex:none;color:#e5f6fa;font-variant-numeric:tabular-nums}
+.layout-trainer-buff .is-benefit-art {display:block;flex:0 0 22px;width:22px;height:13px;background-image:url('assets/vip/boost-illustrations.webp');background-repeat:no-repeat;background-size:139.568px 87.296px}

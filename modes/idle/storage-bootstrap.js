@@ -1,6 +1,13 @@
 /* Copy once from the original game, then keep independent saves. */
 window.OAK_IDLE_MODE=true;
 (()=>{'use strict';
+ if(window.OAK_ONLINE_SNAPSHOT){
+  // Preserve old saves untouched. Online progress is loaded through hunt_state only.
+  const originalGet=Storage.prototype.getItem,originalSet=Storage.prototype.setItem;
+  Storage.prototype.getItem=function(key){return /journey-native|oakchess-idle:|oakchessidle:/.test(String(key))?null:originalGet.call(this,key)};
+  Storage.prototype.setItem=function(key,value){if(!/journey-native|oakchess-idle:|oakchessidle:/.test(String(key)))return originalSet.call(this,key,value)};
+  return;
+ }
  const get=Storage.prototype.getItem,set=Storage.prototype.setItem,del=Storage.prototype.removeItem;
  const prefix='oakchessidle:',legacy='oakchess-idle:',main='journey-native-v2',marker=prefix+'legacy-copy-v1';
  try{

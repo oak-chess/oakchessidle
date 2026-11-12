@@ -1,7 +1,7 @@
 /* Pure decisions: no DOM, randomness, save access or side-specific advantages. */
-window.IDLE_TACTICS=(()=>{
+(typeof window === 'undefined' ? globalThis : window).IDLE_TACTICS=(()=>{
  'use strict';
- const chart=window.IDLE_TYPE_CHART,types=Object.keys(chart),unknown=new Set();
+ const chart=(typeof window === 'undefined' ? globalThis : window).IDLE_TYPE_CHART,types=Object.keys(chart),unknown=new Set();
  const config={advantage:1.5,resistance:.75,cooldowns:{simple:6,area:10,control:12,support:16},tie:.05,retargetGain:.15,retargetHold:1};
  const key=m=>m?.id!=null?'id:'+m.id:'move:'+(m?.emerald||m?.n||'');
  const support=m=>['heal','buff','barrier'].includes(m.k);

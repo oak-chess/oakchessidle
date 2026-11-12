@@ -1,5 +1,5 @@
 /* Relations: PokeAPI type_efficacy.csv; intensity is configured by the Idle engine. */
-window.IDLE_TYPE_CHART={
+(typeof window === 'undefined' ? globalThis : window).IDLE_TYPE_CHART={
  "normal": {
   "normal": 100,
   "fighting": 100,

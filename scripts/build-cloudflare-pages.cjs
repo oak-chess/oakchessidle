@@ -5,8 +5,9 @@ const path = require('node:path');
 const root = path.resolve(__dirname, '..');
 const output = path.join(root, '_cloudflare');
 const spritePrefix = 'assets/pmd/sprite/';
-const onlineFiles = new Set(['index.html', 'config.js', 'online.js', 'chat-client.mjs', 'hunt-client.mjs',
+const onlineFiles = new Set(['index.html', 'config.js', 'online.js', 'chat-client.mjs', 'hunt-client.mjs', 'server-journey.js', 'native-hunts.js', 'beta-policy.js',
   'home.html', 'home.css', 'home.js', 'contacts-ui.mjs', 'chat.css', 'private-chat.mjs', 'verification.mjs', 'new-conversation.mjs', 'game-entry.html', 'game-entry.js']);
+const rankingFiles = new Set(['ui.css','ui.mjs','cache.mjs','approved-frame.png']);
 const entryFiles = new Set(['index.html', 'engine.js', 'asset-inventory.js', 'layout.css', 'transfer.html', 'CREDITS.md']);
 const tracked = execFileSync('git', ['ls-files', '-z'], { cwd: root, encoding: 'utf8', maxBuffer: 16 * 1024 * 1024 })
   .split('\0').filter(Boolean);
@@ -15,6 +16,7 @@ const modified = new Set(execFileSync('git', ['diff', 'HEAD', '--name-only', '-z
 }).split('\0').filter(Boolean));
 const files = tracked.filter(file =>
   !file.startsWith(spritePrefix) &&
+  (!file.startsWith('modes/idle/rankings/') || rankingFiles.has(file.slice('modes/idle/rankings/'.length))) &&
   (!file.startsWith('modes/idle/online/') || onlineFiles.has(file.slice('modes/idle/online/'.length))) &&
   (entryFiles.has(file) || /^(assets|wallpapers|modes)\//.test(file))
 );
@@ -44,6 +46,6 @@ fs.copyFileSync(path.join(output, 'modes/idle/online/home.html'), path.join(outp
 fs.copyFileSync(path.join(__dirname, 'cloudflare-sprites-worker.mjs'), path.join(output, '_worker.js'));
 fs.writeFileSync(path.join(output, '_headers'), '/game-shell.txt\n  Content-Type: text/plain; charset=utf-8\n  X-Content-Type-Options: nosniff\n  Cache-Control: no-store\n/game\n  Cache-Control: no-store\n/game.html\n  Cache-Control: no-store\n');
 fs.writeFileSync(path.join(output, '_routes.json'), JSON.stringify({
-  version: 1, include: ['/' + spritePrefix + '*'], exclude: []
+  version: 1, include: ['/' + spritePrefix + '*', '/api/monthly-rankings'], exclude: []
 }) + '\n');
 console.log('Prepared ' + files.length + ' static game files in _cloudflare');

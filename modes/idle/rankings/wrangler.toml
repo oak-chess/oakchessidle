@@ -1,0 +1,14 @@
+name = "oakchessidle-rankings"
+main = "worker.mjs"
+compatibility_date = "2026-11-11"
+
+[triggers]
+crons = ["*/2 * * * *"]
+
+[vars]
+SUPABASE_URL = "https://xbtmdrdrueqzfsausgfh.supabase.co"
+GAME_ORIGIN = "https://oakchessidle.pages.dev"
+
+[[r2_buckets]]
+binding = "RANKINGS_BUCKET"
+bucket_name = "oakchessidle-rankings"

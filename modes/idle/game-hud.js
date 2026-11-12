@@ -6,7 +6,7 @@
   function intercept(name,receive,prepare=ctx=>ctx) {
     let factory;
     Object.defineProperty(window,name,{
-      configurable:true,get(){return factory&&function(ctx){const result=factory(prepare(ctx));receive(ctx,result);return result}},
+      configurable:true,get(){const current=factory;return current&&function(ctx){const result=current(prepare(ctx));receive(ctx,result);return result}},
       set(value){factory=value},
     });
   }
@@ -210,11 +210,12 @@
     benchContent.append(benchList,slots);
     fieldCard.content.append(fieldList);benchCard.content.append(benchContent,farmList);left.append(profile,field,bench);
     showBenchTab(false);
-    for(const [label,id] of [['Pokémon','pokemon'],['Pokédex','dex'],['Pokéfone','bag'],['Evolução','evolution'],['Caçadas','hunts'],['Jornada','journey'],['Modos','modes'],['Centro','center'],['Vila','village'],['Wiki','wiki']]){
-      const action=id==='dex'?()=>openGuidePanel?.('dex'):id==='village'?proxy('#rv-village-launch'):id==='wiki'?proxy('#idleWikiLaunch'):menu(id);
-      const icon=id==='dex'||id==='wiki'?'modes/idle/assets/phone/'+id+'.svg':undefined;
+    for(const [label,id] of [['Pokémon','pokemon'],['Pokédex','dex'],['Pokéfone','bag'],['Evolução','evolution'],['Caçadas','hunts'],['Jornada','journey'],['Modos','modes'],['Centro','center'],['Vila','village'],['Ranks','ranks'],['Wiki','wiki']]){
+      const action=id==='ranks'?()=>window.IDLE_MONTHLY_RANKINGS?.open():id==='dex'?()=>openGuidePanel?.('dex'):id==='village'?proxy('#rv-village-launch'):id==='wiki'?proxy('#idleWikiLaunch'):menu(id);
+      const icon=id==='ranks'?'modes/idle/assets/menu-icons/ranks.png':id==='dex'||id==='wiki'?'modes/idle/assets/phone/'+id+'.svg':undefined;
       const entry=button(label,action,icon);entry.dataset.layoutMenu=id;
       if(!icon)entry.prepend(make('i','layout-nav-art layout-nav-'+id));
+      if(id==='ranks')entry.setAttribute('aria-haspopup','dialog');
       nav.append(entry);
     }
     const banner=make('div','layout-hunt'),status=make('div','layout-log'),controls=make('div','layout-arena-tools');
@@ -441,6 +442,7 @@
       renderStorage();
     }
     function moveEconomyPokemon(member,fromDepot){
+      if(window.IDLE_SERVER_JOURNEY?.enabled){void window.IDLE_SERVER_JOURNEY.mutate(state,'storage',{inventoryId:member.id,depot:!fromDepot}).then(()=>{selectedDepot=null;saveEconomy?.();renderStorage()}).catch(error=>alert(error.message));return;}
       const source=fromDepot?state.captureDepot:state.collection;
       const target=fromDepot?state.collection:(state.captureDepot??=[]);
       const index=source.indexOf(member);
@@ -563,7 +565,7 @@
       const roster=[...state.team,...state.collection,...(state.captureDepot||[])];
       const capturesWithMembers=recent.map(entry=>{
         const line=LINES.find(line=>line.ids.includes(entry.speciesId)||line.names.includes(entry.name));
-        const member=!entry.converted&&roster.find(member=>entry.memberToken
+        const member=!entry.converted&&roster.find(member=>entry.memberId?member.id===entry.memberId:entry.memberToken
           ? member.captureToken===entry.memberToken
           : entry.memberCaughtAt&&member.caughtAt===entry.memberCaughtAt&&line?.names.includes(member.name));
         const id=entry.speciesId||line?.ids[line.names.indexOf(entry.name)];
@@ -1015,7 +1017,24 @@
         const presence=make('div','layout-trainer-online');
         presence.append(make('span','layout-trainer-online-dot'),make('span','layout-trainer-online-label'));
         presence.append(make('span','layout-trainer-beta','Beta 0.1.0'));
-        trainerCard.content.replaceChildren(identity,wallet,vip,vipDetails,presence);lastTrainer=trainer;
+        trainerCard.content.replaceChildren(identity,wallet,vip,make('div','layout-trainer-buffs'),vipDetails,presence);lastTrainer=trainer;
+      }
+      const boostState=IDLE_VIP.sync(state);
+      const buffs=Object.entries(IDLE_VIP.catalog).filter(([key])=>boostState.remaining[key]>0&&!boostState.paused[key]);
+      const buffPanel=one('.layout-trainer-buffs',trainerCard.content);
+      const buffSignature=JSON.stringify(buffs.map(([key])=>[key,Math.ceil(boostState.remaining[key]/60)]));
+      if(buffPanel.dataset.signature!==buffSignature){
+        buffPanel.dataset.signature=buffSignature;
+        buffPanel.replaceChildren(...buffs.map(([key,definition])=>{
+          const row=make('div','layout-trainer-buff');
+          const art=make('i','is-benefit-art');
+          art.dataset.kind=key;art.setAttribute('aria-hidden','true');
+          const minutes=Math.ceil(boostState.remaining[key]/60);
+          row.append(art,make('span','',definition.benefit),make('small','',minutes>=60?Math.floor(minutes/60)+'h '+minutes%60+'min':minutes+' min'));
+          row.title=definition.name+' · '+definition.benefit;
+          return row;
+        }));
+        buffPanel.hidden=!buffs.length;
       }
       const remaining=Math.max(0,IDLE_XP.need(state.trainerLevel)-(state.trainerXp||0)),session=state.hunts?.session;
       const rate=session?.seconds>=60?session.xp*3600/session.seconds:0;

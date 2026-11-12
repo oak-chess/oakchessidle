@@ -57,8 +57,8 @@ window.createIdleCenterScene=function(ctx){
  function talkToNurse(){
   if(healingTimer)return;ctx.closePanels();dialogueFocus=document.activeElement;dialogue.hidden=false;dialogueActions.replaceChildren();
   dialogueText.textContent='Olá! Bem-vindo ao Centro Pokémon. Posso recuperar seus Pokémon gratuitamente?'+(ctx.isRunning()?' A caçada será encerrada ao confirmar.':'');
-  const confirm=btn('Sim, cuidar da equipe · Grátis',()=>{
-   confirm.disabled=true;const result=ctx.recover();dialogueActions.replaceChildren();
+  const confirm=btn('Sim, cuidar da equipe · Grátis',async()=>{
+   confirm.disabled=true;dialogueText.textContent='Confirmando atendimento no Centro Pokémon…';const result=await ctx.recover();if(dialogue.hidden)return;dialogueActions.replaceChildren();
    if(!result.ok){dialogueText.textContent=result.message;const done=btn('Entendi',dismissDialogue);dialogueActions.append(done);done.focus();return}
    dialogueText.textContent='Só um instante! Estamos cuidando dos seus Pokémon…';layer.classList.add('ic-healing');
    healingTimer=setTimeout(()=>{healingTimer=0;layer.classList.remove('ic-healing');dialogueText.textContent=result.message;const done=btn('Obrigado!',dismissDialogue);dialogueActions.append(done);done.focus();refresh()},1100);

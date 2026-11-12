@@ -1,0 +1,45 @@
+/* Replays server positions inside the existing arena. It never decides an outcome. */
+window.createServerHunts=function(ctx){
+ const bridge=window.IDLE_SERVER_JOURNEY;
+ let pending=null,requestId=null;
+ const wait=ms=>new Promise(resolve=>setTimeout(resolve,ms));
+ async function execute(){
+  const challenge=ctx.challenge();
+  if(challenge&&challenge.kind!=='boss')throw Error('Este modo ainda não está ligado à economia online. Use as caçadas disponíveis.');
+  await bridge.syncPreferences(ctx.state);
+  if(!bridge.snapshot.activeHunt&&!requestId){
+   await bridge.syncOrganization(ctx.state);
+  }
+  requestId??=crypto.randomUUID();
+  const encounter=await bridge.request({action:'begin',requestId,route:challenge?challenge.area+':gym':ctx.state.area+':'+ctx.state.hunts.kind});
+  ctx.show(encounter.replay);
+  const frames=encounter.replay.frames,elapsedMs=encounter.replay.elapsedMs;
+  const resumed=Math.max(0,elapsedMs-encounter.remainingMs),start=performance.now();let index=0;
+  while(performance.now()-start<encounter.remainingMs){
+   const elapsed=Math.min(elapsedMs,resumed+performance.now()-start);
+   while(index+1<frames.length&&frames[index+1].t<=elapsed)index++;
+   if(ctx.running()&&!document.hidden)ctx.frame(frames[index]);
+   await wait(document.hidden?500:100);
+  }
+  let settled;
+  for(let retry=0;retry<4;retry++){
+   try{settled=await bridge.request({action:'finish',huntId:encounter.id});break;}
+   catch(error){if(retry===3||!error.message.includes('andamento'))throw error;await wait(750);}
+  }
+  requestId=null;
+  ctx.finish(settled);
+  if(encounter.route.endsWith(':gym'))return;
+  const last=frames.at(-1),offset=encounter.replay.snapshot.allies.length;
+  for(const [index,enemy] of encounter.replay.snapshot.enemies.entries()){
+   if(last.u[offset+index][3])continue;
+   await ctx.capture(enemy,async ball=>{
+    const result=await bridge.request({action:'capture',huntId:encounter.id,index,ball});
+    ctx.apply(result.state);return result.capture;
+   });
+  }
+ }
+ return {get busy(){return !!pending},run(){
+  if(pending)return pending;
+  pending=execute().finally(()=>{pending=null;});return pending;
+ }};
+};

@@ -7,7 +7,7 @@ retry.onclick = () => location.reload();
 const home = () => location.replace('/');
 try {
  if (!window.supabase) throw new Error('Biblioteca de acesso indisponível.');
- const client = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+ const client = window.OAK_ONLINE_CLIENT = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
  const { data: { session }, error: sessionError } = await client.auth.getSession();
  if (sessionError || !session) home();
  else {
@@ -25,11 +25,14 @@ try {
     if(profileError || journeyError) throw new Error('Não foi possível verificar sua jornada.');
     if(!profile?.username || !journey) home();
     else {
+     const {data:snapshot,error:snapshotError}=await client.rpc('hunt_state').abortSignal(controller.signal);
+     if(snapshotError||!snapshot?.profile||snapshot.ownerId!==user.id)throw new Error('Jornada online indisponível.');
      const response = await fetch('/game-shell.txt', { cache:'no-store', signal:controller.signal });
      if(!response.ok) throw new Error('Não foi possível carregar o jogo.');
      const html = await response.text();
      if(!/^<!doctype html>/i.test(html.trimStart())) throw new Error('Arquivo do jogo indisponível.');
      // The payload is served as plain text, so navigating to it cannot launch the game.
+     window.OAK_ONLINE_SNAPSHOT=snapshot;
      document.open(); document.write(html.replace('<base href="./">','<base href="/">')); document.close();
     }
    } finally {clearTimeout(timer);}

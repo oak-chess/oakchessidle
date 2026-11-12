@@ -1,0 +1,16 @@
+.arena-online-replay{position:fixed;inset:0;margin:auto;width:min(1100px,96vw);height:min(740px,94dvh);padding:12px;background:#061e2d;border:2px solid #6bdff4;border-radius:14px;color:#e9faff;box-shadow:0 0 0 100vmax #020b13d9;z-index:2147483500;display:grid;grid-template-rows:40px minmax(0,1fr) 28px 36px;gap:8px;font:700 16px Arial;overflow:hidden}
+.arena-online-replay::backdrop{background:#020b13d9}
+.aor-header{display:flex;justify-content:space-between;align-items:center;color:#ffdd83;padding:0 12px}
+.aor-scene{position:relative;min-height:0;background:#0b3347 url('stadium-v3.webp') center/cover no-repeat;border:1px solid #42798d;border-radius:6px;overflow:hidden}
+.aor-unit{position:absolute;width:9%;height:15%;transform:translate(-50%,-80%);display:flex;flex-direction:column;align-items:center;justify-content:end;transition:left .16s linear,top .16s linear,opacity .3s;filter:drop-shadow(0 5px 2px #0008)}
+.aor-unit>img,.aor-unit>canvas{width:75%;height:75%;object-fit:contain;image-rendering:pixelated}
+.aor-unit>small{font:700 clamp(8px,1vw,12px) Arial;text-shadow:0 1px 2px #000}
+.aor-health{display:block;width:85%;height:5px;min-height:5px;background:#202933;border:1px solid #091720}
+.aor-health>i{display:block;height:100%;background:#51e6a5;transition:width .15s}
+.aor-unit[data-side=enemy] .aor-health>i{background:#ef6279}
+.aor-fainted{opacity:.15}
+.aor-cast{animation:aor-pulse .4s ease-out}
+.aor-footer{text-align:center;font-size:13px;color:#95ddeb;align-self:center}
+.arena-online-replay>button{justify-self:center;min-width:160px;height:36px;padding:4px 20px;border:1px solid #67dfef;border-radius:5px;background:linear-gradient(#245b72,#10313f);color:#fff;font-weight:700;cursor:pointer}
+@keyframes aor-pulse{50%{filter:brightness(1.7) drop-shadow(0 0 12px #82f6ff)}}
+@media(prefers-reduced-motion:reduce){.aor-cast{animation:none}.aor-unit{transition:none}}
