@@ -9,13 +9,19 @@ const onlinePresentation=window.createHuntPresentation({
   const mv={...u.moves[index]};if(!mv.n)return;
   u.lastMoveIndex=index;u._replayMove=mv;u._pmdSp=performance.now();if(t)faceTo(u,t);
   const rc=recipe(mv),art=window.EMERALD_MOVES;
+  const hex=window.HEX_ATTACKS;
+  const preview=CFG.movePreview===false?null:hex?.prepare(u,t,mv,rc);
+  if(CFG.movePreview!==false&&t){
+   if(mv.k==='chain')hex?.link(u,t,mv,.15);
+   else if(mv.k==='storm'||mv.k==='multi')hex?.target(t,mv);
+  }
   PMD.playNames(u.el,rc.pose||PMD.SP[mv.k]);art?.pose(mv,u.spr);
   const approved=window.IDLE_PDA_EFFECTS?.activate(mv,u,t)||window.IDLE_MOVE_EFFECTS?.owns(mv);
   art?.start(mv,u.x,cyOf(u));
   const impact=()=>{if(t&&!art?.hit(mv,t.x,cyOf(t),1,{x:u.x,y:cyOf(u)}))FX.impact(mv.t,t.x,cyOf(t),1);};
   if(t&&['bolt','blast','drain','multi','barrage','storm','trap'].includes(mv.k)){
    // Arrival triggers the original visual impact, never another damage calculation.
-   FX.shoot(u.x,cyOf(u),t,mv.t,rc.spd||600,rc.sz||1,impact,{...rc.proj,move:mv});
+   FX.shoot(u.x,cyOf(u),t,mv.t,rc.spd||600,rc.sz||1,impact,{...rc.proj,move:mv,preview});
   }else if(t&&['beam','chain'].includes(mv.k)){
    if(!art?.beam(mv,u.x,cyOf(u),t.x,cyOf(t),rc.bw||55))FX.beam(u.x,cyOf(u),t.x,cyOf(t),mv.t,rc.bw||55);
    impact();
