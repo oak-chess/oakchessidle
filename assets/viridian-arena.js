@@ -1,6 +1,8 @@
 // Floresta aprovada: renderização isolada das regras de combate.
 window.createViridianArena=function(){
-let c,W=1280,H=800,time=0,paused=false,gridSoftness=0,angled=true,mode='scene',benchMode=false;
+let c,W=1280,H=800,time=0,paused=false,gridSoftness=0,sealProgress=0,angled=true,mode='scene',benchMode=false;
+const reducedMotion=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const sealEase=n=>{const k=Math.max(0,Math.min(1,n));return k*k*(3-2*k)};
 const config={leaves:100,decor:true,sunrays:true,life:true,quality:'high'};
 let audio=null,sound=false,unlocked=false,lastGrid=0;
 const effects=document.createElement('canvas');effects.id='viridianAtmosphere';effects.width=2560;effects.height=800;effects.style.cssText='position:absolute;left:-640px;top:0;width:2560px;height:800px;pointer-events:none';
@@ -88,11 +90,14 @@ c.save();c.globalAlpha=1-gridSoftness*.87;face(pts,row>=4?((row+col)%2?'#b5a16d'
 for(let i=0;i<170;i++){const x=-275+random(i+41)*550,y=-260+random(i+91)*520;ellipse(x,y,11,1+random(i+16)*2,.7,i%2?'#e1c28d38':'#5d583b38')}
 // Poké Bola pintada na terra, projetada no mesmo plano dos hexágonos.
 const circle=(radius,start,end)=>Array.from({length:49},(_,i)=>{const a=start+(end-start)*i/48;return[Math.cos(a)*radius,Math.sin(a)*radius,12]});
-face(circle(59,0,Math.PI*2),'#ece5c9','#354b35');
-face([[0,0,12],...circle(58,Math.PI,Math.PI*2)],'#c76750');
-face([[-58,-3,13],[58,-3,13],[58,3,13],[-58,3,13]],'#354b35');
-face(circle(59,0,Math.PI*2),'#0000','#354b35');
-face(circle(16,0,Math.PI*2),'#354b35');face(circle(11,0,Math.PI*2),'#eee7ce');face(circle(6,0,Math.PI*2),'#c8cfb1','#80916c');
+// Assemble on the same projected floor; never rotate or move the combat grid.
+const sealPart=(alpha,draw)=>{if(alpha<=0)return;c.save();c.globalAlpha*=alpha;draw();c.restore()};
+const p=sealProgress;
+sealPart(sealEase((p-.44)/.3),()=>face([[0,0,12],...circle(58,0,Math.PI)],'#ece5c9'));
+sealPart(sealEase((p-.3)/.3),()=>face([[0,0,12],...circle(58,Math.PI,Math.PI*2)],'#c76750'));
+sealPart(sealEase((p-.55)/.26),()=>face([[-58,-3,13],[58,-3,13],[58,3,13],[-58,3,13]],'#354b35'));
+if(p>0){const arc=circle(59,-Math.PI/2,-Math.PI/2+Math.PI*2*sealEase(p/.57));c.beginPath();arc.forEach((v,i)=>{const q=point(...v);i?c.lineTo(q.x,q.y):c.moveTo(q.x,q.y)});c.strokeStyle='#354b35';c.lineWidth=2;c.stroke()}
+sealPart(sealEase((p-.73)/.27),()=>{face(circle(16,0,Math.PI*2),'#354b35');face(circle(11,0,Math.PI*2),'#eee7ce');face(circle(6,0,Math.PI*2),'#c8cfb1','#80916c')});
 c.restore();
 }
 function forestDecor(){
@@ -213,7 +218,9 @@ return{
   angled=state.angled;paused=state.paused;config.quality=state.quality;
   if(!paused)time+=dt;
   gridSoftness+=((state.combat?1:0)-gridSoftness)*(1-Math.exp(-dt*5));
-  const grid=Math.round(gridSoftness*10),dirty=grid!==lastGrid;lastGrid=grid;
+  const beforeSeal=sealProgress,target=state.combat?1:0;
+  if(!paused&&!document.hidden)sealProgress=reducedMotion?target:Math.max(0,Math.min(1,sealProgress+(target?1:-1)*dt/(target?1.8:1.35)));
+  const grid=Math.round(gridSoftness*10),dirty=grid!==lastGrid||beforeSeal!==sealProgress;lastGrid=grid;
   visualElapsed+=dt;if(visualElapsed<(window.IDLE_PANEL_OPEN ? .1 : 1/30))return dirty;visualElapsed=0;
   c=effects.getContext('2d');c.setTransform(1,0,0,1,0,0);c.clearRect(0,0,2560,800);c.setTransform(1,0,0,1,640,0);mode='scene';
   if(!document.hidden){forestLife();atmosphere()}
