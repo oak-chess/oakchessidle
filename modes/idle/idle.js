@@ -4,8 +4,28 @@ const ONLINE=!!window.OAK_ONLINE_SNAPSHOT;let serverHunts;
 const onlinePresentation=window.createHuntPresentation({
  units:()=>B.units,update:updateCUEl,
  attack:(u,t)=>{if(window.IDLE_ARENA_ECONOMY)return;lunge(u,t,u.range<=1?18:8);PMD.playNames(u.el,u.range<=1?PMD.MELEE:PMD.RANGED,true);if(u.range>1)FX.shoot(u.x,cyOf(u),t,u.types[0],520,.8,()=>{});},
- cast:(u,t,index)=>{if(window.IDLE_ARENA_ECONOMY)return;const mv={...u.moves[index]};if(!mv.n)return;u._replayMove=mv;u._pmdSp=performance.now();if(t)faceTo(u,t);const rc=recipe(mv);PMD.playNames(u.el,rc.pose||PMD.SP[mv.k]);window.IDLE_PDA_EFFECTS?.activate(mv,u,t);const art=window.EMERALD_MOVES;art?.start(mv,u.x,cyOf(u));if(t){if(['beam','chain'].includes(mv.k))art?.beam(mv,u.x,cyOf(u),t.x,cyOf(t),55);else if(['bolt','blast','drain','multi','barrage','storm'].includes(mv.k))FX.shoot(u.x,cyOf(u),t,mv.t,600,1,()=>{}, {move:mv});else art?.hit(mv,t.x,cyOf(t),1,{x:u.x,y:cyOf(u)});}SND.cast(mv.t);},
- hit:(u,t,e)=>{if(window.IDLE_ARENA_ECONOMY)return;if(!e.dot){t._pmdHurt=performance.now();recoil(t,u);if(t.spr)anim(t.spr,[{filter:'brightness(1.8)'},{filter:'brightness(1)'}],{duration:160});FX.impact(e.type,t.x,cyOf(t),e.crit?1:.55);SND.hit(e.type,e.crit?1:.55);}if(CFG.dmgnum!=='none')FX.text(t.x,t.y-50,String(e.n),e.crit?'#ffd24a':e.kind==='spec'?'#8fd8ff':'#fff',e.crit?22:14);},
+ cast:(u,t,index)=>{
+  if(window.IDLE_ARENA_ECONOMY)return;
+  const mv={...u.moves[index]};if(!mv.n)return;
+  u.lastMoveIndex=index;u._replayMove=mv;u._pmdSp=performance.now();if(t)faceTo(u,t);
+  const rc=recipe(mv),art=window.EMERALD_MOVES;
+  PMD.playNames(u.el,rc.pose||PMD.SP[mv.k]);art?.pose(mv,u.spr);
+  const approved=window.IDLE_PDA_EFFECTS?.activate(mv,u,t)||window.IDLE_MOVE_EFFECTS?.owns(mv);
+  art?.start(mv,u.x,cyOf(u));
+  const impact=()=>{if(t&&!art?.hit(mv,t.x,cyOf(t),1,{x:u.x,y:cyOf(u)}))FX.impact(mv.t,t.x,cyOf(t),1);};
+  if(t&&['bolt','blast','drain','multi','barrage','storm','trap'].includes(mv.k)){
+   // Arrival triggers the original visual impact, never another damage calculation.
+   FX.shoot(u.x,cyOf(u),t,mv.t,rc.spd||600,rc.sz||1,impact,{...rc.proj,move:mv});
+  }else if(t&&['beam','chain'].includes(mv.k)){
+   if(!art?.beam(mv,u.x,cyOf(u),t.x,cyOf(t),rc.bw||55))FX.beam(u.x,cyOf(u),t.x,cyOf(t),mv.t,rc.bw||55);
+   impact();
+  }else if(mv.k==='barrier')FX.shieldFx(u.x,cyOf(u));
+  else if(mv.k==='heal')FX.healFx(u.x,cyOf(u));
+  else impact();
+  if(!approved){FX.charge(mv.t,u.x,cyOf(u));if(rc.start)FX.fx(rc.start,u.x,cyOf(u),mv.t,1);}
+  SND.cast(mv.t);
+ },
+ hit:(u,t,e)=>{if(window.IDLE_ARENA_ECONOMY)return;if(!e.dot){t._pmdHurt=performance.now();recoil(t,u);if(t.spr)anim(t.spr,[{filter:'brightness(1.8)'},{filter:'brightness(1)'}],{duration:160});FX.impact(e.type,t.x,cyOf(t),e.crit?1:.55);SND.hit(e.type,e.crit?1:.55);}if(CFG.dmgnum!=='none')FX.text(t.x,t.y-50,String(e.n),e.crit?'#ffd24a':e.kind==='spec'?'#8fd8ff':'#fff',e.crit?22:14,e.crit);},
  heal:(u,n)=>{if(window.IDLE_ARENA_ECONOMY)return;FX.healFx(u.x,cyOf(u));if(CFG.dmgnum!=='none')FX.text(u.x,u.y-52,'+'+n,'#7dff9a',14);},
  text:e=>{if(!window.IDLE_ARENA_ECONOMY)FX.text(e.x,e.y,e.text,e.color,e.size);},
  faint:u=>{if(window.IDLE_ARENA_ECONOMY){if(u.el)u.el.style.display='none';return;}SND.cry(u.id,.7);if(window.IDLE_TRAINER?.recall(u))return;PMD.play(u.el,'faint');if(u.el)anim(u.el,[{opacity:1},{opacity:0}],{duration:520,fill:'forwards'});}
@@ -182,22 +202,39 @@ window.addEventListener('idle-server-error',event=>message(event.detail));docume
    const side=i<allies.length?0:1,index=side?i-allies.length:i,L=LINES.find(l=>l.ids.includes(m.pokemon_id));
    const u=mkCU({line:L.i,star:L.ids.indexOf(m.pokemon_id)+1,items:m.combat_data?.items||[],
    scale:1+(m.level-1)*.12,idleLevel:m.level,shiny:!!m.combat_data?.shiny,r:side?2-Math.floor(index/3):(m.pos?.r??5+Math.floor(index/3)),c:side?[1,3,5][index%3]:(m.pos?.c??[1,3,5][index%3])},side);
-   IDLE_INDIVIDUALS.apply(u,m.combat_data||{});if(m.maxHp>0)u.maxHp=m.maxHp;u._idleLevel=m.level;if(!side)u._idleMember=m.id;
+   IDLE_INDIVIDUALS.apply(u,m.combat_data||{});if(m.maxHp>0)u.maxHp=m.maxHp;u._idleLevel=m.level;u._idleServerId=m.id;if(!side)u._idleMember=m.id;
    B.units.push(u);addCUEl(u);
-  });trainerUI?.throwBall();render();
+  });window.EMERALD_MOVES?.warmMoves(B.units.flatMap(u=>u.moves||[]));trainerUI?.throwBall();render();
  },
  // updateCUEl positions sprites with transform; left/top would double the offset.
  frame:(frame,events)=>{B.t=frame.t/1000;onlinePresentation.frame(frame,events);},
  apply:snapshot=>{IDLE_SERVER_JOURNEY.apply(state,snapshot);if(G.phase==='plan')rebuild();else render();},
- finish:response=>{
+ finish:async response=>{
   const reward=response.result.rewards;IDLE_SERVER_JOURNEY.apply(state,response.state);if(response.result.kind==='gym'){running=false;state.world.challenge=null;}else if(response.result.winner!==0&&!state.hunts.supplies.afterDefeat)running=false;
   window.IDLE_XP.record(state,reward.trainerXp);activityLog?.xp(reward.trainerXp);
   if(state.hunts.session){state.hunts.session.xp+=reward.trainerXp;state.hunts.session.coins+=reward.coins;state.hunts.session.defeated+=reward.defeated;state.hunts.session.battles++;if(response.result.winner===0)state.hunts.session.wins++;}
-  B.on=false;B.winner=null;B.over=false;G.phase='plan';rebuild();
+  B.on=false;B.winner=null;B.over=false;G.phase='result';
+  trainerUI?.recallDefeated(B.units);
+  await trainerUI?.pending();
   message((response.result.winner===0?'Vitória!':response.result.winner===-1?'Empate.':'Derrota.')+' +'+reward.trainerXp+' XP · +'+reward.coins+' Coins · progresso confirmado no servidor.');
- },capture:(enemy,callback)=>captureSystem.serverDefeated(enemy,callback)
+ },capture:(enemy,callback)=>{
+  const u=B.units.find(u=>u._idleServerId===enemy.id);
+  return captureSystem.serverDefeated(enemy,callback,trainerUI?.unitPoint(u));
+ },complete:()=>{G.phase='plan';rebuild();}
 });window.IDLE_I18N?.protect(state);activityLog=window.IDLE_ACTIVITY.create(state,{mode:()=>!document.getElementById('rv-native-tools')?.hidden&&document.getElementById('rv-native-tools')?.dataset.view==='fishing'?'fishing':running?(systems.challenge()?'challenge':'hunt'):document.body.classList.contains('rv-native-open')?'village':'menu',huntName:()=>hunts.label()});window.createIdleMusic({state,challenge:()=>systems.challenge(),combat:()=>G.phase==='combat',center:()=>!!centerUI?.isOpen()}).mount();mountLegendaryEvents();if(welcomeGranted)toast('Boas-vindas! 3 dias de VIP + 300 Revives, 300 Ultra Balls e 300 Poções.');const restoredChallenge=systems.challenge();syncIdleArena();reroll();rebuild();message('Arraste seus Pokémon para preparar a equipe. Clique em EXPLORAR para iniciar o automático.');if(state.safari?.session){const resumeSafari=()=>{if(!safariSystem.tick())safariRuntime.launch()};setTimeout(resumeSafari,300)}else if(elapsed>=1/60&&!state.world.battleTower?.active)offline(elapsed);if(resumeSavedHunt&&!restoredChallenge&&!state.safari?.session){const resume=()=>{if(running||systems.challenge())return;state.world.location='field';captureSystem.start();hunts.start();running=true;safeFight();save({capture:false});if(running)message('Caçada retomada na mesma área e onda.')};if(document.documentElement.classList.contains('ready'))setTimeout(resume,0);else window.addEventListener('oak-startup-ready',resume,{once:true})}setInterval(()=>{window.IDLE_VIP.sync(state);activityLog?.tick();if(G.phase==='plan'){capturePositions();$id('boardcnt').textContent=boardUnits().length+'/'+capacity();updateTraitsUI();refreshIdlePanels()}screenUI?.refresh();centerUI?.refresh();trainerUI?.refresh();fieldNotes?.refresh();if(!document.hidden&&!window.IDLE_BACKGROUND_BUSY){systems.tick(.5);hunts.tick(.5,running&&!systems.challenge())}},500);setInterval(()=>{if(ready&&!document.hidden)save()},10000)}
-window.addEventListener('pagehide',save);document.addEventListener('visibilitychange',()=>{if(!ready)return;if(document.hidden){save();backgroundStamp=performance.now();backgroundDebt=0;backgroundWait=2.5;captureFx?.clear();trainerUI?.clear();clearTimeout(nextTimer);clearInterval(backgroundTimer);backgroundTimer=setInterval(pumpBackground,500)}else{collectBackgroundTime();clearInterval(backgroundTimer);window.IDLE_BACKGROUND_BUSY=true;pumpBackground()}});boot();
+window.addEventListener('pagehide',save);function handleIdleVisibility(){
+ if(!ready)return;
+ // Online results already advance on the server. Never leave the offline catch-up
+ // flag set: it stops the FX renderer, trainer canvas and capture animations.
+ if(ONLINE){
+  window.IDLE_BACKGROUND_BUSY=false;backgroundStamp=0;backgroundDebt=0;
+  clearInterval(backgroundTimer);backgroundTimer=null;
+  if(document.hidden){save();captureFx?.clear();trainerUI?.clear();}
+  else lastT=performance.now();
+  return;
+ }
+ if(document.hidden){save();backgroundStamp=performance.now();backgroundDebt=0;backgroundWait=2.5;captureFx?.clear();trainerUI?.clear();clearTimeout(nextTimer);clearInterval(backgroundTimer);backgroundTimer=setInterval(pumpBackground,500)}else{collectBackgroundTime();clearInterval(backgroundTimer);window.IDLE_BACKGROUND_BUSY=true;pumpBackground()}
+}document.addEventListener('visibilitychange',handleIdleVisibility);boot();
 })();
 
 // Clear arena hover state immediately when an idle menu opens, without pausing combat.

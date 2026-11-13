@@ -193,15 +193,16 @@ window.createIdleCapture = function ({state, lines, sprite, save, changed, notif
    const result=await entry.serverCapture(ball),name=entry.speciesName;
    const event=record(name,result.caught?'Capturado · guardado no Depósito':'Escapou',false,{source:'hunt',status:result.caught?'caught':'escaped',attempted:true,shiny:!!entry.genes?.shiny,speciesId:entry.speciesId,level:entry.level,potency:entry.genes?.potency,ivTotal:IDLE_INDIVIDUALS.total(entry.genes),memberId:result.id,ball});
    captureInbox.events.unshift(event);captureInbox.events=captureInbox.events.slice(0,20);if(result.caught)captureInbox.total++;
-   onAttempt?.({name,shiny:!!entry.genes?.shiny,success:result.caught,sentToPC:true,ballName:IDLE_ITEMS.balls[ball].name,ballSprite:'assets/pokeapi/sprites/items/'+IDLE_ITEMS.balls[ball].sprite+'.png',pokemonSprite:IDLE_PMD_THUMBNAIL.member({...entry.genes,name:entry.line.names[0],star:entry.line.ids.indexOf(entry.speciesId)+1},lines)});
    const index=manualQueue.indexOf(entry);if(index>=0)manualQueue.splice(index,1);
+   // Keep the current arena until its confirmed capture presentation finishes.
+   await onAttempt?.({name,targetPoint:entry.targetPoint,shiny:!!entry.genes?.shiny,success:result.caught,sentToPC:true,ballName:IDLE_ITEMS.balls[ball].name,ballSprite:'assets/pokeapi/sprites/items/'+IDLE_ITEMS.balls[ball].sprite+'.png',pokemonSprite:IDLE_PMD_THUMBNAIL.member({...entry.genes,name:entry.line.names[0],star:entry.line.ids.indexOf(entry.speciesId)+1},lines)});
    notify(name+(result.caught?' capturado! Guardado no Depósito.':' escapou.'));changed();
   }catch(error){notify(error.message);if(entry.expires>Date.now()&&!manualQueue.includes(entry))enqueue(entry);}
   finally{entry.busy=false;drawManual();}
  }
- function serverDefeated(enemy,serverCapture){
+ function serverDefeated(enemy,serverCapture,targetPoint){
   const line=lines.find(l=>l.ids.includes(enemy.pokemon_id)),speciesName=line.names[line.ids.indexOf(enemy.pokemon_id)];
-  const entry={line,speciesName,speciesId:enemy.pokemon_id,genes:enemy.combat_data,level:enemy.level,expires:Date.now()+15000,source:'hunt',serverCapture};
+  const entry={line,speciesName,speciesId:enemy.pokemon_id,genes:enemy.combat_data,level:enemy.level,expires:Date.now()+15000,source:'hunt',serverCapture,targetPoint};
   if(isVip()&&state.capture.enabled)return serverAttempt(entry);
   enqueue(entry);
  }

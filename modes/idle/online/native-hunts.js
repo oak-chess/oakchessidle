@@ -37,8 +37,8 @@ window.createServerHunts=function(ctx){
    catch(error){if(retry===3||!error.message.includes('andamento'))throw error;await wait(750);}
   }
   requestId=null;
-  ctx.finish(settled);
-  if(encounter.route.endsWith(':gym'))return;
+  await ctx.finish(settled);
+  if(encounter.route.endsWith(':gym')){ctx.complete?.();return;}
   const last=frames.at(-1),offset=encounter.replay.snapshot.allies.length;
   for(const [index,enemy] of encounter.replay.snapshot.enemies.entries()){
    if(last.u[offset+index][3])continue;
@@ -47,6 +47,7 @@ window.createServerHunts=function(ctx){
     ctx.apply(result.state);return result.capture;
    });
   }
+  ctx.complete?.();
  }
  return {get busy(){return !!pending},run(){
   if(pending)return pending;
