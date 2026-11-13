@@ -51,13 +51,18 @@ for (const file of files) {
     fs.copyFileSync(path.join(root, file), target);
   }
 }
-fs.copyFileSync(path.join(output, 'index.html'), path.join(output, 'game-shell.txt'));
+const release = execFileSync('git', ['rev-parse', 'HEAD'], { cwd: root, encoding: 'utf8' }).trim();
+const shell = fs.readFileSync(path.join(output, 'index.html'), 'utf8');
+const updateNotice = fs.readFileSync(path.join(__dirname, 'pages-update-notice.js'), 'utf8');
+fs.writeFileSync(path.join(output, 'game-shell.txt'), shell.replace(/<\/body>/i,
+  () => '<script data-release="' + release + '">' + updateNotice + '</script></body>'));
+fs.writeFileSync(path.join(output, 'game-version.json'), JSON.stringify({ release }));
 fs.copyFileSync(path.join(output, 'modes/idle/online/game-entry.html'), path.join(output, 'game.html'));
 // The legacy entry must use the same gate, never expose a playable anonymous page.
 fs.copyFileSync(path.join(output, 'modes/idle/online/game-entry.html'), path.join(output, 'modes/idle/index.html'));
 fs.copyFileSync(path.join(output, 'modes/idle/online/home.html'), path.join(output, 'index.html'));
 fs.copyFileSync(path.join(__dirname, 'cloudflare-sprites-worker.mjs'), path.join(output, '_worker.js'));
-fs.writeFileSync(path.join(output, '_headers'), '/game-shell.txt\n  Content-Type: text/plain; charset=utf-8\n  X-Content-Type-Options: nosniff\n  Cache-Control: no-store\n/game\n  Cache-Control: no-store\n/game.html\n  Cache-Control: no-store\n');
+fs.writeFileSync(path.join(output, '_headers'), '/game-version.json\n  Cache-Control: no-store\n/game-shell.txt\n  Content-Type: text/plain; charset=utf-8\n  X-Content-Type-Options: nosniff\n  Cache-Control: no-store\n/game\n  Cache-Control: no-store\n/game.html\n  Cache-Control: no-store\n');
 fs.writeFileSync(path.join(output, '_routes.json'), JSON.stringify({
   version: 1, include: ['/' + spritePrefix + '*', '/api/monthly-rankings'], exclude: []
 }) + '\n');
