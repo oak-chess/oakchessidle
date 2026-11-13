@@ -13,9 +13,15 @@ window.createServerHunts=function(ctx){
   requestId??=crypto.randomUUID();
   const encounter=await bridge.request({action:'begin',requestId,route:challenge?challenge.area+':gym':ctx.state.area+':'+ctx.state.hunts.kind});
   if(abandoning)return;
+  const prepared=!ctx.running()&&!!ctx.preview;
+  if(prepared){
+   ctx.preview(encounter.replay);
+   while(!ctx.running()&&!abandoning)await wait(200);
+   if(abandoning)return;
+  }
   ctx.show(encounter.replay);
   const frames=encounter.replay.frames,elapsedMs=encounter.replay.elapsedMs;
-  const resumed=Math.max(0,elapsedMs-encounter.remainingMs),start=performance.now();let index=0,lastIndex=-1;
+  const resumed=prepared?0:Math.max(0,elapsedMs-encounter.remainingMs),start=performance.now();let index=0,lastIndex=-1;
   // Resuming must not replay old damage/attack effects in a single burst.
   const checkpointKey='oak-online-hunt-frame:'+encounter.id;
   const storage=window.sessionStorage;
