@@ -255,7 +255,7 @@ window.addEventListener('idle-server-error',event=>message(event.detail));docume
     summary.supplyCost=(summary.supplyCost||0)+item.price*count;
    }
   }
-  if(state.hunts.session){state.hunts.session.xp+=reward.trainerXp;state.hunts.session.coins+=reward.coins;state.hunts.session.defeated+=reward.defeated;state.hunts.session.battles++;if(response.result.winner===0)state.hunts.session.wins++;}
+  if(state.hunts.session){state.hunts.session.xp+=reward.trainerXp;state.hunts.session.coins+=reward.coins;state.hunts.session.loot+=(reward.lootValue||0);state.hunts.session.autoSoldLoot=(state.hunts.session.autoSoldLoot||0)+(reward.autoSoldLoot||0);state.hunts.session.defeated+=reward.defeated;state.hunts.session.battles++;if(response.result.winner===0)state.hunts.session.wins++;}
   B.on=false;B.winner=null;B.over=false;G.phase='result';
   trainerUI?.recallDefeated(B.units);
   await trainerUI?.pending();

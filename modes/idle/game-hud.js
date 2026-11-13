@@ -576,13 +576,13 @@
       const sortValue={recent:c=>c.entry.time,score:c=>c.score,iv:c=>c.entry.ivTotal,power:c=>c.entry.potency,quality:c=>c.quality,level:c=>c.level}[captureSort];
       capturesWithMembers.sort((a,b)=>(sortValue(b)??-Infinity)-(sortValue(a)??-Infinity)||b.entry.time-a.entry.time);
       const records=JSON.stringify([shinyOnly,captureSort,capturesWithMembers]);
-      const snapshot=JSON.stringify([title,combatStatus,Math.floor(session.seconds||0),session.xp,session.coins,session.loot,session.ballCost,session.supplyCost,session.defeated,session.captures,session.balls,session.potions,session.revives,session.usedItems,session.wins,session.battles,records]);
+      const snapshot=JSON.stringify([title,combatStatus,Math.floor(session.seconds||0),session.xp,session.coins,session.loot,session.autoSoldLoot,session.ballCost,session.supplyCost,session.defeated,session.captures,session.balls,session.potions,session.revives,session.usedItems,session.wins,session.battles,records]);
       if(snapshot===lastEconomy)return;
       const seconds=Math.floor(session.seconds||0);
       const activeTime=[Math.floor(seconds/3600),Math.floor(seconds/60)%60,seconds%60].map(value=>String(value).padStart(2,'0')).join(':');
       economyStatus.textContent=title+' · '+combatStatus+' · '+activeTime+' ativo';
       const perHour=value=>session.seconds>=60?fmt((value||0)*3600/session.seconds)+'/h':'Calculando ritmo';
-      const balance=(session.coins||0)+(session.loot||0)-(session.ballCost||0)-(session.supplyCost||0);
+      const balance=(session.coins||0)+(session.loot||0)-(session.autoSoldLoot||0)-(session.ballCost||0)-(session.supplyCost||0);
       const values=[
         [session.xp,perHour(session.xp)],
         [balance,seconds>=60?fmt(balance*3600/session.seconds)+' Coins/h · estimativa':'Calculando Coins/h'],

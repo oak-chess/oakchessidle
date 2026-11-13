@@ -50,7 +50,7 @@ window.IDLE_SERVER_JOURNEY=(()=>{
    world:{badges:clone(snapshot.profile.badges||[]),regionWins:clone(snapshot.profile.region_wins||{}),stones:clone(snapshot.profile.stones||{})},
    team,collection:members.filter(m=>!team.includes(m)&&!m.inDepot),captureDepot:members.filter(m=>!team.includes(m)&&m.inDepot),ballStock:Object.fromEntries(Object.entries(supplies).filter(([k])=>k!=='poke')),
    capture:{ball:preferences.captureBall||'poke',enabled:preferences.captureEnabled??true,bankLocked:preferences.bankLocked??false,duplicates:preferences.duplicates||'keep'},captureShiny:{ball:preferences.shinyBall||'ultra'},
-   balls:supplies.poke||0,hunts:{kind:route[1],wave:snapshot.profile.wave,routeKey:snapshot.profile.route,autoAdvance:preferences.autoAdvance??true,
+   balls:supplies.poke||0,hunts:{kind:route[1],wave:snapshot.profile.wave,routeKey:snapshot.profile.route,autoAdvance:preferences.autoAdvance??true,autoSellLoot:preferences.autoSellLoot??true,
    loot:clone(snapshot.profile.loot),supplies:{...supplies,heal:true,revive:true,threshold:50,healItem:'potions',reviveItem:'revives',...preferences}},
    vip:{version:1,credits:0,vipUntil:Date.parse(snapshot.profile.vip_until),vipSince:Date.parse(snapshot.profile.created_at)},
    welcomeGift:{version:1,at:Date.parse(snapshot.profile.created_at)},huntRunning:!!snapshot.activeHunt};
@@ -62,7 +62,7 @@ window.IDLE_SERVER_JOURNEY=(()=>{
   state.gold=view.gold;state.trainerLevel=view.trainerLevel;state.trainerXp=view.trainerXp;
   state.team=view.team;state.collection=view.collection;state.captureDepot=view.captureDepot;state.balls=view.balls;state.ballStock=view.ballStock;
   state.vip=view.vip;state.hunts.supplies={...state.hunts.supplies,...view.hunts.supplies};
-  state.hunts.autoAdvance=view.hunts.autoAdvance;
+  state.hunts.autoAdvance=view.hunts.autoAdvance;state.hunts.autoSellLoot=view.hunts.autoSellLoot;
   state.hunts.loot=view.hunts.loot;state.hunts.wave=view.hunts.wave;
   state.world.stones=clone(canonical.profile.stones||{});state.items=clone(canonical.profile.gear||[]);
   state.shopHistory=clone(canonical.profile.shop_history||[]);state.encounter=null;state.encounterGenes=null;
@@ -71,7 +71,7 @@ window.IDLE_SERVER_JOURNEY=(()=>{
  async function formation(ids){canonical=await rpc('hunt_set_formation',{p_ids:ids});return canonical;}
  let preferenceTask=null;
  function selectedPreferences(state){const s=state.hunts.supplies;return {heal:s.heal,revive:s.revive,threshold:Math.round(s.threshold),healItem:s.healItem,reviveItem:s.reviveItem,afterDefeat:s.afterDefeat,autoAdvance:state.hunts.autoAdvance,
- bankLocked:!!state.capture.bankLocked,duplicates:state.capture.duplicates||'keep',captureEnabled:state.capture.enabled,captureBall:state.capture.ball,shinyBall:state.captureShiny.ball,
+ autoSellLoot:state.hunts.autoSellLoot??true,bankLocked:!!state.capture.bankLocked,duplicates:state.capture.duplicates||'keep',captureEnabled:state.capture.enabled,captureBall:state.capture.ball,shinyBall:state.captureShiny.ball,
  tutorial:state.tutorial?Object.fromEntries(['index','tip','visited','introduced','complete','contentVersion','version','mode','skipped'].filter(key=>state.tutorial[key]!==undefined).map(key=>[key,clone(state.tutorial[key])])):{}};}
  async function syncPreferences(state){
   if(preferenceTask)await preferenceTask;

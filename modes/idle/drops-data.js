@@ -43,5 +43,8 @@ window.IDLE_DROPS=(()=>{
  function rollStone(L,star=1){const r=Math.random();let total=0;for(const drop of stoneTable(L,star)){total+=drop.chance;if(r<total)return {key:drop.key,count:1}}return null}
  // The shop, auto-sale and hunt estimates all use the same resale values.
  for(const item of Object.values(items))item.price*=50;
- return {items,icon,table,roll,stoneTable,stoneIcon,rollStone};
+ // Only these reviewed common materials may be sold automatically.
+ const autoSellKeys=new Set(["fiber","ore","shell","essence","seed","powder","sand","fur","spirit","dragon","glitter","bulb","fireTail","spoon","wing","sting","feather","bone","bugGoo","venom","fireEssence","leaves","pollen","steel","snow","waterGem","beak","ratTail","redWing","snakeTail","electricTail","armadilloClaw","femaleEar","maleEar","foxTail","microphone","batWing","giantBatWing","flower","mushroom","antenna","medallion","wool","duckMug","bracelet","giantFur","plantTail","tentacle","strangeRock","horseFoot","slowTail","magnetPart","stick","dodrioFeather","sealTail","sludge","ghostTrace","onixTail","hypnosis","crabClaw","tongue","venomFlute","hornDrill","egg","vines","kangaEar","seahorseTail","fin","gemStar","mimic","scythe","electricAppendage","magmaFoot","pinsirHorn","bullTail","magikarpFin","gyaradosTail","bigFur","dragonTail"]);
+ const canAutoSell=key=>autoSellKeys.has(key);
+ return {items,icon,table,roll,stoneTable,stoneIcon,rollStone,canAutoSell};
 })();
