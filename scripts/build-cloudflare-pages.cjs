@@ -5,7 +5,7 @@ const path = require('node:path');
 const root = path.resolve(__dirname, '..');
 const output = path.join(root, '_cloudflare');
 const spritePrefix = 'assets/pmd/sprite/';
-const onlineFiles = new Set(['index.html', 'config.js', 'online.js', 'chat-client.mjs', 'hunt-client.mjs', 'server-journey.js', 'native-hunts.js', 'beta-policy.js',
+const onlineFiles = new Set(['index.html', 'config.js', 'online.js', 'chat-client.mjs', 'hunt-client.mjs', 'server-journey.js', 'hunt-presentation.js', 'native-hunts.js', 'beta-policy.js',
   'home.html', 'home.css', 'home.js', 'contacts-ui.mjs', 'chat.css', 'private-chat.mjs', 'verification.mjs', 'new-conversation.mjs', 'game-entry.html', 'game-entry.js']);
 const rankingFiles = new Set(['ui.css','ui.mjs','cache.mjs','approved-frame.png']);
 const entryFiles = new Set(['index.html', 'engine.js', 'asset-inventory.js', 'layout.css', 'transfer.html', 'CREDITS.md']);
@@ -20,6 +20,19 @@ const files = tracked.filter(file =>
   (!file.startsWith('modes/idle/online/') || onlineFiles.has(file.slice('modes/idle/online/'.length))) &&
   (entryFiles.has(file) || /^(assets|wallpapers|modes)\//.test(file))
 );
+// Fail the deployment instead of silently serving the home page for a missing script.
+const published = new Set(files);
+for (const entry of ['index.html', 'modes/idle/index.html']) {
+  const html = modified.has(entry)
+    ? execFileSync('git', ['show', 'HEAD:' + entry], {cwd: root, encoding: 'utf8', maxBuffer: 4 * 1024 * 1024})
+    : fs.readFileSync(path.join(root, entry), 'utf8');
+  for (const match of html.matchAll(/<script\b[^>]*\bsrc=["']([^"']+)["']/g)) {
+    const src = match[1].split('?')[0];
+    if (src.startsWith('modes/idle/online/') && !published.has(src)) {
+      throw new Error('Missing published online script: ' + src);
+    }
+  }
+}
 if (files.length + 5 > 20000) throw new Error('Cloudflare Pages file limit exceeded');
 for (const file of files) {
   if (fs.statSync(path.join(root, file)).size > 25 * 1024 * 1024) {
