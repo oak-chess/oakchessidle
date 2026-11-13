@@ -1105,6 +1105,7 @@ const FX=(()=>{
     const idle=!parts.length&&!projs.length&&!beams.length&&!bolts.length&&!zones.length&&!window.MOVE_SPRITES?.active;
     g.setTransform(2,0,0,2,0,0);g.clearRect(0,0,W,H);
     if(shakeM>.2){W_.style.transform=`translate(${rnd(-shakeM,shakeM).toFixed(1)}px,${rnd(-shakeM,shakeM).toFixed(1)}px)`}else if(W_.style.transform)W_.style.transform='';
+    window.HEX_ATTACKS?.draw(g);
     if(idle)return;
     g.lineCap='round';g.lineJoin='round';
     for(const z of zones){const k=z.t/z.life,al=k>.8?(1-k)/.2:Math.min(1,k*8);g.globalCompositeOperation='lighter';const gr=g.createRadialGradient(z.x,z.y+16,2,z.x,z.y+16,z.r);gr.addColorStop(0,hexA(z.c[1],.38*al));gr.addColorStop(.8,hexA(z.c[2],.22*al));gr.addColorStop(1,hexA(z.c[2],0));
