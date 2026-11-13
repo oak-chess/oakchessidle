@@ -193,7 +193,7 @@ window.createIdleCapture = function ({state, lines, sprite, save, changed, notif
    const result=await entry.serverCapture(ball),name=entry.speciesName;
    const event=record(name,result.caught?'Capturado · guardado no Depósito':'Escapou',false,{source:'hunt',status:result.caught?'caught':'escaped',attempted:true,shiny:!!entry.genes?.shiny,speciesId:entry.speciesId,level:entry.level,potency:entry.genes?.potency,ivTotal:IDLE_INDIVIDUALS.total(entry.genes),memberId:result.id,ball});
    captureInbox.events.unshift(event);captureInbox.events=captureInbox.events.slice(0,20);if(result.caught)captureInbox.total++;
-   const summary=state.hunts?.session;if(summary){summary.balls++;if(result.caught)summary.captures++;}
+   const summary=state.hunts?.session;if(summary){summary.balls++;summary.usedItems??={};summary.usedItems[ball]=(summary.usedItems[ball]||0)+1;summary.ballCost=(summary.ballCost||0)+IDLE_ITEMS.balls[ball].price;if(result.caught)summary.captures++;}
    save({capture:false});
    const index=manualQueue.indexOf(entry);if(index>=0)manualQueue.splice(index,1);
    // Keep the current arena until its confirmed capture presentation finishes.

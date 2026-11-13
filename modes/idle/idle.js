@@ -240,9 +240,21 @@ window.addEventListener('idle-server-error',event=>message(event.detail));docume
  // updateCUEl positions sprites with transform; left/top would double the offset.
  frame:(frame,events)=>{B.t=frame.t/1000;onlinePresentation.frame(frame,events);},
  apply:snapshot=>{IDLE_SERVER_JOURNEY.apply(state,snapshot);if(G.phase==='plan')rebuild();else render();},
- finish:async response=>{
+ finish:async (response,usedSupplies)=>{
   const reward=response.result.rewards;IDLE_SERVER_JOURNEY.apply(state,response.state);if(response.result.kind==='gym'){running=false;state.world.challenge=null;}else if(response.result.winner!==0&&!state.hunts.supplies.afterDefeat)running=false;
   window.IDLE_XP.record(state,reward.trainerXp);activityLog?.xp(reward.trainerXp);
+  const summary=state.hunts.session;
+  if(summary){
+   summary.usedItems??={};
+   for(const [key,count] of Object.entries(usedSupplies||{})){
+    const healing=IDLE_ITEMS.healing[key],item=healing||IDLE_ITEMS.reviving[key];
+    if(!item||!Number.isInteger(count)||count<=0)continue;
+    const category=healing?'potions':'revives';
+    summary[category]=(summary[category]||0)+count;
+    summary.usedItems[key]=(summary.usedItems[key]||0)+count;
+    summary.supplyCost=(summary.supplyCost||0)+item.price*count;
+   }
+  }
   if(state.hunts.session){state.hunts.session.xp+=reward.trainerXp;state.hunts.session.coins+=reward.coins;state.hunts.session.defeated+=reward.defeated;state.hunts.session.battles++;if(response.result.winner===0)state.hunts.session.wins++;}
   B.on=false;B.winner=null;B.over=false;G.phase='result';
   trainerUI?.recallDefeated(B.units);

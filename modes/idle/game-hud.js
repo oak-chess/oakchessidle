@@ -576,7 +576,7 @@
       const sortValue={recent:c=>c.entry.time,score:c=>c.score,iv:c=>c.entry.ivTotal,power:c=>c.entry.potency,quality:c=>c.quality,level:c=>c.level}[captureSort];
       capturesWithMembers.sort((a,b)=>(sortValue(b)??-Infinity)-(sortValue(a)??-Infinity)||b.entry.time-a.entry.time);
       const records=JSON.stringify([shinyOnly,captureSort,capturesWithMembers]);
-      const snapshot=JSON.stringify([title,combatStatus,Math.floor(session.seconds||0),session.xp,session.coins,session.loot,session.ballCost,session.supplyCost,session.defeated,session.captures,session.balls,session.potions,session.revives,session.wins,session.battles,records]);
+      const snapshot=JSON.stringify([title,combatStatus,Math.floor(session.seconds||0),session.xp,session.coins,session.loot,session.ballCost,session.supplyCost,session.defeated,session.captures,session.balls,session.potions,session.revives,session.usedItems,session.wins,session.battles,records]);
       if(snapshot===lastEconomy)return;
       const seconds=Math.floor(session.seconds||0);
       const activeTime=[Math.floor(seconds/3600),Math.floor(seconds/60)%60,seconds%60].map(value=>String(value).padStart(2,'0')).join(':');
@@ -596,7 +596,24 @@
         if(index===1)cell.title='Coins recebidos + valor do loot − custo de reposição.';
         cell.classList.toggle('is-negative',index===1&&balance<0);
       });
-      supplies.forEach(({key,count})=>{count.textContent=fmt(session[key])});
+      usageList.replaceChildren();
+      const catalog=window.IDLE_ITEMS;
+      for(const [category,items] of [['balls',catalog.balls],['potions',catalog.healing],['revives',catalog.reviving]]){
+        const used=Object.entries(items).filter(([key])=>session.usedItems?.[key]>0);
+        const unclassified=Math.max(0,(session[category]||0)-used.reduce((sum,[key])=>sum+session.usedItems[key],0));
+        if(!used.length||unclassified){
+          const entry=supplies.find(entry=>entry.key===category);
+          entry.count.textContent=fmt(unclassified);
+          usageList.append(entry.count.parentElement);
+        }
+        for(const [key,definition] of used){
+          const row=make('li'),icon=make('img');
+          icon.src=item(definition.sprite);
+          icon.alt='';
+          row.append(icon,make('span','',definition.name),make('b','',fmt(session.usedItems[key])));
+          usageList.append(row);
+        }
+      }
       [session.coins,session.loot,(session.ballCost||0)+(session.supplyCost||0)].forEach((value,index)=>{cashValues[index].textContent=fmt(value)+' Coins'});
       if(captureList.dataset.records!==records){
         captureList.dataset.records=records;

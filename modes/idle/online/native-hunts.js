@@ -63,7 +63,7 @@ window.createServerHunts=function(ctx){
   requestId=null;
   checkpointPlayback=null;
   storage?.removeItem(checkpointKey);
-  await ctx.finish(settled);
+  await ctx.finish(settled,encounter.usedSupplies);
   if(encounter.route.endsWith(':gym')){ctx.complete?.();return;}
   const last=frames.at(-1),offset=encounter.replay.snapshot.allies.length;
   for(const [index,enemy] of encounter.replay.snapshot.enemies.entries()){

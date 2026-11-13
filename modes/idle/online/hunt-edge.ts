@@ -2248,7 +2248,7 @@ export function createAuthoritativeHuntHandler({supabaseUrl,serviceKey,publishab
     }
     // No private RNG seed is returned. Replays are presentation, never proof of a reward.
     return reply(200,{id:encounter.id,route:encounter.route,readyAt:encounter.ready_at,remainingMs:Math.max(0,Date.parse(encounter.ready_at)-Date.now()),
-     settled:!!encounter.finished_at,replay:{frames:encounter.plan.frames,snapshot:encounter.plan.snapshot,elapsedMs:encounter.plan.elapsedMs}});
+     settled:!!encounter.finished_at,usedSupplies:Object.fromEntries(Object.keys({...catalog.healing,...catalog.reviving}).map(key=>[key,Math.max(0,(encounter.snapshot.supplies[key]||0)-(encounter.plan.supplies[key]||0))])),replay:{frames:encounter.plan.frames,snapshot:encounter.plan.snapshot,elapsedMs:encounter.plan.elapsedMs}});
    }
    if(body.action==='finish')return reply(200,await rpc('hunt_finish',{p_player:user.id,p_hunt:body.huntId}));
    const encounter=await rpc('hunt_get',{p_player:user.id,p_hunt:body.huntId});
