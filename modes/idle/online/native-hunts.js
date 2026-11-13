@@ -16,10 +16,25 @@ window.createServerHunts=function(ctx){
   const frames=encounter.replay.frames,elapsedMs=encounter.replay.elapsedMs;
   const resumed=Math.max(0,elapsedMs-encounter.remainingMs),start=performance.now();let index=0,lastIndex=-1;
   // Resuming must not replay old damage/attack effects in a single burst.
-  while(index+1<frames.length&&frames[index+1].t<=resumed)index++;
-  lastIndex=resumed>0?index:-1;
-  while(performance.now()-start<encounter.remainingMs){
-   const elapsed=Math.min(elapsedMs,resumed+performance.now()-start);
+  const checkpointKey='oak-online-hunt-frame:'+encounter.id;
+  const storage=window.sessionStorage;
+  const checkpoint=storage?.getItem(checkpointKey);
+  let elapsed=checkpoint!=null?Math.min(elapsedMs,Math.max(0,Number(checkpoint)||0)):ctx.running()?resumed:0;
+  let previous=start,wasRunning=ctx.running();
+  while(index+1<frames.length&&frames[index+1].t<=elapsed)index++;
+  lastIndex=elapsed>0?index:-1;
+  if(frames.length)ctx.frame(frames[index],[]);
+  while(elapsed<elapsedMs||!ctx.running()){
+   await wait(!ctx.running()||document.hidden?200:33);
+   const now=performance.now(),delta=now-previous;
+   previous=now;
+   if(!ctx.running()){
+    if(wasRunning)storage?.setItem(checkpointKey,String(elapsed));
+    wasRunning=false;
+    continue;
+   }
+   elapsed=Math.min(elapsedMs,elapsed+(wasRunning?delta:0));
+   wasRunning=true;
    while(index+1<frames.length&&frames[index+1].t<=elapsed)index++;
    if(ctx.running()&&!document.hidden){
     const a=frames[index],b=frames[index+1],q=b?Math.max(0,Math.min(1,(elapsed-a.t)/(b.t-a.t))):0;
@@ -28,7 +43,6 @@ window.createServerHunts=function(ctx){
     ctx.frame(shown,events);
    }
    lastIndex=index;
-   await wait(document.hidden?500:33);
   }
   if(ctx.running()&&!document.hidden){ctx.frame(frames.at(-1),frames.slice(lastIndex+1).flatMap(f=>f.e||[]));}
   let settled;
@@ -37,6 +51,7 @@ window.createServerHunts=function(ctx){
    catch(error){if(retry===3||!error.message.includes('andamento'))throw error;await wait(750);}
   }
   requestId=null;
+  storage?.removeItem(checkpointKey);
   await ctx.finish(settled);
   if(encounter.route.endsWith(':gym')){ctx.complete?.();return;}
   const last=frames.at(-1),offset=encounter.replay.snapshot.allies.length;
