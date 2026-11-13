@@ -1,0 +1,13 @@
+import fs from 'node:fs';
+import vm from 'node:vm';
+import assert from 'node:assert/strict';
+const source=fs.readFileSync('modes/idle/idle.js','utf8');
+const body=source.split(' frame:frame=>{')[1].split('\n apply:snapshot=>')[0].replace(/},\s*$/,'}');
+const units=[{maxHp:100,el:{style:{left:'400px',top:'300px'}}},{maxHp:200,el:{style:{}}}];
+const context={B:{units},updateCUEl(u){u.el.style.transform=`translate(${u.x}px,${u.y}px)`;}};
+vm.runInNewContext('('+ 'frame=>{'+body+')({t:500,u:[[400,300,500,1,0],[600,250,750,1,1]]})',context);
+assert.equal(units[0].el.style.left,'');assert.equal(units[0].el.style.top,'');
+assert.equal(units[0].el.style.transform,'translate(400px,300px)');
+assert.equal(units[0].hp,50);assert.equal(units[1].hp,150);
+assert.equal(units[1].el.style.transform,'translate(600px,250px)');
+console.log('PASS online replay uses one position transform and preserves HP/frame updates');

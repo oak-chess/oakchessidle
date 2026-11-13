@@ -176,7 +176,7 @@ window.addEventListener('idle-server-error',event=>message(event.detail));docume
    B.units.push(u);addCUEl(u);
   });render();
  },
- frame:frame=>{B.t=frame.t/1000;frame.u.forEach((p,i)=>{const u=B.units[i];if(!u)return;u.x=p[0];u.y=p[1];u.hp=u.maxHp*p[2]/1000;u.alive=!!p[3];u.mi=p[4];if(u.el){u.el.style.left=u.x+'px';u.el.style.top=u.y+'px';u.el.style.opacity=u.alive?'1':'.15';updateCUEl(u);}});},
+ frame:frame=>{B.t=frame.t/1000;frame.u.forEach((p,i)=>{const u=B.units[i];if(!u)return;u.x=p[0];u.y=p[1];u.hp=u.maxHp*p[2]/1000;u.alive=!!p[3];u.mi=p[4];if(u.el){u.el.style.left='';u.el.style.top='';u.el.style.opacity=u.alive?'1':'.15';updateCUEl(u);}});},
  apply:snapshot=>{IDLE_SERVER_JOURNEY.apply(state,snapshot);if(G.phase==='plan')rebuild();else render();},
  finish:response=>{
   const reward=response.result.rewards;IDLE_SERVER_JOURNEY.apply(state,response.state);if(response.result.kind==='gym'){running=false;state.world.challenge=null;}else if(response.result.winner!==0&&!state.hunts.supplies.afterDefeat)running=false;
