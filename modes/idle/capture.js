@@ -193,6 +193,8 @@ window.createIdleCapture = function ({state, lines, sprite, save, changed, notif
    const result=await entry.serverCapture(ball),name=entry.speciesName;
    const event=record(name,result.caught?'Capturado · guardado no Depósito':'Escapou',false,{source:'hunt',status:result.caught?'caught':'escaped',attempted:true,shiny:!!entry.genes?.shiny,speciesId:entry.speciesId,level:entry.level,potency:entry.genes?.potency,ivTotal:IDLE_INDIVIDUALS.total(entry.genes),memberId:result.id,ball});
    captureInbox.events.unshift(event);captureInbox.events=captureInbox.events.slice(0,20);if(result.caught)captureInbox.total++;
+   const summary=state.hunts?.session;if(summary){summary.balls++;if(result.caught)summary.captures++;}
+   save({capture:false});
    const index=manualQueue.indexOf(entry);if(index>=0)manualQueue.splice(index,1);
    // Keep the current arena until its confirmed capture presentation finishes.
    await onAttempt?.({name,targetPoint:entry.targetPoint,shiny:!!entry.genes?.shiny,success:result.caught,sentToPC:true,ballName:IDLE_ITEMS.balls[ball].name,ballSprite:'assets/pokeapi/sprites/items/'+IDLE_ITEMS.balls[ball].sprite+'.png',pokemonSprite:IDLE_PMD_THUMBNAIL.member({...entry.genes,name:entry.line.names[0],star:entry.line.ids.indexOf(entry.speciesId)+1},lines)});

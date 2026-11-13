@@ -1,7 +1,7 @@
 /* Replays server positions inside the existing arena. It never decides an outcome. */
 window.createServerHunts=function(ctx){
  const bridge=window.IDLE_SERVER_JOURNEY;
- let pending=null,requestId=null;
+ let pending=null,requestId=null,checkpointPlayback=null;
  const wait=ms=>new Promise(resolve=>setTimeout(resolve,ms));
  async function execute(){
   const challenge=ctx.challenge();
@@ -21,6 +21,7 @@ window.createServerHunts=function(ctx){
   const checkpoint=storage?.getItem(checkpointKey);
   let elapsed=checkpoint!=null?Math.min(elapsedMs,Math.max(0,Number(checkpoint)||0)):ctx.running()?resumed:0;
   let previous=start,wasRunning=ctx.running();
+  checkpointPlayback=()=>storage?.setItem(checkpointKey,String(elapsed));
   while(index+1<frames.length&&frames[index+1].t<=elapsed)index++;
   lastIndex=elapsed>0?index:-1;
   if(frames.length)ctx.frame(frames[index],[]);
@@ -51,6 +52,7 @@ window.createServerHunts=function(ctx){
    catch(error){if(retry===3||!error.message.includes('andamento'))throw error;await wait(750);}
   }
   requestId=null;
+  checkpointPlayback=null;
   storage?.removeItem(checkpointKey);
   await ctx.finish(settled);
   if(encounter.route.endsWith(':gym')){ctx.complete?.();return;}
@@ -64,8 +66,8 @@ window.createServerHunts=function(ctx){
   }
   ctx.complete?.();
  }
- return {get busy(){return !!pending},run(){
+ return {get busy(){return !!pending},checkpoint(){checkpointPlayback?.();},run(){
   if(pending)return pending;
-  pending=execute().finally(()=>{pending=null;});return pending;
+  pending=execute().finally(()=>{pending=null;checkpointPlayback=null;});return pending;
  }};
 };
