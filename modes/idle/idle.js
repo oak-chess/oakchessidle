@@ -1,6 +1,15 @@
 /* Idle adaptation of the native OakChess interface and battle engine. */
 (()=>{
 const ONLINE=!!window.OAK_ONLINE_SNAPSHOT;let serverHunts;
+const onlinePresentation=window.createHuntPresentation({
+ units:()=>B.units,update:updateCUEl,
+ attack:(u,t)=>{if(window.IDLE_ARENA_ECONOMY)return;lunge(u,t,u.range<=1?18:8);PMD.playNames(u.el,u.range<=1?PMD.MELEE:PMD.RANGED,true);if(u.range>1)FX.shoot(u.x,cyOf(u),t,u.types[0],520,.8,()=>{});},
+ cast:(u,t,index)=>{if(window.IDLE_ARENA_ECONOMY)return;const mv={...u.moves[index]};if(!mv.n)return;u._replayMove=mv;u._pmdSp=performance.now();if(t)faceTo(u,t);const rc=recipe(mv);PMD.playNames(u.el,rc.pose||PMD.SP[mv.k]);window.IDLE_PDA_EFFECTS?.activate(mv,u,t);const art=window.EMERALD_MOVES;art?.start(mv,u.x,cyOf(u));if(t){if(['beam','chain'].includes(mv.k))art?.beam(mv,u.x,cyOf(u),t.x,cyOf(t),55);else if(['bolt','blast','drain','multi','barrage','storm'].includes(mv.k))FX.shoot(u.x,cyOf(u),t,mv.t,600,1,()=>{}, {move:mv});else art?.hit(mv,t.x,cyOf(t),1,{x:u.x,y:cyOf(u)});}SND.cast(mv.t);},
+ hit:(u,t,e)=>{if(window.IDLE_ARENA_ECONOMY)return;if(!e.dot){t._pmdHurt=performance.now();recoil(t,u);if(t.spr)anim(t.spr,[{filter:'brightness(1.8)'},{filter:'brightness(1)'}],{duration:160});FX.impact(e.type,t.x,cyOf(t),e.crit?1:.55);SND.hit(e.type,e.crit?1:.55);}if(CFG.dmgnum!=='none')FX.text(t.x,t.y-50,String(e.n),e.crit?'#ffd24a':e.kind==='spec'?'#8fd8ff':'#fff',e.crit?22:14);},
+ heal:(u,n)=>{if(window.IDLE_ARENA_ECONOMY)return;FX.healFx(u.x,cyOf(u));if(CFG.dmgnum!=='none')FX.text(u.x,u.y-52,'+'+n,'#7dff9a',14);},
+ text:e=>{if(!window.IDLE_ARENA_ECONOMY)FX.text(e.x,e.y,e.text,e.color,e.size);},
+ faint:u=>{if(window.IDLE_ARENA_ECONOMY){if(u.el)u.el.style.display='none';return;}SND.cry(u.id,.7);if(window.IDLE_TRAINER?.recall(u))return;PMD.play(u.el,'faint');if(u.el)anim(u.el,[{opacity:1},{opacity:0}],{duration:520,fill:'forwards'});}
+});
 const KEY='journey-native-v2';let restored;if(ONLINE)restored=IDLE_SERVER_JOURNEY.project();try{if(!ONLINE){const raw=localStorage.getItem(KEY);restored=JSON.parse(raw);if(raw)for(const suffix of ['before-life-systems','before-legendary-choice','before-unova','before-sinnoh','before-hoenn','before-johto','before-shiny','before-potency','before-world-expansion','before-hunts-expansion','before-individuals','before-consolidation','before-progression-rework']){try{if(!localStorage.getItem(KEY+'-'+suffix))localStorage.setItem(KEY+'-'+suffix,raw)}catch(error){console.warn('[Jornada Idle] Backup indisponível; progresso atual preservado.',error);break}}}}catch{}
 
 const state=Object.assign({gold:20,wins:0,area:0,last:Date.now(),team:['Bulbasaur','Charmander','Squirtle'].map(name=>({name,level:1,star:1,originSource:'starter'})),formation:0,pending:0},restored||{});
@@ -165,18 +174,20 @@ tutorialUI=window.createIdleTutorial({state,pause:pauseForEdit,closePanels:close
 window.IDLE_CAPTURE_DEFEAT=unit=>{if(ONLINE)return;if(!ready||G.phase!=='combat')return;if(systems.challenge()?.kind==='safari'){safariRuntime.defeat(unit,trainerUI?.unitPoint(unit));return}if(systems.challenge())return;try{hunts.onDefeat(unit,B.units);const result=captureSystem.defeated(unit,trainerUI?.unitPoint(unit));if(result)message(result);screenUI?.refresh()}catch(error){console.error('Captura por nocaute:',error)}};
 window.addEventListener('idle-server-error',event=>message(event.detail));document.addEventListener('click',event=>{if(!event.target.closest('#badgeCaseButton'))return;event.preventDefault();event.stopImmediatePropagation();systems.open('badges')},true);configureIdleSettings();if(window.TRAINER_PROFILE)window.TRAINER_PROFILE.open=()=>systems.open('profile');const idleProfileButton=document.querySelector('.tp-open');if(idleProfileButton)idleProfileButton.onclick=()=>systems.open('profile');document.querySelector('.tp-overlay')?.setAttribute('hidden','');document.getElementById('pauseBtn')?.remove();document.getElementById('pausedOverlay')?.remove();document.body.classList.remove('game-paused');ready=true;if(ONLINE)serverHunts=window.createServerHunts({state,challenge:()=>systems.challenge(),running:()=>running,
  show:replay=>{
+  onlinePresentation.reset();
   clearCombatUnits();for(const u of nativeUnits)if(u.el)u.el.style.display='none';
   B.on=false;B.over=false;B.done=false;G.phase='combat';document.body.classList.add('combat');
   const allies=replay.snapshot.allies,enemies=replay.snapshot.enemies;
   [...allies,...enemies].forEach((m,i)=>{
    const side=i<allies.length?0:1,index=side?i-allies.length:i,L=LINES.find(l=>l.ids.includes(m.pokemon_id));
    const u=mkCU({line:L.i,star:L.ids.indexOf(m.pokemon_id)+1,items:m.combat_data?.items||[],
-   scale:1+(m.level-1)*.12,idleLevel:m.level,r:side?2-Math.floor(index/3):5+Math.floor(index/3),c:[1,3,5][index%3]},side);
-   IDLE_INDIVIDUALS.apply(u,m.combat_data||{});u._idleLevel=m.level;if(!side)u._idleMember=m.id;
+   scale:1+(m.level-1)*.12,idleLevel:m.level,shiny:!!m.combat_data?.shiny,r:side?2-Math.floor(index/3):(m.pos?.r??5+Math.floor(index/3)),c:side?[1,3,5][index%3]:(m.pos?.c??[1,3,5][index%3])},side);
+   IDLE_INDIVIDUALS.apply(u,m.combat_data||{});if(m.maxHp>0)u.maxHp=m.maxHp;u._idleLevel=m.level;if(!side)u._idleMember=m.id;
    B.units.push(u);addCUEl(u);
-  });render();
+  });trainerUI?.throwBall();render();
  },
- frame:frame=>{B.t=frame.t/1000;frame.u.forEach((p,i)=>{const u=B.units[i];if(!u)return;u.x=p[0];u.y=p[1];u.hp=u.maxHp*p[2]/1000;u.alive=!!p[3];u.mi=p[4];if(u.el){u.el.style.left='';u.el.style.top='';u.el.style.opacity=u.alive?'1':'.15';updateCUEl(u);}});},
+ // updateCUEl positions sprites with transform; left/top would double the offset.
+ frame:(frame,events)=>{B.t=frame.t/1000;onlinePresentation.frame(frame,events);},
  apply:snapshot=>{IDLE_SERVER_JOURNEY.apply(state,snapshot);if(G.phase==='plan')rebuild();else render();},
  finish:response=>{
   const reward=response.result.rewards;IDLE_SERVER_JOURNEY.apply(state,response.state);if(response.result.kind==='gym'){running=false;state.world.challenge=null;}else if(response.result.winner!==0&&!state.hunts.supplies.afterDefeat)running=false;

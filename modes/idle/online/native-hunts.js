@@ -14,13 +14,23 @@ window.createServerHunts=function(ctx){
   const encounter=await bridge.request({action:'begin',requestId,route:challenge?challenge.area+':gym':ctx.state.area+':'+ctx.state.hunts.kind});
   ctx.show(encounter.replay);
   const frames=encounter.replay.frames,elapsedMs=encounter.replay.elapsedMs;
-  const resumed=Math.max(0,elapsedMs-encounter.remainingMs),start=performance.now();let index=0;
+  const resumed=Math.max(0,elapsedMs-encounter.remainingMs),start=performance.now();let index=0,lastIndex=-1;
+  // Resuming must not replay old damage/attack effects in a single burst.
+  while(index+1<frames.length&&frames[index+1].t<=resumed)index++;
+  lastIndex=resumed>0?index:-1;
   while(performance.now()-start<encounter.remainingMs){
    const elapsed=Math.min(elapsedMs,resumed+performance.now()-start);
    while(index+1<frames.length&&frames[index+1].t<=elapsed)index++;
-   if(ctx.running()&&!document.hidden)ctx.frame(frames[index]);
-   await wait(document.hidden?500:100);
+   if(ctx.running()&&!document.hidden){
+    const a=frames[index],b=frames[index+1],q=b?Math.max(0,Math.min(1,(elapsed-a.t)/(b.t-a.t))):0;
+    const shown={...a,u:a.u.map((p,i)=>{const n=b?.u[i];return n?[p[0]+(n[0]-p[0])*q,p[1]+(n[1]-p[1])*q,...p.slice(2)]:p})};
+    const events=frames.slice(lastIndex+1,index+1).flatMap(f=>f.e||[]);
+    ctx.frame(shown,events);
+   }
+   lastIndex=index;
+   await wait(document.hidden?500:33);
   }
+  if(ctx.running()&&!document.hidden){ctx.frame(frames.at(-1),frames.slice(lastIndex+1).flatMap(f=>f.e||[]));}
   let settled;
   for(let retry=0;retry<4;retry++){
    try{settled=await bridge.request({action:'finish',huntId:encounter.id});break;}

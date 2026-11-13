@@ -69,6 +69,7 @@ export function buildHuntPlan(encounter){
   for(const drop of drops.loot)rewards.loot[drop.key]=(rewards.loot[drop.key]||0)+drop.count;
   if(drops.stone)rewards.stones[drops.stone.key]=(rewards.stones[drops.stone.key]||0)+1;
  });
+ allies.forEach((m,i)=>m.maxHp=result.units[i].maxHp);
  enemies.forEach((m,i)=>m.maxHp=Math.max(1,Math.floor(result.units[allies.length+i].maxHp)));
  return {...result,snapshot:{allies,enemies},enemies,rewards,supplies,
   allies:allies.map((m,i)=>({...m,condition:last.u[i][3]?Math.max(.01,last.u[i][2]/1000):0,

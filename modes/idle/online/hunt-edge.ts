@@ -18,7 +18,7 @@ const projs=[];
 const FX=new Proxy({shoot(sx,sy,tgt,type,speed,size,onHit,o){const lx=tgt.x,ly=tgt.L?tgt.y-22:tgt.y;projs.push({x:sx,y:sy,tgt,type,sp:speed||520,size:size||1,onHit,o:o||null,age:0,lx,ly});window.SKILL_RHYTHM?.launch(o?.castToken)},
 shootO(sx,sy,tgt,type,speed,size,o,onHit){this.shoot(sx,sy,tgt,type,speed,size,onHit,o)},
 rain(type,x,y,onHit,o){this.shoot(x+rnd(-30,30),y-340,{x,y},type,900,1.4,onHit,{...o,falling:true})}
-},{get:(obj,key)=>obj[key]||no});
+},{get:(obj,key)=>key==='text'?((x,y,text,color,size)=>visualEvents.push({k:'text',x,y,text,color,size})):obj[key]||no});
 const TYPES={
  normal:{n:'Normal',c:'#a8a878',e:'⚪'},fire:{n:'Fogo',c:'#f08030',e:'🔥'},water:{n:'Água',c:'#6890f0',e:'💧'},
  grass:{n:'Planta',c:'#78c850',e:'🍃'},electric:{n:'Elétrico',c:'#f8d030',e:'⚡'},ice:{n:'Gelo',c:'#98d8d8',e:'❄️'},
@@ -2059,7 +2059,15 @@ window.IDLE_DROPS=(()=>{
 
 Object.assign(window.PLAYABLE_MOVES,window.IDLE_UNOVA_MOVES||{});
 const IDLE_TACTICS=window.IDLE_TACTICS,IDLE_HOENN_RULES=window.IDLE_HOENN_RULES,SKILL_RHYTHM=window.SKILL_RHYTHM;
-function run(allies,enemies){
+
+let visualEvents=[];
+const visualIndex=u=>u?B.units.indexOf(u):-1;
+const nativeAttack=attack,nativeCast=cast,nativeHurt=hurt,nativeHeal=healUnit;
+attack=function(u,t){visualEvents.push({k:'attack',a:visualIndex(u),b:visualIndex(t)});return nativeAttack(u,t)};
+cast=function(u,decision){const before=u.mi,result=nativeCast(u,decision);if(u.mi!==before)visualEvents.push({k:'cast',a:visualIndex(u),b:visualIndex(u.target),m:u.lastMoveIndex??0});return result};
+hurt=function(src,t,d,kind,o={}){const before=t.hp,shield=t.shield,result=nativeHurt(src,t,d,kind,o);const amount=Math.max(0,before-t.hp)+Math.max(0,shield-t.shield);if(amount>0)visualEvents.push({k:'hit',a:visualIndex(src),b:visualIndex(t),n:Math.round(amount),type:o.type||src?.types?.[0]||'normal',crit:!!o.crit,dot:!!o.dot,kind});return result};
+healUnit=function(u,...args){const before=u.hp,result=nativeHeal(u,...args),amount=Math.max(0,u.hp-before);if(amount>0)visualEvents.push({k:'heal',b:visualIndex(u),n:Math.round(amount)});return result};
+function run(allies,enemies){visualEvents=[];
  if(![allies,enemies].every(team=>Array.isArray(team)&&team.length>=1&&team.length<=6&&team.every(m=>Number.isInteger(m.pokemon_id)&&Number.isInteger(m.level)&&m.level>=1&&m.level<=100000)))throw Error('Invalid canonical formation');
  const frames=[];
  const make=(m,side,index)=>{
@@ -2080,7 +2088,7 @@ function run(allies,enemies){
  for(let step=0;step<4900&&!B.over;step++){
   stepBattle(1/60);
   for(let i=projs.length-1;i>=0;i--){const p=projs[i];p.age+=1/60;const tgt=p.tgt;if(tgt&&tgt.alive!==false){p.lx=tgt.x;p.ly=tgt.L?tgt.y-22:tgt.y}const dx=p.lx-p.x,dy=p.ly-p.y,d=Math.hypot(dx,dy),s=p.sp/60;if(d<=s+6){projs.splice(i,1);window.SKILL_RHYTHM?.arrive(p.o?.castToken);p.onHit?.()}else{p.x+=dx/d*s;p.y+=dy/d*s}}
-  if(step%10===0||B.over)frames.push({t:Math.round(B.t*1000),u:B.units.map(u=>[Math.round(u.x),Math.round(u.y),Math.round(Math.max(0,u.hp)/u.maxHp*1000),u.alive?1:0,u.mi])});
+  if(step%10===0||B.over)frames.push({t:Math.round(B.t*1000),u:B.units.map(u=>[Math.round(u.x),Math.round(u.y),Math.round(Math.max(0,u.hp)/u.maxHp*1000),u.alive?1:0,u.mi,u.fa??(u.side===0?-Math.PI/2:Math.PI/2),u.moving?1:0,visualIndex(u.target),u.r,u.c,Math.round(u.mana),Math.round(u.shield),u.stun||0,u.slow||0,u.frozen?1:0,u.burn?1:0,u.pois?1:0]),e:visualEvents.splice(0)});
  }
  return {winner:B.impasse?-1:B.winner,elapsedMs:Math.round(B.t*1000),rulesVersion:ARENA_RULES_VERSION,frames,units:B.units.map(u=>({maxHp:u.maxHp}))};
 }
@@ -2165,6 +2173,7 @@ export function buildHuntPlan(encounter){
   for(const drop of drops.loot)rewards.loot[drop.key]=(rewards.loot[drop.key]||0)+drop.count;
   if(drops.stone)rewards.stones[drops.stone.key]=(rewards.stones[drops.stone.key]||0)+1;
  });
+ allies.forEach((m,i)=>m.maxHp=result.units[i].maxHp);
  enemies.forEach((m,i)=>m.maxHp=Math.max(1,Math.floor(result.units[allies.length+i].maxHp)));
  return {...result,snapshot:{allies,enemies},enemies,rewards,supplies,
   allies:allies.map((m,i)=>({...m,condition:last.u[i][3]?Math.max(.01,last.u[i][2]/1000):0,
