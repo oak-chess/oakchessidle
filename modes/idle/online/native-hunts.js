@@ -69,7 +69,7 @@ window.createServerHunts=function(ctx){
   for(const [index,enemy] of encounter.replay.snapshot.enemies.entries()){
    if(last.u[offset+index][3])continue;
    await ctx.capture(enemy,async ball=>{
-    const result=await bridge.request({action:'capture',huntId:encounter.id,index,ball});
+    const result=await bridge.request({action:'capture',huntId:encounter.id,index,ball,economy:window.IDLE_ARENA_ECONOMY===true});
     ctx.apply(result.state);return result.capture;
    });
   }

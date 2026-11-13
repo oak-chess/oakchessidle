@@ -224,7 +224,7 @@ window.addEventListener('idle-server-error',event=>message(event.detail));docume
  show:replay=>{
   preparedHuntReplay=null;
   onlinePresentation.reset();
-  clearCombatUnits();for(const u of nativeUnits)if(u.el)u.el.style.display='none';
+  clearCombatUnits();for(const u of nativeUnits)if(u.el)u.el.style.display=u.pos?.z==='n'?'':'none';
   B.on=false;B.over=false;B.done=false;G.phase='combat';document.body.classList.add('combat');
   const allies=replay.snapshot.allies,enemies=replay.snapshot.enemies;
 

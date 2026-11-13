@@ -22,11 +22,11 @@ export function createAuthoritativeHuntHandler({supabaseUrl,serviceKey,publishab
    for(;;){const {done,value}=await reader.read();if(done)break;bytes+=value.length;if(bytes>1024){await reader.cancel();return reply(413,{error:'Pedido muito grande.'});}parts.push(value);}
    const raw=new Uint8Array(bytes);let at=0;for(const part of parts){raw.set(part,at);at+=part.length;}
    body=JSON.parse(new TextDecoder().decode(raw));
-   const keys={begin:['action','requestId','route'],finish:['action','huntId'],capture:['action','huntId','index','ball'],evolve:['action','requestId','inventoryId','target']};
+   const keys={begin:['action','requestId','route'],finish:['action','huntId'],capture:['action','huntId','index','ball','economy'],evolve:['action','requestId','inventoryId','target']};
    if(!body||!keys[body.action]||Object.keys(body).some(k=>!keys[body.action].includes(k)))throw Error();
    if(['begin','evolve'].includes(body.action)?!uuid.test(body.requestId):!uuid.test(body.huntId))throw Error();
    if(body.action==='evolve'&&(!uuid.test(body.inventoryId)||!Number.isInteger(body.target)||body.target<1||body.target>649))throw Error();
-   if(body.action==='capture'&&(!Number.isInteger(body.index)||body.index<0||body.index>5||typeof body.ball!=='string'))throw Error();
+   if(body.action==='capture'&&(!Number.isInteger(body.index)||body.index<0||body.index>5||typeof body.ball!=='string'||(body.economy!==undefined&&typeof body.economy!=='boolean')))throw Error();
   }catch{return reply(400,{error:'Pedido de caçada inválido.'});}
   async function rpc(name,args){
    const response=await fetcher(supabaseUrl+'/rest/v1/rpc/'+name,{method:'POST',headers:{apikey:serviceKey,
@@ -57,14 +57,24 @@ export function createAuthoritativeHuntHandler({supabaseUrl,serviceKey,publishab
     }
     // No private RNG seed is returned. Replays are presentation, never proof of a reward.
     return reply(200,{id:encounter.id,route:encounter.route,readyAt:encounter.ready_at,remainingMs:Math.max(0,Date.parse(encounter.ready_at)-Date.now()),
-     settled:!!encounter.finished_at,replay:{frames:encounter.plan.frames,snapshot:encounter.plan.snapshot,elapsedMs:encounter.plan.elapsedMs}});
+     settled:!!encounter.finished_at,usedSupplies:Object.fromEntries(Object.keys({...catalog.healing,...catalog.reviving}).map(key=>[key,Math.max(0,(encounter.snapshot.supplies[key]||0)-(encounter.plan.supplies[key]||0))])),replay:{frames:encounter.plan.frames,snapshot:encounter.plan.snapshot,elapsedMs:encounter.plan.elapsedMs}});
    }
    if(body.action==='finish')return reply(200,await rpc('hunt_finish',{p_player:user.id,p_hunt:body.huntId}));
    const encounter=await rpc('hunt_get',{p_player:user.id,p_hunt:body.huntId});
    if(encounter?.route?.endsWith(':gym'))return reply(409,{error:'Os Pokémon do ginásio não podem ser capturados.'});
    if(!encounter?.plan?.enemies?.[body.index])return reply(404,{error:'Encontro não encontrado.'});
-   let chance;try{chance=captureChance(encounter.plan.enemies[body.index],body.ball,false);}catch(error){return reply(400,{error:error.message});}
-   return reply(200,await rpc('hunt_capture',{p_player:user.id,p_hunt:body.huntId,p_index:body.index,p_ball:body.ball,p_chance:chance}));
+   const enemy=encounter.plan.enemies[body.index];
+   let known=false;
+   if(body.ball==='repeat'){
+    const response=await fetcher(supabaseUrl+'/rest/v1/rpc/hunt_state',{method:'POST',
+     headers:{apikey:publishableKey,Authorization:authorization,'Content-Type':'application/json'},
+     body:'{}',signal:AbortSignal.timeout(12000)});
+    if(!response.ok)throw Error('Não foi possível consultar a coleção.');
+    const state=await response.json();
+    known=state.inventory.some(member=>member.pokemon_id===enemy.pokemon_id);
+   }
+   let chance;try{chance=captureChance(enemy,body.ball,known);}catch(error){return reply(400,{error:error.message});}
+   return reply(200,await rpc('hunt_capture_destination',{p_player:user.id,p_hunt:body.huntId,p_index:body.index,p_ball:body.ball,p_chance:chance,p_economy:body.economy===true}));
   }catch(error){return reply(error.status||503,{error:error.status===409?error.message:'Não foi possível processar a caçada. Tente novamente com o mesmo encontro.'});}
  };
 }

@@ -191,14 +191,15 @@ window.createIdleCapture = function ({state, lines, sprite, save, changed, notif
   const settings=entry.genes?.shiny?state.captureShiny:state.capture,ball=settings.ball;
   try{
    const result=await entry.serverCapture(ball),name=entry.speciesName;
-   const event=record(name,result.caught?'Capturado · guardado no Depósito':'Escapou',false,{source:'hunt',status:result.caught?'caught':'escaped',attempted:true,shiny:!!entry.genes?.shiny,speciesId:entry.speciesId,level:entry.level,potency:entry.genes?.potency,ivTotal:IDLE_INDIVIDUALS.total(entry.genes),memberId:result.id,ball});
+   const destination=result.destination||'depot',place={depot:'no Depósito',bench:'no banco',pc:'no PC Pokémon'}[destination]||'no PC Pokémon';
+   const event=record(name,result.caught?'Capturado · guardado '+place:'Escapou',false,{source:'hunt',status:result.caught?'caught':'escaped',attempted:true,shiny:!!entry.genes?.shiny,speciesId:entry.speciesId,level:entry.level,potency:entry.genes?.potency,ivTotal:IDLE_INDIVIDUALS.total(entry.genes),memberId:result.id,destination,ball});
    captureInbox.events.unshift(event);captureInbox.events=captureInbox.events.slice(0,20);if(result.caught)captureInbox.total++;
    const summary=state.hunts?.session;if(summary){summary.balls++;summary.usedItems??={};summary.usedItems[ball]=(summary.usedItems[ball]||0)+1;summary.ballCost=(summary.ballCost||0)+IDLE_ITEMS.balls[ball].price;if(result.caught)summary.captures++;}
    save({capture:false});
    const index=manualQueue.indexOf(entry);if(index>=0)manualQueue.splice(index,1);
    // Keep the current arena until its confirmed capture presentation finishes.
-   await onAttempt?.({name,targetPoint:entry.targetPoint,shiny:!!entry.genes?.shiny,success:result.caught,sentToPC:true,ballName:IDLE_ITEMS.balls[ball].name,ballSprite:'assets/pokeapi/sprites/items/'+IDLE_ITEMS.balls[ball].sprite+'.png',pokemonSprite:IDLE_PMD_THUMBNAIL.member({...entry.genes,name:entry.line.names[0],star:entry.line.ids.indexOf(entry.speciesId)+1},lines)});
-   notify(name+(result.caught?' capturado! Guardado no Depósito.':' escapou.'));changed();
+   await onAttempt?.({name,targetPoint:entry.targetPoint,shiny:!!entry.genes?.shiny,success:result.caught,destination,sentToPC:destination==='pc',ballName:IDLE_ITEMS.balls[ball].name,ballSprite:'assets/pokeapi/sprites/items/'+IDLE_ITEMS.balls[ball].sprite+'.png',pokemonSprite:IDLE_PMD_THUMBNAIL.member({...entry.genes,name:entry.line.names[0],star:entry.line.ids.indexOf(entry.speciesId)+1},lines)});
+   notify(name+(result.caught?' capturado! Guardado '+place+'.':' escapou.'));changed();
   }catch(error){notify(error.message);if(entry.expires>Date.now()&&!manualQueue.includes(entry))enqueue(entry);}
   finally{entry.busy=false;drawManual();}
  }

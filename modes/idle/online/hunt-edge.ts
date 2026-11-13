@@ -877,7 +877,8 @@ function dashAdvance(u,t,style){
     if(protectedAllies.length)FX.text(u.x,u.y-58,'Passo Cuidador!','#ffa9dc',11);
   }
   faceTo(u,t);return true}
-function useMobility(u,t,style){if(style==='teleport'||style==='shadow')return blinkBehind(u,t,style);return dashAdvance(u,t,style)}/* ---------- dano / cura / status ---------- */
+function useMobility(u,t,style){if(style==='teleport'||style==='shadow')return blinkBehind(u,t,style);return dashAdvance(u,t,style)}
+/* ---------- dano / cura / status ---------- */
 function healUnit(u,a,quiet,source){if(!u.alive)return;a*= (1+(u.healBoost||0))*(u.healBlockT>0?.7:1);const b=u.hp;u.hp=Math.min(u.maxHp,u.hp+a);const healed=Math.max(0,u.hp-b);u._healed=(u._healed||0)+healed;const healer=source||u;healer._healingDone=(healer._healingDone||0)+healed;if(!quiet&&u.hp-b>=8&&CFG.dmgnum!=='off')FX.text(u.x,u.y-52,'+'+Math.round(u.hp-b),'#7dff9a',15)}
 function applyStatus(e,st,d,src,v){
   if(!e.alive)return;
@@ -2213,11 +2214,11 @@ export function createAuthoritativeHuntHandler({supabaseUrl,serviceKey,publishab
    for(;;){const {done,value}=await reader.read();if(done)break;bytes+=value.length;if(bytes>1024){await reader.cancel();return reply(413,{error:'Pedido muito grande.'});}parts.push(value);}
    const raw=new Uint8Array(bytes);let at=0;for(const part of parts){raw.set(part,at);at+=part.length;}
    body=JSON.parse(new TextDecoder().decode(raw));
-   const keys={begin:['action','requestId','route'],finish:['action','huntId'],capture:['action','huntId','index','ball'],evolve:['action','requestId','inventoryId','target']};
+   const keys={begin:['action','requestId','route'],finish:['action','huntId'],capture:['action','huntId','index','ball','economy'],evolve:['action','requestId','inventoryId','target']};
    if(!body||!keys[body.action]||Object.keys(body).some(k=>!keys[body.action].includes(k)))throw Error();
    if(['begin','evolve'].includes(body.action)?!uuid.test(body.requestId):!uuid.test(body.huntId))throw Error();
    if(body.action==='evolve'&&(!uuid.test(body.inventoryId)||!Number.isInteger(body.target)||body.target<1||body.target>649))throw Error();
-   if(body.action==='capture'&&(!Number.isInteger(body.index)||body.index<0||body.index>5||typeof body.ball!=='string'))throw Error();
+   if(body.action==='capture'&&(!Number.isInteger(body.index)||body.index<0||body.index>5||typeof body.ball!=='string'||(body.economy!==undefined&&typeof body.economy!=='boolean')))throw Error();
   }catch{return reply(400,{error:'Pedido de caçada inválido.'});}
   async function rpc(name,args){
    const response=await fetcher(supabaseUrl+'/rest/v1/rpc/'+name,{method:'POST',headers:{apikey:serviceKey,
@@ -2265,7 +2266,7 @@ export function createAuthoritativeHuntHandler({supabaseUrl,serviceKey,publishab
     known=state.inventory.some(member=>member.pokemon_id===enemy.pokemon_id);
    }
    let chance;try{chance=captureChance(enemy,body.ball,known);}catch(error){return reply(400,{error:error.message});}
-   return reply(200,await rpc('hunt_capture',{p_player:user.id,p_hunt:body.huntId,p_index:body.index,p_ball:body.ball,p_chance:chance}));
+   return reply(200,await rpc('hunt_capture_destination',{p_player:user.id,p_hunt:body.huntId,p_index:body.index,p_ball:body.ball,p_chance:chance,p_economy:body.economy===true}));
   }catch(error){return reply(error.status||503,{error:error.status===409?error.message:'Não foi possível processar a caçada. Tente novamente com o mesmo encontro.'});}
  };
 }

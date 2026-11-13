@@ -49,7 +49,7 @@ window.IDLE_SERVER_JOURNEY=(()=>{
    levelSchema:2,schemaVersion:5,area:Number(route[0]),last:Date.now(),wins:0,pending:0,tutorial:clone(preferences.tutorial||{}),items:clone(snapshot.profile.gear||[]),shopHistory:clone(snapshot.profile.shop_history||[]),
    world:{badges:clone(snapshot.profile.badges||[]),regionWins:clone(snapshot.profile.region_wins||{}),stones:clone(snapshot.profile.stones||{})},
    team,collection:members.filter(m=>!team.includes(m)&&!m.inDepot),captureDepot:members.filter(m=>!team.includes(m)&&m.inDepot),ballStock:Object.fromEntries(Object.entries(supplies).filter(([k])=>k!=='poke')),
-   capture:{ball:preferences.captureBall||'poke',enabled:preferences.captureEnabled??true},captureShiny:{ball:preferences.shinyBall||'ultra'},
+   capture:{ball:preferences.captureBall||'poke',enabled:preferences.captureEnabled??true,bankLocked:preferences.bankLocked??false,duplicates:preferences.duplicates||'keep'},captureShiny:{ball:preferences.shinyBall||'ultra'},
    balls:supplies.poke||0,hunts:{kind:route[1],wave:snapshot.profile.wave,routeKey:snapshot.profile.route,autoAdvance:preferences.autoAdvance??true,
    loot:clone(snapshot.profile.loot),supplies:{...supplies,heal:true,revive:true,threshold:50,healItem:'potions',reviveItem:'revives',...preferences}},
    vip:{version:1,credits:0,vipUntil:Date.parse(snapshot.profile.vip_until),vipSince:Date.parse(snapshot.profile.created_at)},
@@ -71,7 +71,7 @@ window.IDLE_SERVER_JOURNEY=(()=>{
  async function formation(ids){canonical=await rpc('hunt_set_formation',{p_ids:ids});return canonical;}
  let preferenceTask=null;
  function selectedPreferences(state){const s=state.hunts.supplies;return {heal:s.heal,revive:s.revive,threshold:Math.round(s.threshold),healItem:s.healItem,reviveItem:s.reviveItem,afterDefeat:s.afterDefeat,autoAdvance:state.hunts.autoAdvance,
- captureEnabled:state.capture.enabled,captureBall:state.capture.ball,shinyBall:state.captureShiny.ball,
+ bankLocked:!!state.capture.bankLocked,duplicates:state.capture.duplicates||'keep',captureEnabled:state.capture.enabled,captureBall:state.capture.ball,shinyBall:state.captureShiny.ball,
  tutorial:state.tutorial?Object.fromEntries(['index','tip','visited','introduced','complete','contentVersion','version','mode','skipped'].filter(key=>state.tutorial[key]!==undefined).map(key=>[key,clone(state.tutorial[key])])):{}};}
  async function syncPreferences(state){
   if(preferenceTask)await preferenceTask;
@@ -84,11 +84,17 @@ window.IDLE_SERVER_JOURNEY=(()=>{
  let organizationTask=null;
  async function syncOrganization(state){
   if(organizationTask)await organizationTask;
-  if(canonical.activeHunt)return;
-  const slots=state.team.filter(m=>['b','n'].includes(m.pos?.z)).map(m=>({id:m.id,pos:clone(m.pos)})).sort((a,b)=>a.id.localeCompare(b.id));
-  const stored=(canonical.profile.organization||[]).slice().sort((a,b)=>a.id.localeCompare(b.id));
-  if(JSON.stringify(slots)===JSON.stringify(stored))return;
-  organizationTask=rpc('journey_organization',{p_request:crypto.randomUUID(),p_slots:slots}).then(snapshot=>{canonical=snapshot;}).finally(()=>{organizationTask=null;});
+  organizationTask=ordered(async()=>{
+   // Read slots after earlier account operations have applied their new captures.
+   if(canonical.activeHunt){
+    const field=state.team.filter(m=>m.pos?.z==='b').map(m=>m.id).sort();
+    if(JSON.stringify(field)!==JSON.stringify([...(canonical.profile.formation||[])].sort()))return;
+   }
+   const slots=state.team.filter(m=>['b','n'].includes(m.pos?.z)).map(m=>({id:m.id,pos:clone(m.pos)})).sort((a,b)=>a.id.localeCompare(b.id));
+   const stored=(canonical.profile.organization||[]).slice().sort((a,b)=>a.id.localeCompare(b.id));
+   if(JSON.stringify(slots)===JSON.stringify(stored))return;
+   canonical=await rawRpc('journey_organization',{p_request:crypto.randomUUID(),p_slots:slots});
+  }).finally(()=>{organizationTask=null;});
   await organizationTask;
  }
  let preferenceTimer;
