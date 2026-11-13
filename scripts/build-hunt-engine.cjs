@@ -3,7 +3,7 @@ const fs=require('node:fs'),path=require('node:path'),vm=require('node:vm');
 const root=path.resolve(__dirname,'..'),read=p=>fs.readFileSync(path.join(root,p),'utf8');
 let source=read('modes/idle/online/arena-engine.mjs')
  .replace('createArenaSimulation','createHuntSimulation')
- .replace('const window={OAK_IDLE_MODE:true}', 'const window={OAK_IDLE_MODE:true,IDLE_SHINY:{rate:.000122}}')
+ .replace('const window={OAK_IDLE_MODE:true}', 'const window={OAK_IDLE_MODE:true,IDLE_SHINY:{rate:1/25000}}')
  .replace('team.length===6&&team.every','team.length>=1&&team.length<=6&&team.every')
  .replace('r:side===0?5+Math.floor(index/3):2-Math.floor(index/3),c:[1,3,5][index%3]', 'r:side===0?(m.pos?.r??5+Math.floor(index/3)):2-Math.floor(index/3),c:side===0?(m.pos?.c??[1,3,5][index%3]):[1,3,5][index%3]')
  .replace('u.el=empty;u._idleLevel=m.level;', 'u.hp=u.maxHp*Math.max(0,Math.min(1,data.condition??1));u.alive=u.hp>0;u.el=empty;u._idleLevel=m.level;')

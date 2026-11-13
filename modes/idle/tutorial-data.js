@@ -22,7 +22,7 @@ window.IDLE_TUTORIAL_DATA=(()=>{
    step('Compre suprimentos na Loja e confira o estoque. Os ícones no canto inferior direito permitem trocar os itens selecionados. Para recuperar a equipe de graça, visite a enfermeira no Centro.','shop','.is-supply-hud')]),
   topic('quality','Entenda seus parceiros',[
    step('Na ficha, compare nível, potência P1–P5, Nature e IVs antes de trocar um parceiro. A potência é a qualidade do indivíduo; não é a mesma coisa que a raridade da espécie.','party','.is-navigation [data-menu=pokemon]'),
-   step('O shiny tem visual próprio e aviso especial. A garantia de '+window.IDLE_SHINY.guarantee.toLocaleString('pt-BR')+' encontros elegíveis sem shiny garante o aparecimento, não a captura. O som shiny toca mesmo com os sons comuns silenciados.','shiny','.is-quick [aria-label=Automação]')]),
+   step('O shiny tem visual próprio e aviso especial. A chance base de aparecer é de 1 em 25.000 por Pokémon elegível, sem garantia. O som shiny toca mesmo com os sons comuns silenciados.','shiny','.is-quick [aria-label=Automação]')]),
   topic('center','Use o Centro Pokémon',[
    step('Abra Centro e converse com a enfermeira ou Chansey para recuperar a equipe gratuitamente. Confirme o atendimento; o descanso encerra a caçada.','center','.is-navigation [data-menu=center]'),
    step('Os NPCs do cenário abrem PC, evolução, loja, incubadora, tarefas, Gachapon e a oficina do Professor Carvalho. A Vila possui um botão próprio e não substitui o Centro.','center','.is-navigation [data-menu=center]')]),
