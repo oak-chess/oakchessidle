@@ -102,5 +102,6 @@ window.IDLE_SERVER_JOURNEY=(()=>{
    canonical=result.state;apply(state);operations.delete(key);return result;
   }finally{mutationBusy=false;}
  }
- return {project,apply,request,formation,mutate,syncPreferences,syncOrganization,queuePreferences,get snapshot(){return canonical},get enabled(){return !!canonical}};
+ async function abandon(){canonical=await rpc('hunt_abandon');return canonical;}
+ return {project,apply,request,formation,mutate,abandon,syncPreferences,syncOrganization,queuePreferences,get snapshot(){return canonical},get enabled(){return !!canonical}};
 })();

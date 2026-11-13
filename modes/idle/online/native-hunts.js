@@ -1,7 +1,7 @@
 /* Replays server positions inside the existing arena. It never decides an outcome. */
 window.createServerHunts=function(ctx){
  const bridge=window.IDLE_SERVER_JOURNEY;
- let pending=null,requestId=null,checkpointPlayback=null;
+ let pending=null,requestId=null,checkpointPlayback=null,abandoning=false;
  const wait=ms=>new Promise(resolve=>setTimeout(resolve,ms));
  async function execute(){
   const challenge=ctx.challenge();
@@ -12,6 +12,7 @@ window.createServerHunts=function(ctx){
   }
   requestId??=crypto.randomUUID();
   const encounter=await bridge.request({action:'begin',requestId,route:challenge?challenge.area+':gym':ctx.state.area+':'+ctx.state.hunts.kind});
+  if(abandoning)return;
   ctx.show(encounter.replay);
   const frames=encounter.replay.frames,elapsedMs=encounter.replay.elapsedMs;
   const resumed=Math.max(0,elapsedMs-encounter.remainingMs),start=performance.now();let index=0,lastIndex=-1;
@@ -27,6 +28,7 @@ window.createServerHunts=function(ctx){
   if(frames.length)ctx.frame(frames[index],[]);
   while(elapsed<elapsedMs||!ctx.running()){
    await wait(!ctx.running()||document.hidden?200:33);
+   if(abandoning)return;
    const now=performance.now(),delta=now-previous;
    previous=now;
    if(!ctx.running()){
@@ -45,6 +47,7 @@ window.createServerHunts=function(ctx){
    }
    lastIndex=index;
   }
+  if(abandoning)return;
   if(ctx.running()&&!document.hidden){ctx.frame(frames.at(-1),frames.slice(lastIndex+1).flatMap(f=>f.e||[]));}
   let settled;
   for(let retry=0;retry<4;retry++){
@@ -66,7 +69,16 @@ window.createServerHunts=function(ctx){
   }
   ctx.complete?.();
  }
- return {get busy(){return !!pending},checkpoint(){checkpointPlayback?.();},run(){
+ return {get busy(){return !!pending||abandoning},checkpoint(){checkpointPlayback?.();},async abandon(){
+  if(abandoning)throw Error('Aguarde a troca de caçada.');
+  abandoning=true;
+  try{
+   await pending?.catch(()=>{});
+   const snapshot=await bridge.abandon();
+   requestId=null;
+   ctx.apply(snapshot);
+  }finally{abandoning=false;}
+ },run(){
   if(pending)return pending;
   pending=execute().finally(()=>{pending=null;checkpointPlayback=null;});return pending;
  }};
