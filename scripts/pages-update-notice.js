@@ -16,7 +16,7 @@
     notice.style.cssText = 'position:fixed;top:12px;left:50%;transform:translateX(-50%);z-index:2147483647;display:flex;align-items:center;gap:12px;padding:12px;max-width:calc(100vw - 24px);border:1px solid #63daed;border-radius:8px;background:#102735;color:#fff;font:14px system-ui;box-shadow:0 4px 16px #0008';
     const message = document.createElement('span');
     message.setAttribute('role', 'status');
-    message.textContent = 'Nova versão disponível.';
+    message.textContent = 'Uma atualização do jogo está pronta.';
     const countdown = document.createElement('span');
     const button = document.createElement('button');
     button.type = 'button';
