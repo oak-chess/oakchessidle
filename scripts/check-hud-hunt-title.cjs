@@ -1,0 +1,11 @@
+const fs=require('node:fs'),assert=require('node:assert/strict');
+const source=fs.readFileSync('modes/idle/game-hud.js','utf8');
+const declaration=source.split('\n').find(line=>line.includes("const hunt=one('.is-hunt'),liveTitle="));assert.ok(declaration);
+const title=new Function('one','state','window',declaration+'return liveTitle;');
+const state={area:1,hunts:{kind:'lake',wave:2}},window={IDLE_REGION_HUNTS:[{}, {habitats:{lake:{name:'Lagos de Cerulean'},cave:{name:'Passagens do Monte Lua'}}}]};
+const panel={querySelector(selector){return selector.includes('> b')?{textContent:'Lagos de Cerulean'}:null;}};
+assert.equal(title(()=>panel,state,window),'Lagos de Cerulean');
+assert.equal(title(()=>null,state,window),'Lagos de Cerulean');
+state.hunts.kind='cave';assert.equal(title(()=>null,state,window),'Passagens do Monte Lua');
+state.area=99;assert.equal(title(()=>null,state,window),'Escolha sua caçada');
+console.log('PASS live b heading and regional fallback follow the current hunt, without a fixed Viridian label.');

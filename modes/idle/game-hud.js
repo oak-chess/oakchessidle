@@ -1071,7 +1071,7 @@
       const presenceLabel=one('.layout-trainer-online-label',presence);
       if(presenceLabel.textContent!==onlineLabel)presenceLabel.textContent=onlineLabel;
       paintGain(one('.layout-wallet',trainerCard.content),'trainer');
-      const hunt=one('.is-hunt'),liveTitle=hunt?.querySelector('h2,h3,strong')?.textContent||'Trilhas de Viridian',wave=state.hunts?.wave||1;
+      const hunt=one('.is-hunt'),liveTitle=hunt?.querySelector(':scope > b,h2,h3,strong')?.textContent||window.IDLE_REGION_HUNTS?.[state.area]?.habitats?.[state.hunts?.kind]?.name||'Escolha sua caçada',wave=state.hunts?.wave||1;
       if(banner.dataset.label!==liveTitle+wave){banner.replaceChildren(make('b','',liveTitle),make('span','','Onda '+wave+'/10'));banner.dataset.label=liveTitle+wave}
       const combat=one('#combatbtn')?.dataset.deviceLabel||one('#combatbtn')?.textContent.trim()||'Explorar';
       one('span',action).textContent=combat;
