@@ -18,9 +18,9 @@ window.IDLE_VIP=(()=>{
   s.hunts.supplies.potions=number(s.hunts.supplies.potions)+300;
   s.ballStock.ultra=number(s.ballStock.ultra)+300;
   if(!(v.vipUntil>now))v.vipSince=now;
-  v.vipUntil=Math.max(now,Number(v.vipUntil)||0)+3*86400000;
+  v.vipUntil=Math.max(now,Number(v.vipUntil)||0)+30*86400000;
   s.welcomeGift={version:1,at:now};
-  record(s,'Presente de boas-vindas: 3 dias de VIP, 300 Revives, 300 Ultra Balls e 300 Poções.');return true;
+  record(s,'Presente de boas-vindas: 30 dias de VIP, 300 Revives, 300 Ultra Balls e 300 Poções.');return true;
  }
  function bind(s,running){data(s);runtimes.set(s,{running,last:Date.now()})}
  function sync(s){const v=data(s),rt=runtimes.get(s);if(!rt)return v;const now=Date.now(),dt=Math.max(0,(now-rt.last)/1000);rt.last=now;if(rt.running())for(const k in catalog)if(!v.paused[k])v.remaining[k]=Math.max(0,v.remaining[k]-dt);return v}
