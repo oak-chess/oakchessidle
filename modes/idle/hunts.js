@@ -204,7 +204,7 @@ function renderCatalog(content){sync();const preyBox=h('div',undefined,'ih-prey-
    lower.append(guide);
   }
   const status=h('p',missing.length?'Requer: '+missing.join(' · '):isCurrent?'Onda '+q.wave+'/10 · Progresso salvo':e.area!==s.area?'Pronta para visitar · troca a região e a caçada':'Pronta para iniciar','ih-browser-requirements');status.dataset.locked=String(!!missing.length);meta.append(status);
-  previewFooter.append(btn(isCurrent?'Configurar expedição':e.area!==s.area?'Ir para esta caçada':'Escolher caçada',async()=>{if(missingFor(e).length)return;if(!isCurrent&&ctx.beforeSelect){try{await ctx.beforeSelect()}catch(error){ctx.notify(error.message);return}}if(e.area!==s.area){if(!ctx.travelTo?.(e.area))return;sync()}catalogQuery='';focusHunt=e.id;popup.close();if(!isCurrent)choose(e.id);tab='setup';render()},!!missing.length));
+  previewFooter.append(btn(isCurrent?'Configurar expedição':e.area!==s.area?'Ir para esta caçada':'Escolher caçada',async()=>{if(missingFor(e).length)return;if(!isCurrent&&ctx.beforeSelect){try{await ctx.beforeSelect()}catch(error){ctx.notify(error.message);return}}if(e.area!==s.area){if(!await ctx.travelTo?.(e.area))return;sync()}catalogQuery='';focusHunt=e.id;popup.close();if(!isCurrent)choose(e.id);tab='setup';render()},!!missing.length));
  }
  function draw(){
   const scroll=list.scrollTop,query=normalizeText(catalogQuery.trim());

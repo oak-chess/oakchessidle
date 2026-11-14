@@ -280,3 +280,246 @@ Atividades e registros do jogador|Player activity and records|Actividades y regi
 window.IDLE_LOCALES??={en:{},es:{}};window.IDLE_I18N_PARTIAL??={en:{},es:{}};for(const line of rows.split('\n')){const [pt,en,es]=line.split('|');if(!pt||!en||!es)continue;window.IDLE_LOCALES.en[pt]=en;window.IDLE_LOCALES.es[pt]=es;window.IDLE_I18N_PARTIAL.en[pt]=en;window.IDLE_I18N_PARTIAL.es[pt]=es}
 })();
 (()=>{const rows=[['FENDAS MEGA','MEGA RIFTS','FISURAS MEGA'],['Fendas Mega','Mega Rifts','Fisuras Mega'],['‹ Início','‹ Home','‹ Inicio'],['● ARQUIVO LOCAL ATIVO','● LOCAL ARCHIVE ACTIVE','● ARCHIVO LOCAL ACTIVO'],['Chegar ao nível','Reach level','Alcanzar el nivel'],['Juntar ouro:','Gold target:','Meta de oro:'],['Capturar Pokémon:','Capture target:','Meta de capturas:'],['Histórico local sem corte de 200 registros. Exporte antes de trocar de navegador ou limpar os dados.','Permanent local history without the 200-entry limit. Export before switching browsers or clearing data.','Historial local permanente sin el límite de 200 registros. Exporta antes de cambiar de navegador o borrar los datos.'],['Desde','Since','Desde'],['Preparando seus registros…','Preparing your records…','Preparando tus registros…'],['Horário de Brasília','Brasília time','Hora de Brasilia'],['Idioma do jogo','Game language','Idioma del juego']];for(const [pt,en,es]of rows){IDLE_LOCALES.en[pt]=en;IDLE_LOCALES.es[pt]=es;IDLE_I18N_PARTIAL.en[pt]=en;IDLE_I18N_PARTIAL.es[pt]=es}for(const language of ['en','es'])for(const [pt,value]of Object.entries(IDLE_LOCALES[language])){IDLE_LOCALES[language][pt]=value.replace(/Pok[eé](?:phone|fone)/gi,'Pokéfone').replace(/Pok[eé]Nav/gi,'PokéNav');}for(const language of ['en','es'])for(const [pt,value]of Object.entries(IDLE_LOCALES[language]))if(pt.toLocaleUpperCase('pt-BR')!==pt&&pt.toLocaleUpperCase('pt-BR').length>1)if(!Object.hasOwn(IDLE_LOCALES[language],pt.toLocaleUpperCase('pt-BR')))IDLE_LOCALES[language][pt.toLocaleUpperCase('pt-BR')]=value.toLocaleUpperCase(language)})();
+
+// Account bar and live HUD phrases, including labels with changing counters.
+(()=>{
+  const phrases=[
+  [
+    "Conta, idiomas e comunidade",
+    "Account, languages and community",
+    "Cuenta, idiomas y comunidad"
+  ],
+  [
+    "Sair da conta",
+    "Sign out",
+    "Cerrar sesión"
+  ],
+  [
+    "Sair da sua conta e voltar à página inicial?",
+    "Sign out and return to the home page?",
+    "¿Cerrar sesión y volver a la página de inicio?"
+  ],
+  [
+    "Sua conta ainda está carregando.",
+    "Your account is still loading.",
+    "Tu cuenta aún se está cargando."
+  ],
+  [
+    "Avisos de eventos · em breve",
+    "Event notices · coming soon",
+    "Avisos de eventos · próximamente"
+  ],
+  [
+    "· em breve",
+    "· coming soon",
+    "· próximamente"
+  ],
+  [
+    "Escolha sua caçada",
+    "Choose your hunt",
+    "Elige tu cacería"
+  ],
+  [
+    "Encontro em andamento",
+    "Encounter in progress",
+    "Encuentro en curso"
+  ],
+  [
+    "Preparação da equipe",
+    "Preparing the team",
+    "Preparación del equipo"
+  ],
+  [
+    "Caçada parada",
+    "Hunt paused",
+    "Cacería pausada"
+  ],
+  [
+    "Aguardando encontro",
+    "Waiting for encounter",
+    "Esperando encuentro"
+  ],
+  [
+    "Preparando encontro",
+    "Preparing encounter",
+    "Preparando encuentro"
+  ],
+  [
+    "Processando capturas",
+    "Processing captures",
+    "Procesando capturas"
+  ],
+  [
+    "Em combate",
+    "In battle",
+    "En combate"
+  ],
+  [
+    "Sua equipe em campo",
+    "Your active team",
+    "Tu equipo en campo"
+  ],
+  [
+    "Equipe adversária",
+    "Opponent team",
+    "Equipo rival"
+  ],
+  [
+    "SUA EQUIPE",
+    "YOUR TEAM",
+    "TU EQUIPO"
+  ],
+  [
+    "ADVERSÁRIOS",
+    "OPPONENTS",
+    "RIVALES"
+  ],
+  [
+    "Avisos de suprimentos",
+    "Supply alerts",
+    "Avisos de suministros"
+  ],
+  [
+    "Gastos da sessão",
+    "Session supplies used",
+    "Suministros usados en la sesión"
+  ],
+  [
+    "Nenhum aviso de estoque ou reserva.",
+    "No stock or reserve alerts.",
+    "No hay avisos de existencias o reservas."
+  ],
+  [
+    "No limite da reserva",
+    "At reserve limit",
+    "En el límite de reserva"
+  ],
+  [
+    "O jogo para de usar o item ao atingir sua reserva.",
+    "The game stops using the item when its reserve is reached.",
+    "El juego deja de usar el objeto al alcanzar su reserva."
+  ],
+  [
+    "Salvar reservas",
+    "Save reserves",
+    "Guardar reservas"
+  ],
+  [
+    "Reservas salvas",
+    "Reserves saved",
+    "Reservas guardadas"
+  ],
+  [
+    "Nenhuma alteração. As reservas atuais já estão salvas.",
+    "No changes. Your current reserves are already saved.",
+    "Sin cambios. Tus reservas actuales ya están guardadas."
+  ],
+  [
+    "1 reserva atualizada.",
+    "1 reserve updated.",
+    "1 reserva actualizada."
+  ],
+  [
+    "reservas atualizadas.",
+    "reserves updated.",
+    "reservas actualizadas."
+  ],
+  [
+    "Alterações ainda não salvas.",
+    "Changes not saved yet.",
+    "Cambios pendientes de guardar."
+  ],
+  [
+    "Aguardando confirmação do servidor.",
+    "Waiting for server confirmation.",
+    "Esperando confirmación del servidor."
+  ],
+  [
+    "Seções de automação",
+    "Automation sections",
+    "Secciones de automatización"
+  ],
+  [
+    "Resumo da caçada",
+    "Hunt summary",
+    "Resumen de la cacería"
+  ],
+  [
+    "Resetar resumo",
+    "Reset summary",
+    "Reiniciar resumen"
+  ],
+  [
+    "Saldo estimado",
+    "Estimated balance",
+    "Saldo estimado"
+  ],
+  [
+    "Reposição estimada",
+    "Estimated replacement cost",
+    "Coste estimado de reposición"
+  ],
+  [
+    "Nenhuma captura registrada na caçada.",
+    "No captures recorded on this hunt.",
+    "Ninguna captura registrada en la cacería."
+  ],
+  [
+    "Capturas recentes",
+    "Recent captures",
+    "Capturas recientes"
+  ],
+  [
+    "Vender todo o Depósito",
+    "Sell all Pokémon in the Depot",
+    "Vender todos los Pokémon del Depósito"
+  ],
+  [
+    "preparado para o próximo encontro",
+    "ready for the next encounter",
+    "preparado para el próximo encuentro"
+  ],
+  [
+    "Neste encontro",
+    "In this encounter",
+    "En este encuentro"
+  ],
+  ["Modos","Modes","Modos"],
+  ["AUTOMAÇÕES","AUTOMATION","AUTOMATIZACIÓN"],
+  ["Modo Economia","Economy Mode","Modo Economía"],
+  ["MODO ECONOMIA","ECONOMY MODE","MODO ECONOMÍA"],
+  ["Ligar cena","Show arena","Mostrar arena"],
+  ["Abates","Knockouts","Derrotados"],
+  ["Onda","Wave","Oleada"],
+  ["ativo","active","activo"],
+  ["estimativa","estimate","estimación"],
+  ["vitórias em","wins in","victorias en"],
+  ["encontros","encounters","encuentros"],
+  ["jogador online","player online","jugador en línea"],
+  ["jogadores online","players online","jugadores en línea"],
+  ["Coins recebidos","Coins earned","Coins recibidos"],
+  ["Valor do loot","Loot value","Valor del botín"],
+  ["Recentes","Recent","Recientes"],
+  ["Nota","Rating","Nota"],
+  ["Qualidade","Quality","Calidad"],
+  ["Itens","Items","Objetos"],
+  ["Depósito","Depot","Depósito"],
+  ["PC Pokémon","Pokémon PC","PC Pokémon"],
+  ["Tipo","Type","Tipo"],
+  ["As capturas do Modo Economia chegam aqui.","Pokémon caught in Economy Mode appear here.","Los Pokémon capturados en el Modo Economía aparecen aquí."],
+  ["para vender · rende","for sale · worth","para vender · valor"],
+  ["no PC Pokémon","in the Pokémon PC","en el PC Pokémon"],
+  ["Reservas","Reserves","Reservas"],
+  ["Opções","Options","Opciones"],
+  ["Bola (normal)","Ball (normal)","Bola (normal)"],
+  ["Bola (shiny)","Ball (shiny)","Bola (shiny)"],
+  ["Shop VIP","VIP Shop","Tienda VIP"],
+  ["Loja VIP","VIP Shop","Tienda VIP"]
+];
+  for(const [pt,en,es] of phrases){
+    Object.assign(IDLE_LOCALES.en,{[pt]:en});
+    Object.assign(IDLE_LOCALES.es,{[pt]:es});
+    Object.assign(IDLE_I18N_PARTIAL.en,{[pt]:en});
+    Object.assign(IDLE_I18N_PARTIAL.es,{[pt]:es});
+  }
+})();

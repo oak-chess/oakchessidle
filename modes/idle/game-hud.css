@@ -69,6 +69,7 @@ body.layout-preview-mode.idle-center-view .layout-arena-benefits {display:none}
 .layout-member {border:1px solid #284957;border-radius:7px;display:grid;grid-template-columns:clamp(32px,4.7vh,52px) minmax(0,1fr) minmax(0,1.03fr);align-items:center;gap:5px;background:#081820;text-align:left;padding:3px 5px;min-height:clamp(35px,5.45vh,54px);min-width:0}
 .layout-member canvas {width:100%;height:clamp(29px,4.55vh,47px);object-fit:contain;image-rendering:pixelated}
 .layout-member b,.layout-member small {display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.layout-field .layout-member b {font-size:.9em}
 .layout-member small {font-size:.86em;margin-top:2px}
 .layout-bars {display:grid;gap:3px}
 .layout-meter {--fill:#1ea848;position:relative;min-width:0;min-height:13px;display:grid;place-items:center;overflow:hidden;border:1px solid #39525a;border-radius:5px;background:#09141d}
@@ -756,3 +757,30 @@ body:is(.idle-center-view,.rv-native-open) .layout-arena-mini > .layout-hunt-sta
 
 /* Immersive FPS-style defeat feed; colors describe the outcome, not team ownership. */
 .layout-defeat-feed{position:absolute;right:18px;top:72px;z-index:26;display:flex;flex-direction:column;align-items:flex-end;gap:4px;pointer-events:none;max-width:min(340px,42%)}.layout-defeat-feed[hidden]{display:none}.layout-defeat-entry{display:flex;align-items:center;gap:7px;padding:4px 8px;background:#071c2ce8;border-right:2px solid #7aa3b4;clip-path:polygon(5px 0,100% 0,100% calc(100% - 5px),calc(100% - 5px) 100%,0 100%,0 5px);box-shadow:inset 0 1px #426577;animation:defeat-feed-in .2s ease-out}.layout-defeat-entry>span{display:flex;align-items:center;gap:4px;min-width:0}.layout-defeat-entry img{width:23px;height:23px;object-fit:contain;image-rendering:pixelated}.layout-defeat-entry b{font-size:10px;line-height:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.layout-defeat-winner{color:#79ceff}.layout-defeat-defeated{color:#ff8492}.layout-defeat-arrow{color:#e5f0f8;font-size:20px;font-weight:800}@keyframes defeat-feed-in{from{opacity:0;transform:translateX(10px)}to{opacity:1;transform:translateX(0)}}@media(prefers-reduced-motion:reduce){.layout-defeat-entry{animation:none}}@media(max-width:700px){.layout-defeat-feed{right:10px;top:68px;max-width:48%}.layout-defeat-entry{gap:3px;padding:3px 5px}.layout-defeat-entry b{font-size:9px}.layout-defeat-entry img{width:19px;height:19px}}
+
+.layout-preview .layout-left {overflow:hidden}
+.layout-left-panels {display:flex;flex-direction:column;gap:inherit;min-height:0;overflow:auto;scrollbar-width:thin;scrollbar-color:#327182 transparent}
+.layout-left-panels > .layout-card {flex-shrink:0}
+.layout-preview .layout-account-bar {--chamfer:polygon(8px 0,calc(100% - 8px) 0,100% 8px,100% calc(100% - 8px),calc(100% - 8px) 100%,8px 100%,0 calc(100% - 8px),0 8px);display:flex;align-items:center;justify-content:center;gap:clamp(1px,.22vw,4px);margin-top:auto;padding:8px;max-width:100%;flex-shrink:0}
+.layout-account-bar::after {background-size:16px 16px,16px 16px,100% 2px,100% 2px}
+.layout-account-action {display:grid;place-items:center;flex:0 1 26px;min-width:0;width:clamp(17px,1.7vw,26px);height:25px;padding:2px;background:#102d3b;border:1px solid #345662;border-radius:3px;color:#c5ebfa;cursor:pointer}
+.layout-account-action svg {display:block;width:100%;max-width:18px;height:16px}
+.layout-account-action.is-signout {background:#66333a;color:#fff}
+.layout-account-action[aria-pressed=true] {border-color:#67e5ff;box-shadow:0 0 5px #41c7e280}
+.layout-account-action:enabled:hover,.layout-account-action:focus-visible {outline:1px solid #87edff;outline-offset:1px}
+.layout-account-action:disabled {opacity:.42;cursor:default}
+
+@media (min-width: 1050px) {
+  .layout-preview:not(.layout-immersive) {
+    grid-template-columns: minmax(220px, 18fr) minmax(0, 64fr) minmax(220px, 18fr);
+    --layout-nav-tile-height: clamp(44px, 7vh, 70px);
+  }
+  .layout-preview .layout-card.layout-nav { padding-block: 7px; }
+  .layout-auto { --layout-auto-shoulder: calc(var(--layout-nav-tile-height) + 22px); }
+  .layout-auto:has(> details:not([open])) { min-height: calc(var(--layout-nav-tile-height) + 14px); padding-block: 7px; }
+  .layout-left > .layout-card:not(.layout-account-bar) { padding-block: 9px; }
+  .layout-left .layout-member { min-height: clamp(33px, 4.9vh, 49px); padding-block: 2px; }
+  .layout-right .layout-links { padding-block: 7px; }
+  .layout-links .layout-button { min-height: clamp(40px, 6.4vh, 62px); }
+  .layout-auto > details[open] > .layout-auto-body { gap: clamp(5px, 1vh, 9px); }
+}

@@ -208,7 +208,40 @@
       farmTab.setAttribute('aria-pressed',String(showFarm));
     }
     benchContent.append(benchList,slots);
-    fieldCard.content.append(fieldList);benchCard.content.append(benchContent,farmList);left.append(profile,field,bench);
+    fieldCard.content.append(fieldList);benchCard.content.append(benchContent,farmList);const leftPanels=make('div','layout-left-panels');leftPanels.append(profile,field,bench);left.append(leftPanels);
+    const footer=make('nav','layout-card layout-account-bar');footer.setAttribute('aria-label','Conta, idiomas e comunidade');
+    const art=(body)=>'<svg viewBox="0 0 24 20" aria-hidden="true" focusable="false">'+body+'</svg>';
+    const flag={
+      pt:art('<path fill="#129447" d="M1 1h22v18H1z"/><path fill="#ffdc38" d="m12 3 10 7-10 7L2 10z"/><circle fill="#1559b8" cx="12" cy="10" r="4"/><path stroke="white" fill="none" d="M8 9q4-1 8 3"/>'),
+      en:art('<path fill="#eee" d="M1 1h22v18H1z"/><path stroke="#d44955" stroke-width="2" d="M1 2h22M1 6h22M1 10h22M1 14h22M1 18h22"/><path fill="#294783" d="M1 1h11v10H1z"/><path stroke="white" stroke-dasharray="1 2" d="M2 3h8M2 6h8M2 9h8"/>'),
+      es:art('<path fill="#c83940" d="M1 1h22v18H1z"/><path fill="#ffcf48" d="M1 6h22v8H1z"/>')
+    };
+    const addFooter=(label,svg,action,disabled=false)=>{const b=button('',action);b.className='layout-account-action';b.innerHTML=svg;b.title=label;b.setAttribute('aria-label',label);b.disabled=disabled;footer.append(b);return b;};
+    const outline=paths=>art('<g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">'+paths+'</g>');
+    addFooter('Sair da conta',outline('<path d="M10 3H4v14h6M9 10h12m-4-4 4 4-4 4"/>'),async()=>{
+      const prompt='Sair da sua conta e voltar à página inicial?';
+      if(!await window.confirmIdleAction(prompt,'Sair da conta','Sair da conta'))return;
+      try{const client=window.OAK_ONLINE_CLIENT;if(!client)throw Error('Sua conta ainda está carregando.');const {error}=await client.auth.signOut();if(error)throw error;location.replace('/');}
+      catch(error){dispatchEvent(new CustomEvent('idle-server-error',{detail:error.message}));}
+    }).classList.add('is-signout');
+    const languageButtons=[['pt-BR','Português',flag.pt],['en','English',flag.en],['es','Español',flag.es]].map(([locale,label,icon])=>[
+      locale,addFooter(label,icon,()=>window.IDLE_I18N?.set(locale))
+    ]);
+    function updateLanguageButtons(){
+      const locale=window.IDLE_I18N?.locale||'pt-BR';
+      for(const [code,entry] of languageButtons)entry.setAttribute('aria-pressed',String(locale===code));
+    }
+    updateLanguageButtons();
+    window.addEventListener('idle-language-change',updateLanguageButtons);
+    for(const [label,paths]of [
+      ['Discord','<path d="M7 5q5-2 10 0l3 10-5 2-1-2h-4l-1 2-5-2z"/><circle cx="9" cy="10" r="1"/><circle cx="15" cy="10" r="1"/>'],
+      ['X','<path d="m5 3 14 14M19 3 5 17"/>'],
+      ['Instagram','<rect x="4" y="2" width="16" height="16" rx="4"/><circle cx="12" cy="10" r="4"/><path d="M17 5h.1"/>'],
+      ['TikTok','<path d="M13 3v10a4 4 0 1 1-4-4m4-6q1 5 6 5"/>']
+    ])addFooter(label+' · em breve',outline(paths),()=>{},true);
+    addFooter('Avisos de eventos · em breve',outline('<path d="M9 3h6l2 3v7l2 2H5l2-2V6zm1 14h4"/>'),null,true);
+    left.append(footer);
+
     showBenchTab(false);
     for(const [label,id] of [['Pokémon','pokemon'],['Pokédex','dex'],['Pokéfone','bag'],['Evolução','evolution'],['Caçadas','hunts'],['Jornada','journey'],['Modos','modes'],['Centro','center'],['Vila','village'],['Ranks','ranks'],['Wiki','wiki']]){
       const action=id==='ranks'?()=>window.IDLE_MONTHLY_RANKINGS?.open():id==='dex'?()=>openGuidePanel?.('dex'):id==='village'?proxy('#rv-village-launch'):id==='wiki'?proxy('#idleWikiLaunch'):menu(id);
@@ -233,8 +266,8 @@
     economyTitle.append(make('small','','MODO ECONOMIA'),make('h2','','Resumo da caçada'),economyStatus);
     const restoreScene=button('Ligar cena',()=>{chooseEconomy(false);economy.focus()});
     const summaryActions=make('div','layout-economy-toolbar');
-    summaryActions.append(button('Resetar resumo',()=>{
-      if(!confirm('Reiniciar os contadores do resumo da caçada?'))return;
+    summaryActions.append(button('Resetar resumo',async()=>{
+      if(!await window.confirmIdleAction('Reiniciar os contadores do resumo da caçada?','Resetar resumo','Resetar resumo'))return;
       state.hunts.session=null;
       saveEconomy?.();
       refreshCaptureFilter?.();
@@ -437,10 +470,10 @@
     economyDetails.append(captures,storage);
     economyInfo.append(economyHeader,economyMetrics,usage,economyDetails);
 
-    function sellDepot(members){
+    async function sellDepot(members){
       const eligible=members.filter(m=>shop?.depotPrice(m)!=null);
       const total=eligible.reduce((sum,m)=>sum+shop.depotPrice(m),0);
-      if(!eligible.length||!confirm('Vender '+eligible.length+' Pokémon por '+fmt(total)+' Coins?'))return;
+      if(!eligible.length||!await window.confirmIdleAction('Vender '+eligible.length+' Pokémon por '+fmt(total)+' Coins?','Vender Pokémon','Vender'))return;
       shop.sellDepot(eligible.map(m=>m.id));
       renderStorage();
     }
