@@ -89,17 +89,13 @@ export function buildHuntPlan(encounter){
 export function captureChance(enemy,ball,known=false){
  const item=catalog.balls[ball];
  if(!item||item.locked)throw Error('Esta bola não pode ser usada na caçada.');
- const meta=createHuntSimulation().metadata().find(s=>s.id===enemy.pokemon_id);
+ const meta=catalog.species.find(s=>s.id===enemy.pokemon_id);
  const rate=catalog.captureRates[enemy.pokemon_id];
  if(rate===undefined)throw Error('Taxa de captura indisponível.');
  let bonus=item.bonus;
  if(ball==='net'&&meta.types.some(t=>['water','bug'].includes(t))||ball==='repeat'&&known)bonus=3;
- // The native formula uses a defeated target with 1 remaining HP. A large M tends to rate*bonus.
- // Persist the exact maximum HP from the server simulation before enabling captures.
- const M=enemy.maxHp;
- if(!Number.isFinite(M)||M<1)throw Error('Dados de captura incompletos.');
- const a=Math.floor(Math.floor(rate*bonus)*(3*M-2)/(3*M));
- const root=a>0?Math.floor(Math.sqrt(Math.floor(Math.sqrt(Math.floor(16711680/a))))):0;
- const chance=a>254?1:a<1?0:Math.min(1,(Math.floor(1048560/root)/65536)**4);
- return enemy.combat_data.shiny?Math.min(.25,chance*.25):chance;
+ // Fixed hunt rates agreed for all evolutionary stages. Prices are unchanged.
+ // Net and Repeat bonuses are conditional; VIP/Prey do not add capture chance.
+ const chance=ball==='great'?.0073:ball==='ultra'?.0146:bonus===3?.011:.0037;
+ return enemy.combat_data.shiny?chance*.25:chance;
 }
