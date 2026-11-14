@@ -317,7 +317,7 @@ function renderEvolutionCalculator(m,previousCard){
      score=I.potentialScore({...variant,name:form.name,star:form.star,megaKey:null,evolutionRatingFloor:Math.max(floor||0,lastName&&lastName!==form.name?score+.1:0)});
      lastName=form.name
     }
-    if(stage.megaKey){prior=score;score=Math.min(10,score+.1)}
+    if(stage.megaKey){prior=score;score=I.potentialScore({...variant,evolutionRatingFloor:score})}
     return {score,prior}
    });
    const [normalNote,shinyNote]=scores.map(entry=>entry.score),row=el('tr');

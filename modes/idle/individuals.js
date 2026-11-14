@@ -27,12 +27,16 @@ window.IDLE_INDIVIDUALS=(()=>{
  const reduction=value=>{const defense=Math.max(0,Number(value)||0);return 100*defense/(100+defense)};
  const defenseText=value=>reduction(value).toLocaleString('pt-BR',{minimumFractionDigits:1,maximumFractionDigits:1})+'%';
  // Match the Arena index without equipment and compare births at the same level.
- function rawPotential(m,L,star){
+ function rawPotential(m,L,star,mega=null){
   const base=baseStats(L,star,true);
   const powerAt100=variant=>{const a=stats(base,variant,100);return a.hp+a.atk+a.spell+a.armor+a.mr};
   const withIVs=(iv,potency,shiny)=>({...m,ivs:Object.fromEntries(keys.map(k=>[k,iv])),potency,shiny});
   const low=powerAt100(withIVs(0,1,false)),high=powerAt100(withIVs(31,5,true));
-  return high>low?10*Math.max(0,Math.min(1,(powerAt100(m)-low)/(high-low))):0;
+  // Keep the base species reference so the Mega's actual gain is visible.
+  // Applying the same multipliers to both endpoints would cancel that gain.
+  const actual=stats(base,m,100),ratios=mega?.stats||{};
+  const value=actual.hp+actual.atk*(ratios.atk??1)+actual.spell*(ratios.spell??1)+actual.armor*(ratios.armor??1)+actual.mr*(ratios.mr??1);
+  return high>low?10*Math.max(0,Math.min(1,(value-low)/(high-low))):0;
  }
  function potentialScore(m){
   const L=typeof LINES==='undefined'?null:LINES.find(l=>l.names[0]===m.name);if(!L)return 0;
@@ -41,8 +45,9 @@ window.IDLE_INDIVIDUALS=(()=>{
    const id=L.ids[star-1];if(!id||id===last)continue;
    score=Math.max(rawPotential(m,L,star),last===null?0:score+.1);last=id
   }
-  const mega=window.IDLE_MEGA_DEFS?.some(d=>d.key===m.megaKey&&d.id===last);
-  return Math.min(10,Math.max(score,Number(m.evolutionRatingFloor)||0)+(mega ? .1 : 0));
+  const mega=window.IDLE_MEGA_DEFS?.find(d=>d.key===m.megaKey&&d.id===last);
+  const floor=Math.max(score,Number(m.evolutionRatingFloor)||0);
+  return Math.min(10,mega?Math.max(rawPotential(m,L,m.star,mega),floor+.1):floor);
  }
 
  function quality(m){return 'P'+power(m).tier}
