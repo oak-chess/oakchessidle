@@ -1098,12 +1098,68 @@
       const bars=make('div','layout-bars'),live=typeof B!=='undefined'&&B.on?B.units.find(u=>u._idleId===m.id || u._idleMember===m.id):null;
       bars.append(meter('PS',live?live.hp/live.maxHp:m.condition??1),meter('XP',(m.xp||0)/IDLE_XP.need(m.level)));b.append(words,bars);b.dataset.memberId=m.id;return b;
     }
+    const immersiveTeams=make('div','layout-immersive-teams');
+    const immersiveSides=[0,1].map(side=>{
+      const panel=make('section','layout-immersive-team '+(side?'opponents':'allies'));
+      panel.setAttribute('aria-label',side?'Equipe adversária':'Sua equipe em campo');
+      const heading=make('h2','',side?'ADVERSÁRIOS':'SUA EQUIPE'),list=make('div','layout-immersive-roster');
+      panel.append(heading,list);immersiveTeams.append(panel);return {panel,list,rows:new Map()};
+    });
+    arena.append(immersiveTeams);
+    const defeatFeed=make('div','layout-defeat-feed');defeatFeed.setAttribute('aria-label','Derrotas do combate');arena.append(defeatFeed);
+    const defeatNotices=[];
+    window.addEventListener('idle-combat-defeat',event=>{
+      if(!layout.classList.contains('layout-immersive')||window.IDLE_ARENA_ECONOMY||document.hidden)return;
+      const {attacker,defender}=event.detail||{};if(!defender)return;
+      const row=make('div','layout-defeat-entry');
+      const identity=u=>{const member=state.team.find(m=>m.id===u?._idleId||m.id===u?._idleMember);return member?{name:IDLE_PMD_PORTRAITS.identity(member,LINES).name,src:IDLE_PMD_THUMBNAIL.member(member,LINES,sprFront(u.id))}:{name:u?.name||'Efeito de combate',src:u?IDLE_PMD_THUMBNAIL.source(u.id,!!u.shiny,u.idleForm||0,IDLE_PMD_THUMBNAIL.fromLegacy(sprFront(u.id))):null}};
+      for(const [unit,kind]of [[attacker,'winner'],[defender,'defeated']]){
+        const data=identity(unit),part=make('span','layout-defeat-'+kind);if(data.src){const img=make('img');img.src=data.src;img.alt='';part.append(img)}part.append(make('b','',data.name));
+        if(kind==='defeated')row.append(make('span','layout-defeat-arrow','›'));row.append(part);
+      }
+      row.setAttribute('aria-label',(attacker?.name||'Efeito de combate')+' derrotou '+defender.name);
+      defeatNotices.push({row,until:performance.now()+5500});defeatFeed.prepend(row);
+      while(defeatNotices.length>4)defeatNotices.shift().row.remove();
+    });
+    function refreshDefeatFeed(){
+      const visible=layout.classList.contains('layout-immersive')&&!window.IDLE_ARENA_ECONOMY&&state.world?.location==='field';
+      const now=performance.now();for(let i=defeatNotices.length-1;i>=0;i--)if(!visible||defeatNotices[i].until<=now){defeatNotices[i].row.remove();defeatNotices.splice(i,1)}
+      defeatFeed.hidden=!visible||!defeatNotices.length;
+    }
+
+    function refreshImmersiveTeams(active){
+      const visible=layout.classList.contains('layout-immersive')&&!window.IDLE_ARENA_ECONOMY&&state.world?.location==='field'&&!document.body.matches('.idle-center-view,.rv-native-open');
+      immersiveTeams.hidden=!visible;if(!visible)return;
+      const units=typeof B!=='undefined'?B.units:[];
+      for(const side of [0,1]){
+        const entries=side?units.filter(u=>u.side===1).map(u=>({key:u.key,u})):active.map(m=>({key:m.id,m,u:units.find(u=>u.side===0&&(u._idleId===m.id||u._idleMember===m.id))}));
+        const group=immersiveSides[side],keep=new Set(entries.map(e=>String(e.key)));
+        for(const [key,row]of group.rows)if(!keep.has(key)){row.remove();group.rows.delete(key)}
+        for(const entry of entries){
+          const {m,u}=entry,key=String(entry.key),name=m?IDLE_PMD_PORTRAITS.identity(m,LINES).name:u.name||u.L?.names[(u.star||1)-1]||'Pokémon';
+          let row=group.rows.get(key);
+          if(!row){row=make('div','layout-immersive-member');const image=make('img'),words=make('div'),label=make('b'),level=make('small'),health=meter('PS',1);image.alt='';words.append(label,level,health);row.append(image,words);group.rows.set(key,row);group.list.append(row)}
+          const image=row.firstChild,words=row.lastChild,src=m?IDLE_PMD_THUMBNAIL.member(m,LINES,sprFront(u?.id||LINES.find(l=>l.names[0]===m.name)?.ids[m.star-1])):IDLE_PMD_THUMBNAIL.source(u.id,!!u.shiny,u.idleForm||0,IDLE_PMD_THUMBNAIL.fromLegacy(sprFront(u.id)));
+          if(image.getAttribute('src')!==src)image.src=src;
+          if(words.children[0].textContent!==name)words.children[0].textContent=name;
+          const level='Nv. '+(m?.level||u?._idleLevel||1);
+          const ratio=u?(u.alive===false?0:u.hp/Math.max(1,u.maxHp)):m?.condition??1,percent=Math.round(Math.max(0,Math.min(1,ratio))*100),health=words.children[2];
+          if(health.dataset.percent!==String(percent)){health.dataset.percent=String(percent);health.firstChild.style.width=percent+'%';health.lastChild.textContent='PS '+percent+'%'}
+          const statusText=level+' · PS '+percent+'%';if(words.children[1].textContent!==statusText)words.children[1].textContent=statusText;
+          row.classList.toggle('fainted',percent===0);
+        }
+        let empty=group.list.querySelector('.layout-immersive-empty');
+        if(!entries.length&&!empty){empty=make('p','layout-immersive-empty',side?'Aguardando encontro':'Nenhum Pokémon em campo');group.list.append(empty)}else if(entries.length)empty?.remove();
+      }
+    }
     let last='',lastFarm='',lastTrainer='',lastCombat='',lastEconomyUpdate=0,feed=[];
     function refresh(){
       syncSound();
       positionArenaOverlays();
       refreshItems.forEach(update=>update());
       const members=state.team,active=members.filter(m=>m.pos?.z==='b'),reserve=members.filter(m=>m.pos?.z==='n').sort((a,b)=>a.pos.i-b.pos.i);
+      refreshImmersiveTeams(active);
+      refreshDefeatFeed();
       for(const m of active)trackGain('field:'+m.id,m.level,m.xp||0);
       const data=JSON.stringify(members.map(m=>[m.id,m.name,m.level,m.star,m.xp,m.condition,m.shiny,m.megaKey,m.pos,typeof B!=='undefined'&&B.on?Math.round(B.units.find(u=>u._idleId===m.id || u._idleMember===m.id)?.hp||0):0]));
       if(data!==last){

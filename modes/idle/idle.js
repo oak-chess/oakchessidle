@@ -3,6 +3,7 @@
 const ONLINE=!!window.OAK_ONLINE_SNAPSHOT;let serverHunts,preparedHuntReplay;
 const onlinePresentation=window.createHuntPresentation({
  units:()=>B.units,update:updateCUEl,
+ defeat:(attacker,defender)=>window.dispatchEvent(new CustomEvent('idle-combat-defeat',{detail:{attacker,defender}})),
  attack:(u,t)=>{if(window.IDLE_ARENA_ECONOMY)return;lunge(u,t,u.range<=1?18:8);PMD.playNames(u.el,u.range<=1?PMD.MELEE:PMD.RANGED,true);if(u.range>1)FX.shoot(u.x,cyOf(u),t,u.types[0],520,.8,()=>{});},
  cast:(u,t,index)=>{
   if(window.IDLE_ARENA_ECONOMY)return;

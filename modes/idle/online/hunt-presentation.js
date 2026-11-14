@@ -15,7 +15,7 @@ window.createHuntPresentation=function(api){
    u.frozen=!!p[14];u.burn=p[15]?{}:null;u.pois=p[16]?{}:null;
    if(u.el){u.el.style.left='';u.el.style.top='';api.update(u);}
    if(!u.alive&&first&&u.el)u.el.style.display='none';
-   if(!u.alive&&wasAlive&&!first){u.moving=false;api.faint(u);}
+   if(!u.alive&&wasAlive&&!first){u.moving=false;const lastHit=events.filter(e=>e.k==='hit'&&e.b===i).at(-1);api.defeat?.(lastHit?units[lastHit.a]:null,u);api.faint(u);}
   });
   // Events are passed once, even when several rendering ticks share one server frame.
   for(const e of events){const a=units[e.a],b=units[e.b];
