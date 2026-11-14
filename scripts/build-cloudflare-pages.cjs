@@ -3,7 +3,8 @@ const fs = require('node:fs');
 const path = require('node:path');
 
 const root = path.resolve(__dirname, '..');
-const output = path.join(root, '_cloudflare');
+const workingTree = process.argv.includes('--working-tree');
+const output = path.join(root, workingTree ? 'output/cloudflare-review' : '_cloudflare');
 const spritePrefix = 'assets/pmd/sprite/';
 const onlineFiles = new Set(['index.html', 'config.js', 'online.js', 'chat-client.mjs', 'hunt-client.mjs', 'server-journey.js', 'hunt-presentation.js', 'native-hunts.js', 'beta-policy.js',
   'home.html', 'home.css', 'home.js', 'contacts-ui.mjs', 'chat.css', 'private-chat.mjs', 'verification.mjs', 'new-conversation.mjs', 'game-entry.html', 'game-entry.js']);
@@ -14,6 +15,7 @@ const tracked = execFileSync('git', ['ls-files', '-z'], { cwd: root, encoding: '
 const modified = new Set(execFileSync('git', ['diff', 'HEAD', '--name-only', '-z'], {
   cwd: root, encoding: 'utf8', maxBuffer: 16 * 1024 * 1024
 }).split('\0').filter(Boolean));
+if (workingTree && !tracked.includes('modes/idle/fishing/cast-rules.mjs')) tracked.push('modes/idle/fishing/cast-rules.mjs');
 const files = tracked.filter(file =>
   !file.startsWith(spritePrefix) &&
   (!file.startsWith('modes/idle/rankings/') || rankingFiles.has(file.slice('modes/idle/rankings/'.length))) &&
@@ -23,7 +25,7 @@ const files = tracked.filter(file =>
 // Fail the deployment instead of silently serving the home page for a missing script.
 const published = new Set(files);
 for (const entry of ['index.html', 'modes/idle/index.html']) {
-  const html = modified.has(entry)
+  const html = !workingTree && modified.has(entry)
     ? execFileSync('git', ['show', 'HEAD:' + entry], {cwd: root, encoding: 'utf8', maxBuffer: 4 * 1024 * 1024})
     : fs.readFileSync(path.join(root, entry), 'utf8');
   for (const match of html.matchAll(/<script\b[^>]*\bsrc=["']([^"']+)["']/g)) {
@@ -43,7 +45,7 @@ if (fs.existsSync(output)) throw new Error('Remove the previous _cloudflare buil
 for (const file of files) {
   const target = path.join(output, file);
   fs.mkdirSync(path.dirname(target), { recursive: true });
-  if (modified.has(file)) {
+  if (!workingTree && modified.has(file)) {
     fs.writeFileSync(target, execFileSync('git', ['show', 'HEAD:' + file], {
       cwd: root, maxBuffer: 32 * 1024 * 1024
     }));
@@ -51,7 +53,7 @@ for (const file of files) {
     fs.copyFileSync(path.join(root, file), target);
   }
 }
-const release = execFileSync('git', ['rev-parse', 'HEAD'], { cwd: root, encoding: 'utf8' }).trim();
+const release = (workingTree ? 'review-' : '') + execFileSync('git', ['rev-parse', 'HEAD'], { cwd: root, encoding: 'utf8' }).trim();
 const shell = fs.readFileSync(path.join(output, 'index.html'), 'utf8');
 const updateNotice = fs.readFileSync(path.join(__dirname, 'pages-update-notice.js'), 'utf8');
 fs.writeFileSync(path.join(output, 'game-shell.txt'), shell.replace(/<\/body>/i,

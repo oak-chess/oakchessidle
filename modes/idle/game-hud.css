@@ -550,3 +550,180 @@ body.idle-rocket-runtime-open .layout-arena > :not(#vp) {visibility:hidden;point
 .layout-trainer-buff>span {flex:1;min-width:0;line-height:1.3}
 .layout-trainer-buff>small {flex:none;color:#e5f6fa;font-variant-numeric:tabular-nums}
 .layout-trainer-buff .is-benefit-art {display:block;flex:0 0 22px;width:22px;height:13px;background-image:url('assets/vip/boost-illustrations.webp');background-repeat:no-repeat;background-size:139.568px 87.296px}
+
+/* The visible HUD mirrors the actual hunt control, including its server phase. */
+.layout-arena > .layout-explore{padding-bottom:16px;min-height:48px}
+.layout-explore-status{position:absolute;bottom:4px;left:8px;right:8px;font:600 10px/1 Arial,sans-serif;text-align:center;color:#aed9e4;white-space:nowrap;pointer-events:none}
+.layout-explore[data-hunt-state="running"] .layout-explore-status{color:#7ee5b1}
+.layout-explore[data-hunt-state="waiting"] .layout-explore-status{color:#ffdb84}
+.layout-explore:disabled{cursor:wait;filter:saturate(.65)}
+
+/* Keep the action and its current phase readable without shifting the arena. */
+.layout-arena > .layout-explore {
+  display:grid;
+  grid-template-columns:32px minmax(0, 1fr);
+  grid-template-areas:"indicator command" "indicator phase";
+  gap:2px 10px;
+  align-items:center;
+  width:190px;
+  min-height:52px;
+  padding:6px 14px 6px 10px;
+}
+.layout-explore > .layout-explore-indicator {grid-area:indicator}
+.layout-explore > span {grid-area:command}
+.layout-explore > .layout-explore-status {
+  grid-area:phase;
+  position:static;
+  white-space:normal;
+  line-height:1.15;
+}
+
+.layout-arena > .layout-explore {
+  --phase-color:#89ecfb;
+  --phase-bg:#214c61;
+  background:linear-gradient(135deg,var(--phase-color),#132f40 65%,var(--phase-color));
+}
+.layout-arena > .layout-explore::before,
+.layout-arena > .layout-explore:is(:hover,:focus-visible)::before {
+  background:linear-gradient(120deg,var(--phase-bg),#071e2b 75%);
+}
+.layout-arena > .layout-explore:focus-visible {filter:brightness(1.35)}
+.layout-explore::after {background:var(--phase-color)}
+.layout-explore .layout-explore-status {color:var(--phase-color)}
+.layout-explore-indicator {
+  display:grid;
+  place-items:center;
+  width:28px;
+  height:28px;
+  color:var(--phase-color);
+  border:1px solid currentColor;
+  border-radius:50%;
+}
+.layout-explore-indicator::before {content:"▶";font:700 13px/1 system-ui}
+.layout-arena > .layout-explore[data-hunt-phase="combat"] {
+  --phase-color:#ffad86;
+  --phase-bg:#663329;
+  clip-path:polygon(12px 0,calc(100% - 12px) 0,100% 50%,calc(100% - 12px) 100%,12px 100%,0 50%);
+}
+.layout-explore[data-hunt-phase="combat"] .layout-explore-indicator {position:relative;border-color:transparent}
+.layout-explore[data-hunt-phase="combat"] .layout-explore-indicator::before {content:"Ⅱ"}
+.layout-explore[data-hunt-phase="combat"] .layout-explore-indicator::after {
+  content:"";
+  position:absolute;
+  inset:0;
+  border:2px solid currentColor;
+  border-right-color:transparent;
+  border-radius:50%;
+  animation:hunt-ring .9s linear infinite;
+}
+@keyframes hunt-ring {to {transform:rotate(1turn)}}
+.layout-arena > .layout-explore[data-hunt-phase="resume"] {--phase-color:#97efbb;--phase-bg:#245541;border-radius:24px;clip-path:none}
+.layout-explore[data-hunt-phase="resume"] .layout-explore-indicator::before {content:"↻"}
+.layout-arena > .layout-explore[data-hunt-phase="waiting"] {--phase-color:#ffdb84;--phase-bg:#584521;border-radius:6px;clip-path:none}
+.layout-explore[data-hunt-phase="waiting"] .layout-explore-indicator::before {content:"…"}
+.layout-arena > .layout-explore[data-hunt-phase="loading"] {--phase-color:#b0c8ff;--phase-bg:#304675;clip-path:polygon(0 0,calc(100% - 14px) 0,100% 14px,100% 100%,14px 100%,0 calc(100% - 14px))}
+.layout-explore[data-hunt-phase="loading"] .layout-explore-indicator::before {content:"⌕"}
+.layout-arena > .layout-explore[data-hunt-phase="settling"] {--phase-color:#ffe39c;--phase-bg:#514828;border-radius:12px 12px 2px 2px;clip-path:none}
+.layout-explore[data-hunt-phase="settling"] .layout-explore-indicator::before {content:"✓"}
+.layout-arena > .layout-explore[data-hunt-phase="captures"] {--phase-color:#efb9ff;--phase-bg:#58376e;border-radius:4px 22px;clip-path:none}
+.layout-explore[data-hunt-phase="captures"] .layout-explore-indicator::before {content:"◎"}
+.layout-arena > .layout-explore[data-hunt-phase="next"] {--phase-color:#a0e7da;--phase-bg:#245555;clip-path:polygon(0 0,calc(100% - 14px) 0,100% 50%,calc(100% - 14px) 100%,0 100%)}
+.layout-explore[data-hunt-phase="next"] .layout-explore-indicator::before {content:"››"}
+@media (prefers-reduced-motion:reduce) {
+  .layout-explore[data-hunt-phase="combat"] .layout-explore-indicator::after {animation:none}
+}
+
+.layout-arena > .layout-explore[hidden] {display:none}
+
+.layout-item-tiles .layout-button {position:relative}
+.layout-item-consumption {
+  display:none;
+  position:absolute;
+  z-index:2;
+  top:3px;
+  left:50%;
+  transform:translateX(-50%);
+  padding:2px 4px;
+  border:1px solid #ff8ea4;
+  border-radius:4px;
+  background:#611d32;
+  color:#fff;
+  font:800 11px/1 system-ui;
+  white-space:nowrap;
+  pointer-events:none;
+}
+.layout-item-tiles .layout-item-spent .layout-item-consumption {display:block}
+.layout-item-tiles .layout-item-spent {border-color:#ff8ea4;opacity:1}
+@media (prefers-reduced-motion:no-preference) {
+  .layout-item-spent .layout-item-consumption {animation:layout-spent-pop .22s ease-out}
+  @keyframes layout-spent-pop {from {transform:translateX(-50%) scale(.75)}}
+}
+
+.layout-item-reserves {display:grid;gap:4px;max-height:220px;overflow:auto;padding:5px 3px;font-size:12px}
+.layout-item-reserves p {margin:2px 0;color:#b4cbd5}
+.layout-item-reserves label {display:grid;grid-template-columns:1fr 66px;align-items:center;gap:6px}
+.layout-item-reserves input {width:100%;min-width:0;background:#0b2430;color:#e7faff;border:1px solid #537b8c;border-radius:4px;padding:3px}
+
+/* Keep the shop shortcuts outside the automation scroll area. */
+.layout-right {overflow:hidden}
+.layout-right > .layout-auto {
+  display:flex;
+  flex-direction:column;
+  flex:0 1 auto;
+  min-height:0;
+}
+.layout-auto > details {display:flex;flex-direction:column;min-height:0}
+.layout-auto > details > summary {flex:none}
+.layout-auto > details[open] > .layout-auto-body {
+  overflow:auto;
+  min-height:0;
+  overscroll-behavior:contain;
+  scrollbar-width:thin;
+  scrollbar-color:#327182 transparent;
+  gap:6px;
+}
+.layout-auto .layout-auto-more > summary {padding-block:6px}
+.layout-right > .layout-links {flex:none}
+@media (max-width:800px) {
+  .layout-right > .layout-auto {max-height:65dvh}
+}
+
+.layout-auto-navigation {display:flex;flex:none;flex-wrap:wrap;gap:4px;padding:2px 1px 4px}
+.layout-auto-navigation .layout-button {flex:1 0 auto;min-height:27px;padding:3px 5px;font-size:11px}
+.layout-auto-navigation .layout-button[aria-pressed="true"] {border-color:#67eaff;background:#164755}
+.layout-auto > details[open] > .layout-auto-body {padding-top:4px}
+.layout-auto-page {display:grid;gap:6px}
+.layout-auto-body > [hidden] {display:none}
+.layout-auto-body > .layout-item-reserves {max-height:none;overflow:visible}
+@media (min-width:1050px) {
+  .layout-auto > details[open] > summary {margin-bottom:calc(var(--layout-auto-shoulder) - 34px)}
+}
+
+.layout-arena-mini > .layout-hunt-status {position:absolute;right:calc(100% + 5px);top:0;z-index:5}
+.layout-hunt-status > summary {width:40px;height:38px;list-style:none;cursor:pointer}
+.layout-hunt-status > summary::-webkit-details-marker {display:none}
+.layout-hunt-status > summary svg {width:21px;height:21px;fill:none;stroke:var(--ice);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.layout-hunt-status-panel {position:absolute;right:-90px;bottom:calc(100% + 7px);width:min(220px,55vw);max-height:32vh;overflow:auto;padding:9px;background:#0b2331;border:1px solid #5895ab;border-radius:6px;font-size:12px}
+.layout-hunt-status-panel p {margin:5px 0}
+.layout-arena-mini .layout-hunt-status-panel button {width:100%;height:auto;min-height:28px;margin-top:3px}
+.layout-arena-mini .layout-hunt-status-panel span {font-size:inherit}
+body:is(.idle-center-view,.rv-native-open) .layout-arena-mini > .layout-hunt-status {display:none}
+
+.layout-hunt-status-panel > b:not(:first-child) {display:block;margin-top:7px;padding-top:7px;border-top:1px solid #416674}
+.layout-hunt-supply-usage {list-style:none;margin:5px 0 0;padding:0;display:grid;gap:4px}
+.layout-hunt-supply-usage li {display:flex;align-items:center;gap:5px}
+.layout-hunt-supply-usage img {width:18px;height:18px;object-fit:contain;image-rendering:pixelated}
+.layout-hunt-supply-usage strong {margin-left:auto;color:var(--ice)}
+
+.layout-reserve-item {display:flex;align-items:center;gap:5px;min-width:0}
+.layout-reserve-item img {width:16px;height:16px;flex:none;object-fit:contain;image-rendering:pixelated}
+
+.layout-hunt-status > .layout-reserve-alert {position:relative;border-color:#ffbf69;background:#51351d}
+.layout-reserve-alert::after {content:"";position:absolute;top:4px;right:4px;width:7px;height:7px;border-radius:50%;background:#ffbf69}
+
+.layout-reserve-feedback:not(:empty) {padding:4px 6px;border-left:2px solid currentColor;color:#b4e5f0;line-height:1.25}
+.layout-reserve-feedback[data-kind="success"] {color:#8af0b9}
+.layout-reserve-feedback[data-kind="pending"] {color:#ffe29a}
+.layout-reserve-feedback[data-kind="error"] {color:#ffacb7}
+
+.layout-item-reserves button[data-saved="true"] {color:#a5f5c7;border-color:#60c695;background:#143d33}

@@ -1,10 +1,10 @@
 /* Replays server positions inside the existing arena. It never decides an outcome. */
 window.createServerHunts=function(ctx){
  const bridge=window.IDLE_SERVER_JOURNEY;
- let pending=null,requestId=null,checkpointPlayback=null,abandoning=false;
+ let pending=null,requestId=null,checkpointPlayback=null,abandoning=false,phase='idle';
  const wait=ms=>new Promise(resolve=>setTimeout(resolve,ms));
  async function execute(){
-  const challenge=ctx.challenge();
+  phase='loading';const challenge=ctx.challenge();
   if(challenge&&challenge.kind!=='boss')throw Error('Este modo ainda não está ligado à economia online. Use as caçadas disponíveis.');
   await bridge.syncPreferences(ctx.state);
   if(!bridge.snapshot.activeHunt&&!requestId){
@@ -15,11 +15,18 @@ window.createServerHunts=function(ctx){
   if(abandoning)return;
   const prepared=!ctx.running()&&!!ctx.preview;
   if(prepared){
-   ctx.preview(encounter.replay);
+   phase='prepared';ctx.preview(encounter.replay);
    while(!ctx.running()&&!abandoning)await wait(200);
    if(abandoning)return;
   }
-  ctx.show(encounter.replay);
+  // A drag made during preparation must not start an older team's replay.
+  const current=ctx.state.team?.filter(m=>m.pos?.z==='b').map(m=>[m.id,m.pos.r,m.pos.c]).sort((a,b)=>a[0].localeCompare(b[0]));
+  const expected=encounter.replay.snapshot.allies.map((m,i)=>[m.id,m.pos?.r??5+Math.floor(i/3),m.pos?.c??[1,3,5][i%3]]).sort((a,b)=>String(a[0]).localeCompare(String(b[0])));
+  if(current&&JSON.stringify(current)!==JSON.stringify(expected)){
+   await bridge.abandon();requestId=null;await bridge.syncOrganization(ctx.state);return execute();
+  }
+  if(!encounter.settled)ctx.recovery?.(encounter.usedSupplies,encounter.id);
+  phase='combat';ctx.show(encounter.replay);
   const frames=encounter.replay.frames,elapsedMs=encounter.replay.elapsedMs;
   const resumed=prepared?0:Math.max(0,elapsedMs-encounter.remainingMs),start=performance.now();let index=0,lastIndex=-1;
   // Resuming must not replay old damage/attack effects in a single burst.
@@ -55,7 +62,7 @@ window.createServerHunts=function(ctx){
   }
   if(abandoning)return;
   if(ctx.running()&&!document.hidden){ctx.frame(frames.at(-1),frames.slice(lastIndex+1).flatMap(f=>f.e||[]));}
-  let settled;
+  phase='settling';let settled;
   for(let retry=0;retry<4;retry++){
    try{settled=await bridge.request({action:'finish',huntId:encounter.id});break;}
    catch(error){if(retry===3||!error.message.includes('andamento'))throw error;await wait(750);}
@@ -65,7 +72,7 @@ window.createServerHunts=function(ctx){
   storage?.removeItem(checkpointKey);
   await ctx.finish(settled,encounter.usedSupplies);
   if(encounter.route.endsWith(':gym')){ctx.complete?.();return;}
-  const last=frames.at(-1),offset=encounter.replay.snapshot.allies.length;
+  phase='captures';const last=frames.at(-1),offset=encounter.replay.snapshot.allies.length;
   for(const [index,enemy] of encounter.replay.snapshot.enemies.entries()){
    if(last.u[offset+index][3])continue;
    await ctx.capture(enemy,async ball=>{
@@ -75,17 +82,27 @@ window.createServerHunts=function(ctx){
   }
   ctx.complete?.();
  }
- return {get busy(){return !!pending||abandoning},checkpoint(){checkpointPlayback?.();},async abandon(){
+ async function editOrganization(slots){
   if(abandoning)throw Error('Aguarde a troca de caçada.');
+  ctx.pauseEditing?.();
   abandoning=true;
+  let snapshot;
   try{
    await pending?.catch(()=>{});
-   const snapshot=await bridge.abandon();
+   snapshot=await bridge.abandon();
    requestId=null;
-   ctx.apply(snapshot);
+   if(slots)snapshot=await bridge.organize(ctx.state,slots);
+   (ctx.reset||ctx.apply)(snapshot);
+  }catch(error){
+   // Cancellation may succeed before saving the new positions fails. In that
+   // case discard the draft/old replay and display the last confirmed roster.
+   if(snapshot)(ctx.reset||ctx.apply)(snapshot);
+   throw error;
   }finally{abandoning=false;}
- },run(){
+ }
+ bridge.setOrganizationEditor?.(editOrganization);
+ return {get phase(){return abandoning?'editing':phase},get busy(){return !!pending||abandoning},checkpoint(){checkpointPlayback?.();},abandon:()=>editOrganization(null),run(){
   if(pending)return pending;
-  pending=execute().finally(()=>{pending=null;checkpointPlayback=null;});return pending;
+  pending=execute().finally(()=>{pending=null;checkpointPlayback=null;phase='idle';});return pending;
  }};
 };

@@ -221,7 +221,10 @@
     const banner=make('div','layout-hunt'),status=make('div','layout-log'),controls=make('div','layout-arena-tools');
     const action=button('Explorar',proxy('#combatbtn'));
     action.classList.add('layout-explore');
-    action.prepend(make('i','layout-nav-art layout-nav-hunts'));
+    const indicator=make('i','layout-explore-indicator');
+    indicator.setAttribute('aria-hidden','true');
+    action.prepend(indicator);
+    const actionStatus=make('small','layout-explore-status');action.append(actionStatus);
     const economyInfo=card('','layout-economy-info');
     economyInfo.hidden=true;
     const economyStatus=make('small','','Preparação da equipe');
@@ -739,7 +742,25 @@
     captureCount.setAttribute('aria-hidden','true');
     captureButton.append(captureCount);
     mini.append(captureButton,button('Registro',quick('Registro'),icons('report')),button('Recompensas',quick('Recompensas'),icons('rewards')),zoom);
-    mini.append(synergies);
+    const huntStatus=make('details','layout-hunt-status');
+    const statusToggle=make('summary','layout-button');
+    statusToggle.title='Avisos de suprimentos';
+    statusToggle.setAttribute('aria-label',statusToggle.title);
+    statusToggle.innerHTML='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12h5l3-7 4 14 3-7h5"/></svg>';
+    const statusPanel=make('div','layout-hunt-status-panel');
+    const supplyWarnings=make('div');
+    let previousReserves;
+    const supplyUsage=make('ul','layout-hunt-supply-usage');
+    huntStatus.append(statusToggle,statusPanel);
+    statusPanel.append(make('b','','Avisos de suprimentos'),supplyWarnings,make('b','','Gastos da sessão'),supplyUsage);
+    huntStatus.addEventListener('keydown',event=>{
+      if(event.key==='Escape'&&huntStatus.open){
+        event.stopPropagation();
+        huntStatus.open=false;
+        statusToggle.focus();
+      }
+    });
+    mini.append(synergies,huntStatus);
     const benefits=make('div','layout-arena-benefits');
     arena.append(vp,banner,controls,status,mini,action,benefits);center.append(nav,arena,economyInfo);
     economy.setAttribute('aria-pressed','false');
@@ -808,7 +829,16 @@
     syncSceneModes();
     window.dispatchEvent(new Event('resize'));
 
-    const refreshItems=[];
+    let openReserves;
+    const refreshItems=[],recoveryTiles=new Map();
+    let lastRecoveryEncounter;
+    window.addEventListener('idle-hunt-recovery',({detail})=>{
+      if(detail.id===lastRecoveryEncounter)return;
+      lastRecoveryEncounter=detail.id;
+      for(const [id,count] of Object.entries(detail.used||{})){
+        if(count>0)recoveryTiles.get(id)?.(count);
+      }
+    });
     function buildAutomation(){
       const raw=make('div'),shiny=make('div'),recovery=make('div'),expedition=make('div');
       automation.captureSettings(raw,false,{compact:true});automation.captureSettings(shiny,true,{compact:true});
@@ -835,14 +865,31 @@
           },item(entry.sprite));
           const stock=make('small','layout-item-stock');
           stock.setAttribute('aria-hidden','true');
-          tile.replaceChildren(one('img',tile),stock);
+          const consumption=make('small','layout-item-consumption');
+          consumption.setAttribute('aria-hidden','true');
+          tile.replaceChildren(one('img',tile),stock,consumption);
           tile.disabled=option.disabled;
+          let consumptionTimer;
+          let pendingConsumption=0;
+          function showConsumption(amount){
+            pendingConsumption+=amount;
+            consumption.textContent='−'+fmt(pendingConsumption);
+            tile.classList.add('layout-item-spent');
+            clearTimeout(consumptionTimer);
+            consumptionTimer=setTimeout(()=>{
+              tile.classList.remove('layout-item-spent');
+              pendingConsumption=0;
+            },2400);
+          }
+          if(!isBall)recoveryTiles.set(id,showConsumption);
           function update(){
             const count=catalog===items.balls?items.stock(state,id):state.hunts.supplies[id]||0;
             const pressed=String(selected()===id);
             if(tile.getAttribute('aria-pressed')!==pressed)tile.setAttribute('aria-pressed',pressed);
-            if(tile.dataset.stock===String(count))return;
+            const previous=tile.dataset.stock;
+            if(previous===String(count))return;
             tile.dataset.stock=String(count);
+            if((isBall||!window.IDLE_SERVER_JOURNEY?.snapshot)&&previous!==undefined&&count<Number(previous))showConsumption(Number(previous)-count);
             stock.textContent=count>999?'999+':count;
             tile.title=entry.name+' · Estoque: '+fmt(count)+' · '+entry.description;
             tile.setAttribute('aria-label',entry.name+', estoque '+fmt(count));
@@ -897,25 +944,110 @@
       updateThreshold();
       slider.onchange=()=>{if(value){value.value=slider.value;value.dispatchEvent(new Event('change',{bubbles:true}))}};
       const threshold=make('label','layout-threshold');threshold.append(make('span','','Iniciar cura com PS abaixo de'),slider,output);
-      autoBody.append(
-        capture,
-        take(raw,'normalBall','Bola (normal)'),
-        take(shiny,'shinyBall','Bola (shiny)'),
-        take(recovery,'healItem','Item de cura'),
-        take(recovery,'reviveItem','Item para reviver'),
-        make('hr'),heal,revive,threshold,make('hr'),
-        take(expedition,'autoAdvance','Avançar após 3 vitórias'),
-        take(recovery,'afterDefeat','Continuar após derrota')
-      );
-      const more=make('details','layout-auto-more'),options=make('div','layout-auto-options');
+      const capturePanel=make('section','layout-auto-page');
+      capturePanel.append(capture,take(raw,'normalBall','Bola (normal)'),take(shiny,'shinyBall','Bola (shiny)'));
+      const recoveryPanel=make('section','layout-auto-page');
+      recoveryPanel.append(heal,take(recovery,'healItem','Item de cura'),
+        revive,take(recovery,'reviveItem','Item para reviver'),threshold);
+      const reserveForm=make('form','layout-item-reserves');
+      reserveForm.append(make('p','','O jogo para de usar o item ao atingir sua reserva.'));
+      const reserveInputs=new Map();
+      for(const [id,entry] of Object.entries({...items.balls,...items.healing,...items.reviving})){
+        if(id==='master')continue;
+        const row=make('label');
+        const input=make('input');
+        input.type='number';input.min='0';input.max='999999';input.step='1';input.required=true;
+        const name=make('span','layout-reserve-item',entry.name);
+        const icon=make('img');
+        icon.src=item(entry.sprite);
+        icon.alt='';
+        name.prepend(icon);
+        row.append(name,input);
+        reserveInputs.set(id,input);
+        reserveForm.append(row);
+      }
+      const reserveStatus=make('small','layout-reserve-feedback');
+      reserveStatus.setAttribute('role','status');
+      function showReserveFeedback(kind,message){
+        reserveStatus.dataset.kind=kind;
+        reserveStatus.textContent=message;
+      }
+      const saveReserves=make('button','layout-button','Salvar reservas');
+      saveReserves.type='submit';
+      for(const [id,input] of reserveInputs)input.value=state.hunts.supplies.itemReserves?.[id]??0;
+      reserveForm.addEventListener('input',()=>{
+        delete saveReserves.dataset.saved;
+        saveReserves.textContent='Salvar reservas';
+        showReserveFeedback('pending','Alterações ainda não salvas.');
+      });
+      reserveForm.addEventListener('submit',async event=>{
+        event.preventDefault();
+        if(saveReserves.disabled)return;
+        const bridge=window.IDLE_SERVER_JOURNEY;
+        const saved=bridge.snapshot?.profile?.preferences?.itemReserves||{};
+        const draft=Object.fromEntries([...reserveInputs].map(([id,input])=>[id,input.valueAsNumber]));
+        const changed=Object.keys(draft).filter(id=>draft[id]!== (saved[id]??0));
+        if(!changed.length){
+          saveReserves.dataset.saved='true';
+          saveReserves.textContent='✓ Reservas salvas';
+          showReserveFeedback('info','Nenhuma alteração. As reservas atuais já estão salvas.');
+          return;
+        }
+        const previous=state.hunts.supplies.itemReserves;
+        state.hunts.supplies.itemReserves=draft;
+        saveReserves.disabled=true;
+        saveReserves.textContent='Salvando…';
+        for(const input of reserveInputs.values())input.readOnly=true;
+        showReserveFeedback('pending','Aguardando confirmação do servidor.');
+        try{
+          await bridge.syncPreferences(state);
+          saveReserves.dataset.saved='true';
+          showReserveFeedback('success',changed.length===1?'1 reserva atualizada.':changed.length+' reservas atualizadas.');
+        }catch(error){
+          state.hunts.supplies.itemReserves=previous;
+          showReserveFeedback('error',error.message==='Preferência inválida.'
+            ?'O servidor precisa da atualização de reservas. Seus valores continuam no formulário.'
+            :'Falha ao salvar. Seus valores continuam no formulário. '+(error.message||'Tente de novo.'));
+        }finally{
+          for(const input of reserveInputs.values())input.readOnly=false;
+          saveReserves.textContent=saveReserves.dataset.saved?'✓ Reservas salvas':'Salvar reservas';
+          saveReserves.disabled=false;
+        }
+      });
+      reserveForm.append(saveReserves,reserveStatus);
+      const options=make('section','layout-auto-page');
       options.append(
+        take(expedition,'autoAdvance','Avançar após 3 vitórias'),
+        take(recovery,'afterDefeat','Continuar após derrota'),
         take(raw,'duplicates','Capturas repetidas'),
         take(raw,'offline','Capturas offline'),
         take(raw,'bankLocked','Trancar banco'),
         button('Configuração completa',quick('Automação'),icons('automation'))
       );
-      more.append(make('summary','','Mais opções'),options);
-      autoBody.append(more);
+      const pages=[['Captura',capturePanel],['Cura',recoveryPanel],['Opções',options]];
+      if(window.IDLE_SERVER_JOURNEY?.snapshot)pages.splice(2,0,['Reservas',reserveForm]);
+      const navigation=make('div','layout-auto-navigation');
+      navigation.setAttribute('role','group');
+      navigation.setAttribute('aria-label','Seções de automação');
+      const tabs=pages.map(([label],index)=>button(label,()=>selectPage(index)));
+      function selectPage(index){
+        pages.forEach(([,panel],i)=>{
+          panel.hidden=i!==index;
+          tabs[i].setAttribute('aria-pressed',String(i===index));
+        });
+        autoBody.scrollTop=0;
+      }
+      const reserveIndex=pages.findIndex(([label])=>label==='Reservas');
+      if(reserveIndex>=0)openReserves=()=>{
+        disclosure.open=true;
+        selectPage(reserveIndex);
+        tabs[reserveIndex].focus();
+        huntStatus.open=false;
+      };
+      navigation.append(...tabs);
+      disclosure.insertBefore(navigation,autoBody);
+      autoBody.append(...pages.map(([,panel])=>panel));
+      selectPage(0);
     }
     buildAutomation();
 
@@ -1073,8 +1205,73 @@
       paintGain(one('.layout-wallet',trainerCard.content),'trainer');
       const hunt=one('.is-hunt'),liveTitle=hunt?.querySelector(':scope > b,h2,h3,strong')?.textContent||window.IDLE_REGION_HUNTS?.[state.area]?.habitats?.[state.hunts?.kind]?.name||'Escolha sua caçada',wave=state.hunts?.wave||1;
       if(banner.dataset.label!==liveTitle+wave){banner.replaceChildren(make('b','',liveTitle),make('span','','Onda '+wave+'/10'));banner.dataset.label=liveTitle+wave}
-      const combat=one('#combatbtn')?.dataset.deviceLabel||one('#combatbtn')?.textContent.trim()||'Explorar';
+      const sourceControl=one('#combatbtn');
+      const combat=one('#in-auto-label')?.textContent||sourceControl?.dataset.deviceLabel||'Explorar';
       one('span',action).textContent=combat;
+      const controlStatus=sourceControl?.querySelector('.idle-hunt-control-status')?.textContent||'';
+      if(actionStatus.textContent!==controlStatus)actionStatus.textContent=controlStatus;
+      {
+        const {supplies}=state.hunts,items=window.IDLE_ITEMS;
+        const watched=new Map();
+        if(state.capture.enabled&&Number(state.vip?.vipUntil)>Date.now()){
+          for(const id of [state.capture.ball,state.captureShiny.ball])watched.set(id,[items.balls[id],items.stock(state,id)]);
+        }
+        if(supplies.heal)watched.set(supplies.healItem,[items.healing[supplies.healItem],supplies[supplies.healItem]||0]);
+        if(supplies.revive)watched.set(supplies.reviveItem,[items.reviving[supplies.reviveItem],supplies[supplies.reviveItem]||0]);
+        const warnings=[], reached=new Set();
+        for(const [id,[entry,stock]] of watched){
+          const minimum=supplies.itemReserves?.[id]||0;
+          if(entry&&minimum>0&&stock<=minimum)reached.add(id);
+          if(entry&&stock<=minimum)warnings.push([entry.name+(stock===0?' · Sem estoque':' · No limite da reserva'),minimum>0]);
+        }
+        const additions=[...reached].filter(id=>previousReserves&&!previousReserves.has(id));
+        previousReserves=reached;
+        statusToggle.classList.toggle('layout-reserve-alert',reached.size>0);
+        const caption=reached.size?'Avisos de suprimentos · '+reached.size+' na reserva':'Avisos de suprimentos';
+        if(statusToggle.title!==caption){
+          statusToggle.title=caption;
+          statusToggle.setAttribute('aria-label',caption);
+        }
+        if(additions.length&&!CFG.mute)SND.err();
+        if(huntStatus.open){
+          const session=state.hunts.session;
+          const spent=[];
+          for(const [category,catalog,label] of [
+            ['balls',items.balls,'Pokébolas'],['potions',items.healing,'Poções'],['revives',items.reviving,'Revives']
+          ]){
+            let classified=0;
+            for(const [id,entry] of Object.entries(catalog)){
+              const count=session?.usedItems?.[id]||0;
+              if(count>0){spent.push([entry.name,count,entry.sprite]);classified+=count;}
+            }
+            const remaining=(session?.[category]||0)-classified;
+            if(remaining>0)spent.push([label,remaining]);
+          }
+          const usageSignature=JSON.stringify(spent);
+          if(supplyUsage.dataset.usage!==usageSignature){
+            supplyUsage.dataset.usage=usageSignature;
+            const rows=spent.map(([label,count,sprite])=>{
+              const row=make('li');
+              if(sprite){const icon=make('img');icon.src=item(sprite);icon.alt='';row.append(icon);}
+              row.append(make('span','',label),make('strong','','×'+fmt(count)));
+              return row;
+            });
+            supplyUsage.replaceChildren(...(rows.length?rows:[make('li','','Nenhum item gasto nesta sessão.')]));
+          }
+          const signature=JSON.stringify(warnings);
+          if(supplyWarnings.dataset.warnings!==signature){
+            supplyWarnings.dataset.warnings=signature;
+            supplyWarnings.replaceChildren(...(warnings.length?warnings.map(([label,reserved])=>
+              reserved&&openReserves?button(label,openReserves):make('p','',label)):[make('p','','Nenhum aviso de estoque ou reserva.')]));
+          }
+      }
+      }
+      action.dataset.huntPhase=sourceControl?.dataset.huntPhase||'idle';
+      action.disabled=!!sourceControl?.disabled;
+      action.title=sourceControl?.title||combat;
+      action.dataset.huntState=sourceControl?.dataset.huntState||'paused';
+      action.setAttribute('aria-label',action.title);
+      action.setAttribute('aria-busy',sourceControl?.getAttribute('aria-busy')||'false');
       const nextCombat=(G.phase==='combat'?'Encontro em andamento':'Preparação da equipe')+' · Onda '+wave+'/10';
       const now=performance.now();
       if(window.IDLE_ARENA_ECONOMY&&now-lastEconomyUpdate>=900){lastEconomyUpdate=now;refreshEconomy(liveTitle,nextCombat)}

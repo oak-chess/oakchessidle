@@ -1,7 +1,7 @@
 const fs=require('node:fs'),path=require('node:path'),http=require('node:http'),vm=require('node:vm'),assert=require('node:assert/strict');
 let chromium;try{({chromium}=require('playwright'))}catch{({chromium}=require('C:/Users/os_ap/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright'))}
 const root=path.resolve(__dirname,'..');
-const fixture=Function('return ('+fs.readFileSync(path.join(__dirname,'check-idle-legendary-choice-browser.cjs'),'utf8').match(/const fixture=([\s\S]*?);\n/)[1]+')')();
+const fixture=Function('return ('+fs.readFileSync(path.join(__dirname,'check-idle-legendary-choice-browser.cjs'),'utf8').match(/const fixture=([\s\S]*?);\r?\n/)[1]+')')();
 const fakeStorage=()=>{const data=new Map();return {get length(){return data.size},key:i=>[...data.keys()][i],getItem:k=>data.get(k)??null,setItem:(k,v)=>data.set(k,v),removeItem:k=>data.delete(k)}};
 const box={window:{},document:{getElementById:()=>null}};vm.runInNewContext(fs.readFileSync(path.join(root,'modes/idle/save-transfer.js'),'utf8'),box);const api=box.window.IDLE_SAVE_TRANSFER,storage=fakeStorage(),key='oakchessidle:journey-native-v2';
 const valid=api.validate({format:'oakchess-idle',version:1,state:fixture});storage.setItem('campaign','preserve');api.restore(storage,valid);assert.equal(storage.getItem('campaign'),'preserve');assert.equal(storage.getItem('oakchessidle:official-start-v1'),'1');assert.equal(JSON.parse(storage.getItem(key)).gold,fixture.gold);

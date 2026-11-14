@@ -1,5 +1,18 @@
 /* Authoritative Village state: all spending and individual transfers commit here. */
 window.createIdleVillageService=function(ctx){
+ // Online operations only accept server snapshots. Never run legacy generators or spending.
+ if(window.OAK_ONLINE_SNAPSHOT){
+  const clone=x=>JSON.parse(JSON.stringify(x));
+  function snapshot(){const view={...clone(ctx.state.village||{version:1,onlineCore:false,houses:[],deeds:[],roster:[],tier:null}),gold:ctx.state.gold,activityVolume:typeof CFG!=='undefined'?(CFG.mute?0:CFG.sfx):1};if(view.rolling?.startedAt)view.rolling.elapsed=Math.max(0,(Date.now()-view.rolling.startedAt)/1000);return view;}
+  return {snapshot,reward(){},victory:()=>0,boss:()=>0,async action(request,action,data={}){
+   if(typeof request!=='string'||!snapshot().onlineCore)return {ok:false,reason:'A Fazenda online ainda precisa ser ativada no servidor.',state:snapshot()};
+   if(action==='sync')return {ok:true,state:snapshot()};
+   const fishing=['rod','cast','finish','cancelFish','fishFlag','fishPC','sellFish','order'].includes(action);
+   if(fishing&&!snapshot().onlineFishing)return {ok:false,reason:'A pesca online ainda não está disponível.',state:snapshot()};
+   try{if(['assign','return','pack'].includes(action))await window.IDLE_SERVER_JOURNEY.prepareWorldEdit();const result=await window.IDLE_SERVER_JOURNEY.mutate(ctx.state,fishing?'fishing':'farm',{operation:action,data});return {...result?.receipt,...(result.cast?{cast:result.cast}:{}),ok:true,state:snapshot()};}
+   catch(error){return {ok:false,reason:error.message,state:snapshot()};}
+  }};
+ }
  const s=ctx.state,P=window.RURAL_PROPERTIES,E=window.FISHING_BUCKET_ECONOMY,keys=['hp','atk','def','spa','spd','spe'];let serial=0;const replies=new Map();
  const names=['Magikarp','Goldeen','Poliwag','Psyduck','Wooper','Barboach','Tentacool','Krabby','Horsea','Remoraid','Slowpoke','Chinchou','Corsola','Staryu','Feebas','Poliwhirl','Seaking','Whiscash','Gyarados','Dratini','Lapras'],ids=[129,118,60,54,194,339,72,98,116,223,79,170,222,120,349,61,119,340,130,147,131],rank={129:1,118:1,60:1,54:1,79:2,119:2,130:3,147:3,339:1,194:1,61:2,340:3,349:2,72:1,98:1,120:2,116:1,222:2,170:2,223:1,131:3};
  const pools=[[129,118,60,54,79,119,130,147],[129,60,339,194,61,340,349,130],[129,72,98,116,120,222,170,223,131]],unlock=Object.fromEntries(ids.map((id,i)=>[id,i?i*10:1])),orders=[{id:'magikarp',species:129,count:3,gold:60,xp:30},{id:'goldeen',species:118,count:2,gold:90,xp:45},{id:'poliwag',species:60,count:2,gold:120,xp:60}];

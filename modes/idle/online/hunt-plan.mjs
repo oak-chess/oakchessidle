@@ -43,12 +43,14 @@ export function buildHuntPlan(encounter){
  }
  const supplies={...snapshot.supplies},preferences={heal:true,revive:true,threshold:50,healItem:'potions',reviveItem:'revives',...snapshot.preferences};
  const heal=catalog.healing[preferences.healItem],revive=catalog.reviving[preferences.reviveItem];
+ const reserves=preferences.itemReserves||{};
+ const available=key=>(supplies[key]||0)>(reserves[key]||0);
  const allies=snapshot.allies.map(m=>{
   const data={...engine.genes(m.pokemon_id,m.id,false),...m.combat_data};
   let condition=Math.max(0,Math.min(1,data.condition??1));
-  if(condition===0&&preferences.revive&&supplies[preferences.reviveItem]>0){supplies[preferences.reviveItem]--;condition=revive.ratio;}
+  if(condition===0&&preferences.revive&&available(preferences.reviveItem)){supplies[preferences.reviveItem]--;condition=revive.ratio;}
   if(condition>0&&preferences.heal&&condition<preferences.threshold/100){
-   while(condition<1&&supplies[preferences.healItem]>0){supplies[preferences.healItem]--;condition=Math.min(1,condition+heal.ratio);}
+   while(condition<1&&available(preferences.healItem)){supplies[preferences.healItem]--;condition=Math.min(1,condition+heal.ratio);}
   }
   return {...m,pos:snapshot.organization?.find(slot=>slot.id===m.id)?.pos,combat_data:{...data,condition}};
  });

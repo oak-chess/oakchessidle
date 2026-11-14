@@ -95,34 +95,127 @@ function supplyPanel(container,{manualOnly=false,automaticOnly=false,compact=fal
 function lootPanel(container){container.append(h('h3','Loot da caçada'),h('p','O valor do loot só vira ouro quando você vende.'));for(const [key,info]of Object.entries(lootTypes)){const count=q.loot[key]||0;if(!count)continue;const row=h('div',undefined,'ip-resource-row');const icon=h('img');icon.src=window.IDLE_DROPS.icon(info);icon.alt='';icon.className='idle-item-icon';row.append(icon,h('b',info.name),h('span','×'+count+' · '+info.price+' ouro/un.'),btn('Vender tudo · '+count*info.price+' ouro',()=>{const n=q.loot[key]||0;s.gold+=n*info.price;q.loot[key]=0;commit()},!count));container.append(row)}}
 function expeditionPanel(container){const label=h('label'),input=h('input');label.dataset.supplyField='autoAdvance';input.type='checkbox';input.checked=q.autoAdvance;input.onchange=()=>{q.autoAdvance=input.checked;commit()};label.append(input,document.createTextNode('Avançar automaticamente após três vitórias'));container.append(h('h3','Progressão das ondas'),label,h('p','Desativado: repete a onda atual para treinar. Derrotas não avançam; a onda 10 se repete. Líderes e regiões são escolhidos na Jornada.','ip-help'))}
 function close(){if(huntRoot)huntRoot.hidden=true;if(recordRoot)recordRoot.hidden=true}
-function open(which='choose'){ctx.capturePositions();ctx.closePanels();root=['report','history'].includes(which)?recordRoot:huntRoot;tab=which;focusHunt=null;root.hidden=false;render();root.querySelector('.ih-content').scrollTop=0}
-let catalogQuery='',catalogFilter='all';
+function open(which='choose'){ctx.capturePositions();ctx.closePanels();root=['report','history'].includes(which)?recordRoot:huntRoot;tab=which;focusHunt=null;galleryRegion=null;root.hidden=false;render();root.querySelector('.ih-content').scrollTop=0}
+let catalogQuery='',catalogFilter='all',galleryRegion=null;
 function preyCatalog(){const pool=[];window.IDLE_REGION_HUNTS.forEach((regional,area)=>{if(area!==s.area&&area>0&&!s.world.badges.includes(area-1))return;for(const [id,data]of Object.entries(regional.habitats)){const template=window.IDLE_HUNT_AREAS[id]||window.IDLE_HUNT_AREAS.forest,d={...template,...data},base=Math.max(d.min||1,...data.species.map(speciesLevel)),key=area+':'+id;if(s.trainerLevel<base&&!q.legacyAccess?.[key]||(s.world.badges.length||0)<(d.badges||0)||d.field&&!s.world.field?.[d.field])continue;for(const name of data.species){const L=ctx.lines.find(l=>!l.boss&&l.names.includes(name));if(L)pool.push({name,id:L.ids[L.names.indexOf(name)],habitat:d.name,area,hunt:id})}}});return pool.filter((x,i,a)=>a.findIndex(y=>y.name===x.name)===i)}
-function renderCatalog(content){sync();const preyBox=h('div',undefined,'ih-prey-summary'),prey=ctx.prey?.(),info=prey?.summary()||[];preyBox.append(h('span',info.length?info.map(p=>p.name+' · '+p.remaining+' restantes'+(p.pending?' · próximo encontro':'')).join(' | '):'Prey · bônus temporário contra uma espécie'));content.append(preyBox);window.IDLE_LIFE_UI.outbreak(content,s.area);
+function renderCatalog(content){sync();const preyBox=h('div',undefined,'ih-prey-summary'),prey=ctx.prey?.(),info=prey?.summary()||[];preyBox.append(h('span',info.length?'Prey · '+info.map(p=>p.name+' · '+p.remaining+' restantes'+(p.pending?' · próximo encontro':'')).join(' | '):'Prey · sem bônus ativo'));preyBox.title='Bônus temporário contra uma espécie';
+ const notices=h('div',undefined,'ih-hunt-notices');notices.append(preyBox);content.append(notices);window.IDLE_LIFE_UI.outbreak(notices,s.area);
  const normalizeText=text=>text.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
  const spriteFor=name=>{const L=ctx.lines.find(l=>l.names.includes(name));if(!L)return null;const img=h('img');img.src=IDLE_PMD_THUMBNAIL.fromLegacy(ctx.sprite(L.ids[Math.max(0,L.names.indexOf(name))]||L.ids[0]));img.alt=name;img.title=name;return img};
  const catalog=window.IDLE_REGION_HUNTS.flatMap((regional,area)=>Object.entries(regional.habitats).map(([id,data])=>{const template=window.IDLE_HUNT_AREAS[id]||window.IDLE_HUNT_AREAS.forest,d={...template,...data,profile:[data.difficulty,template.profile].filter(Boolean).join(' · '),gold:(1+area*.18)*(data.rewardFactor||1),xp:(1+area*.2)*(data.rewardFactor||1)},names=data.species.filter(name=>ctx.lines.some(l=>!l.boss&&l.names.includes(name))).map((name,i)=>[name,i<3?'common':i===3?'uncommon':'rare']),base=Math.max(d.min||1,...names.map(([name])=>speciesLevel(name))),level=d.endless?Math.max(base,Math.floor(Number(q.levelByArea[area+':'+id])||base)):base;return {key:area+':'+id,area,id,d,names,base,level}}));
  const missingFor=entry=>{const missing=[];if(entry.area!==s.area&&entry.area>0&&!s.world.badges.includes(entry.area-1))missing.push('Insígnia de '+ctx.regions[entry.area-1].name);if(s.trainerLevel<entry.level&&!q.legacyAccess?.[entry.key])missing.push('Treinador nível '+entry.level);if((s.world.badges.length||0)<(entry.d.badges||0))missing.push(entry.d.badges+' insígnia(s)');if(entry.d.field&&!s.world.field?.[entry.d.field])missing.push(entry.d.field==='rod'?'Vara de pescar':'Silph Scope');if(entry.area!==s.area&&ctx.challenge())missing.push('Concluir ou sair do desafio atual');return missing};
  const tools=h('div',undefined,'ih-browser-tools'),search=h('input'),filter=h('select');search.type='search';search.placeholder='Buscar área ou Pokémon';search.setAttribute('aria-label','Buscar área ou Pokémon');search.value=catalogQuery;
  for(const [id,label]of [['all','Todas as áreas'],['available','Disponíveis'],['locked','Bloqueadas']]){const o=h('option',label);o.value=id;o.selected=id===catalogFilter;filter.append(o)}filter.setAttribute('aria-label','Filtrar disponibilidade');const count=h('span',undefined,'ih-browser-count');count.setAttribute('aria-live','polite');tools.append(search,filter,count);
- const scope=h('p',undefined,'ih-search-scope'),browser=h('div',undefined,'ih-browser'),list=h('div',undefined,'ih-browser-list'),detail=h('aside',undefined,'ih-browser-detail');browser.append(list,detail);content.append(tools,scope,browser);let focused=null,globalSearch=false;
+ const regionOf=entry=>ctx.regions[entry.area].continent||'Kanto';
+ galleryRegion??=ctx.regions[s.area].continent||'Kanto';
+ const regions=h('nav',undefined,'ih-region-tabs');
+ regions.setAttribute('aria-label','Regiões');
+ const browser=h('div',undefined,'ih-browser ih-region-gallery'),list=h('div',undefined,'ih-browser-list');
+ const popup=h('dialog',undefined,'ih-hunt-popup'),detail=h('article',undefined,'ih-browser-detail');
+ const closePreview=btn('Fechar prévia',()=>popup.close());
+ const previewHeader=h('div',undefined,'ih-preview-header'),previewTitle=h('h3');
+ previewTitle.id='ih-preview-title';
+ popup.setAttribute('aria-labelledby',previewTitle.id);
+ previewHeader.append(previewTitle,closePreview);
+ const previewFooter=h('div',undefined,'ih-preview-footer');
+ popup.append(previewHeader,detail,previewFooter);
+ browser.append(list);
+ content.append(regions,tools,browser,popup);
+ let focused=null;
+ for(const region of new Set(catalog.map(regionOf))){
+  const control=btn(region,()=>{
+   galleryRegion=region;
+   for(const child of regions.children)child.setAttribute('aria-pressed',String(child===control));
+   list.scrollTop=0;
+   draw();
+  });
+  control.setAttribute('aria-pressed',String(region===galleryRegion));
+  regions.append(control);
+ }
+ const tactics=window.IDLE_TACTICS;
+ function guidance(entry){
+  const targets=entry.names.map(([name,rarity])=>{
+   const line=ctx.lines.find(l=>l.names.includes(name)),star=line.names.indexOf(name)+1;
+   return {types:typesOf(line,star),moves:movesFor(line,star).map(move=>move.t).filter(type=>tactics.types.includes(type)),
+    weight:rarity==='common'?3:rarity==='uncommon'?2:1};
+  });
+  const score=types=>targets.reduce((sum,target)=>sum+target.weight*(Math.max(...types.map(type=>tactics.effectiveness(type,target.types)))>1?1:0),0);
+  const ranked=tactics.types.filter(type=>score([type])>0).sort((a,b)=>score([b])-score([a]));
+  const first=ranked[0];
+  const second=ranked.filter(type=>type!==first).sort((a,b)=>score([first,b])-score([first,a]))[0];
+  const incoming=targets.flatMap(target=>target.moves.map(type=>({type,weight:target.weight})));
+  const defense=type=>incoming.reduce((sum,move)=>sum+move.weight*(1-tactics.effectiveness(move.type,[type])),0);
+  const guards=tactics.types.filter(type=>defense(type)>0).sort((a,b)=>defense(b)-defense(a)).slice(0,2);
+  const active=s.team.filter(member=>member.pos?.z==='b'&&(member.condition??1)>0);
+  const wave=(entry.area===s.area&&entry.id===q.kind?q.wave:q.waveByArea[entry.key])||1;
+  const foe=entry.level+Math.round(window.IDLE_HUNT_PROGRESSION.span(entry.area)*(wave-1)/9);
+  const average=active.reduce((sum,member)=>sum+member.level,0)/Math.max(1,active.length);
+  const ratio=average/Math.max(1,foe);
+  const risk=ratio>=1.25?'Tranquilo':ratio>=1?'Puxado':ratio>=.75?'Perigoso':'Mortal';
+  return {attack:[first,second].filter(Boolean),guards,risk,average,foe,wave,active:active.length};
+ }
+ function adviceBadges(types,risk){
+  const row=h('div',undefined,'ih-advice-badges');
+  if(risk){
+   const badge=h('span',risk,'ih-risk-badge');
+   badge.dataset.risk=risk;
+   row.append(h('small','Risco','ih-risk-label'),badge);
+  }
+  for(const type of types){
+   const info=TYPES[type];
+   const badge=h('span',info?.n||type,'ih-type-badge');
+   badge.style.setProperty('--hunt-type-color',info?.c||'#92dce9');
+   row.append(badge);
+  }
+  return row;
+ }
  function drawDetail(){
-  detail.replaceChildren();if(!focused){detail.append(h('h3','Escolha uma área'),h('p',catalogQuery?'Nenhuma caçada encontrada para esta busca. Algumas espécies são obtidas por evolução, ovos ou eventos.':'Selecione uma caçada para ver os Pokémon e requisitos.'));return}
+  detail.replaceChildren();detail.scrollTop=0;previewFooter.replaceChildren();if(!focused){detail.append(h('h3','Escolha uma área'),h('p',catalogQuery?'Nenhuma caçada encontrada para esta busca. Algumas espécies são obtidas por evolução, ovos ou eventos.':'Selecione uma caçada para ver os Pokémon e requisitos.'));return}
   const e=focused,d=e.d,missing=missingFor(e),isCurrent=e.area===s.area&&e.id===q.kind,wave=isCurrent?q.wave:q.waveByArea[e.key]||1;
-  detail.append(h('small',isCurrent?'CAÇADA ATUAL':missing.length?'ÁREA BLOQUEADA':'ÁREA DISPONÍVEL','ih-browser-eyebrow'),h('h3',d.name),h('p',ctx.regions[e.area].name+' · '+(ctx.regions[e.area].continent||'Kanto'),'ih-browser-region'),h('p',d.profile,'ih-browser-profile'));
-  const stats=h('div',undefined,'ih-browser-stats');for(const [label,value]of [['Pokémon','Nv. '+e.level+'–'+(e.level+window.IDLE_HUNT_PROGRESSION.span(e.area))],['XP',Math.round(d.xp*100)+'%'],['Ouro',Math.round(d.gold*100)+'%']]){const cell=h('div');cell.append(h('small',label),h('b',value));stats.append(cell)}detail.append(stats);
-  const families=new Set(e.names.map(([name])=>ctx.lines.find(l=>l.names.includes(name))?.i)).size,countAt=w=>window.IDLE_HUNT_ENCOUNTER_COUNT(e.level,w,families);detail.append(h('p',countAt(wave)+' adversários por encontro nesta onda · até '+countAt(10)+' nas ondas finais.','ih-setup-help'));if(d.endless)detail.append(h('p','A partir do nível '+e.base+'. A dificuldade pode continuar subindo sem limite na aba Expedição.','ih-setup-help'));detail.append(h('h4','Pokémon encontrados'));
-  const species=h('div',undefined,'ih-browser-species'),rarity={common:'Comum',uncommon:'Incomum',rare:'Raro'},query=normalizeText(catalogQuery);for(const [name,kind]of e.names){const row=h('div'),img=spriteFor(name);if(img)row.append(img);row.dataset.match=String(globalSearch&&normalizeText(name).includes(query));row.append(h('b',name),h('small',rarity[kind]||kind));species.append(row)}detail.append(species);
-  const status=h('p',missing.length?'Requer: '+missing.join(' · '):isCurrent?'Onda '+q.wave+'/10 · Progresso salvo':e.area!==s.area?'Pronta para visitar · troca a região e a caçada':'Pronta para iniciar','ih-browser-requirements');status.dataset.locked=String(!!missing.length);detail.append(status);
-  detail.append(btn(isCurrent?'Configurar expedição':e.area!==s.area?'Ir para esta caçada':'Escolher caçada',async()=>{if(missingFor(e).length)return;if(!isCurrent&&ctx.beforeSelect){try{await ctx.beforeSelect()}catch(error){ctx.notify(error.message);return}}if(e.area!==s.area){if(!ctx.travelTo?.(e.area))return;sync()}catalogQuery='';focusHunt=e.id;if(!isCurrent)choose(e.id);tab='setup';render()},!!missing.length),h('small','Consulte os drops e as chances por espécie na Pokédex.','ih-browser-note'));
+  previewTitle.textContent=d.name;
+  const overview=h('div',undefined,'ih-preview-overview'),meta=h('section',undefined,'ih-preview-meta');
+  const lower=h('div',undefined,'ih-preview-lower'),roster=h('section',undefined,'ih-preview-roster');
+  detail.append(overview,lower);
+  overview.append(meta);lower.append(roster);
+  meta.append(h('small',isCurrent?'CAÇADA ATUAL':missing.length?'ÁREA BLOQUEADA':'ÁREA DISPONÍVEL','ih-browser-eyebrow'),h('p',ctx.regions[e.area].name+' · '+(ctx.regions[e.area].continent||'Kanto'),'ih-browser-region'),h('p',d.profile,'ih-browser-profile'));
+  window.IDLE_HUNT_VISUALS?.mount(overview,{area:e.area,kind:e.id,names:e.names.map(([name])=>name),lines:ctx.lines,sprite:ctx.sprite});
+  const stats=h('div',undefined,'ih-browser-stats');for(const [label,value]of [['Pokémon','Nv. '+e.level+'–'+(e.level+window.IDLE_HUNT_PROGRESSION.span(e.area))],['XP',Math.round(d.xp*100)+'%'],['Ouro',Math.round(d.gold*100)+'%']]){const cell=h('div');cell.append(h('small',label),h('b',value));stats.append(cell)}meta.append(stats);
+  const families=new Set(e.names.map(([name])=>ctx.lines.find(l=>l.names.includes(name))?.i)).size,countAt=w=>window.IDLE_HUNT_ENCOUNTER_COUNT(e.level,w,families);meta.append(h('p',countAt(wave)+' adversários por encontro nesta onda · até '+countAt(10)+' nas ondas finais.','ih-setup-help'));if(d.endless)meta.append(h('p','A partir do nível '+e.base+'. A dificuldade pode continuar subindo sem limite na aba Expedição.','ih-setup-help'));roster.append(h('h4','Pokémon encontrados · '+e.names.length));
+  const species=h('div',undefined,'ih-browser-species'),rarity={common:'Comum',uncommon:'Incomum',rare:'Raro'},query=normalizeText(catalogQuery);for(const [name,kind]of e.names){const row=h('div'),img=spriteFor(name);row.dataset.rarity=kind;if(img)row.append(img);row.dataset.match=String(!!query&&normalizeText(name).includes(query));row.append(h('b',name),h('small',rarity[kind]||kind));species.append(row)}roster.append(species);
+  if(tactics){
+   const advice=guidance(e),guide=h('section',undefined,'ih-hunt-guidance');
+   const heading=h('div',undefined,'ih-guide-heading');
+   heading.append(h('h4','Monte sua equipe'));
+   if(advice.active)heading.append(adviceBadges([],advice.risk));
+   guide.append(heading);
+   if(advice.active){
+    const levels=h('div',undefined,'ih-guide-levels');
+    for(const [label,value] of [['Equipe · média','Nv. '+Math.round(advice.average)],['Adversários · onda '+advice.wave,'Nv. '+advice.foe]]){
+     const cell=h('div');cell.append(h('small',label),h('b',value));levels.append(cell);
+    }
+    guide.append(levels);
+   }else guide.append(h('p','Coloque Pokémon em campo para estimar o risco.','ih-guide-context'));
+   for(const [label,types] of [['Golpes recomendados',advice.attack],['Tipos que resistem',advice.guards]]){
+    if(!types.length)continue;
+    const group=h('div',undefined,'ih-guide-types');
+    group.append(h('b',label),adviceBadges(types));
+    guide.append(group);
+   }
+   lower.append(guide);
+  }
+  const status=h('p',missing.length?'Requer: '+missing.join(' · '):isCurrent?'Onda '+q.wave+'/10 · Progresso salvo':e.area!==s.area?'Pronta para visitar · troca a região e a caçada':'Pronta para iniciar','ih-browser-requirements');status.dataset.locked=String(!!missing.length);meta.append(status);
+  previewFooter.append(btn(isCurrent?'Configurar expedição':e.area!==s.area?'Ir para esta caçada':'Escolher caçada',async()=>{if(missingFor(e).length)return;if(!isCurrent&&ctx.beforeSelect){try{await ctx.beforeSelect()}catch(error){ctx.notify(error.message);return}}if(e.area!==s.area){if(!ctx.travelTo?.(e.area))return;sync()}catalogQuery='';focusHunt=e.id;popup.close();if(!isCurrent)choose(e.id);tab='setup';render()},!!missing.length));
  }
  function draw(){
-  const scroll=list.scrollTop,query=normalizeText(catalogQuery.trim());globalSearch=!!query&&catalog.some(e=>e.names.some(([name])=>normalizeText(name).includes(query)));
-  const candidates=globalSearch?catalog.filter(e=>e.names.some(([name])=>normalizeText(name).includes(query))):catalog.filter(e=>e.area===s.area&&normalizeText(e.d.name+' '+e.d.profile+' '+e.names.map(n=>n[0]).join(' ')).includes(query)),rows=candidates.filter(e=>catalogFilter==='all'||(catalogFilter==='available'?!missingFor(e).length:!!missingFor(e).length)).sort((a,b)=>a.level-b.level||a.d.name.localeCompare(b.d.name,'pt-BR'));
-  if(!rows.some(e=>e.key===focused?.key))focused=rows.find(e=>e.area===s.area&&e.id===(focusHunt||q.kind))||rows[0]||null;
-  list.replaceChildren();scope.hidden=!globalSearch;scope.textContent=globalSearch?'Pokémon encontrado em '+candidates.length+' caçada(s) · busca em todas as regiões. Selecione um resultado para ver os requisitos.':'';count.textContent=globalSearch?rows.length+' resultados · Todas as regiões':rows.length+' / '+Object.keys(types).length+' áreas · Nível ↑';
-  if(!rows.length)list.append(h('p',globalSearch?'Nenhuma caçada corresponde ao filtro de disponibilidade.':'Nenhuma caçada encontrada. Tente outro nome ou filtro.','ih-browser-empty'));
-  for(const e of rows){const available=!missingFor(e).length,isCurrent=e.area===s.area&&e.id===q.kind,card=btn('',()=>{focused=e;if(e.area===s.area)focusHunt=e.id;draw()});card.className='ih-browser-card';card.dataset.region=String(e.area);card.dataset.hunt=e.id;card.setAttribute('aria-pressed',String(e.key===focused?.key));card.dataset.locked=String(!available);const top=h('div',undefined,'ih-browser-card-head');top.append(h('b',e.d.name),h('span',isCurrent?'Atual':available?'Disponível':'Bloqueada'));card.append(top,h('small',ctx.regions[e.area].name+' · '+(ctx.regions[e.area].continent||'Kanto'),'ih-browser-profile'),h('small','Nv. '+e.level+'–'+(e.level+window.IDLE_HUNT_PROGRESSION.span(e.area))+' · '+e.names.length+' espécies'+(isCurrent?' · Onda '+q.wave+'/10':''),'ih-browser-card-level'));window.IDLE_HUNT_VISUALS?.mount(card,{area:e.area,kind:e.id,names:e.names.map(([name])=>name),lines:ctx.lines,sprite:ctx.sprite});list.append(card)}list.scrollTop=scroll;drawDetail();
+  const scroll=list.scrollTop,query=normalizeText(catalogQuery.trim());
+  const regional=catalog.filter(e=>regionOf(e)===galleryRegion);
+  const rows=regional.filter(e=>normalizeText(e.d.name+' '+e.d.profile+' '+e.names.map(n=>n[0]).join(' ')).includes(query))
+   .filter(e=>catalogFilter==='all'||(catalogFilter==='available'?!missingFor(e).length:!!missingFor(e).length))
+   .sort((a,b)=>a.level-b.level||a.d.name.localeCompare(b.d.name,'pt-BR'));
+  list.replaceChildren();
+  count.textContent=rows.length+' / '+regional.length+' áreas · Nível ↑';
+  if(!rows.length)list.append(h('p','Nenhuma caçada encontrada. Tente outro nome ou filtro.','ih-browser-empty'));
+  for(const e of rows){const available=!missingFor(e).length,isCurrent=e.area===s.area&&e.id===q.kind,card=btn('',()=>{focused=e;drawDetail();popup.showModal()});card.className='ih-browser-card';card.dataset.region=String(e.area);card.dataset.hunt=e.id;card.setAttribute('aria-haspopup','dialog');card.dataset.locked=String(!available);const top=h('div',undefined,'ih-browser-card-head');top.append(h('b',e.d.name),h('span',isCurrent?'Atual':available?'Disponível':'Bloqueada'));card.append(top,h('small',ctx.regions[e.area].name+' · '+(ctx.regions[e.area].continent||'Kanto'),'ih-browser-profile'),h('small','Nv. '+e.level+'–'+(e.level+window.IDLE_HUNT_PROGRESSION.span(e.area))+' · '+e.names.length+' espécies'+(isCurrent?' · Onda '+q.wave+'/10':''),'ih-browser-card-level'));if(tactics){const advice=guidance(e);const footer=h('div',undefined,'ih-card-advice');if(advice.active)footer.append(adviceBadges([],advice.risk));if(advice.attack.length){const attacks=h('div');attacks.append(h('small','Golpes recomendados'),adviceBadges(advice.attack));footer.append(attacks);}if(footer.childElementCount)card.append(footer);}window.IDLE_HUNT_VISUALS?.mount(card,{area:e.area,kind:e.id,names:e.names.map(([name])=>name),lines:ctx.lines,sprite:ctx.sprite});list.append(card)}list.scrollTop=scroll;
  }
  search.addEventListener('input',()=>{catalogQuery=search.value;list.scrollTop=0;draw()});filter.addEventListener('change',()=>{catalogFilter=filter.value;list.scrollTop=0;draw()});draw();
 }

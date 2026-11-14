@@ -2018,3 +2018,328 @@ body.idle-native-mode #idle-pc .ipc-comparison>header{display:flex;align-items:c
 #idle-pc .ipc-comparison>.ip-help{font-size:9px;line-height:15px}
 #idle-automation .is-automation-settings>label:has(>input[type=checkbox]){display:flex;align-items:center;gap:9px;padding:12px;background:#20313d;border:1px solid #ffffff12;border-radius:7px;margin:10px 0;font-size:11px}
 #idle-automation .is-automation-settings>input[type=number],#idle-automation .is-automation-settings>select{min-height:32px;padding:7px;font-size:11px;max-width:100%;box-sizing:border-box}
+
+#idle-hunts .ih-region-tabs {display:flex;flex-wrap:wrap;gap:5px;margin:8px 0}
+#idle-hunts .ih-region-tabs button[aria-pressed=true] {border-color:#83efff;background:#185069;color:#fff}
+#idle-hunts[data-view=choose] .ih-region-gallery {display:block}
+#idle-hunts[data-view=choose] .ih-region-gallery .ih-browser-list {
+ display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,200px),1fr));gap:8px;
+}
+#idle-hunts .ih-hunt-popup {width:min(620px,94vw);max-height:85dvh;overflow:auto;background:#102636;color:#edf9ff;border:1px solid #69acbe;border-radius:13px;padding:12px}
+#idle-hunts .ih-hunt-popup::backdrop {background:#020c15b8}
+#idle-hunts .ih-hunt-popup > button {display:block;margin:0 0 8px auto}
+#idle-hunts .ih-hunt-popup .ih-browser-detail {overflow:visible;max-height:none}
+
+#idle-hunts .ih-hunt-advice {color:#9eefff}
+#idle-hunts .ih-hunt-guidance {padding:8px 10px;margin:8px 0;background:#102f40;border:1px solid #356578;border-radius:7px}
+
+/* The gallery uses the panel's scroll area instead of a fixed-height list. */
+#idle-hunts[data-view=choose] .ih-content {
+ min-height:0;overflow:auto;overscroll-behavior:contain;max-height:calc(100dvh - 145px)!important;
+ scrollbar-width:thin;scrollbar-color:#62cad5 #11232e;
+}
+#idle-hunts[data-view=choose] .ih-region-gallery {height:auto;min-height:0}
+#idle-hunts[data-view=choose] .ih-region-gallery .ih-browser-list {height:auto;overflow:visible;padding-bottom:8px}
+#idle-hunts[data-view=choose] .ih-browser-card-head {flex-wrap:wrap}
+#idle-hunts[data-view=choose] :is(.ih-browser-card-head b,.ih-browser-species b) {white-space:normal;overflow-wrap:anywhere}
+#idle-hunts .ih-region-tabs button,#idle-hunts .ih-hunt-popup,#idle-hunts[data-view=choose] .ih-browser-card {
+ border-radius:3px;border:2px solid #466a7c;box-shadow:inset 0 0 0 2px #0c2330;
+}
+#idle-hunts[data-view=choose] .ih-browser-card {
+ background:linear-gradient(#183b47,#102630);
+ transition:border-color .15s,background-color .15s;
+}
+#idle-hunts[data-view=choose] .ih-browser-card:is(:hover,:focus-visible) {
+ border-color:#83efff;box-shadow:inset 0 0 0 2px #15364a,0 0 10px #63e9ff42;
+}
+#idle-hunts .ih-region-tabs button[aria-pressed=true] {border-color:var(--region-color,#83efff);box-shadow:inset 0 -3px var(--region-color,#83efff)}
+#idle-hunts .ih-region-tabs button:nth-child(1){--region-color:#8eed91}
+#idle-hunts .ih-region-tabs button:nth-child(2){--region-color:#ffce74}
+#idle-hunts .ih-region-tabs button:nth-child(3){--region-color:#65e0d9}
+#idle-hunts .ih-region-tabs button:nth-child(4){--region-color:#aabaff}
+#idle-hunts .ih-region-tabs button:nth-child(5){--region-color:#ff99cb}
+#idle-hunts .ih-advice-badges {display:flex;flex-wrap:wrap;gap:4px;margin:3px 0}
+#idle-hunts :is(.ih-type-badge,.ih-risk-badge) {
+ padding:3px 5px;border:1px solid var(--hunt-type-color,#83efff);border-radius:2px;
+ background:color-mix(in srgb,var(--hunt-type-color,#83efff) 24%,#102331);
+ color:#fff;font-size:10px;line-height:1.15;font-weight:750;
+}
+#idle-hunts .ih-risk-badge[data-risk=Tranquilo]{--hunt-type-color:#85ecaa}
+#idle-hunts .ih-risk-badge[data-risk=Puxado]{--hunt-type-color:#ffe08a}
+#idle-hunts .ih-risk-badge[data-risk=Perigoso]{--hunt-type-color:#ffac68}
+#idle-hunts .ih-risk-badge[data-risk=Mortal]{--hunt-type-color:#ff8198}
+#idle-hunts .ih-browser-requirements[data-locked=true]{border-left:3px solid #ffbd72;padding:6px;background:#442b21;color:#ffe0ae}
+#idle-hunts .ih-hunt-popup img {image-rendering:pixelated}
+@media(max-width:575px){
+ #idle-hunts[data-view=choose] .ih-browser-tools{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+ #idle-hunts[data-view=choose] .ih-browser-tools input{grid-column:1/-1;min-width:0}
+}
+
+body.idle-native-mode #idle-hunts[data-view=choose]:not([hidden]) {
+ display:flex;flex-direction:column;overflow:hidden;
+ max-height:min(700px, calc(100dvh - 24px))!important;
+}
+#idle-hunts[data-view=choose] > :is(header,.ip-tabs) {flex:none}
+#idle-hunts[data-view=choose] > .ih-content {flex:1 1 auto;max-height:none!important}
+#idle-hunts[data-view=choose] > .ip-tabs {flex-wrap:wrap}
+#idle-hunts[data-view=choose] > .ip-tabs button {min-width:0}
+
+/* Stepped corners and hard highlights give the hunts their own pixel UI. */
+#idle-hunts {
+ --hunt-pixel-edge:polygon(8px 0,calc(100% - 8px) 0,calc(100% - 8px) 4px,calc(100% - 4px) 4px,calc(100% - 4px) 8px,100% 8px,100% calc(100% - 8px),calc(100% - 4px) calc(100% - 8px),calc(100% - 4px) calc(100% - 4px),calc(100% - 8px) calc(100% - 4px),calc(100% - 8px) 100%,8px 100%,8px calc(100% - 4px),4px calc(100% - 4px),4px calc(100% - 8px),0 calc(100% - 8px),0 8px,4px 8px,4px 4px,8px 4px);
+}
+body.idle-native-mode #idle-hunts[data-view=choose]:not([hidden]) {
+ border-radius:0!important;
+ clip-path:var(--hunt-pixel-edge);
+ border:3px solid #68bac5!important;
+ background:repeating-linear-gradient(0deg,#102736 0 3px,#112a39 3px 6px)!important;
+}
+#idle-hunts[data-view=choose] button {
+ border-radius:0!important;
+ clip-path:var(--hunt-pixel-edge);
+ background:#1c4357!important;
+ box-shadow:inset 0 3px #679ea8,inset 0 -4px #081923!important;
+}
+#idle-hunts[data-view=choose] button:is(:hover,:focus-visible,[aria-pressed=true]) {
+ background:#2d6476!important;
+ box-shadow:inset 0 3px var(--region-color,#9eefff),inset 0 -4px #0c2e43!important;
+}
+#idle-hunts[data-view=choose] button:disabled {opacity:.65}
+#idle-hunts[data-view=choose] .ih-browser-card {clip-path:none;text-align:left;border:2px solid #57828c;box-shadow:inset 0 0 0 3px #122f41!important}
+#idle-hunts .ih-hunt-popup {
+ clip-path:var(--hunt-pixel-edge);
+ border:3px solid #71c1cb;
+ padding:0;
+ max-height:min(88dvh,780px);
+ overflow:auto;
+}
+#idle-hunts .ih-preview-header {position:sticky;top:0;z-index:2;display:flex;align-items:center;justify-content:space-between;gap:8px;padding:8px 12px;background:#204357;border-bottom:3px solid #65aeb9}
+#idle-hunts .ih-preview-header h3 {margin:0;min-width:0;overflow-wrap:anywhere}
+#idle-hunts .ih-preview-header button {flex:none}
+#idle-hunts .ih-hunt-popup .ih-browser-detail {margin:0;border:0;border-radius:0;max-height:none;overflow:visible}
+#idle-hunts .ih-hunt-popup :is(img,canvas) {max-width:100%;image-rendering:pixelated}
+#idle-hunts .ih-hunt-popup .ih-browser-detail > button {max-width:100%;white-space:normal}
+
+body.idle-native-mode #idle-hunts[data-view=choose] > .ih-content {
+ flex:1 1 0;min-height:0;overflow-y:auto!important;overflow-x:hidden;
+}
+#idle-hunts .ih-hunt-popup[open] {
+ display:flex;flex-direction:column;
+ max-height:min(640px,calc(100dvh - 32px));overflow:hidden;
+}
+#idle-hunts .ih-preview-header,#idle-hunts .ih-preview-footer {flex:none}
+#idle-hunts .ih-preview-footer {display:flex;justify-content:flex-end;padding:6px 12px;border-top:2px solid #466a7c;background:#102636}
+#idle-hunts .ih-preview-footer button {white-space:normal}
+#idle-hunts .ih-hunt-popup > .ih-browser-detail {
+ display:block;min-height:0;overflow:auto;overscroll-behavior:contain;padding:8px 12px;
+}
+#idle-hunts .ih-hunt-popup .ih-arena-preview {width:min(100%,325px);margin:0 auto 6px;aspect-ratio:16/9;height:auto}
+#idle-hunts .ih-hunt-popup .ih-arena-preview canvas {width:100%;height:100%;display:block}
+#idle-hunts .ih-hunt-popup .ih-browser-species > div {min-height:30px;padding:2px 5px}
+#idle-hunts .ih-hunt-popup .ih-browser-species img {width:24px;height:24px}
+#idle-hunts .ih-hunt-popup .ih-browser-stats {margin-top:4px;padding:5px 0}
+
+body.idle-native-mode #idle-hunts[data-view=choose] > .ih-content:has(.ih-region-gallery) {display:block}
+#idle-hunts[data-view=choose] .ih-browser-card {
+ border-radius:0!important;clip-path:var(--hunt-pixel-edge);
+ background:linear-gradient(#254858 4px,#152e3c 4px)!important;
+}
+#idle-hunts[data-view=choose] .ih-browser-card .ih-arena-preview {border-radius:0;clip-path:var(--hunt-pixel-edge)}
+#idle-hunts .ih-card-advice {
+ display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:3px 8px;
+ width:100%;margin-top:auto;padding-top:5px;border-top:2px solid #386277;
+}
+#idle-hunts .ih-card-advice small {display:block;color:#beeaf2;font-size:9px}
+#idle-hunts[data-view=choose] :is(.ih-prey-summary,.il-outbreak) {
+ border-radius:0;clip-path:var(--hunt-pixel-edge);padding:6px 10px;
+ box-shadow:inset 0 3px var(--hunt-stripe),inset 0 -2px #071b25;
+}
+#idle-hunts[data-view=choose] .ih-prey-summary {--hunt-stripe:#b98dea;background:#24233e}
+#idle-hunts[data-view=choose] .il-outbreak {--hunt-stripe:#79d39d;background:#183734;flex-wrap:wrap}
+#idle-hunts[data-view=choose] .il-outbreak > b {margin-left:auto;color:#c3ffc9}
+
+#idle-hunts .ih-hunt-notices {display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.3fr);gap:6px;margin:0 0 6px;align-items:start}
+body.idle-native-mode #idle-hunts .ih-hunt-notices :is(.ih-prey-summary,.il-outbreak) {margin:0;padding:5px 8px;min-height:28px;min-width:0;font-size:10px}
+#idle-hunts .ih-hunt-notices .il-outbreak img {display:none}
+#idle-hunts .ih-hunt-notices .il-outbreak details {flex:1;min-width:0}
+#idle-hunts .ih-hunt-notices summary {cursor:pointer;overflow-wrap:anywhere}
+#idle-hunts .ih-hunt-notices .il-countdown {margin-inline-start:6px;color:#c3ffc9}
+@media(max-width:520px){#idle-hunts .ih-hunt-notices {grid-template-columns:1fr}}
+
+#idle-hunts .ih-risk-label {align-self:center;color:#beeaf2;font-size:10px}
+
+#idle-hunts .ih-hunt-notices {
+ gap:0;align-items:stretch;padding:3px;border:2px solid #426879;
+ background:#0d2430;box-shadow:inset 0 0 0 2px #071923;
+}
+body.idle-native-mode #idle-hunts .ih-hunt-notices :is(.ih-prey-summary,.il-outbreak) {
+ clip-path:none;border:0;box-shadow:none;background:none;
+ display:flex;align-items:center;padding:5px 9px;min-height:32px;
+ font-size:11px;line-height:1.25;color:#ebfaff;
+}
+body.idle-native-mode #idle-hunts .ih-hunt-notices .ih-prey-summary {border-right:1px solid #426879;color:#e0c5ff}
+#idle-hunts .ih-hunt-notices .il-outbreak summary {
+ display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:3px 8px;
+ min-height:22px;list-style:none;color:#edfff4;
+}
+#idle-hunts .ih-hunt-notices .il-outbreak summary::-webkit-details-marker {display:none}
+#idle-hunts .ih-hunt-notices .il-outbreak summary > span::before {content:"▸";margin-right:5px;color:#8de6ae}
+#idle-hunts .ih-hunt-notices .il-outbreak details[open] summary > span::before {content:"▾"}
+#idle-hunts .ih-hunt-notices .il-countdown {margin:0;font-variant-numeric:tabular-nums}
+@media(max-width:520px){
+ body.idle-native-mode #idle-hunts .ih-hunt-notices .ih-prey-summary {border-right:0;border-bottom:1px solid #426879}
+}
+
+body.idle-native-mode #idle-hunts .ih-hunt-notices .ih-prey-summary {align-self:stretch;justify-content:center;text-align:center;border-radius:0}
+#idle-hunts .ih-hunt-notices .il-outbreak summary {min-height:32px;padding:0 2px}
+#idle-hunts .ih-hunt-notices .ih-outbreak-identity {display:flex;align-items:center;gap:7px;min-width:0}
+#idle-hunts .ih-hunt-notices .ih-outbreak-identity img {display:block;width:30px;height:30px;object-fit:contain;image-rendering:pixelated}
+#idle-hunts .ih-outbreak-identity strong,#idle-hunts .ih-outbreak-identity small {display:block}
+#idle-hunts .ih-outbreak-identity small {margin-top:2px;color:#a9cdc2}
+#idle-hunts .ih-hunt-notices .il-countdown {padding:3px 5px;background:#163b34;border:1px solid #4f8c74;white-space:nowrap}
+#idle-hunts .ih-outbreak-help {text-align:center;padding:4px;border-top:1px solid #426879}
+
+body.idle-native-mode #idle-hunts:is([data-view=setup],[data-view=habitat]):not([hidden]) {
+ display:flex;flex-direction:column;overflow:hidden!important;
+ height:auto;max-height:min(700px,calc(100dvh - 24px))!important;
+ clip-path:var(--hunt-pixel-edge);border-radius:0!important;
+ border:3px solid #68bac5!important;background:#102736!important;
+}
+#idle-hunts:is([data-view=setup],[data-view=habitat]) > :is(header,.ip-tabs) {flex:none}
+body.idle-native-mode #idle-hunts:is([data-view=setup],[data-view=habitat]) > .ih-content {
+ flex:1 1 auto;min-height:0;max-height:none!important;overflow:auto;
+ padding:10px 14px 14px;scrollbar-width:thin;scrollbar-color:#62cad5 #11232e;
+}
+#idle-hunts:is([data-view=setup],[data-view=habitat]) button {
+ clip-path:var(--hunt-pixel-edge);border-radius:0!important;
+ background:#1c4357!important;box-shadow:inset 0 3px #679ea8,inset 0 -4px #081923!important;
+}
+#idle-hunts:is([data-view=setup],[data-view=habitat]) button:is(:hover,:focus-visible,[aria-pressed=true]):not(:disabled) {
+ background:#2d6476!important;box-shadow:inset 0 3px #9eefff,inset 0 -4px #0c2e43!important;
+}
+#idle-hunts:is([data-view=setup],[data-view=habitat]) > .ip-tabs {flex-wrap:wrap}
+#idle-hunts:is([data-view=setup],[data-view=habitat]) > .ip-tabs button {min-width:0}
+#idle-hunts .ih-setup-dashboard {gap:8px}
+#idle-hunts .ih-setup-dashboard :is(.ih-setup-wave,.ih-setup-card,.ih-setup-boss,.ih-route-options),
+body.idle-native-mode #idle-hunts .idle-habitat-card {
+ border-radius:0;border:1px solid #527886;box-shadow:inset 0 3px #365b6b;
+ background:#142f3d;padding:8px 10px;
+}
+body.idle-native-mode #idle-hunts .idle-habitat-card {gap:3px;min-width:0}
+#idle-hunts .idle-habitat-card > img {width:36px;height:36px}
+#idle-hunts .idle-habitat-card summary {color:#aee8f0}
+#idle-hunts .idle-habitat-card b {overflow-wrap:anywhere}
+#idle-hunts .idle-habitat-grid {
+ grid-template-columns:repeat(auto-fit,minmax(min(100%,150px),1fr));gap:7px;
+}
+#idle-hunts .ih-setup-steps {grid-template-columns:repeat(10,minmax(0,1fr))}
+@media(max-width:560px){
+ #idle-hunts .ih-setup-columns {grid-template-columns:minmax(0,1fr)}
+ #idle-hunts .ih-setup-steps {grid-template-columns:repeat(5,minmax(0,1fr))}
+ #idle-hunts .ih-setup-heading {flex-wrap:wrap}
+}
+
+#idle-hunts .ih-preview-overview,#idle-hunts .ih-preview-lower {
+ display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:10px;align-items:start;
+}
+#idle-hunts .ih-preview-overview {margin-bottom:8px;padding-bottom:8px;border-bottom:1px solid #386277}
+#idle-hunts .ih-preview-overview .ih-arena-preview {width:100%;margin:0;border-radius:0}
+#idle-hunts .ih-preview-meta p {margin:4px 0}
+#idle-hunts .ih-preview-roster .ih-browser-species {grid-template-columns:minmax(0,1fr);gap:3px}
+#idle-hunts .ih-preview-lower h4 {margin:0 0 5px}
+#idle-hunts .ih-preview-lower .ih-hunt-guidance {margin:0;border-radius:0}
+#idle-hunts .ih-preview-lower .ih-hunt-guidance p {margin:6px 0 3px}
+@media(max-width:520px) {
+ #idle-hunts .ih-preview-overview,#idle-hunts .ih-preview-lower {grid-template-columns:minmax(0,1fr)}
+}
+
+#idle-hunts .ih-preview-lower {grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);align-items:stretch}
+#idle-hunts .ih-preview-roster,#idle-hunts .ih-preview-lower .ih-hunt-guidance {
+ padding:8px;border:1px solid #406777;background:#112b39;box-shadow:inset 0 2px #305567;
+}
+#idle-hunts .ih-preview-roster .ih-browser-species {
+ grid-template-columns:repeat(auto-fit,minmax(min(100%,125px),1fr));gap:4px;
+}
+#idle-hunts .ih-guide-heading {display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:4px}
+#idle-hunts .ih-guide-heading :is(h4,.ih-advice-badges) {margin:0}
+#idle-hunts .ih-guide-context {font-size:10px;color:#b9d7e2}
+#idle-hunts .ih-guide-types {display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:2px 6px;padding:4px 0;border-top:1px solid #386277;font-size:10px}
+@media(max-width:520px){#idle-hunts .ih-preview-lower {grid-template-columns:minmax(0,1fr)}}
+
+#idle-hunts .ih-preview-lower {align-items:stretch}
+#idle-hunts .ih-preview-lower h4 {margin:0 0 5px;color:#d9f5fa}
+#idle-hunts .ih-preview-lower .ih-guide-heading h4 {margin:0}
+#idle-hunts .ih-preview-roster .ih-browser-species > div {
+ border-radius:0;border:1px solid #50798a;background:#193644;
+}
+#idle-hunts .ih-preview-roster .ih-browser-species > [data-rarity=uncommon] {border-color:#65b9a7;background:#204b43}
+#idle-hunts .ih-preview-roster .ih-browser-species > [data-rarity=rare] {border-color:#ca9e54;background:#503b25}
+#idle-hunts .ih-preview-roster [data-rarity=uncommon] small {color:#9ee9d8}
+#idle-hunts .ih-preview-roster [data-rarity=rare] small {color:#ffdc9d}
+#idle-hunts .ih-guide-levels {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:4px;margin:6px 0}
+#idle-hunts .ih-guide-levels > div {padding:5px;background:#0d202e;border:1px solid #355b6a}
+#idle-hunts .ih-guide-levels small,#idle-hunts .ih-guide-levels b {display:block}
+#idle-hunts .ih-guide-levels small {font-size:9px;color:#acd8e3}
+#idle-hunts .ih-guide-levels b {margin-top:2px;font-size:12px;color:#f2fbff}
+
+/* Journey regional card browser and independent gym preview. */
+body.idle-native-mode #stage #idle-world.idle-store-finish[data-family=journey]:not([hidden]){display:flex;flex-direction:column;width:min(960px,calc(100vw - 24px));height:auto;max-height:calc(100dvh - 24px)!important;top:50%!important;border-radius:0!important;border:3px solid #64bac8!important;background:#102735!important;clip-path:polygon(8px 0,calc(100% - 8px) 0,calc(100% - 8px) 4px,100% 8px,100% calc(100% - 8px),calc(100% - 8px) 100%,8px 100%,0 calc(100% - 8px),0 8px)}
+body.idle-native-mode #stage #idle-world.idle-store-finish[data-family=journey]>header{padding:12px 16px!important;flex:none}
+body.idle-native-mode #stage #idle-world.idle-store-finish[data-family=journey]>.iw-shell{display:flex;flex-direction:column;height:auto;max-height:calc(100dvh - 120px);min-height:0;overflow:hidden}
+body.idle-native-mode #stage #idle-world.idle-store-finish[data-family=journey] .iw-shell>nav{display:flex;flex-direction:row;flex-wrap:wrap;flex:none;gap:6px;padding:8px 12px;border:0;border-bottom:1px solid #375b6c;background:#10222f}
+body.idle-native-mode #stage #idle-world.idle-store-finish[data-family=journey] .iw-shell>nav>button{width:auto;min-width:100px;text-align:center}
+body.idle-native-mode #stage #idle-world.idle-store-finish[data-family=journey] .iw-content{flex:1;min-height:0;overflow:auto!important;padding:12px!important;scrollbar-width:thin;scrollbar-color:#61c0ce #10222f;overscroll-behavior:contain}
+body.idle-native-mode #stage #idle-world.idle-store-finish[data-family=journey] button{border-radius:0!important;clip-path:polygon(4px 0,calc(100% - 4px) 0,calc(100% - 4px) 2px,100% 4px,100% calc(100% - 4px),calc(100% - 4px) 100%,4px 100%,0 calc(100% - 4px),0 4px);border:1px solid #508293!important;background:#193c4d!important;box-shadow:inset 0 2px #426b7b,inset 0 -3px #091e2b!important;transition:background .15s}
+body.idle-native-mode #stage #idle-world.idle-store-finish[data-family=journey] button:is(:hover,:focus-visible,[aria-pressed=true]):not(:disabled){background:#285e70!important;border-color:#8beaf0!important}
+body.idle-native-mode #stage #idle-world.idle-store-finish[data-family=journey] .iw-gym-map{display:block}
+body.idle-native-mode #stage #idle-world.idle-store-finish[data-family=journey] .iw-continents{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 12px;padding:0}
+body.idle-native-mode #stage #idle-world.idle-store-finish[data-family=journey] .iw-continents button{min-height:30px;padding:7px 12px!important}
+body.idle-native-mode #stage #idle-world.idle-store-finish[data-family=journey] .iw-gym-nodes{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:0;align-items:stretch}
+body.idle-native-mode #stage #idle-world.idle-store-finish[data-family=journey] button.iw-gym-node{position:relative;display:grid!important;grid-template-columns:minmax(0,1fr) 34px;grid-template-rows:88px auto auto auto;align-items:center;gap:5px;padding:10px!important;text-align:left;min-width:0;background:#173744!important;border:2px solid #4d7586!important;box-shadow:inset 0 3px #355c6e,inset 0 -4px #0b2230!important}
+body.idle-native-mode #stage #idle-world.idle-store-finish[data-family=journey] .iw-gym-card-trainer{grid-column:1/-1;grid-row:1;width:100%!important;height:88px!important;object-fit:contain;image-rendering:pixelated;filter:drop-shadow(0 3px 0 #091923)}
+body.idle-native-mode #stage #idle-world.idle-store-finish[data-family=journey] .iw-gym-node>img:not(.iw-gym-card-trainer){grid-column:2;grid-row:2;width:28px;height:28px}
+body.idle-native-mode #stage #idle-world.idle-store-finish[data-family=journey] .iw-gym-node>span{grid-column:1;grid-row:2;min-width:0}
+body.idle-native-mode #stage #idle-world.idle-store-finish[data-family=journey] .iw-gym-node b{font-size:12px;white-space:normal;overflow-wrap:anywhere;color:#effaff}
+body.idle-native-mode #stage #idle-world.idle-store-finish[data-family=journey] .iw-gym-node small{font-size:10px;color:#b5d7e2;margin-top:3px}
+body.idle-native-mode #stage #idle-world.idle-store-finish[data-family=journey] .iw-gym-node em{display:block;font-style:normal;font-size:9px;color:#80dfd2;margin-top:4px}
+body.idle-native-mode #stage #idle-world.idle-store-finish[data-family=journey] .iw-gym-card-metrics{grid-column:1/-1;display:flex;justify-content:space-between;align-items:center;gap:5px;border-top:1px solid #406579;padding-top:6px;font-size:10px}
+body.idle-native-mode #stage #idle-world.idle-store-finish[data-family=journey] .iw-gym-card-metrics>span{padding:3px 6px;background:#2b4854;border:1px solid #6b8791;color:#e3f5f6}
+body.idle-native-mode #stage #idle-world.idle-store-finish[data-family=journey] .iw-gym-card-progress{grid-column:1/-1;display:block;padding:5px;background:#0e2633;text-align:center}
+body.idle-native-mode #stage #idle-world.idle-store-finish[data-family=journey] .iw-gym-node[data-state=locked]{background:#1d2e3b!important;border-color:#3b5363!important}
+body.idle-native-mode #stage #idle-world.idle-store-finish[data-family=journey] .iw-gym-node[data-state=locked] .iw-gym-card-trainer{filter:grayscale(.65);opacity:.7}
+body.idle-native-mode #stage #idle-world.idle-store-finish[data-family=journey] .iw-gym-node[data-state=locked] em{color:#c3ac98}
+body.idle-native-mode #stage #idle-world.idle-store-finish[data-family=journey] .iw-gym-node[data-state=won]{border-color:#72c49e!important;background:#193e37!important}
+body.idle-native-mode #stage #idle-world.idle-store-finish[data-family=journey] .iw-journey-dialog{position:fixed;inset:0;margin:auto;width:min(780px,calc(100vw - 32px));max-height:calc(100dvh - 40px);padding:0;border:3px solid #75c3cf;background:#112d3b;color:#e0f2f7;overflow:auto;scrollbar-width:thin;scrollbar-color:#61c0ce #10222f;box-shadow:0 12px 60px #0009}
+body.idle-native-mode #stage #idle-world.idle-store-finish[data-family=journey] .iw-journey-dialog::backdrop{background:#04121cbb}
+body.idle-native-mode #stage #idle-world.idle-store-finish[data-family=journey] .iw-journey-dialog>header{position:sticky;top:0;z-index:2;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:9px 12px;background:#20485a;border-bottom:2px solid #5a9ba9}
+body.idle-native-mode #stage #idle-world.idle-store-finish[data-family=journey] .iw-journey-dialog>header h3{margin:0;font-size:14px}
+body.idle-native-mode #stage #idle-world.idle-store-finish[data-family=journey] .iw-journey-dialog .iw-gym-detail{display:flex;flex-direction:column;gap:10px;padding:12px;border:0!important;border-radius:0!important;background:#142e3c!important;overflow:visible}
+body.idle-native-mode #stage #idle-world.idle-store-finish[data-family=journey] .iw-gym-hero{display:grid;grid-template-columns:70px minmax(0,1fr) 80px;gap:10px;padding:0 0 10px;background:transparent!important;border:0!important;border-bottom:1px solid #406578!important;box-shadow:none!important}
+body.idle-native-mode #stage #idle-world.idle-store-finish[data-family=journey] .iw-gym-scene{height:90px;border-radius:0;background:#102632;border:1px solid #426577}
+body.idle-native-mode #stage #idle-world.idle-store-finish[data-family=journey] .iw-gym-scene img{width:65px;height:85px}
+body.idle-native-mode #stage #idle-world.idle-store-finish[data-family=journey] .iw-gym-identity h3{font-size:17px;margin:4px 0}
+body.idle-native-mode #stage #idle-world.idle-store-finish[data-family=journey] .iw-gym-type{display:inline-block!important;padding:4px 6px;border:1px solid var(--gym-color);background:color-mix(in srgb,var(--gym-color) 25%,#112633);color:#f1f7fa!important;font-size:10px;margin:5px 0}
+body.idle-native-mode #stage #idle-world.idle-store-finish[data-family=journey] .iw-gym-prize{border:1px solid #426777!important;border-radius:0!important;background:#102632!important}
+body.idle-native-mode #stage #idle-world.idle-store-finish[data-family=journey] :is(.iw-gym-team,.iw-gym-progress,.iw-gym-tactics,.iw-region-preview,.iw-map-actions){margin:0!important}
+body.idle-native-mode #stage #idle-world.idle-store-finish[data-family=journey] .iw-gym-opponents{display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));gap:5px}
+body.idle-native-mode #stage #idle-world.idle-store-finish[data-family=journey] .iw-gym-opponents>div{border-radius:0;background:#193a49!important;border:1px solid #456d7e;padding:6px}
+body.idle-native-mode #stage #idle-world.idle-store-finish[data-family=journey] .iw-gym-progress>div{height:6px;border-radius:0}
+body.idle-native-mode #stage #idle-world.idle-store-finish[data-family=journey] .iw-gym-progress i{background:#69d4dc;border-radius:0}
+body.idle-native-mode #stage #idle-world.idle-store-finish[data-family=journey] :is(.iw-gym-tactics,.iw-region-preview){border:1px solid #426777;border-radius:0;background:#102632;padding:8px!important}
+body.idle-native-mode #stage #idle-world.idle-store-finish[data-family=journey] summary{cursor:pointer;color:#c0e5ee}
+body.idle-native-mode #stage #idle-world.idle-store-finish[data-family=journey] .iw-region-habitats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:8px;align-items:stretch}
+body.idle-native-mode #stage #idle-world.idle-store-finish[data-family=journey] .iw-region-habitats>article{min-width:0;padding:6px;border:1px solid #477384;background:#193b49;border-radius:0}
+body.idle-native-mode #stage #idle-world.idle-store-finish[data-family=journey] .iw-region-habitats .ih-arena-preview{width:100%;aspect-ratio:16/9;margin:0 0 5px;border-radius:0;overflow:hidden}
+body.idle-native-mode #stage #idle-world.idle-store-finish[data-family=journey] .iw-region-habitats canvas{display:block;width:100%;height:100%;object-fit:contain}
+body.idle-native-mode #stage #idle-world.idle-store-finish[data-family=journey] .iw-region-habitats>article>b,body.idle-native-mode #stage #idle-world.idle-store-finish[data-family=journey] .iw-region-habitats>article>small{display:block;margin:4px 0}
+body.idle-native-mode #stage #idle-world.idle-store-finish[data-family=journey] .iw-map-actions{display:flex;flex-wrap:wrap;gap:6px;padding-top:5px}
+body.idle-native-mode #stage #idle-world.idle-store-finish[data-family=journey] .iw-map-actions button{min-height:34px;padding:8px 15px!important}
+body.idle-native-mode #stage #idle-world.idle-store-finish[data-family=journey] :is(.iw-quest-card,.iw-challenge-card){border:2px solid #456d7e!important;border-radius:0!important;background:#173746!important;padding:10px;box-shadow:inset 0 3px #345969!important}
+@media(max-width:720px){body.idle-native-mode #stage #idle-world.idle-store-finish[data-family=journey] .iw-gym-nodes{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:500px){body.idle-native-mode #stage #idle-world.idle-store-finish[data-family=journey] .iw-gym-nodes{grid-template-columns:repeat(2,minmax(0,1fr))}body.idle-native-mode #stage #idle-world.idle-store-finish[data-family=journey] .iw-region-habitats{grid-template-columns:minmax(0,1fr)}body.idle-native-mode #stage #idle-world.idle-store-finish[data-family=journey] .iw-gym-hero{grid-template-columns:54px minmax(0,1fr) 66px}}
+@media(prefers-reduced-motion:reduce){body.idle-native-mode #stage #idle-world.idle-store-finish[data-family=journey] button{transition:none}}
+
+body.idle-native-mode #stage #idle-world.idle-store-finish[data-family=journey] .iw-region-habitats .ih-arena-preview{min-height:0!important;height:auto!important;aspect-ratio:16/10;width:100%;position:relative}
+body.idle-native-mode #stage #idle-world.idle-store-finish[data-family=journey] .iw-region-habitats>article{display:flex;flex-direction:column;gap:4px}
+body.idle-native-mode #stage #idle-world.idle-store-finish[data-family=journey] .iw-region-habitats>article>b{font-size:11px!important;line-height:15px;margin:2px 0;min-height:30px}
+body.idle-native-mode #stage #idle-world.idle-store-finish[data-family=journey] .iw-region-habitats>article>small{margin:0;font-size:10px!important}

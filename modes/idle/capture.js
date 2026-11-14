@@ -206,7 +206,9 @@ window.createIdleCapture = function ({state, lines, sprite, save, changed, notif
  function serverDefeated(enemy,serverCapture,targetPoint){
   const line=lines.find(l=>l.ids.includes(enemy.pokemon_id)),speciesName=line.names[line.ids.indexOf(enemy.pokemon_id)];
   const entry={line,speciesName,speciesId:enemy.pokemon_id,genes:enemy.combat_data,level:enemy.level,expires:Date.now()+15000,source:'hunt',serverCapture,targetPoint};
-  if(isVip()&&state.capture.enabled)return serverAttempt(entry);
+  const settings=entry.genes?.shiny?state.captureShiny:state.capture;
+  const reserve=state.hunts.supplies.itemReserves?.[settings.ball]||0;
+  if(isVip()&&state.capture.enabled&&IDLE_ITEMS.stock(state,settings.ball)>reserve)return serverAttempt(entry);
   enqueue(entry);
  }
 
