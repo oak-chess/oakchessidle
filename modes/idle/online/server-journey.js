@@ -55,7 +55,7 @@ window.IDLE_SERVER_JOURNEY=(()=>{
   return {gold:snapshot.gold,trainerLevel:snapshot.trainerLevel,trainerXp:snapshot.trainerXp,
    levelSchema:2,schemaVersion:5,area:Number(route[0]),last:Date.now(),wins:0,pending:0,tutorial:clone(preferences.tutorial||{}),items:clone(snapshot.profile.gear||[]),shopHistory:clone(snapshot.profile.shop_history||[]),
    world:{badges:clone(snapshot.profile.badges||[]),regionWins:clone(snapshot.profile.region_wins||{}),stones:clone(snapshot.profile.stones||{})},
-   village,team,collection:members.filter(m=>!team.includes(m)&&!m.inDepot),captureDepot:members.filter(m=>!team.includes(m)&&m.inDepot),ballStock:Object.fromEntries(Object.entries(supplies).filter(([k])=>k!=='poke')),
+   prey:clone(snapshot.profile.prey||{version:1,slots:[{},{},{}],options:[]}),village,team,collection:members.filter(m=>!team.includes(m)&&!m.inDepot),captureDepot:members.filter(m=>!team.includes(m)&&m.inDepot),ballStock:Object.fromEntries(Object.entries(supplies).filter(([k])=>k!=='poke')),
    capture:{ball:preferences.captureBall||'poke',enabled:preferences.captureEnabled??true,bankLocked:preferences.bankLocked??false,duplicates:preferences.duplicates||'keep'},captureShiny:{ball:preferences.shinyBall||'ultra'},
    balls:supplies.poke||0,hunts:{kind:route[1],wave:snapshot.profile.wave,routeKey:snapshot.profile.route,autoAdvance:preferences.autoAdvance??true,autoSellLoot:preferences.autoSellLoot??true,
    loot:clone(snapshot.profile.loot),supplies:{...supplies,heal:true,revive:true,threshold:50,healItem:'potions',reviveItem:'revives',...preferences,itemReserves:clone(preferences.itemReserves||{})}},
@@ -67,7 +67,7 @@ window.IDLE_SERVER_JOURNEY=(()=>{
   state.wins=snapshot.profile.total_wins||0;Object.assign(state.world,view.world);
   state.gold=view.gold;state.trainerLevel=view.trainerLevel;state.trainerXp=view.trainerXp;
   state.team=view.team;state.collection=view.collection;state.captureDepot=view.captureDepot;state.balls=view.balls;state.ballStock=view.ballStock;
-  state.vip=view.vip;state.village=view.village;state.hunts.supplies={...state.hunts.supplies,...view.hunts.supplies};
+  state.vip=view.vip;state.village=view.village;state.prey=clone(snapshot.profile.prey||{version:1,slots:[{},{},{}],options:[]});state.hunts.supplies={...state.hunts.supplies,...view.hunts.supplies};
   state.hunts.autoAdvance=view.hunts.autoAdvance;state.hunts.autoSellLoot=view.hunts.autoSellLoot;
   state.hunts.loot=view.hunts.loot;state.hunts.wave=view.hunts.wave;
   state.world.stones=clone(canonical.profile.stones||{});state.items=clone(canonical.profile.gear||[]);
@@ -124,7 +124,7 @@ window.IDLE_SERVER_JOURNEY=(()=>{
    if(action==='fishing'){
     if(payload.operation==='cast'||payload.operation==='finish')result=await ordered(()=>rawRequest(payload.operation==='cast'?{action:'cast',requestId:id,settings:payload.data}:{action:'finish',castId:payload.data.id,trace:payload.data.trace,duration:payload.data.duration},'fishing-battle'));
     else result=await rpc('journey_fishing',{p_request:id,p_action:payload.operation,p_payload:payload.data});
-   }else result=action==='farm'?await rpc('journey_farm',{p_request:id,p_action:payload.operation,p_payload:payload.data}):action==='evolve'?await request({action,requestId:id,...payload}):action==='storage'?await rpc('journey_storage',{p_request:id,p_inventory:payload.inventoryId,p_depot:payload.depot}):action==='equipment'?await rpc('journey_equipment',{p_request:id,p_action:payload.operation,p_payload:payload.data}):await rpc('journey_shop',{p_request:id,p_action:action,p_payload:payload});
+   }else result=action==='prey'?await rpc('journey_prey',{p_request:id,p_action:payload.operation,p_payload:payload.data}):action==='farm'?await rpc('journey_farm',{p_request:id,p_action:payload.operation,p_payload:payload.data}):action==='evolve'?await request({action,requestId:id,...payload}):action==='storage'?await rpc('journey_storage',{p_request:id,p_inventory:payload.inventoryId,p_depot:payload.depot}):action==='equipment'?await rpc('journey_equipment',{p_request:id,p_action:payload.operation,p_payload:payload.data}):await rpc('journey_shop',{p_request:id,p_action:action,p_payload:payload});
    if(result.state){canonical=result.state;apply(state);}operations.delete(key);return result;
   }finally{mutationBusy=false;}
  }

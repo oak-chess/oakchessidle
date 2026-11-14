@@ -55,25 +55,33 @@ export function buildHuntPlan(encounter){
   return {...m,pos:snapshot.organization?.find(slot=>slot.id===m.id)?.pos,combat_data:{...data,condition}};
  });
  if(allies.every(m=>m.combat_data.condition===0))throw Error('Recupere sua equipe no Centro Pokémon ou habilite Revives com estoque disponível.');
- const result=engine.run(allies,enemies),last=result.frames.at(-1);
+ // Tags come exclusively from the database snapshot, never request data.
+ const prey=route.isGym?[]:(snapshot.prey||[]),availablePrey=new Map(prey.map(p=>[p.id,p.remaining]));
+ for(const enemy of enemies){
+  const p=prey.find(p=>p.pokemonId===enemy.pokemon_id&&availablePrey.get(p.id)>0);
+  if(p){enemy.preyTag={...p};availablePrey.set(p.id,availablePrey.get(p.id)-1);}
+ }
+ const result=engine.run(allies,enemies),last=result.frames.at(-1),preyUsed=new Map();
  const gains=allies.map(()=>0),rewards={trainerXp:0,pokemonXp:0,coins:0,loot:{},stones:{},defeated:0};
  const xpFactor=(1+route.area*.2)*(route.rewardFactor||1),goldFactor=(1+route.area*.18)*(route.rewardFactor||1);
  const vip=snapshot.vip?1.5:1;
  enemies.forEach((enemy,i)=>{
   if(last.u[allies.length+i][3])return;
   const meta=metadata.find(s=>s.id===enemy.pokemon_id);
-  const xp=Math.round(Math.max(1,Math.round((10*meta.cost+4*level)*xpFactor))*vip);
+  const tag=enemy.preyTag;
+  if(tag)preyUsed.set(tag.id,(preyUsed.get(tag.id)||0)+1);
+  const xp=Math.round(Math.max(1,Math.round((10*meta.cost+4*level)*xpFactor))*vip*(tag?.kind==='xp'?1+tag.percent/100:1));
   rewards.trainerXp+=xp;rewards.pokemonXp+=xp;rewards.defeated++;
   const death=result.frames.find(frame=>!frame.u[allies.length+i][3]);
   allies.forEach((_,index)=>{if(death.u[index][3])gains[index]+=xp;});
   rewards.coins+=Math.round((2+meta.cost+route.area)*goldFactor*Math.max(1,Math.sqrt(level/route.min)));
-  const drops=engine.drops(enemy.pokemon_id);
+  const drops=engine.drops(enemy.pokemon_id,tag?.kind==='loot'?tag.percent/100:0);
   for(const drop of drops.loot)rewards.loot[drop.key]=(rewards.loot[drop.key]||0)+drop.count;
   if(drops.stone)rewards.stones[drops.stone.key]=(rewards.stones[drops.stone.key]||0)+1;
  });
  allies.forEach((m,i)=>m.maxHp=result.units[i].maxHp);
  enemies.forEach((m,i)=>m.maxHp=Math.max(1,Math.floor(result.units[allies.length+i].maxHp)));
- return {...result,snapshot:{allies,enemies},enemies,rewards,supplies,
+ return {...result,preyUsage:[...preyUsed].map(([id,count])=>({id,count})),snapshot:{allies,enemies},enemies,rewards,supplies,
   allies:allies.map((m,i)=>({...m,condition:last.u[i][3]?Math.max(.01,last.u[i][2]/1000):0,
    xpGain:gains[i]}))};
 }

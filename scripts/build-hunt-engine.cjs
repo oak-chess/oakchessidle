@@ -6,11 +6,11 @@ let source=read('modes/idle/online/arena-engine.mjs')
  .replace('const window={OAK_IDLE_MODE:true}', 'const window={OAK_IDLE_MODE:true,IDLE_SHINY:{rate:1/25000}}')
  .replace('team.length===6&&team.every','team.length>=1&&team.length<=6&&team.every')
  .replace('r:side===0?5+Math.floor(index/3):2-Math.floor(index/3),c:[1,3,5][index%3]', 'r:side===0?(m.pos?.r??5+Math.floor(index/3)):2-Math.floor(index/3),c:side===0?(m.pos?.c??[1,3,5][index%3]):[1,3,5][index%3]')
- .replace('u.el=empty;u._idleLevel=m.level;', 'u.hp=u.maxHp*Math.max(0,Math.min(1,data.condition??1));u.alive=u.hp>0;u.el=empty;u._idleLevel=m.level;')
+ .replace('u.el=empty;u._idleLevel=m.level;', 'u.hp=u.maxHp*Math.max(0,Math.min(1,data.condition??1));u.alive=u.hp>0;u._idlePreyBonus=m.preyTag;u.el=empty;u._idleLevel=m.level;')
  .replace('rulesVersion:ARENA_RULES_VERSION,frames}', 'rulesVersion:ARENA_RULES_VERSION,frames,units:B.units.map(u=>({maxHp:u.maxHp}))}')
  .replace('return {run,species:()=>LINES.flatMap(l=>l.ids)};', `return {run,species:()=>LINES.flatMap(l=>l.ids),
  metadata:()=>LINES.flatMap(l=>l.ids.map((id,i)=>({id,name:l.names[i],family:l.names[0],star:i+1,cost:l.c,types:Array.isArray(l.t[0])?l.t[i]:l.t}))),
- drops:id=>{const l=LINES.find(l=>l.ids.includes(id)),star=l.ids.indexOf(id)+1;return {loot:window.IDLE_DROPS.roll(l,star,0,0),stone:window.IDLE_DROPS.rollStone(l,star)}},
+ drops:(id,preyBonus=0)=>{const l=LINES.find(l=>l.ids.includes(id)),star=l.ids.indexOf(id)+1;return {loot:window.IDLE_DROPS.roll(l,star,preyBonus,0),stone:window.IDLE_DROPS.rollStone(l,star)}},
  rating:row=>{const l=LINES.find(l=>l.ids.includes(row.pokemon_id));return window.IDLE_INDIVIDUALS.potentialScore({...row.combat_data,name:l.names[0],star:l.ids.indexOf(row.pokemon_id)+1})},
  nature:data=>window.IDLE_INDIVIDUALS.nature(data),
  genes:(id,seed,shiny=true)=>{const l=LINES.find(l=>l.ids.includes(id));if(!l)throw Error('Unsupported species');return window.IDLE_INDIVIDUALS.roll(l,seed,shiny)}};`);
@@ -22,7 +22,7 @@ const visualIndex=u=>u?B.units.indexOf(u):-1;
 const nativeAttack=attack,nativeCast=cast,nativeHurt=hurt,nativeHeal=healUnit;
 attack=function(u,t){visualEvents.push({k:'attack',a:visualIndex(u),b:visualIndex(t)});return nativeAttack(u,t)};
 cast=function(u,decision){const before=u.mi,result=nativeCast(u,decision);if(u.mi!==before)visualEvents.push({k:'cast',a:visualIndex(u),b:visualIndex(u.target),m:u.lastMoveIndex??0});return result};
-hurt=function(src,t,d,kind,o={}){const before=t.hp,shield=t.shield,result=nativeHurt(src,t,d,kind,o);const amount=Math.max(0,before-t.hp)+Math.max(0,shield-t.shield);if(amount>0)visualEvents.push({k:'hit',a:visualIndex(src),b:visualIndex(t),n:Math.round(amount),type:o.type||src?.types?.[0]||'normal',crit:!!o.crit,dot:!!o.dot,kind});return result};
+hurt=function(src,t,d,kind,o={}){if(src?.side===0&&t.side===1&&t._idlePreyBonus?.kind==='damage')d*=1+t._idlePreyBonus.percent/100;else if(src?.side===1&&t.side===0&&src._idlePreyBonus?.kind==='defense')d*=1-src._idlePreyBonus.percent/100;const before=t.hp,shield=t.shield,result=nativeHurt(src,t,d,kind,o);const amount=Math.max(0,before-t.hp)+Math.max(0,shield-t.shield);if(amount>0)visualEvents.push({k:'hit',a:visualIndex(src),b:visualIndex(t),n:Math.round(amount),type:o.type||src?.types?.[0]||'normal',crit:!!o.crit,dot:!!o.dot,kind});return result};
 healUnit=function(u,...args){const before=u.hp,result=nativeHeal(u,...args),amount=Math.max(0,u.hp-before);if(amount>0)visualEvents.push({k:'heal',b:visualIndex(u),n:Math.round(amount)});return result};
 function run(allies,enemies){visualEvents=[];`);
 const oldFrame='u.alive?1:0,u.mi])});';

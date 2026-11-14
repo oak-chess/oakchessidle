@@ -1,0 +1,51 @@
+// Isolated PostgreSQL/WASM fixture; never connects to a player's account.
+import {PGlite} from '../output/prey-db-check/package/dist/index.js';
+import fs from 'node:fs';
+import assert from 'node:assert/strict';
+const db=new PGlite();
+try{
+await db.exec(`create role anon;create role authenticated;create schema auth;create schema oakchess_server;
+create function auth.uid() returns uuid language sql as $$ select nullif(current_setting('test.player',true),'')::uuid $$;
+create table public.journeys(owner_id uuid primary key,gold bigint,trainer_level integer);
+create table oakchess_server.hunt_profiles(owner_id uuid primary key,badges integer[],unlocked_area integer);
+create table oakchess_server.shop_operations(owner_id uuid,request_id uuid,action text,payload jsonb,receipt jsonb,unique(owner_id,request_id));
+create table oakchess_server.online_hunts(id uuid primary key default gen_random_uuid(),owner_id uuid,route text,snapshot jsonb,plan jsonb,finished_at timestamptz);
+create function oakchess_server.hunt_view(player uuid) returns jsonb language sql as $$ select jsonb_build_object('profile',to_jsonb(h),'gold',j.gold) from oakchess_server.hunt_profiles h join public.journeys j using(owner_id) where owner_id=player $$;
+insert into public.journeys values('11111111-1111-4111-8111-111111111111',100000,50),('22222222-2222-4222-8222-222222222222',100000,50);
+insert into oakchess_server.hunt_profiles values('11111111-1111-4111-8111-111111111111',array[0],0),('22222222-2222-4222-8222-222222222222',array[]::integer[],0);
+select set_config('test.player','11111111-1111-4111-8111-111111111111',false);`);
+const migration=fs.readFileSync('modes/idle/online/033-online-prey.sql','utf8');
+await db.exec(migration);
+const rpc=async(action,payload={},id=crypto.randomUUID())=>(await db.query('select public.journey_prey($1,$2,$3) r',[id,action,payload])).rows[0].r;
+const loaded=await rpc('load');assert.equal(loaded.state.profile.prey.options.length,3);
+assert.equal(loaded.state.gold,100000);assert(loaded.state.profile.prey.options.every(p=>p.remaining===100));
+const option=loaded.state.profile.prey.options[0],request=crypto.randomUUID();
+await rpc('activate',{optionId:option.id,slot:0,confirm:false},request);
+await rpc('activate',{optionId:option.id,slot:0,confirm:false},request);
+await assert.rejects(rpc('activate',{optionId:'fake',slot:0,confirm:true}));
+await assert.rejects(rpc('activate',{optionId:loaded.state.profile.prey.options[1].id,slot:1,confirm:true}));
+const battle=(await db.query(`insert into oakchess_server.online_hunts(owner_id,route,snapshot)values(auth.uid(),'0:forest','{}') returning *`)).rows[0];
+assert.equal(battle.snapshot.prey[0].id,option.id);
+const next=loaded.state.profile.prey.options[1];await rpc('activate',{optionId:next.id,slot:0,confirm:true});
+await db.query('update oakchess_server.online_hunts set plan=$1,finished_at=now() where id=$2',[{preyUsage:[{id:option.id,count:1}]},battle.id]);
+let view=await rpc('load');assert.equal(view.state.profile.prey.slots[0].active.remaining,99);assert.equal(view.state.profile.prey.slots[0].pending.id,next.id);
+await db.query('update oakchess_server.online_hunts set finished_at=now() where id=$1',[battle.id]);
+view=await rpc('load');assert.equal(view.state.profile.prey.slots[0].active.remaining,99,'retry cannot consume twice');
+const freeId=crypto.randomUUID();await rpc('renew',{},freeId);await rpc('renew',{},freeId);
+view=await rpc('renew');assert.equal(view.state.gold,95000,'one free daily renewal; paid renewal charged once');
+// Resuming/editing/cancelling an encounter must not burn charges.
+const pendingBattle=(await db.query(`insert into oakchess_server.online_hunts(owner_id,route,snapshot)values(auth.uid(),'0:forest','{}') returning *`)).rows[0];
+assert.equal(pendingBattle.snapshot.prey[0].id,next.id);
+await db.query('delete from oakchess_server.online_hunts where id=$1',[pendingBattle.id]);
+view=await rpc('load');assert.equal(view.state.profile.prey.slots[0].active.remaining,100);
+await db.query(`update oakchess_server.hunt_profiles set prey=jsonb_set(prey,'{slots,0,active,remaining}','1') where owner_id=auth.uid()`);
+const lastBattle=(await db.query(`insert into oakchess_server.online_hunts(owner_id,route,snapshot)values(auth.uid(),'0:forest','{}') returning *`)).rows[0];
+await db.query('update oakchess_server.online_hunts set plan=$1,finished_at=now() where id=$2',[{preyUsage:[{id:next.id,count:1}]},lastBattle.id]);
+view=await rpc('load');assert.equal(view.state.profile.prey.slots[0].active,undefined,'last charge expires');
+assert.equal((await db.query("select prey->'options' options from oakchess_server.hunt_profiles where owner_id='22222222-2222-4222-8222-222222222222'")).rows[0].options.length,0,'other player unchanged');
+await db.exec(migration);view=await rpc('load');assert.equal(view.state.profile.prey.slots[0].active,undefined,'reinstall preserves progress');
+assert.equal((await db.query("select has_function_privilege('anon','public.journey_prey(uuid,text,jsonb)','execute') allowed")).rows[0].allowed,false);
+await db.exec("select set_config('test.player','22222222-2222-4222-8222-222222222222',false)");
+await assert.rejects(rpc('load'),/insígnia/);
+console.log('PASS PostgreSQL Prey migration, authorization, unlocks, charges, pending replacement, idempotency, daily price and safe reinstall.');
+}finally{await db.close();}

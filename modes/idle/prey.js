@@ -3,6 +3,22 @@ window.createIdlePrey=function(ctx){
  'use strict';
  const s=ctx.state,random=ctx.random||Math.random,now=ctx.now||Date.now;
  const bonuses={damage:{label:'Dano',values:[10,15,20]},defense:{label:'Defesa',values:[10,15,20]},xp:{label:'Experiência',values:[10,15,20,25]},loot:{label:'Loot',values:[10,15,20]}};
+ if(window.IDLE_SERVER_JOURNEY?.enabled){
+  const data=()=>s.prey||{version:1,slots:[{},{},{}],options:[]};let selected=null;
+  const catalog=()=>ctx.catalog(),slots=()=>new Set(s.world?.badges||[]).size;
+  const slotCount=()=>slots()>=16?3:slots()>=8?2:slots()>=1?1:0;
+  async function operation(action,payload={}){const r=await window.IDLE_SERVER_JOURNEY.mutate(s,'prey',{operation:action,data:payload});selected=null;ctx.changed?.();return r.receipt;}
+  return {
+   load:()=>slotCount()&&!data().initialized?operation('load'):Promise.resolve({ok:true}),
+   snapshot(){const d=data(),today=new Intl.DateTimeFormat('en-CA',{timeZone:'America/Sao_Paulo',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date(now()));return {unlocked:slotCount()>0,slots:slotCount(),data:{...d,selected},bonuses,catalog:catalog(),free:d.lastFreeDay!==today,price:d.lastFreeDay!==today?0:Math.min(50000,Math.max(100,s.trainerLevel*100))};},
+   select(id){if(!data().options.some(o=>o.id===id))return {ok:false,message:'Escolha uma opção disponível.'};selected=id;return {ok:true};},
+   activate(slot,confirm=false){const d=data(),entry=d.slots[slot];if(!selected)return {ok:false,message:'Selecione uma espécie.'};if((entry.active||entry.pending)&&!confirm)return {ok:false,confirm:true,message:'Substituir o Prey no próximo encontro?'};return operation('activate',{optionId:selected,slot,confirm});},
+   renew:()=>operation('renew'),introduce:()=>operation('introduce'),
+   summary:()=>data().slots.flatMap((e,slot)=>{const entry=e.pending||e.active;return entry?[{...entry,slot,pending:!!e.pending,currentName:e.pending?e.active?.name:undefined}]:[];}),
+   // Server replays already include all Prey effects and charge settlement.
+   begin(){},tag(){},defeat(){return {xp:1,loot:0};}
+  };
+ }
  const d=s.prey&&s.prey.version===1?s.prey:{version:1,slots:[],options:[],selected:null,lastFreeDay:null,introduced:false,serial:0};s.prey=d;
  d.serial=Math.max(0,Math.floor(Number(d.serial)||0));let encounter=0,saveQueued=false;const rewarded=new WeakSet();
  const count=()=>new Set(s.world?.badges||[]).size;
@@ -28,5 +44,5 @@ window.createIdlePrey=function(ctx){
  function tag(units){if(!unlocked())return;for(let i=0;i<slotCount();i++){const active=d.slots[i].active;if(!active?.remaining)continue;let available=active.remaining;for(const u of units){if(available<=0)break;const name=u.L?.names?.[(u.star||1)-1];if(u.side!==1||name!==active.name||u.L?.boss)continue;u._idlePreyBonus={name,kind:active.kind,percent:active.percent,id:active.id,slot:i,encounter};available--}}}
  function defeat(u){const tag=u?._idlePreyBonus,neutral={xp:1,loot:0};if(!tag||tag.encounter!==encounter||rewarded.has(u)||u.alive||u.side!==1)return neutral;const active=d.slots[tag.slot]?.active;if(!active||active.id!==tag.id||active.remaining<=0)return neutral;rewarded.add(u);active.remaining--;if(!active.remaining){d.slots[tag.slot].active=null;ctx.notify?.('Prey concluído: '+active.name+' · 100 derrotas.')}saveSoon();return {xp:tag.kind==='xp'?1+tag.percent/100:1,loot:tag.kind==='loot'?tag.percent/100:0}}
  function snapshot(){const initialized=ensure();if(initialized)ctx.save();return {unlocked:unlocked(),slots:slotCount(),data:d,bonuses,catalog:catalog(),free:d.lastFreeDay!==day(),price:d.lastFreeDay!==day()?0:Math.min(50000,Math.max(100,Math.floor(Number(s.trainerLevel)||1)*100))}}
- return {snapshot,select,activate:activation,renew,begin,tag,defeat,introduce(){d.introduced=true;changed()},summary(){return d.slots.flatMap((x,i)=>[x.active&&{...x.active,slot:i,pending:false},x.pending&&{...x.pending,slot:i,pending:true}].filter(Boolean))}};
+ return {snapshot,select,activate:activation,renew,begin,tag,defeat,introduce(){d.introduced=true;changed()},summary(){return d.slots.flatMap((x,i)=>{const entry=x.pending||x.active;return entry?[{...entry,slot:i,pending:!!x.pending,currentName:x.pending?x.active?.name:undefined}]:[];})}};
 };

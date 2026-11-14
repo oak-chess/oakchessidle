@@ -1,0 +1,44 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import vm from 'node:vm';
+import {buildHuntPlan} from '../modes/idle/online/hunt-plan.mjs';
+import {createHuntSimulation} from '../modes/idle/online/hunt-engine.mjs';
+const allies=[1,4,7].map((pokemon_id,i)=>({id:'ally-'+i,pokemon_id,level:50,combat_data:{condition:1}}));
+const encounter={id:'test-prey',route:'0:forest',seed:421,snapshot:{allies,wave:1,supplies:{},preferences:{heal:false,revive:false}}};
+const baseline=buildHuntPlan(encounter),enemy=baseline.enemies[0];
+assert(baseline.rewards.defeated>0);
+for(const kind of ['xp','damage','defense','loot']){
+ const p={id:'choice',pokemonId:enemy.pokemon_id,kind,percent:20,remaining:1};
+ const next=buildHuntPlan({...encounter,snapshot:{...encounter.snapshot,prey:[p]}});
+ assert.deepEqual(next.preyUsage,[{id:'choice',count:1}]);
+ assert.equal(next.enemies.filter(e=>e.preyTag).length,1);
+ if(kind==='xp')assert(next.rewards.trainerXp>baseline.rewards.trainerXp);
+ if(kind==='xp'||kind==='loot')assert.deepEqual(next.frames,baseline.frames,'reward buffs cannot change combat');
+ if(kind==='damage'||kind==='defense')assert.notDeepEqual(next.frames,baseline.frames,'combat buffs must affect replay');
+ const exhausted=buildHuntPlan({...encounter,snapshot:{...encounter.snapshot,prey:[{...p,remaining:0}]}});
+ assert.deepEqual(exhausted.preyUsage,[]);assert.deepEqual(exhausted.frames,baseline.frames);
+}
+const gym=buildHuntPlan({...encounter,route:'0:gym',snapshot:{...encounter.snapshot,prey:[{id:'gym',pokemonId:74,kind:'damage',percent:20,remaining:100}]}});
+assert.deepEqual(gym.preyUsage,[]);assert(gym.enemies.every(e=>!e.preyTag));
+// The existing drops-table test checks evolution stones separately from common loot.
+let calls=[];const state={world:{badges:[0]},trainerLevel:20,gold:1000,prey:{initialized:true,version:1,slots:[{},{},{}],options:[{id:'server-option',name:'Pidgey',remaining:100,kind:'xp',percent:20}]}};
+const context={window:{IDLE_SERVER_JOURNEY:{enabled:true,async mutate(s,action,payload){calls.push({action,payload});return {receipt:{ok:true}};}}},Intl,Date,Math};
+vm.runInNewContext(fs.readFileSync('modes/idle/prey.js','utf8'),context);
+const model=context.window.createIdlePrey({state,catalog:()=>[]});
+assert.equal(model.select('server-option').ok,true);await model.activate(0);
+assert.equal(calls[0].action,'prey');assert.equal(calls[0].payload.data.optionId,'server-option');
+assert.equal(state.gold,1000);assert.equal(state.prey.options.length,1,'client cannot locally remove a canonical choice');
+model.defeat({});assert.equal(calls.length,1,'no per-hit RPCs');
+state.prey={...state.prey,slots:[{active:{id:'active',remaining:99}},{},{}]};
+assert.equal(model.summary()[0].remaining,99,'model follows canonical replacement after synchronization');
+state.prey.slots[0].active.name='Weedle';
+state.prey.slots[0].pending={id:'replacement',name:'Charmander',remaining:100};
+assert.equal(model.summary().length,1,'one occupied slot produces one arena icon');
+assert.equal(model.summary()[0].name,'Charmander','HUD immediately displays confirmed replacement');
+assert.equal(model.summary()[0].pending,true);
+assert.equal(model.summary()[0].currentName,'Weedle','current combat target stays identified without a second icon');
+state.prey.slots[0]={active:state.prey.slots[0].pending};
+assert.equal(model.summary().length,1);assert.equal(model.summary()[0].name,'Charmander');
+assert.equal(model.summary()[0].currentName,undefined,'old target disappears when server promotes replacement');
+assert.equal(model.summary()[0].pending,false);
+console.log('PASS online Prey combat/reward bonuses, expiry, gym exclusion, stones, server actions and canonical replacement.');
